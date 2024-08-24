@@ -5,16 +5,18 @@ class Nation(models.Model):
     #description = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return f"{self.name} ({self.nation.name})"
+        return self.name
 
 
 class Player(models.Model):
     username = models.CharField(max_length=100)
     nation = models.ForeignKey(Nation, on_delete=models.CASCADE, related_name='players')
     un_rep = models.BooleanField(default=False)
+    # Temporary field to force a migration
+    temp_field = models.CharField(max_length=10, null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.username
 
 
 class Territory(models.Model):
