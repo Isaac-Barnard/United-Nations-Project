@@ -3,3 +3,5 @@
 
 # Ignore Python virtual environments
 .venv/
+
+__pycache__

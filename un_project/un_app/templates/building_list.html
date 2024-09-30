@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #b7b7b7;
+            text-align: center;
+        }
+        tr:nth-child(even) {
+            background-color: #efefef;
+        }
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+        tr:hover {
+            background-color: #e6f7ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>United Nations Records: Building List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Territory</th>
+                <th>Owner</th>
+                <th>Main Builder</th>
+                <th>Year Completed</th>
+                <th>Height</th>
+                <th>Coordinates</th>
+                <th>Historic Site</th>
+                <th>Architectural Genius</th>
+                <th>MoPQ Award</th>
+                <th>Architectural Style</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if buildings %}
+                {% for building in buildings %}
+                <tr>
+                    <td>{{ building.name }}</td>
+                    <td>{{ building.territory.name }}</td>
+                    <td>{{ building.owner.name }}</td>
+                    <td>{{ building.main_builder }}</td>
+                    <td>{{ building.year_completed }}</td>
+                    <td>{{ building.height }}</td>
+                    <td>{{ building.coordinates }}</td>
+                    <td>
+                        {% if building.historic_site %}
+                            ✓
+                        {% else %}
+                            <!-- Leave blank if null -->
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if building.architectural_genius %}
+                            ✓
+                        {% else %}
+                            <!-- Leave blank if null -->
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if building.moPQ_award %}
+                            ✓
+                        {% else %}
+                            <!-- Leave blank if null -->
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if building.architectural_style %}
+                            {{ building.architectural_style }}
+                        {% else %}
+                            <!-- Leave blank if null -->
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="10">No data available.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</body>
+</html>
