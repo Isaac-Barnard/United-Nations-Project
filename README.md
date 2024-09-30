@@ -1,5 +1,5 @@
 __**README**__
-This project will eventually mayve become a replacement for our spreadsheets:
+This project will eventually maybe become a replacement for our spreadsheets:
 
 __Building Index:__
 https://docs.google.com/spreadsheets/d/1UHE3NIoL8Cl78Vgs8Dlx_xnMDgdPvZiRhjuruxc6oF8/edit
