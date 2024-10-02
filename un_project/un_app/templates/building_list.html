@@ -54,28 +54,32 @@
                 <tr>
                     <td>{{ building.name }}</td>
                     <td>{{ building.territory.name }}</td>
-                    <td>{{ building.owner.name }}</td>
-                    <td>{{ building.main_builder }}</td>
+                    <td>{{ building.owner.abbreviation }}</td>
+                    <td>
+                        {% for builder in building.main_builders.all %}
+                            {{ builder.username }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
                     <td>{{ building.year_completed }}</td>
                     <td>{{ building.height }}</td>
                     <td>{{ building.coordinates }}</td>
                     <td>
                         {% if building.historic_site %}
-                            ✓
+                            Inducted
                         {% else %}
                             <!-- Leave blank if null -->
                         {% endif %}
                     </td>
                     <td>
                         {% if building.architectural_genius %}
-                            ✓
+                            Inducted
                         {% else %}
                             <!-- Leave blank if null -->
                         {% endif %}
                     </td>
                     <td>
-                        {% if building.moPQ_award %}
-                            ✓
+                        {% if building.mopq_award %}
+                            {{ building.mopq_award }}
                         {% else %}
                             <!-- Leave blank if null -->
                         {% endif %}
