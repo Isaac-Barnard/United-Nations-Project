@@ -40,6 +40,7 @@
                 <th>Owner</th>
                 <th>Main Builder</th>
                 <th>Year Completed</th>
+                <th>Completed</th>
                 <th>Height</th>
                 <th>Coordinates</th>
                 <th>Historic Site</th>
@@ -61,6 +62,13 @@
                         {% endfor %}
                     </td>
                     <td>{{ building.year_completed }}</td>
+                    <td>
+                        {% if building.completed %}
+                            <!-- Leave blank if true -->
+                        {% else %}
+                            False
+                        {% endif %}
+                    </td>
                     <td>{{ building.height }}</td>
                     <td>{{ building.coordinates }}</td>
                     <td>
