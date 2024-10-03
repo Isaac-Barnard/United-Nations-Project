@@ -3,6 +3,10 @@ from django.db.models import F, FloatField, ExpressionWrapper, Count, Value
 from django.db.models.functions import Coalesce
 from .models import Building, Player
 
+def home(request):
+    return render(request, 'home.html')
+
+
 def building_list(request):
     # Annotate the queryset with the calculated height, handling null values
     buildings = Building.objects.select_related('owner', 'territory').annotate(
