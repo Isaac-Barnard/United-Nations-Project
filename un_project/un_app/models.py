@@ -1,12 +1,23 @@
 from django.db import models
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.core.exceptions import ValidationError
 
 class Nation(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    abbreviation  = models.CharField(max_length=100, unique=True)
+    abbreviation = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.abbreviation
+    
 
+class Company(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    abbreviation = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.abbreviation
+    
 
 class Player(models.Model):
     username = models.CharField(max_length=100, unique=True)
@@ -55,4 +66,30 @@ class Building(models.Model):
     
     @property
     def coordinates(self):
-        return f"{self.x_coordinate}/~/ {self.z_coordinate}"
+        return f"{self.x_coordinate}/~/{self.z_coordinate}"
+    
+class PartialBuildingOwnership(models.Model):
+    building = models.ForeignKey(Building, on_delete=models.CASCADE)
+    partial_owner_type = models.ForeignKey(
+        ContentType, 
+        on_delete=models.CASCADE,
+        limit_choices_to={'model__in': ('nation', 'company')}  # Only allow Nation and Company
+    )
+    partial_owner_abbreviation = models.CharField(max_length=100)  # Must match Nation or Company abbreviation
+    partial_owner = GenericForeignKey('partial_owner_type', 'partial_owner_abbreviation')
+    percentage = models.IntegerField()  # Whole percentage, no decimal places
+
+    class Meta:
+        unique_together = ('building', 'partial_owner_type', 'partial_owner_abbreviation')
+
+    def clean(self):
+        """Validate that partial_owner_abbreviation matches either Nation or Company."""
+        if self.partial_owner_type.model == 'nation':
+            if not Nation.objects.filter(abbreviation=self.partial_owner_abbreviation).exists():
+                raise ValidationError(f"{self.partial_owner_abbreviation} is not a valid Nation abbreviation.")
+        elif self.partial_owner_type.model == 'company':
+            if not Company.objects.filter(abbreviation=self.partial_owner_abbreviation).exists():
+                raise ValidationError(f"{self.partial_owner_abbreviation} is not a valid Company abbreviation.")
+
+    def __str__(self):
+        return f"{self.partial_owner_abbreviation} owns {self.percentage}% of {self.building.name}"
