@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Django Project{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'building_list' %}">Buildings</a></li>
+                    <li><a href="{% url 'player_list' %}">Players</a></li>
+                    <!-- Add more links as needed -->
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            {% block content %}
+            <!-- This block will be filled by other templates that extend base.html -->
+            {% endblock %}
+        </main>
+
+        <footer>
+            <p>&copy; 2024 My Django Project</p>
+        </footer>
+    </div>
+</body>
+</html>

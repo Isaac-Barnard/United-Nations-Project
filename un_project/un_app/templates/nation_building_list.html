@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Buildings for {{ nation.name }} ({{ nation.abbreviation }})</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Building Name</th>
+                <th>Ownership</th>
+                <th>Market Value (Placeholder)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for building in buildings %}
+                <tr>
+                    <td>{{ building.name }}</td>
+                    <td>{{ building.adjusted_ownership }}%</td>
+                    <td>Market Value Placeholder</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
