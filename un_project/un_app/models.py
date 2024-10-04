@@ -1,7 +1,10 @@
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
+from django.db.models.functions import Coalesce
 from django.core.exceptions import ValidationError
+from django.db.models import Avg, F, Sum, Value
+from decimal import Decimal
 
 class Nation(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -68,6 +71,43 @@ class Building(models.Model):
     def coordinates(self):
         return f"{self.x_coordinate}/~/{self.z_coordinate}"
     
+    @property
+    def price(self):
+        # Check if the building has two or more evaluations
+        evaluation_count = self.evaluations.count()
+        if evaluation_count < 2:
+            return 0
+        
+        # Calculate the average evaluation price
+        avg_price = self.evaluations.aggregate(Avg('evaluation_price'))['evaluation_price__avg']
+        return avg_price
+    
+    @property
+    def adjusted_ownership(self):
+        """
+        Calculate the adjusted ownership for the building.
+        Ownership is 100% minus the sum of partial owners' percentages who are not the main owner.
+        """
+        total_ownership = self.partialbuildingownership_set.aggregate(
+            total_ownership=Coalesce(
+                Sum('percentage', filter=~F('partial_owner_abbreviation') == self.owner.abbreviation),
+                Value(0)
+            )
+        )['total_ownership'] or 0
+
+        return 100 - total_ownership
+
+
+    @property
+    def adjusted_ownership_price(self):
+        """
+        Calculate the adjusted ownership price by multiplying the building price by adjusted ownership.
+        """
+        if self.price and self.adjusted_ownership is not None:
+            return Decimal(self.price) * Decimal(self.adjusted_ownership) / Decimal(100)
+        return 0  # Return None if price or adjusted ownership is missing
+    
+    
 class PartialBuildingOwnership(models.Model):
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
     partial_owner_type = models.ForeignKey(
@@ -93,3 +133,21 @@ class PartialBuildingOwnership(models.Model):
 
     def __str__(self):
         return f"{self.partial_owner_abbreviation} owns {self.percentage}% of {self.building.name}"
+    
+
+class BuildingEvaluation(models.Model):
+    building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='evaluations')
+    evaluator = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='evaluations')
+    evaluation_price = models.DecimalField(max_digits=12, decimal_places=10)
+    evaluation_date = models.DateField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('building', 'evaluator')  # A player can only evaluate a building once
+
+    def clean(self):
+        # Ensure that the player is a UN representative before saving the evaluation
+        if not self.evaluator.un_rep:
+            raise ValidationError(f"{self.evaluator.username} is not a UN representative and cannot submit an evaluation.")
+
+    def __str__(self):
+        return f"{self.evaluator.username} evaluated {self.building.name} at {self.evaluation_price}"
