@@ -1,37 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Building List</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin: 20px 0;
-        }
-        th, td {
-            border: 1px solid #000;
-            padding: 5px;
-            text-align: left;
-        }
-        th {
-            background-color: #b7b7b7;
-            text-align: center;
-        }
-        tr:nth-child(even) {
-            background-color: #efefef;
-        }
-        tr:nth-child(odd) {
-            background-color: #ffffff;
-        }
-        tr:hover {
-            background-color: #e6f7ff;
-        }
-    </style>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
     <h1>United Nations Records: Building List</h1>
+    
     <table>
         <thead>
             <tr>
@@ -103,10 +74,9 @@
                 {% endfor %}
             {% else %}
                 <tr>
-                    <td colspan="10">No data available.</td>
+                    <td colspan="12">No data available.</td>
                 </tr>
             {% endif %}
         </tbody>
     </table>
-</body>
-</html>
+{% endblock %}

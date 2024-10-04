@@ -12,7 +12,7 @@ body {
 header {
     background-color: #333;
     color: white;
-    padding: 1rem;
+    padding: .5rem;
     text-align: center;
 }
 
@@ -29,6 +29,13 @@ nav ul li {
 nav ul li a {
     color: white;
     text-decoration: none;
+    font-size: 1.25rem; /* Increase font size */
+    font-weight: bold;  /* Make the text bold */
+    text-shadow: 
+        -1px -1px 0 #000,  /* Top-left */
+        1px -1px 0 #000,   /* Top-right */
+        -1px 1px 0 #000,   /* Bottom-left */
+        1px 1px 0 #000;    /* Bottom-right */
 }
 
 /* Ensure main takes up remaining space between header and footer */
@@ -51,6 +58,7 @@ th, td {
     text-align: left;
 }
 
+
 /* Footer stays at the bottom but does not overlap the content */
 footer {
     background-color: #333;
@@ -60,4 +68,78 @@ footer {
     position: relative;
     width: 100%;
     bottom: 0;
+}
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+}
+
+th, td {
+    border: 1px solid #000;
+    padding: 5px;
+    text-align: left;
+}
+
+th {
+    background-color: #b7b7b7;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #efefef;
+}
+
+tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+tr:hover {
+    background-color: #e6f7ff;
+}
+
+/* Dropdown Menu Styles */
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.dropbtn {
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    font-weight: bold;  /* Keep the bold text for the dropdown button */
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #454545;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 8px 8px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-weight: normal;  /* Unbold the text inside the dropdown */
+    font-size: 1.1rem; /* Increase font size */
+}
+
+.dropdown-content a:hover {
+    background-color: #575757;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #575757;
 }

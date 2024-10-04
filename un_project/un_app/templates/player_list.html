@@ -1,36 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Player List</title>
-    <style>
-        table {
-            border-collapse: collapse; /* Makes borders collapse into a single border */
-            width: 100%; /* Full width of the container */
-            margin: 20px 0; /* Adds some margin above and below the table */
-        }
-        th, td {
-            border: 1px solid #000; /* Black border around each cell */
-            padding: 10px; /* Space inside the cells */
-            text-align: left; /* Align text to the left by default */
-        }
-        th {
-            background-color: #b7b7b7; /* Changed to #b7b7b7 for headers */
-            text-align: center; /* Center-align text in header */
-        }
-        tr:nth-child(even) {
-            background-color: #efefef; /* Light grey for even rows */
-        }
-        tr:nth-child(odd) {
-            background-color: #ffffff; /* White for odd rows */
-        }
-        tr:hover {
-            background-color: #e6f7ff; /* Light blue background on row hover */
-        }
-    </style>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
     <h1>United Nations Records: Player List</h1>
     <table>
         <thead>
@@ -64,5 +34,4 @@
             {% endif %}
         </tbody>
     </table>
-</body>
-</html>
+{% endblock %}
