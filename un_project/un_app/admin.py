@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Nation, Player, Territory, Building, Company, PartialBuildingOwnership, BuildingEvaluation
+from .models import Nation, Player, Territory, Building, Company, PartialBuildingOwnership, BuildingEvaluation, Item, ItemEvaluation, ItemCount
 
 admin.site.register(Nation)
 admin.site.register(Company)
@@ -8,3 +8,6 @@ admin.site.register(Territory)
 admin.site.register(Building)
 admin.site.register(PartialBuildingOwnership)
 admin.site.register(BuildingEvaluation)
+admin.site.register(Item)
+admin.site.register(ItemEvaluation)
+admin.site.register(ItemCount)

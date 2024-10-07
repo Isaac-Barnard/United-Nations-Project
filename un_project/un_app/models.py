@@ -74,12 +74,12 @@ class Building(models.Model):
     @property
     def price(self):
         # Check if the building has two or more evaluations
-        evaluation_count = self.evaluations.count()
+        evaluation_count = self.building_evaluations.count()
         if evaluation_count < 2:
             return 0
         
         # Calculate the average evaluation price
-        avg_price = self.evaluations.aggregate(Avg('evaluation_price'))['evaluation_price__avg']
+        avg_price = self.building_evaluations.aggregate(Avg('evaluation_price'))['evaluation_price__avg']
         return avg_price
     
     @property
@@ -136,18 +136,63 @@ class PartialBuildingOwnership(models.Model):
     
 
 class BuildingEvaluation(models.Model):
-    building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='evaluations')
-    evaluator = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='evaluations')
+    building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='building_evaluations')
+    evaluator = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='building_evaluations', limit_choices_to={'un_rep': True})
     evaluation_price = models.DecimalField(max_digits=12, decimal_places=10)
     evaluation_date = models.DateField(auto_now_add=True)
 
     class Meta:
         unique_together = ('building', 'evaluator')  # A player can only evaluate a building once
 
-    def clean(self):
-        # Ensure that the player is a UN representative before saving the evaluation
-        if not self.evaluator.un_rep:
-            raise ValidationError(f"{self.evaluator.username} is not a UN representative and cannot submit an evaluation.")
-
     def __str__(self):
         return f"{self.evaluator.username} evaluated {self.building.name} at {self.evaluation_price}"
+    
+
+class Item(models.Model):
+    FIXED_PRICE = 'fixed'
+    MARKET_RATE = 'market'
+
+    PRICE_TYPE_CHOICES = [
+        (FIXED_PRICE, 'Fixed Price'),
+        (MARKET_RATE, 'Market Rate'),
+    ]
+
+    name = models.CharField(max_length=100)
+    price_type = models.CharField(max_length=10, choices=PRICE_TYPE_CHOICES)
+    fixed_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+    
+    @property
+    def price(self):
+        # For fixed price items, return the fixed price
+        if self.price_type == self.FIXED_PRICE:
+            return self.fixed_price
+        
+        # For market rate items, calculate the average price from evaluations
+        evaluation_count = self.item_evaluations.count()
+        if evaluation_count < 2:
+            return 0
+
+        avg_price = self.item_evaluations.aggregate(Avg('value'))['value__avg']
+        return avg_price
+
+
+class ItemEvaluation(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='item_evaluations', limit_choices_to={'price_type': 'market'})
+    evaluator = models.ForeignKey(Player, on_delete=models.CASCADE, limit_choices_to={'un_rep': True})
+    value = models.DecimalField(max_digits=20, decimal_places=10)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.item.name} - {self.value} by {self.evaluator.username}'
+    
+
+class ItemCount(models.Model):
+    nation = models.ForeignKey(Nation, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    count = models.DecimalField(max_digits=10, decimal_places=2)  # Allows for 2 decimal places
+
+    def __str__(self):
+        return f'{self.item.name} - {self.nation.name}'
