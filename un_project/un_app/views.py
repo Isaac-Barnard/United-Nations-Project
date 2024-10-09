@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import F, FloatField, ExpressionWrapper, Count, Value, Sum
 from django.db.models.functions import Coalesce
 from django.contrib.auth.decorators import login_required
-from .forms import EvaluatorForm, BuildingEvaluationForm
+from .forms import BuildingEvaluationForm
 from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination
 from decimal import Decimal
 
@@ -47,11 +47,12 @@ def evaluate_buildings(request):
         if evaluation_form.is_valid():
             evaluator = request.user
 
-            # Check if evaluator has a related Player instance
+            # Check if evaluator has a related UserProfile and Player instance
             try:
-                evaluator_player = evaluator.player
-            except Player.DoesNotExist:
-                # Handle case where Player profile doesn't exist
+                evaluator_profile = evaluator.userprofile  # Access UserProfile related to User
+                evaluator_player = evaluator_profile.player  # Get the associated Player
+            except UserProfile.DoesNotExist:
+                # Handle case where UserProfile doesn't exist
                 return render(request, 'evaluate_buildings.html', {
                     'evaluation_form': evaluation_form,
                     'error_message': 'Your account is not set up correctly.'

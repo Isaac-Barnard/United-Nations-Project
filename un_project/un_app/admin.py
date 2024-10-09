@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Nation, Player, Territory, Company, Building, BuildingEvaluation, BuildingEvaluationComponent, PartialBuildingOwnership, Denomination, Item, ItemPriceComponent, ItemEvaluation, ItemEvaluationComponent, ItemCount
+from .models import Nation, Player, Territory, Company, Building, BuildingEvaluation, BuildingEvaluationComponent, PartialBuildingOwnership, Denomination, Item, ItemPriceComponent, ItemEvaluation, ItemEvaluationComponent, ItemCount, UserProfile
 
 admin.site.register(Nation)
 admin.site.register(Company)
@@ -15,3 +15,4 @@ admin.site.register(ItemCount)
 admin.site.register(ItemPriceComponent)
 admin.site.register(ItemEvaluation)
 admin.site.register(ItemEvaluationComponent)
+admin.site.register(UserProfile)

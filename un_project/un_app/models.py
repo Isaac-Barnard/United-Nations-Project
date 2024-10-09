@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db.models.functions import Coalesce
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db.models import Avg, F, Sum, Value
 from decimal import Decimal
@@ -35,6 +36,14 @@ class Player(models.Model):
     
     def num_buildings_built(self):
         return self.main_builds.count()
+    
+# --------------------------------------------------------------------
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='user_profiles')
+
+    def __str__(self):
+        return f'{self.user.username} linked to {self.player.username}'
 
 # --------------------------------------------------------------------
 class Territory(models.Model):
