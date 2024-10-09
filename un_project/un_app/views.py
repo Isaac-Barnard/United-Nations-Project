@@ -3,7 +3,7 @@ from django.db.models import F, FloatField, ExpressionWrapper, Count, Value, Sum
 from django.db.models.functions import Coalesce
 from django.contrib.auth.decorators import login_required
 from .forms import BuildingEvaluationForm
-from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination
+from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile
 from decimal import Decimal
 
 def home(request):
