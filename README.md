@@ -1,4 +1,6 @@
-__**README**__
+# **United Nations Official Records Website Project**
+<img src="/un_project/un_app/static/images/un_seal.png" alt="UN Seal" width="350"/>
+
 This project will eventually maybe become a replacement for our spreadsheets:
 
 __Building Index:__
