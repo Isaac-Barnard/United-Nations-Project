@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 from django.db.models import Avg, F, Sum, Value
 from decimal import Decimal
 
+# --------------------------------------------------------------------
 class Nation(models.Model):
     name = models.CharField(max_length=100, unique=True)
     abbreviation = models.CharField(max_length=100, unique=True)
@@ -13,7 +14,7 @@ class Nation(models.Model):
     def __str__(self):
         return self.abbreviation
     
-
+# --------------------------------------------------------------------
 class Company(models.Model):
     name = models.CharField(max_length=100, unique=True)
     abbreviation = models.CharField(max_length=100, unique=True)
@@ -21,7 +22,7 @@ class Company(models.Model):
     def __str__(self):
         return self.abbreviation
     
-
+# --------------------------------------------------------------------
 class Player(models.Model):
     username = models.CharField(max_length=100, unique=True)
     nation = models.ForeignKey(Nation, on_delete=models.CASCADE, related_name='players')
@@ -33,30 +34,45 @@ class Player(models.Model):
     def num_buildings_built(self):
         return self.main_builds.count()
 
-
+# --------------------------------------------------------------------
 class Territory(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    #nation = models.ForeignKey(Nation, on_delete=models.CASCADE, related_name='territories')
 
     def __str__(self):
         return self.name
-
-
+    
+# --------------------------------------------------------------------
+#                           Buildings
+# --------------------------------------------------------------------
 class Building(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    territory = models.ForeignKey(Territory, on_delete=models.CASCADE, related_name='buildings', null=True)
-    owner = models.ForeignKey(Nation, on_delete=models.CASCADE, related_name='owned_buildings')
-    main_builders = models.ManyToManyField(Player, related_name='main_builds')
-    y_level_high_pt = models.FloatField(null=True)
-    y_level_ground = models.FloatField(null=True)
-    year_completed = models.IntegerField(null=True)
-    completed = models.BooleanField(default=True)
-    x_coordinate = models.CharField(max_length=50)
-    z_coordinate = models.CharField(max_length=50)
-    historic_site = models.BooleanField(default=False) 
-    architectural_genius = models.BooleanField(default=False) 
-    mopq_award = models.CharField(max_length=50, null=True, blank=True)
-    architectural_style = models.CharField(max_length=100, null=True, blank=True)
+    name = models.CharField(max_length=100, unique=True,
+                            help_text="Building name")
+    territory = models.ForeignKey(Territory, on_delete=models.CASCADE, related_name='buildings', null=True,
+                                  help_text="The name of the territory district that this building resides. This does not necessarily indicate owner")
+    owner = models.ForeignKey(Nation, on_delete=models.CASCADE, related_name='owned_buildings',
+                              help_text="The nation that owns the building as its sovereign territory")
+    main_builders = models.ManyToManyField(Player, related_name='main_builds',
+                                           help_text="The builder/builders who constructed the majority of the building")
+    y_level_high_pt = models.FloatField(null=True,
+                                        help_text="The highest point of the building")
+    y_level_ground = models.FloatField(null=True,
+                                       help_text="The ground level of the building. Measured to the ground level, not lowest point of the building ie. basements or mines")
+    year_completed = models.IntegerField(null=True,
+                                         help_text="The year where construction began on the building")
+    completed = models.BooleanField(default=True,
+                                    help_text="Whether or not the building is completed. False means the building is incomplete")
+    x_coordinate = models.CharField(max_length=50,
+                                    help_text="The x-coordinate of roughly center of the build")
+    z_coordinate = models.CharField(max_length=50,
+                                    help_text="The z-coordinate of roughly center of the build")
+    historic_site = models.BooleanField(default=False,
+                                        help_text="Damage to structures in the Register of Historic and Cultural Structures (RHCS) is considered war crime") 
+    architectural_genius = models.BooleanField(default=False,
+                                               help_text="Damage to structures in the Register of Architectural and Engineering Wonders of the World (RAEWW) will result in court suits or settlements for damages will be doubled") 
+    mopq_award = models.CharField(max_length=50, null=True, blank=True,
+                                  help_text="Medal of Papa Quinn (MoPQ) award for architecture or another MoPQ award related to a building. Damages to structures that have won a Medal of Papa Quinn in the register will be considered a war crime")
+    architectural_style = models.CharField(max_length=100, null=True, blank=True,
+                                           help_text="The architectural style of the building if it falls into one")
 
     def __str__(self):
         return self.name
@@ -107,7 +123,8 @@ class Building(models.Model):
             return Decimal(self.price) * Decimal(self.adjusted_ownership) / Decimal(100)
         return 0  # Return None if price or adjusted ownership is missing
     
-    
+
+# --------------------------------------------------------------------
 class PartialBuildingOwnership(models.Model):
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
     partial_owner_type = models.ForeignKey(
@@ -134,7 +151,7 @@ class PartialBuildingOwnership(models.Model):
     def __str__(self):
         return f"{self.partial_owner_abbreviation} owns {self.percentage}% of {self.building.name}"
     
-
+# --------------------------------------------------------------------
 class BuildingEvaluation(models.Model):
     building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='building_evaluations')
     evaluator = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='building_evaluations', limit_choices_to={'un_rep': True})
@@ -147,7 +164,9 @@ class BuildingEvaluation(models.Model):
     def __str__(self):
         return f"{self.evaluator.username} evaluated {self.building.name} at {self.evaluation_price}"
     
-
+# --------------------------------------------------------------------
+#                           Items
+# --------------------------------------------------------------------
 class Item(models.Model):
     FIXED_PRICE = 'fixed'
     MARKET_RATE = 'market'
@@ -160,6 +179,8 @@ class Item(models.Model):
     name = models.CharField(max_length=100)
     price_type = models.CharField(max_length=10, choices=PRICE_TYPE_CHOICES)
     fixed_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    description = models.CharField(max_length=255, blank=True)  # Optional description field
+
 
     def __str__(self):
         return self.name
@@ -179,6 +200,7 @@ class Item(models.Model):
         return avg_price
 
 
+# --------------------------------------------------------------------
 class ItemEvaluation(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='item_evaluations', limit_choices_to={'price_type': 'market'})
     evaluator = models.ForeignKey(Player, on_delete=models.CASCADE, limit_choices_to={'un_rep': True})
@@ -188,7 +210,7 @@ class ItemEvaluation(models.Model):
     def __str__(self):
         return f'{self.item.name} - {self.value} by {self.evaluator.username}'
     
-
+# --------------------------------------------------------------------
 class ItemCount(models.Model):
     nation = models.ForeignKey(Nation, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
