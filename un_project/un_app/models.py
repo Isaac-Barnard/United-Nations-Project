@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db.models.functions import Coalesce
@@ -70,9 +71,22 @@ class Building(models.Model):
     architectural_genius = models.BooleanField(default=False,
                                                help_text="Damage to structures in the Register of Architectural and Engineering Wonders of the World (RAEWW) will result in court suits or settlements for damages will be doubled") 
     mopq_award = models.CharField(max_length=50, null=True, blank=True,
-                                  help_text="Medal of Papa Quinn (MoPQ) award for architecture or another MoPQ award related to a building. Damages to structures that have won a Medal of Papa Quinn in the register will be considered a war crime")
+                                  choices=[
+                                      ('Eligible', 'Eligible'),
+                                      ('Nominated', 'Nominated'),
+                                      ('Won', 'Won')
+                                  ],
+                                  help_text="Medal of Papa Quinn (MoPQ) award for architecture or another MoPQ award related to a building.")
     architectural_style = models.CharField(max_length=100, null=True, blank=True,
                                            help_text="The architectural style of the building if it falls into one")
+
+    def save(self, *args, **kwargs):
+        current_year = timezone.now().year
+        if self.year_completed == current_year:
+            self.mopq_award = "Eligible"
+        elif self.mopq_award not in ["Nominated", "Won"]:
+            self.mopq_award = ""
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
