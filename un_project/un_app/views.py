@@ -82,7 +82,7 @@ def evaluate_buildings(request):
             )
 
             # Iterate over denomination fields and create BuildingEvaluationComponents
-            denominations = Denomination.objects.all()
+            denominations = Denomination.objects.all().order_by('priority')  # Custom order
             for denomination in denominations:
                 field_name = f'denomination_{denomination.id}'
                 quantity = evaluation_form.cleaned_data.get(field_name, 0)
