@@ -16,7 +16,7 @@
                 <tr>
                     <td>{{ building.name }}</td>
                     <td>{{ building.adjusted_ownership }}%</td>
-                    <td>{{ building.adjusted_ownership_price }}</td>
+                    <td>{{ building.adjusted_ownership_price|stringformat:"g" }}</td>
                 </tr>
             {% endfor %}
         </tbody>

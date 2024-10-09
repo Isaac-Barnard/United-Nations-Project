@@ -17,10 +17,10 @@
                     <li><a href="{% url 'player_list' %}">Players</a></li>
                     <!-- Dropdown for Nations -->
                     <li class="dropdown">
-                        <a href="javascript:void(0)" class="dropbtn">Buildings by Nation</a>
+                        <a href="javascript:void(0)" class="dropbtn">Nation Building Sheets</a>
                         <div class="dropdown-content">
                             {% for nation in nations %}
-                                <a href="{% url 'nation_building_list' nation.abbreviation %}">{{ nation.name }}</a>
+                                <a href="{% url 'nation_balance_sheet' nation.abbreviation %}">{{ nation.name }}</a>
                             {% endfor %}
                         </div>
                     </li>

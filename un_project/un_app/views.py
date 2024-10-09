@@ -28,11 +28,11 @@ def player_list(request):
     return render(request, 'player_list.html', {'players': players})
 
 
-def nation_building_list(request, nation_abbreviation):
+def nation_balance_sheet(request, nation_abbreviation):
     # Get the nation by its abbreviation
     nation = get_object_or_404(Nation, abbreviation=nation_abbreviation)
     
     # Fetch all buildings owned by the nation (no need to annotate height or ownership here)
     buildings = Building.objects.filter(owner=nation)
 
-    return render(request, 'nation_building_list.html', {'nation': nation, 'buildings': buildings})
+    return render(request, 'nation_balance_sheet.html', {'nation': nation, 'buildings': buildings})
