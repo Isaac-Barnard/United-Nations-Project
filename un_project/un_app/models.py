@@ -28,6 +28,7 @@ class Player(models.Model):
     username = models.CharField(max_length=100, unique=True)
     nation = models.ForeignKey(Nation, on_delete=models.CASCADE, related_name='players')
     un_rep = models.BooleanField(default=False)
+    description = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.username
@@ -121,7 +122,7 @@ class Building(models.Model):
             total_value += evaluation.total_diamond_value
         avg_price = total_value / Decimal(evaluation_count)
         return avg_price
-    
+
     @property
     def adjusted_ownership(self):
         """
@@ -136,17 +137,13 @@ class Building(models.Model):
         )['total_ownership'] or 0
 
         return 100 - total_ownership
-
-
+    
     @property
     def adjusted_ownership_price(self):
-        """
-        Calculate the adjusted ownership price by multiplying the building price by adjusted ownership.
-        """
+        #Calculate the adjusted ownership price by multiplying the building price by adjusted ownership.
         if self.price and self.adjusted_ownership is not None:
             return Decimal(self.price) * Decimal(self.adjusted_ownership) / Decimal(100)
         return 0  # Return None if price or adjusted ownership is missing
-    
 
 # --------------------------------------------------------------------
 class PartialBuildingOwnership(models.Model):

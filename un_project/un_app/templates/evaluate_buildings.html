@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Evaluate Buildings
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <p>Logged in as {{ user.username }} | <a href="{% url 'logout' %}">Logout</a></p>
+    {% else %}
+        <p>You are not logged in. Please <a href="{% url 'login' %}?next={{ request.path }}">log in</a> to submit evaluations.</p>
+    {% endif %}
+    
+    <h1>Evaluate Buildings</h1>
+    
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+    
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {{ evaluation_form.building.label_tag }} {{ evaluation_form.building }}
+            
+            <h2>Input Quantities for Each Denomination</h2>
+            <table>
+                <tr>
+                    <th>Denomination</th>
+                    <th>Quantity</th>
+                </tr>
+                {% for field in evaluation_form %}
+                    {% if field.name != 'building' %}
+                        <tr>
+                            <td>{{ field.label }}</td>
+                            <td>{{ field }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+            
+            <button type="submit">Submit Evaluation</button>
+        </form>
+    {% else %}
+        <p>Please log in to submit an evaluation.</p>
+    {% endif %}
+{% endblock %}

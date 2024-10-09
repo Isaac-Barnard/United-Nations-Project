@@ -1,7 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import F, FloatField, ExpressionWrapper, Count, Value, Sum
 from django.db.models.functions import Coalesce
-from .models import Building, Player, Nation, PartialBuildingOwnership
+from django.contrib.auth.decorators import login_required
+from .forms import EvaluatorForm, BuildingEvaluationForm
+from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination
 from decimal import Decimal
 
 def home(request):
@@ -36,3 +38,67 @@ def nation_balance_sheet(request, nation_abbreviation):
     buildings = Building.objects.filter(owner=nation)
 
     return render(request, 'nation_balance_sheet.html', {'nation': nation, 'buildings': buildings})
+
+
+@login_required
+def evaluate_buildings(request):
+    if request.method == 'POST':
+        evaluation_form = BuildingEvaluationForm(request.POST)
+        if evaluation_form.is_valid():
+            evaluator = request.user
+
+            # Check if evaluator has a related Player instance
+            try:
+                evaluator_player = evaluator.player
+            except Player.DoesNotExist:
+                # Handle case where Player profile doesn't exist
+                return render(request, 'evaluate_buildings.html', {
+                    'evaluation_form': evaluation_form,
+                    'error_message': 'Your account is not set up correctly.'
+                })
+
+            # Check if the evaluator is authorized (un_rep=True)
+            if not evaluator_player.un_rep:
+                return render(request, 'evaluate_buildings.html', {
+                    'evaluation_form': evaluation_form,
+                    'error_message': 'You do not have permission to evaluate buildings.'
+                })
+
+            # Get building
+            building = evaluation_form.cleaned_data['building']
+
+            # Check if evaluator has already evaluated this building
+            if BuildingEvaluation.objects.filter(building=building, evaluator=evaluator_player).exists():
+                return render(request, 'evaluate_buildings.html', {
+                    'evaluation_form': evaluation_form,
+                    'error_message': 'You have already evaluated this building.'
+                })
+
+            # Create BuildingEvaluation
+            building_evaluation = BuildingEvaluation.objects.create(
+                building=building,
+                evaluator=evaluator_player
+            )
+
+            # Iterate over denomination fields and create BuildingEvaluationComponents
+            denominations = Denomination.objects.all()
+            for denomination in denominations:
+                field_name = f'denomination_{denomination.id}'
+                quantity = evaluation_form.cleaned_data.get(field_name, 0)
+                if quantity > 0:
+                    BuildingEvaluationComponent.objects.create(
+                        evaluation=building_evaluation,
+                        denomination=denomination,
+                        quantity=quantity
+                    )
+
+            return redirect('evaluation_success')
+    else:
+        evaluation_form = BuildingEvaluationForm()
+
+    return render(request, 'evaluate_buildings.html', {
+        'evaluation_form': evaluation_form
+    })
+
+def evaluation_success(request):
+    return render(request, 'evaluation_success.html')
