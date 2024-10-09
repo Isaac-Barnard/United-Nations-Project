@@ -43,6 +43,14 @@ class Territory(models.Model):
         return self.name
     
 # --------------------------------------------------------------------
+class Denomination(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    diamond_equivalent = models.DecimalField(max_digits=20, decimal_places=15)
+
+    def __str__(self):
+        return self.name
+    
+# --------------------------------------------------------------------
 #                           Buildings
 # --------------------------------------------------------------------
 class Building(models.Model):
@@ -103,13 +111,15 @@ class Building(models.Model):
     
     @property
     def price(self):
-        # Check if the building has two or more evaluations
-        evaluation_count = self.building_evaluations.count()
+        evaluations = self.building_evaluations.all()
+        evaluation_count = evaluations.count()
         if evaluation_count < 2:
-            return 0
-        
-        # Calculate the average evaluation price
-        avg_price = self.building_evaluations.aggregate(Avg('evaluation_price'))['evaluation_price__avg']
+            return Decimal('0')
+
+        total_value = Decimal('0')
+        for evaluation in evaluations:
+            total_value += evaluation.total_diamond_value
+        avg_price = total_value / Decimal(evaluation_count)
         return avg_price
     
     @property
@@ -169,14 +179,29 @@ class PartialBuildingOwnership(models.Model):
 class BuildingEvaluation(models.Model):
     building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='building_evaluations')
     evaluator = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='building_evaluations', limit_choices_to={'un_rep': True})
-    evaluation_price = models.DecimalField(max_digits=12, decimal_places=10)
     evaluation_date = models.DateField(auto_now_add=True)
 
     class Meta:
         unique_together = ('building', 'evaluator')  # A player can only evaluate a building once
 
     def __str__(self):
-        return f"{self.evaluator.username} evaluated {self.building.name} at {self.evaluation_price}"
+        return f"{self.evaluator.username} evaluated {self.building.name}"
+
+    @property
+    def total_diamond_value(self):
+        total = Decimal('0')
+        for component in self.evaluation_components.all():
+            total += Decimal(component.quantity) * Decimal(component.denomination.diamond_equivalent)
+        return total
+    
+# --------------------------------------------------------------------
+class BuildingEvaluationComponent(models.Model):
+    evaluation = models.ForeignKey(BuildingEvaluation, on_delete=models.CASCADE, related_name='evaluation_components')
+    denomination = models.ForeignKey(Denomination, on_delete=models.CASCADE)
+    quantity = models.DecimalField(max_digits=20, decimal_places=8)
+
+    def __str__(self):
+        return f'{self.quantity} x {self.denomination.name}'
     
 # --------------------------------------------------------------------
 #                           Items
@@ -192,43 +217,78 @@ class Item(models.Model):
 
     name = models.CharField(max_length=100)
     price_type = models.CharField(max_length=10, choices=PRICE_TYPE_CHOICES)
-    fixed_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     description = models.CharField(max_length=255, blank=True)  # Optional description field
-
 
     def __str__(self):
         return self.name
     
     @property
-    def price(self):
-        # For fixed price items, return the fixed price
-        if self.price_type == self.FIXED_PRICE:
-            return self.fixed_price
-        
-        # For market rate items, calculate the average price from evaluations
-        evaluation_count = self.item_evaluations.count()
-        if evaluation_count < 2:
-            return 0
+    def total_diamond_value(self):
+        total = 0
+        for component in self.price_components.all():
+            total += component.quantity * component.denomination.diamond_equivalent
+        return total
+    
+    @property
+    def price_breakdown(self):
+        return self.price_components.all()
+    
+    @property
+    def market_price(self):
+        evaluations = self.item_evaluations.all()
+        if not evaluations:
+            return None  # Or some default value
 
-        avg_price = self.item_evaluations.aggregate(Avg('value'))['value__avg']
-        return avg_price
+        total_value = 0
+        for evaluation in evaluations:
+            total_value += evaluation.total_diamond_value
 
+        return total_value / evaluations.count()
 
 # --------------------------------------------------------------------
 class ItemEvaluation(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='item_evaluations', limit_choices_to={'price_type': 'market'})
     evaluator = models.ForeignKey(Player, on_delete=models.CASCADE, limit_choices_to={'un_rep': True})
-    value = models.DecimalField(max_digits=20, decimal_places=10)
     date = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        unique_together = ('item', 'evaluator')  # A player can only evaluate an item once
+
+
     def __str__(self):
-        return f'{self.item.name} - {self.value} by {self.evaluator.username}'
+        return f'{self.item.name} evaluation by {self.evaluator.username}'
+    
+    @property
+    def total_diamond_value(self):
+        total = Decimal('0')
+        for component in self.evaluation_components.all():
+            total += Decimal(component.quantity) * Decimal(component.denomination.diamond_equivalent)
+        return total
+    
+
+class ItemEvaluationComponent(models.Model):
+    evaluation = models.ForeignKey(ItemEvaluation, on_delete=models.CASCADE, related_name='evaluation_components')
+    denomination = models.ForeignKey(Denomination, on_delete=models.CASCADE)
+    quantity = models.DecimalField(max_digits=20, decimal_places=8)
+
+    def __str__(self):
+        return f'{self.quantity} x {self.denomination.name}'
+
     
 # --------------------------------------------------------------------
 class ItemCount(models.Model):
     nation = models.ForeignKey(Nation, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    count = models.DecimalField(max_digits=10, decimal_places=2)  # Allows for 2 decimal places
+    count = models.DecimalField(max_digits=20, decimal_places=3)  # Allows for 2 decimal places
 
     def __str__(self):
         return f'{self.item.name} - {self.nation.name}'
+    
+# --------------------------------------------------------------------
+class ItemPriceComponent(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='price_components')
+    denomination = models.ForeignKey(Denomination, on_delete=models.CASCADE)
+    quantity = models.DecimalField(max_digits=20, decimal_places=8)
+
+    def __str__(self):
+        return f'{self.quantity} x {self.denomination.name} for {self.item.name}'
