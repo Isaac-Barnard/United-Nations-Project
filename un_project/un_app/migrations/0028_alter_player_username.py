@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("un_app", "0027_player_username"),
+        ("un_app", "0025_remove_buildingevaluation_evaluation_price_and_more"),
     ]
 
     operations = [
