@@ -1,12 +1,6 @@
 from django import forms
 from .models import Building, Denomination
 
-class EvaluatorForm(forms.Form):
-    username = forms.CharField(max_length=150, label='Your Username')
-    #TODO:
-    # However, if you're using Django's authentication system and evaluators are logged in, 
-    # you can omit this form and use request.user to get the evaluator's information.
-
 
 class BuildingEvaluationForm(forms.Form):
     building = forms.ModelChoiceField(queryset=Building.objects.all(), label='Select Building')

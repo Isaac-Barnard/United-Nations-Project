@@ -129,3 +129,4 @@ STATIC_URL = '/static/'
 LOGIN_URL = 'login'  # URL name for the login page
 LOGIN_REDIRECT_URL = 'evaluate_buildings'  # Redirect after successful login
 LOGOUT_REDIRECT_URL = 'login'  # Redirect after logout
+

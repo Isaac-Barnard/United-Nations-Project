@@ -34,10 +34,22 @@ def nation_balance_sheet(request, nation_abbreviation):
     # Get the nation by its abbreviation
     nation = get_object_or_404(Nation, abbreviation=nation_abbreviation)
     
-    # Fetch all buildings owned by the nation (no need to annotate height or ownership here)
+    # Fetch all buildings owned by the nation
     buildings = Building.objects.filter(owner=nation)
+    
+    # Fetch buildings where the nation is a partial owner
+    partial_buildings = Building.objects.filter(
+        partialbuildingownership__partial_owner_abbreviation=nation.abbreviation
+    ).annotate(
+        ownership=F('partialbuildingownership__percentage')
+    )
 
-    return render(request, 'nation_balance_sheet.html', {'nation': nation, 'buildings': buildings})
+    return render(request, 'nation_balance_sheet.html', {
+        'nation': nation,
+        'buildings': buildings,
+        'partial_buildings': partial_buildings,
+    })
+
 
 
 @login_required
