@@ -179,6 +179,13 @@ class PartialBuildingOwnership(models.Model):
             if not Company.objects.filter(abbreviation=self.partial_owner_abbreviation).exists():
                 raise ValidationError(f"{self.partial_owner_abbreviation} is not a valid Company abbreviation.")
 
+    @property
+    def partial_ownership_price(self):
+        """Calculate the price based on the partial ownership percentage."""
+        if self.building.price:
+            return Decimal(self.building.price) * Decimal(self.percentage) / Decimal(100)
+        return 0  # Return 0 if no price is available for the building
+
     def __str__(self):
         return f"{self.partial_owner_abbreviation} owns {self.percentage}% of {self.building.name}"
     
