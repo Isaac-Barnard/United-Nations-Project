@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %}
+    {{ nation.abbreviation }} Balance Sheet
+{% endblock %}
+
 {% block content %}
     <h1>Buildings for {{ nation.name }} ({{ nation.abbreviation }})</h1>
 
