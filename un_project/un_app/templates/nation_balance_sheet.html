@@ -14,9 +14,9 @@
         <tbody>
             {% for building in buildings %}
                 <tr>
-                    <td>{{ building.name }}</td>
-                    <td>{{ building.adjusted_ownership }}%</td>
-                    <td>{{ building.adjusted_ownership_price|stringformat:"g" }}</td>
+                    <td style="width:75%">{{ building.name }}</td>
+                    <td style="width:5%">{{ building.adjusted_ownership }}%</td>
+                    <td style="width:20%">{{ building.adjusted_ownership_price|stringformat:"g" }}</td>
                 </tr>
             {% endfor %}
         </tbody>
