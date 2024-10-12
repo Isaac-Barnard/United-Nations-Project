@@ -54,6 +54,9 @@ def nation_balance_sheet(request, nation_abbreviation):
 
 @login_required
 def evaluate_buildings(request):
+    # Fetch the denominations to pass to the template
+    denominations = Denomination.objects.all().order_by('priority')
+    
     if request.method == 'POST':
         evaluation_form = BuildingEvaluationForm(request.POST)
         if evaluation_form.is_valid():
@@ -64,9 +67,9 @@ def evaluate_buildings(request):
                 evaluator_profile = evaluator.userprofile  # Access UserProfile related to User
                 evaluator_player = evaluator_profile.player  # Get the associated Player
             except UserProfile.DoesNotExist:
-                # Handle case where UserProfile doesn't exist
                 return render(request, 'evaluate_buildings.html', {
                     'evaluation_form': evaluation_form,
+                    'denominations': denominations,  # Ensure denominations are passed in case of error
                     'error_message': 'Your account is not set up correctly.'
                 })
 
@@ -74,6 +77,7 @@ def evaluate_buildings(request):
             if not evaluator_player.un_rep:
                 return render(request, 'evaluate_buildings.html', {
                     'evaluation_form': evaluation_form,
+                    'denominations': denominations,  # Ensure denominations are passed in case of error
                     'error_message': 'You do not have permission to evaluate buildings.'
                 })
 
@@ -84,6 +88,7 @@ def evaluate_buildings(request):
             if BuildingEvaluation.objects.filter(building=building, evaluator=evaluator_player).exists():
                 return render(request, 'evaluate_buildings.html', {
                     'evaluation_form': evaluation_form,
+                    'denominations': denominations,  # Ensure denominations are passed in case of error
                     'error_message': 'You have already evaluated this building.'
                 })
 
@@ -94,7 +99,6 @@ def evaluate_buildings(request):
             )
 
             # Iterate over denomination fields and create BuildingEvaluationComponents
-            denominations = Denomination.objects.all().order_by('priority')  # Custom order
             for denomination in denominations:
                 field_name = f'denomination_{denomination.id}'
                 quantity = evaluation_form.cleaned_data.get(field_name, 0)
@@ -106,12 +110,16 @@ def evaluate_buildings(request):
                     )
 
             return redirect('evaluation_success')
+
     else:
         evaluation_form = BuildingEvaluationForm()
 
+    # Always pass the denominations to the template
     return render(request, 'evaluate_buildings.html', {
-        'evaluation_form': evaluation_form
+        'evaluation_form': evaluation_form,
+        'denominations': denominations  # Ensure denominations are passed on GET request
     })
+
 
 def evaluation_success(request):
     return render(request, 'evaluation_success.html')
