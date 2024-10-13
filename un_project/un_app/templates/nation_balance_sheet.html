@@ -7,32 +7,123 @@
 {% block content %}
     <h1>Buildings for {{ nation.name }} ({{ nation.abbreviation }})</h1>
 
-    <!-- Display Item Information -->
-    <h2>Items for {{ nation.name }}</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Item Name</th>
-                <th>Market Rate</th>
-                <th>Count</th>
-                <th>Total Value</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in items %}
-                <tr>
-                    <td>{{ item.name }}</td> 
-                    <td>{{ item.market_price|stringformat:"g" }}</td> 
-                    <td>{{ item.count|stringformat:"g" }}</td>  
-                    <td>{{ item.total_value|stringformat:"g" }}</td>  
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="4">No items found.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <!-- Display Item Information in three Tables Side by Side -->
+    <div style="display: flex; justify-content: space-between;">
+        <!-- Table 1 -->
+        <div style="width: 24.9%;">
+            <h2>Items for {{ nation.name }}</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Market Rate</th>
+                        <th>Count</th>
+                        <th>Total Value</th>
+                    </tr>
+                </thead>
+                <tbody style="font-size: 0.9em;">
+                    {% for item in items_part1 %}
+                        <tr>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.market_price|stringformat:"g" }}</td>
+                            <td>{{ item.count|stringformat:"g" }}</td>
+                            <td>{{ item.total_value|stringformat:"g" }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No items found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Table 2 -->
+        <div style="width: 24.9%; padding-top: 47.5px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Market Rate</th>
+                        <th>Count</th>
+                        <th>Total Value</th>
+                    </tr>
+                </thead>
+                <tbody style="font-size: 0.9em;">
+                    {% for item in items_part2 %}
+                        <tr>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.market_price|stringformat:"g" }}</td>
+                            <td>{{ item.count|stringformat:"g" }}</td>
+                            <td>{{ item.total_value|stringformat:"g" }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No items found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Table 3 -->
+        <div style="width: 24.9%; padding-top: 47.5px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Market Rate</th>
+                        <th>Count</th>
+                        <th>Total Value</th>
+                    </tr>
+                </thead>
+                <tbody style="font-size: 0.9em;">
+                    {% for item in items_part3 %}
+                        <tr>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.market_price|stringformat:"g" }}</td>
+                            <td>{{ item.count|stringformat:"g" }}</td>
+                            <td>{{ item.total_value|stringformat:"g" }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No items found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- Table 4 -->
+        <div style="width: 24.9%; padding-top: 47.5px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Market Rate</th>
+                        <th>Count</th>
+                        <th>Total Value</th>
+                    </tr>
+                </thead>
+                <tbody style="font-size: 0.9em;">
+                    {% for item in items_part4 %}
+                        <tr>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.market_price|stringformat:"g" }}</td>
+                            <td>{{ item.count|stringformat:"g" }}</td>
+                            <td>{{ item.total_value|stringformat:"g" }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No items found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 
     <div style="display: flex; justify-content: space-between;">
         <!-- Fully Owned Buildings -->

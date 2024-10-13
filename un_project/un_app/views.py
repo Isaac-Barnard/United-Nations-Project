@@ -65,11 +65,27 @@ def nation_balance_sheet(request, nation_abbreviation):
             'total_value': total_value,
         })
     
+    # Distribute items into four parts (round-robin)
+    items_part1, items_part2, items_part3, items_part4 = [], [], [], []
+    for index, item in enumerate(item_data):
+        if index % 4 == 0:
+            items_part1.append(item)
+        elif index % 4 == 1:
+            items_part2.append(item)
+        elif index % 4 == 2:
+            items_part3.append(item)
+        else:
+            items_part4.append(item)
+            
+
     return render(request, 'nation_balance_sheet.html', {
         'nation': nation,
         'buildings': buildings,
         'partial_buildings': partial_buildings,
-        'items': item_data,  # Pass item data to the template
+        'items_part1': items_part1,  # First third of items
+        'items_part2': items_part2,  # Second third of items
+        'items_part3': items_part3,  # Final third of items
+        'items_part4': items_part4,  # Fourth quarter of items
     })
 
 
