@@ -71,13 +71,15 @@
                 </thead>
                 <tbody>
                     {% for building in partial_buildings %}
-                        {% for ownership in building.partialbuildingownership_set.all %}
-                            <tr>
-                                <td>{{ building.name }}</td>
-                                <td>{{ ownership.percentage }}%</td>
-                                <td>{{ ownership.partial_ownership_price|stringformat:"g" }}</td>
-                            </tr>
-                        {% endfor %}
+                        <tr>
+                            <td>{{ building.name }}</td>
+                            <td>{{ building.ownership }}%</td>
+                            <td>{{ building.adjusted_ownership_price|stringformat:"g" }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3">No partially owned buildings found.</td>
+                        </tr>
                     {% endfor %}
                 </tbody>
             </table>

@@ -42,7 +42,7 @@ def nation_balance_sheet(request, nation_abbreviation):
         partialbuildingownership__partial_owner_abbreviation=nation.abbreviation
     ).annotate(
         ownership=F('partialbuildingownership__percentage')
-    )
+    ).distinct()
 
     # Fetch item counts for the nation
     items_with_count = ItemCount.objects.filter(nation=nation)
