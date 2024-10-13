@@ -7,6 +7,33 @@
 {% block content %}
     <h1>Buildings for {{ nation.name }} ({{ nation.abbreviation }})</h1>
 
+    <!-- Display Item Information -->
+    <h2>Items for {{ nation.name }}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Market Rate</th>
+                <th>Count</th>
+                <th>Total Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.name }}</td> 
+                    <td>{{ item.market_price|stringformat:"g" }}</td> 
+                    <td>{{ item.count|stringformat:"g" }}</td>  
+                    <td>{{ item.total_value|stringformat:"g" }}</td>  
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">No items found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
     <div style="display: flex; justify-content: space-between;">
         <!-- Fully Owned Buildings -->
         <div style="width: 49.5%;">

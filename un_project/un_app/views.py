@@ -3,7 +3,7 @@ from django.db.models import F, FloatField, ExpressionWrapper, Count, Value, Sum
 from django.db.models.functions import Coalesce
 from django.contrib.auth.decorators import login_required
 from .forms import BuildingEvaluationForm
-from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile
+from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount
 from decimal import Decimal
 
 def home(request):
@@ -44,10 +44,32 @@ def nation_balance_sheet(request, nation_abbreviation):
         ownership=F('partialbuildingownership__percentage')
     )
 
+    # Fetch item counts for the nation
+    items_with_count = ItemCount.objects.filter(nation=nation)
+
+    # Calculate total value and market price for each item
+    item_data = []
+    for item_count in items_with_count:
+        item = item_count.item
+
+        # Check and log values for debugging
+        item_name = item.name if item.name else "Unnamed Item"
+        market_price = item.market_price if item.market_price else Decimal('0')
+
+        total_value = market_price * item_count.count
+
+        item_data.append({
+            'name': item_name,
+            'market_price': market_price,
+            'count': item_count.count,
+            'total_value': total_value,
+        })
+    
     return render(request, 'nation_balance_sheet.html', {
         'nation': nation,
         'buildings': buildings,
         'partial_buildings': partial_buildings,
+        'items': item_data,  # Pass item data to the template
     })
 
 

@@ -230,7 +230,7 @@ class Item(models.Model):
         (MARKET_RATE, 'Market Rate'),
     ]
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     price_type = models.CharField(max_length=10, choices=PRICE_TYPE_CHOICES)
     description = models.CharField(max_length=255, blank=True)  # Optional description field
 
@@ -250,15 +250,27 @@ class Item(models.Model):
     
     @property
     def market_price(self):
-        evaluations = self.item_evaluations.all()
-        if not evaluations:
-            return None  # Or some default value
+        if self.price_type == self.FIXED_PRICE:
+            # Calculate the fixed price using ItemFixedPriceComponent
+            total_fixed_price = sum(
+                component.quantity * component.denomination.diamond_equivalent
+                for component in self.price_components.all()
+            )
+            return total_fixed_price
 
-        total_value = 0
-        for evaluation in evaluations:
-            total_value += evaluation.total_diamond_value
+        elif self.price_type == self.MARKET_RATE:
+            # Calculate the market price using ItemEvaluation
+            evaluations = self.item_evaluations.all()
+            if not evaluations.exists():
+                return Decimal('0')
 
-        return total_value / evaluations.count()
+            total_value = sum(evaluation.total_diamond_value for evaluation in evaluations)
+            market_rate = total_value / evaluations.count()
+        
+            # Round to 3 decimal places for market rate items
+            return market_rate.quantize(Decimal('0.001'))
+
+        return Decimal('0')  # Default fallback if no price_type is specified
 
 # --------------------------------------------------------------------
 class ItemEvaluation(models.Model):
@@ -287,7 +299,7 @@ class ItemEvaluationComponent(models.Model):
     quantity = models.DecimalField(max_digits=20, decimal_places=8)
 
     def __str__(self):
-        return f'{self.quantity} x {self.denomination.name}'
+        return f'{self.quantity} x {self.denomination.name} x {self.evaluation}'
 
     
 # --------------------------------------------------------------------
@@ -296,14 +308,32 @@ class ItemCount(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     count = models.DecimalField(max_digits=20, decimal_places=3)  # Allows for 2 decimal places
 
+    class Meta:
+        # Ensure the combination of nation and item is unique
+        unique_together = ('nation', 'item')
+
     def __str__(self):
-        return f'{self.item.name} - {self.nation.name}'
+        return f'{self.item.name} - {self.nation.name} x {self.count}'
     
 # --------------------------------------------------------------------
-class ItemPriceComponent(models.Model):
+class ItemFixedPriceComponent(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='price_components')
     denomination = models.ForeignKey(Denomination, on_delete=models.CASCADE)
     quantity = models.DecimalField(max_digits=20, decimal_places=8)
 
+    class Meta:
+        # Ensure that an item can have only one fixed price component
+        unique_together = ('item',)
+
     def __str__(self):
         return f'{self.quantity} x {self.denomination.name} for {self.item.name}'
+
+    def clean(self):
+        # Ensure the item is a fixed price item
+        if self.item.price_type != Item.FIXED_PRICE:
+            raise ValidationError(f"Item '{self.item.name}' must be a fixed-price item to have a fixed price component.")
+    
+    def save(self, *args, **kwargs):
+        # Call the clean method to perform the validation before saving
+        self.clean()
+        super().save(*args, **kwargs)
