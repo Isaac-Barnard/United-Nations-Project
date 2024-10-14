@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% load static %}
+{% load custom_filters %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/balance_sheet_styles.css' %}">
@@ -31,9 +32,9 @@
                     {% for item in items_part1 %}
                         <tr style="font-size: 0.9em;">
                             <td class="item-name"> {{ item.name }}</td>
-                            <td>{{ item.market_price|stringformat:"g" }}</td>
+                            <td>{{ item.market_price|custom_decimal_places }}</td>
                             <td>{{ item.count|stringformat:"g" }}</td>
-                            <td>{{ item.total_value|stringformat:"g" }}</td>
+                            <td>{{ item.total_value|custom_decimal_places }}</td>
                         </tr>
                     {% empty %}
                         <tr>
@@ -59,9 +60,9 @@
                     {% for item in items_part2 %}
                         <tr style="font-size: 0.9em;">
                             <td class="item-name">{{ item.name }}</td>
-                            <td>{{ item.market_price|stringformat:"g" }}</td>
+                            <td>{{ item.market_price|custom_decimal_places }}</td>
                             <td>{{ item.count|stringformat:"g" }}</td>
-                            <td>{{ item.total_value|stringformat:"g" }}</td>
+                            <td>{{ item.total_value|custom_decimal_places }}</td>
                         </tr>
                     {% empty %}
                         <tr>
@@ -87,9 +88,9 @@
                     {% for item in items_part3 %}
                         <tr style="font-size: 0.9em;">
                             <td class="item-name">{{ item.name }}</td>
-                            <td>{{ item.market_price|stringformat:"g" }}</td>
+                            <td>{{ item.market_price|custom_decimal_places }}</td>
                             <td>{{ item.count|stringformat:"g" }}</td>
-                            <td>{{ item.total_value|stringformat:"g" }}</td>
+                            <td>{{ item.total_value|custom_decimal_places }}</td>
                         </tr>
                     {% empty %}
                         <tr>
@@ -116,9 +117,9 @@
                     {% for item in items_part4 %}
                         <tr style="font-size: 0.9em;">
                             <td class="item-name">{{ item.name }}</td>
-                            <td>{{ item.market_price|stringformat:"g" }}</td>
+                            <td>{{ item.market_price|custom_decimal_places }}</td>
                             <td>{{ item.count|stringformat:"g" }}</td>
-                            <td>{{ item.total_value|stringformat:"g" }}</td>
+                            <td>{{ item.total_value|custom_decimal_places }}</td>
                         </tr>
                     {% empty %}
                         <tr>
@@ -148,7 +149,7 @@
                         <tr>
                             <td class="building-name">{{ building.name }}</td>
                             <td>{{ building.adjusted_ownership }}%</td>
-                            <td>{{ building.adjusted_ownership_price|stringformat:"g" }}</td>
+                            <td>{{ building.adjusted_ownership_price|custom_decimal_places }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -171,7 +172,7 @@
                         <tr>
                             <td class="building-name">{{ building.name }}</td>
                             <td>{{ building.ownership }}%</td>
-                            <td>{{ building.adjusted_ownership_price|stringformat:"g" }}</td>
+                            <td>{{ building.adjusted_ownership_price|custom_decimal_places }}</td>
                         </tr>
                     {% empty %}
                         <tr>

@@ -3,7 +3,7 @@ from django.db.models import F, FloatField, ExpressionWrapper, Count, Value, Sum
 from django.db.models.functions import Coalesce
 from django.contrib.auth.decorators import login_required
 from .forms import BuildingEvaluationForm, ItemEvaluationForm
-from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount, ItemEvaluationComponent, ItemEvaluation
+from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount, ItemEvaluationComponent, ItemEvaluation, Item
 from decimal import Decimal
 
 def home(request):
@@ -44,24 +44,27 @@ def nation_balance_sheet(request, nation_abbreviation):
         ownership=F('partialbuildingownership__percentage')
     ).distinct()
 
-    # Fetch item counts for the nation
+    # Fetch all items and item counts for the nation
+    all_items = Item.objects.all()
     items_with_count = ItemCount.objects.filter(nation=nation)
+
+    # Create a dictionary to store counts for each item
+    item_count_dict = {item_count.item_id: item_count.count for item_count in items_with_count}
 
     # Calculate total value and market price for each item
     item_data = []
-    for item_count in items_with_count:
-        item = item_count.item
-
-        # Check and log values for debugging
+    for item in all_items:
         item_name = item.name if item.name else "Unnamed Item"
         market_price = item.market_price if item.market_price else Decimal('0')
-
-        total_value = market_price * item_count.count
+        
+        # Get the count for the item, defaulting to 0 if not present
+        count = item_count_dict.get(item.id, 0)
+        total_value = market_price * count
 
         item_data.append({
             'name': item_name,
             'market_price': market_price,
-            'count': item_count.count,
+            'count': count,
             'total_value': total_value,
         })
     
