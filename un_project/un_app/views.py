@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import F, FloatField, ExpressionWrapper, Count, Value, Sum
 from django.db.models.functions import Coalesce
 from django.contrib.auth.decorators import login_required
-from .forms import BuildingEvaluationForm
-from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount
+from .forms import BuildingEvaluationForm, ItemEvaluationForm
+from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount, ItemEvaluationComponent, ItemEvaluation
 from decimal import Decimal
 
 def home(request):
@@ -161,3 +161,72 @@ def evaluate_buildings(request):
 
 def evaluation_success(request):
     return render(request, 'evaluation_success.html')
+
+
+@login_required
+def evaluate_items(request):
+    # Fetch the denominations to pass to the template
+    denominations = Denomination.objects.all().order_by('priority')
+    
+    if request.method == 'POST':
+        evaluation_form = ItemEvaluationForm(request.POST)
+        if evaluation_form.is_valid():
+            evaluator = request.user
+
+            # Check if evaluator has a related UserProfile and Player instance
+            try:
+                evaluator_profile = evaluator.userprofile  # Access UserProfile related to User
+                evaluator_player = evaluator_profile.player  # Get the associated Player
+            except UserProfile.DoesNotExist:
+                return render(request, 'evaluate_items.html', {
+                    'evaluation_form': evaluation_form,
+                    'denominations': denominations,  # Ensure denominations are passed in case of error
+                    'error_message': 'Your account is not set up correctly.'
+                })
+
+            # Check if the evaluator is authorized (un_rep=True)
+            if not evaluator_player.un_rep:
+                return render(request, 'evaluate_items.html', {
+                    'evaluation_form': evaluation_form,
+                    'denominations': denominations,  # Ensure denominations are passed in case of error
+                    'error_message': 'You do not have permission to evaluate items.'
+                })
+
+            # Get item
+            item = evaluation_form.cleaned_data['item']
+
+            # Check if evaluator has already evaluated this item
+            if ItemEvaluation.objects.filter(item=item, evaluator=evaluator_player).exists():
+                return render(request, 'evaluate_items.html', {
+                    'evaluation_form': evaluation_form,
+                    'denominations': denominations,  # Ensure denominations are passed in case of error
+                    'error_message': 'You have already evaluated this item.'
+                })
+
+            # Create ItemEvaluation
+            item_evaluation = ItemEvaluation.objects.create(
+                item=item,
+                evaluator=evaluator_player
+            )
+
+            # Iterate over denomination fields and create ItemEvaluationComponents
+            for denomination in denominations:
+                field_name = f'denomination_{denomination.id}'
+                quantity = evaluation_form.cleaned_data.get(field_name, 0)
+                if quantity > 0:
+                    ItemEvaluationComponent.objects.create(
+                        evaluation=item_evaluation,
+                        denomination=denomination,
+                        quantity=quantity
+                    )
+
+            return redirect('evaluation_success')
+
+    else:
+        evaluation_form = ItemEvaluationForm()
+
+    # Always pass the denominations to the template
+    return render(request, 'evaluate_items.html', {
+        'evaluation_form': evaluation_form,
+        'denominations': denominations  # Ensure denominations are passed on GET request
+    })

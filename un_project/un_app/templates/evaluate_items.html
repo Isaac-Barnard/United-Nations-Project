@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Evaluate Items
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+    <span>Logged in as {{ user.username }}: </span>
+    <form method="post" action="{% url 'logout' %}" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" style="display: inline;">Logout</button>
+    </form>
+    {% else %}
+        <p>You are not logged in. Please <a href="{% url 'login' %}?next={{ request.path }}">log in</a> to submit evaluations.</p>
+    {% endif %}
+
+    <h1>Evaluate Items</h1>
+
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {{ evaluation_form.item.label_tag }} {{ evaluation_form.item }}
+
+            <h2>Running Total (in Diamonds): <span id="total_diamond_value">0</span></h2>
+
+            <h2>Input Quantities for Each Denomination</h2>
+            <table>
+                <tr>
+                    <th>Denomination</th>
+                    <th>Quantity</th>
+                </tr>
+                {% for field in evaluation_form %}
+                    {% if field.name != 'item' %}
+                        <tr>
+                            <td>{{ field.label }}</td>
+                            <td><input type="number" name="{{ field.name }}" id="{{ field.name }}" value="0" step="any" /></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+
+            <button type="submit">Submit Evaluation</button>
+        </form>
+    {% else %}
+        <p>Please log in to submit an evaluation.</p>
+    {% endif %}
+
+    <!-- Hidden element to store denomination values -->
+    <script type="application/json" id="denomination_values">
+        {
+            {% for denomination in denominations %}
+                "denomination_{{ denomination.id }}": {{ denomination.diamond_equivalent }}{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        }
+    </script>
+
+    <!-- Link to the external JavaScript file -->
+    <script src="{% static 'js/evaluate_items.js' %}"></script>
+
+{% endblock %}
