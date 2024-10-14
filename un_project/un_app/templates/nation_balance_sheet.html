@@ -4,27 +4,33 @@
     {{ nation.abbreviation }} Balance Sheet
 {% endblock %}
 
-{% block content %}
-    <h1>Buildings for {{ nation.name }} ({{ nation.abbreviation }})</h1>
+{% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/balance_sheet_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>{{ nation.name }} ({{ nation.abbreviation }}) Balance Sheet</h1>
+
+    <h2 class="items-heading">Items for {{ nation.name }}</h2>
     <!-- Display Item Information in three Tables Side by Side -->
-    <div style="display: flex; justify-content: space-between;">
+    <div class="item-table" style="display: flex; justify-content: space-between;">
         <!-- Table 1 -->
         <div style="width: 24.9%;">
-            <h2>Items for {{ nation.name }}</h2>
             <table>
                 <thead>
-                    <tr>
+                    <tr style="font-size: 0.9em;">
                         <th>Item Name</th>
-                        <th>Market Rate</th>
-                        <th>Count</th>
+                        <th>Market Value</th>
+                        <th>Item Count</th>
                         <th>Total Value</th>
                     </tr>
                 </thead>
                 <tbody style="font-size: 0.9em;">
                     {% for item in items_part1 %}
-                        <tr>
-                            <td>{{ item.name }}</td>
+                        <tr style="font-size: 0.9em;">
+                            <td class="item-name"> {{ item.name }}</td>
                             <td>{{ item.market_price|stringformat:"g" }}</td>
                             <td>{{ item.count|stringformat:"g" }}</td>
                             <td>{{ item.total_value|stringformat:"g" }}</td>
@@ -39,20 +45,20 @@
         </div>
 
         <!-- Table 2 -->
-        <div style="width: 24.9%; padding-top: 47.5px;">
+        <div class="item-table" style="width: 24.9%;">
             <table>
                 <thead>
-                    <tr>
+                    <tr style="font-size: 0.9em;">
                         <th>Item Name</th>
-                        <th>Market Rate</th>
-                        <th>Count</th>
+                        <th>Market Value</th>
+                        <th>Item Count</th>
                         <th>Total Value</th>
                     </tr>
                 </thead>
                 <tbody style="font-size: 0.9em;">
                     {% for item in items_part2 %}
-                        <tr>
-                            <td>{{ item.name }}</td>
+                        <tr style="font-size: 0.9em;">
+                            <td class="item-name">{{ item.name }}</td>
                             <td>{{ item.market_price|stringformat:"g" }}</td>
                             <td>{{ item.count|stringformat:"g" }}</td>
                             <td>{{ item.total_value|stringformat:"g" }}</td>
@@ -67,20 +73,20 @@
         </div>
 
         <!-- Table 3 -->
-        <div style="width: 24.9%; padding-top: 47.5px;">
+        <div class="item-table" style="width: 24.9%;">
             <table>
                 <thead>
-                    <tr>
+                    <tr style="font-size: 0.9em;">
                         <th>Item Name</th>
-                        <th>Market Rate</th>
-                        <th>Count</th>
+                        <th>Market Value</th>
+                        <th>Item Count</th>
                         <th>Total Value</th>
                     </tr>
                 </thead>
                 <tbody style="font-size: 0.9em;">
                     {% for item in items_part3 %}
-                        <tr>
-                            <td>{{ item.name }}</td>
+                        <tr style="font-size: 0.9em;">
+                            <td class="item-name">{{ item.name }}</td>
                             <td>{{ item.market_price|stringformat:"g" }}</td>
                             <td>{{ item.count|stringformat:"g" }}</td>
                             <td>{{ item.total_value|stringformat:"g" }}</td>
@@ -96,20 +102,20 @@
 
 
         <!-- Table 4 -->
-        <div style="width: 24.9%; padding-top: 47.5px;">
+        <div class="item-table" style="width: 24.9%;">
             <table>
                 <thead>
-                    <tr>
+                    <tr style="font-size: 0.9em;">
                         <th>Item Name</th>
-                        <th>Market Rate</th>
-                        <th>Count</th>
+                        <th>Market Value</th>
+                        <th>Item Count</th>
                         <th>Total Value</th>
                     </tr>
                 </thead>
                 <tbody style="font-size: 0.9em;">
                     {% for item in items_part4 %}
-                        <tr>
-                            <td>{{ item.name }}</td>
+                        <tr style="font-size: 0.9em;">
+                            <td class="item-name">{{ item.name }}</td>
                             <td>{{ item.market_price|stringformat:"g" }}</td>
                             <td>{{ item.count|stringformat:"g" }}</td>
                             <td>{{ item.total_value|stringformat:"g" }}</td>
@@ -125,7 +131,7 @@
     </div>
 
 
-    <div style="display: flex; justify-content: space-between;">
+    <div class="building-table" style="display: flex; justify-content: space-between;">
         <!-- Fully Owned Buildings -->
         <div style="width: 49.5%;">
             <h2>Owned Buildings</h2>
@@ -140,7 +146,7 @@
                 <tbody>
                     {% for building in buildings %}
                         <tr>
-                            <td>{{ building.name }}</td>
+                            <td class="building-name">{{ building.name }}</td>
                             <td>{{ building.adjusted_ownership }}%</td>
                             <td>{{ building.adjusted_ownership_price|stringformat:"g" }}</td>
                         </tr>
@@ -150,7 +156,7 @@
         </div>
 
         <!-- Partially Owned Buildings -->
-        <div style="width: 49.5%;">
+        <div class="building-table" style="width: 49.5%;">
             <h2>Partially Owned Buildings</h2>
             <table>
                 <thead>
@@ -163,7 +169,7 @@
                 <tbody>
                     {% for building in partial_buildings %}
                         <tr>
-                            <td>{{ building.name }}</td>
+                            <td class="building-name">{{ building.name }}</td>
                             <td>{{ building.ownership }}%</td>
                             <td>{{ building.adjusted_ownership_price|stringformat:"g" }}</td>
                         </tr>

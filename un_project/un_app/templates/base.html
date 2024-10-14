@@ -6,6 +6,7 @@
     <title>{% block title %}My Django Project{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
     <div class="wrapper">
