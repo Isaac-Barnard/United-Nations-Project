@@ -31,7 +31,7 @@
                 <tbody style="font-size: 0.9em;">
                     {% for item in items_part1 %}
                         <tr style="font-size: 0.9em;">
-                            <td class="item-name"> {{ item.name }}</td>
+                            <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
                             <td>{{ item.market_price|custom_decimal_places }}</td>
                             <td>{{ item.count|stringformat:"g" }}</td>
                             <td>{{ item.total_value|custom_decimal_places }}</td>
@@ -59,7 +59,7 @@
                 <tbody style="font-size: 0.9em;">
                     {% for item in items_part2 %}
                         <tr style="font-size: 0.9em;">
-                            <td class="item-name">{{ item.name }}</td>
+                            <td class="item-name">{{ item.name }} {{ item.new_ordering }}</td>
                             <td>{{ item.market_price|custom_decimal_places }}</td>
                             <td>{{ item.count|stringformat:"g" }}</td>
                             <td>{{ item.total_value|custom_decimal_places }}</td>
@@ -87,7 +87,7 @@
                 <tbody style="font-size: 0.9em;">
                     {% for item in items_part3 %}
                         <tr style="font-size: 0.9em;">
-                            <td class="item-name">{{ item.name }}</td>
+                            <td class="item-name">{{ item.name }} {{ item.new_ordering }}</td>
                             <td>{{ item.market_price|custom_decimal_places }}</td>
                             <td>{{ item.count|stringformat:"g" }}</td>
                             <td>{{ item.total_value|custom_decimal_places }}</td>
@@ -116,7 +116,7 @@
                 <tbody style="font-size: 0.9em;">
                     {% for item in items_part4 %}
                         <tr style="font-size: 0.9em;">
-                            <td class="item-name">{{ item.name }}</td>
+                            <td class="item-name">{{ item.name }} {{ item.new_ordering }}</td>
                             <td>{{ item.market_price|custom_decimal_places }}</td>
                             <td>{{ item.count|stringformat:"g" }}</td>
                             <td>{{ item.total_value|custom_decimal_places }}</td>

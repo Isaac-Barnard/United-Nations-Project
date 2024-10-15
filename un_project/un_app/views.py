@@ -44,8 +44,8 @@ def nation_balance_sheet(request, nation_abbreviation):
         ownership=F('partialbuildingownership__percentage')
     ).distinct()
 
-    # Fetch all items and item counts for the nation
-    all_items = Item.objects.all()
+    # Fetch all items and sort by the manual 'ordering' field
+    all_items = Item.objects.all().order_by('ordering')  # Sorted by manual ordering
     items_with_count = ItemCount.objects.filter(nation=nation)
 
     # Create a dictionary to store counts for each item
@@ -66,29 +66,29 @@ def nation_balance_sheet(request, nation_abbreviation):
             'market_price': market_price,
             'count': count,
             'total_value': total_value,
+            'ordering': item.ordering,  # Ensure ordering is included for distribution
         })
     
-    # Distribute items into four parts (round-robin)
+    # Distribute items based on their 'ordering' value
     items_part1, items_part2, items_part3, items_part4 = [], [], [], []
-    for index, item in enumerate(item_data):
-        if index % 4 == 0:
-            items_part1.append(item)
-        elif index % 4 == 1:
-            items_part2.append(item)
-        elif index % 4 == 2:
-            items_part3.append(item)
-        else:
-            items_part4.append(item)
+    for item in item_data:
+        if 100 <= item['ordering'] < 200:
+            items_part1.append(item)  # 100's range goes into items_part1
+        elif 200 <= item['ordering'] < 300:
+            items_part2.append(item)  # 200's range goes into items_part2
+        elif 300 <= item['ordering'] < 400:
+            items_part3.append(item)  # 300's range goes into items_part3
+        elif 400 <= item['ordering'] < 500:
+            items_part4.append(item)  # 400's range goes into items_part4
             
-
     return render(request, 'nation_balance_sheet.html', {
         'nation': nation,
         'buildings': buildings,
         'partial_buildings': partial_buildings,
-        'items_part1': items_part1,  # First third of items
-        'items_part2': items_part2,  # Second third of items
-        'items_part3': items_part3,  # Final third of items
-        'items_part4': items_part4,  # Fourth quarter of items
+        'items_part1': items_part1,  # First set of items
+        'items_part2': items_part2,  # Second set of items
+        'items_part3': items_part3,  # Third set of items
+        'items_part4': items_part4,  # Fourth set of items
     })
 
 
