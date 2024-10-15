@@ -222,16 +222,18 @@ class BuildingEvaluationComponent(models.Model):
 #                           Items
 # --------------------------------------------------------------------
 class Item(models.Model):
-    FIXED_PRICE = 'fixed'
-    MARKET_RATE = 'market'
+    FIXED_PRICE = 'fixed_price'
+    MARKET_RATE = 'market_rate'
+    SECTION_DIVIDER = 'section_divider'
 
     PRICE_TYPE_CHOICES = [
         (FIXED_PRICE, 'Fixed Price'),
         (MARKET_RATE, 'Market Rate'),
+        (SECTION_DIVIDER, 'Section Divider'),
     ]
 
     name = models.CharField(max_length=100, unique=True)
-    price_type = models.CharField(max_length=12, choices=PRICE_TYPE_CHOICES)
+    price_type = models.CharField(max_length=15, choices=PRICE_TYPE_CHOICES)
     description = models.CharField(max_length=255, blank=True)  # Optional description field
     ordering = models.IntegerField(default=0)  # Field for manual ordering (100's for first table, 200's for second, etc. (ex: 101, 203, 459))
 

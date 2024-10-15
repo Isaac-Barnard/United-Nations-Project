@@ -19,7 +19,7 @@ class BuildingEvaluationForm(forms.Form):
 
 
 class ItemEvaluationForm(forms.Form):
-    item = forms.ModelChoiceField(queryset=Item.objects.filter(price_type='market'), label='Select Item')
+    item = forms.ModelChoiceField(queryset=Item.objects.filter(price_type='market_rate'), label='Select Item')
     
     def __init__(self, *args, **kwargs):
         super(ItemEvaluationForm, self).__init__(*args, **kwargs)

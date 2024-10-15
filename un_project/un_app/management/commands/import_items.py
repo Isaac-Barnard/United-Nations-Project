@@ -24,7 +24,7 @@ class Command(BaseCommand):
                     )
 
                     item.save()  # Save the item to the database
-                    self.stdout.write(self.style.SUCCESS(f"Added item: {item.name}"))
+                    self.stdout.write(self.style.SUCCESS(f"Added item: {item.name}, {item.ordering}"))
 
                 except Exception as e:
                     self.stdout.write(self.style.ERROR(f"Error adding item: {row['name']} - {e}"))

@@ -31,12 +31,18 @@
                 </thead>
                 <tbody style="font-size: 0.9em;">
                     {% for item in items_part1 %}
-                        <tr style="font-size: 0.9em;">
-                            <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
-                            <td>{{ item.market_price|custom_decimal_places }}</td>
-                            <td>{{ item.count|stringformat:"g" }}</td>
-                            <td>{{ item.total_value|custom_decimal_places }}</td>
-                        </tr>
+                        {% if 'Section Divider' in item.name %}
+                            <tr>
+                                <td colspan="4" style="background-color: transparent; font-size: 0.9em;">&nbsp;</td> <!-- Empty row for divider -->
+                            </tr>
+                        {% else %}
+                            <tr style="font-size: 0.9em;">
+                                <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
+                                <td>{{ item.market_price|custom_decimal_places }}</td>
+                                <td>{{ item.count|stringformat:"g" }}</td>
+                                <td>{{ item.total_value|custom_decimal_places }}</td>
+                            </tr>
+                        {% endif %}
                     {% empty %}
                         <tr>
                             <td colspan="4">No items found.</td>
@@ -59,18 +65,25 @@
                 </thead>
                 <tbody style="font-size: 0.9em;">
                     {% for item in items_part2 %}
-                        <tr style="font-size: 0.9em;">
-                            <td class="item-name">{{ item.name }} {{ item.new_ordering }}</td>
-                            <td>{{ item.market_price|custom_decimal_places }}</td>
-                            <td>{{ item.count|stringformat:"g" }}</td>
-                            <td>{{ item.total_value|custom_decimal_places }}</td>
-                        </tr>
+                        {% if 'Section Divider' in item.name %}
+                            <tr class="section-divider-row">
+                                <td colspan="4" style="background-color: transparent; font-size: 0.9em;">&nbsp;</td> <!-- Empty row for divider -->
+                            </tr>
+                        {% else %}
+                            <tr style="font-size: 0.9em;">
+                                <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
+                                <td>{{ item.market_price|custom_decimal_places }}</td>
+                                <td>{{ item.count|stringformat:"g" }}</td>
+                                <td>{{ item.total_value|custom_decimal_places }}</td>
+                            </tr>
+                        {% endif %}
                     {% empty %}
                         <tr>
                             <td colspan="4">No items found.</td>
                         </tr>
                     {% endfor %}
                 </tbody>
+                
             </table>
         </div>
 
@@ -87,12 +100,18 @@
                 </thead>
                 <tbody style="font-size: 0.9em;">
                     {% for item in items_part3 %}
-                        <tr style="font-size: 0.9em;">
-                            <td class="item-name">{{ item.name }} {{ item.new_ordering }}</td>
-                            <td>{{ item.market_price|custom_decimal_places }}</td>
-                            <td>{{ item.count|stringformat:"g" }}</td>
-                            <td>{{ item.total_value|custom_decimal_places }}</td>
-                        </tr>
+                    {% if 'Section Divider' in item.name %}
+                    <tr>
+                        <td colspan="4" style="background-color: transparent; font-size: 0.9em;">&nbsp;</td> <!-- Empty row for divider -->
+                    </tr>
+                {% else %}
+                    <tr style="font-size: 0.9em;">
+                        <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
+                        <td>{{ item.market_price|custom_decimal_places }}</td>
+                        <td>{{ item.count|stringformat:"g" }}</td>
+                        <td>{{ item.total_value|custom_decimal_places }}</td>
+                    </tr>
+                {% endif %}
                     {% empty %}
                         <tr>
                             <td colspan="4">No items found.</td>
@@ -116,12 +135,18 @@
                 </thead>
                 <tbody style="font-size: 0.9em;">
                     {% for item in items_part4 %}
-                        <tr style="font-size: 0.9em;">
-                            <td class="item-name">{{ item.name }} {{ item.new_ordering }}</td>
-                            <td>{{ item.market_price|custom_decimal_places }}</td>
-                            <td>{{ item.count|stringformat:"g" }}</td>
-                            <td>{{ item.total_value|custom_decimal_places }}</td>
-                        </tr>
+                    {% if 'Section Divider' in item.name %}
+                    <tr>
+                        <td colspan="4" style="background-color: transparent; font-size: 0.9em;">&nbsp;</td> <!-- Empty row for divider -->
+                    </tr>
+                {% else %}
+                    <tr style="font-size: 0.9em;">
+                        <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
+                        <td>{{ item.market_price|custom_decimal_places }}</td>
+                        <td>{{ item.count|stringformat:"g" }}</td>
+                        <td>{{ item.total_value|custom_decimal_places }}</td>
+                    </tr>
+                {% endif %}
                     {% empty %}
                         <tr>
                             <td colspan="4">No items found.</td>
@@ -144,12 +169,18 @@
                 </thead>
                 <tbody style="font-size: 0.9em;">
                     {% for item in items_part5 %}
-                        <tr style="font-size: 0.9em;">
-                            <td class="item-name">{{ item.name }} {{ item.new_ordering }}</td>
-                            <td>{{ item.market_price|custom_decimal_places }}</td>
-                            <td>{{ item.count|stringformat:"g" }}</td>
-                            <td>{{ item.total_value|custom_decimal_places }}</td>
-                        </tr>
+                    {% if 'Section Divider' in item.name %}
+                    <tr>
+                        <td colspan="4" style="background-color: transparent; font-size: 0.9em;">&nbsp;</td> <!-- Empty row for divider -->
+                    </tr>
+                {% else %}
+                    <tr style="font-size: 0.9em;">
+                        <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
+                        <td>{{ item.market_price|custom_decimal_places }}</td>
+                        <td>{{ item.count|stringformat:"g" }}</td>
+                        <td>{{ item.total_value|custom_decimal_places }}</td>
+                    </tr>
+                {% endif %}
                     {% empty %}
                         <tr>
                             <td colspan="4">No items found.</td>

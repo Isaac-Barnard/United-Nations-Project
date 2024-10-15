@@ -65,10 +65,10 @@ Powered Rail,Fixed Price,,439
 Detector Rail,Fixed Price,,440
 Activator Rail,Fixed Price,,441
 Minecart,Fixed Price,,437
-Shears,Fixed Price,,436
-Bucket,Fixed Price,,438
-Shield,Fixed Price,,435
-Flint & Steel,Fixed Price,,437
+Shears,Fixed Price,,336
+Bucket,Fixed Price,,338
+Shield,Fixed Price,,335
+Flint & Steel,Fixed Price,,337
 Hopper,Fixed Price,,411
 Piston,Fixed Price,,405
 Sticky Piston,Fixed Price,,406
@@ -82,7 +82,7 @@ Iron Door,Fixed Price,,525
 Iron Trapdoor,Fixed Price,,526
 Iron Bars,Fixed Price,,527
 Chain,Fixed Price,,532
-Lantern,Fixed Price,,534
+Lantern,Fixed Price,,434
 Golden Carrot,Fixed Price,,140
 Dispenser,Fixed Price,,409
 Dropper,Fixed Price,,410
@@ -99,9 +99,9 @@ Lead,Fixed Price,,340
 Brewing Stand,Fixed Price,,421
 Torch,Fixed Price,,433
 Ender Chest,Fixed Price,,424
-Book,Fixed Price,,231
+Book,Fixed Price,,232
 Item Frame,Fixed Price,,510
-Enchanted Book,Fixed Price,The average price of an enchanted book from a villager,233
+Enchanted Book,Fixed Price,The average price of an enchanted book from a villager,234
 Blast Furnace,Fixed Price,,420
 Nether Star,Fixed Price,,102
 Glass,Fixed Price,,131
@@ -113,14 +113,14 @@ Green Dye,Fixed Price,,540
 Crack,Fixed Price,Any cracked block that needs to be smelted (ie cracked stone bricks),135
 Smooth Stones,Fixed Price,"Any Smooth block that needs to be smelted (ie smooth stone, smooth sandstone)",136
 Magma Cream,Fixed Price,,117
-Fire Charge,Fixed Price,,236
+Fire Charge,Fixed Price,,237
 Eye of Ender,Fixed Price,,538
-Fireworks,Fixed Price,,237
-TNT,Fixed Price,,238
-Spectral Arrow,Fixed Price,,239
+Fireworks,Fixed Price,,238
+TNT,Fixed Price,,239
+Spectral Arrow,Fixed Price,,240
 Glistering Melon,Fixed Price,,539
 Cooked Food,Fixed Price,,141
-Bookshelf,Fixed Price,,232
+Bookshelf,Fixed Price,,233
 Jukebox,Fixed Price,,414
 Enchantment Table,Fixed Price,,417
 Iron Pressure Plate,Fixed Price,,524
@@ -161,7 +161,7 @@ Blaze Rod,Market Rate,,115
 Obsidian,Market Rate,,130
 Sponge,Market Rate,,123
 Leather,Market Rate,,122
-Gunpowder,Market Rate,,235
+Gunpowder,Market Rate,,236
 Dragon's Breath,Market Rate,,506
 Wither Rose,Market Rate,,504
 Glowstone,Market Rate,,127
@@ -174,9 +174,9 @@ Sea Lantern,Market Rate,,128
 Bell,Market Rate,,513
 Sherd,Market Rate,Counts sherds made into pots too,111
 Amethyst Shard,Market Rate,,124
-Sculk Sensor,Market Rate,,127
-Sculk Shrieker,Market Rate,,129
-Sculk Catalyst,Market Rate,,130
+Sculk Sensor,Market Rate,,427
+Sculk Shrieker,Market Rate,,429
+Sculk Catalyst,Market Rate,,430
 Sniffer Egg,Market Rate,,502
 Bee Nest,Market Rate,,541
 Honey Comb,Market Rate,,121
@@ -186,3 +186,21 @@ Heavy Core,Market Rate,,103
 Trial Key,Market Rate,,535
 Ominous Trial Key,Market Rate,,536
 Breeze Rod,Market Rate,,116
+--- Section Divider 1 ---,Section Divider,,114
+--- Section Divider 2 ---,Section Divider,,126
+--- Section Divider 3 ---,Section Divider,,137
+--- Section Divider 4 ---,Section Divider,,224
+--- Section Divider 5 ---,Section Divider,,230
+--- Section Divider 6 ---,Section Divider,,231
+--- Section Divider 7 ---,Section Divider,,235
+--- Section Divider 8 ---,Section Divider,,331
+--- Section Divider 9 ---,Section Divider,,332
+--- Section Divider 10 ---,Section Divider,,416
+--- Section Divider 11 ---,Section Divider,,426
+--- Section Divider 12 ---,Section Divider,,431
+--- Section Divider 13 ---,Section Divider,,432
+--- Section Divider 14 ---,Section Divider,,436
+--- Section Divider 15 ---,Section Divider,,509
+--- Section Divider 16 --,Section Divider,,519
+--- Section Divider 17 ---,Section Divider,,534
+--- Section Divider 18 ---,Section Divider,,537
