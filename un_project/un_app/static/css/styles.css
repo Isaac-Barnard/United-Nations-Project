@@ -33,6 +33,15 @@ header {
 nav ul {
     list-style: none;
     padding: 0;
+    display: flex;
+    align-items: center;  /* Vertically align items */
+    margin: 0;  /* Remove default margin */
+}
+
+nav ul li.menu-logo img {
+    height: 70px;  /* Adjust the height to match the menu titles */
+    margin-right: 40px;  /* Add space between the logo and the menu items */
+    margin-left: 50px;  /* Add space between the logo and the menu items */
 }
 
 nav ul li {
