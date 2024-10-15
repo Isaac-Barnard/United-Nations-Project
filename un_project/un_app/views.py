@@ -70,7 +70,7 @@ def nation_balance_sheet(request, nation_abbreviation):
         })
     
     # Distribute items based on their 'ordering' value
-    items_part1, items_part2, items_part3, items_part4 = [], [], [], []
+    items_part1, items_part2, items_part3, items_part4, items_part5 = [], [], [], [], []
     for item in item_data:
         if 100 <= item['ordering'] < 200:
             items_part1.append(item)  # 100's range goes into items_part1
@@ -80,6 +80,8 @@ def nation_balance_sheet(request, nation_abbreviation):
             items_part3.append(item)  # 300's range goes into items_part3
         elif 400 <= item['ordering'] < 500:
             items_part4.append(item)  # 400's range goes into items_part4
+        elif 500 <= item['ordering'] < 600:
+            items_part5.append(item)  # 500's range goes into items_part5
             
     return render(request, 'nation_balance_sheet.html', {
         'nation': nation,
@@ -89,6 +91,7 @@ def nation_balance_sheet(request, nation_abbreviation):
         'items_part2': items_part2,  # Second set of items
         'items_part3': items_part3,  # Third set of items
         'items_part4': items_part4,  # Fourth set of items
+        'items_part5': items_part5,  # Fourth set of items
     })
 
 

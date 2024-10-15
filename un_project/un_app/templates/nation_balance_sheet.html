@@ -15,10 +15,11 @@
     <h1>{{ nation.name }} ({{ nation.abbreviation }}) Balance Sheet</h1>
 
     <h2 class="items-heading">Items for {{ nation.name }}</h2>
+    
     <!-- Display Item Information in three Tables Side by Side -->
-    <div class="item-table" style="display: flex; justify-content: space-between;">
+    <div class="item-table-container">
         <!-- Table 1 -->
-        <div style="width: 24.9%;">
+        <div>
             <table>
                 <thead>
                     <tr style="font-size: 0.9em;">
@@ -46,7 +47,7 @@
         </div>
 
         <!-- Table 2 -->
-        <div class="item-table" style="width: 24.9%;">
+        <div class="item-table">
             <table>
                 <thead>
                     <tr style="font-size: 0.9em;">
@@ -74,7 +75,7 @@
         </div>
 
         <!-- Table 3 -->
-        <div class="item-table" style="width: 24.9%;">
+        <div class="item-table">
             <table>
                 <thead>
                     <tr style="font-size: 0.9em;">
@@ -103,7 +104,7 @@
 
 
         <!-- Table 4 -->
-        <div class="item-table" style="width: 24.9%;">
+        <div class="item-table">
             <table>
                 <thead>
                     <tr style="font-size: 0.9em;">
@@ -115,6 +116,34 @@
                 </thead>
                 <tbody style="font-size: 0.9em;">
                     {% for item in items_part4 %}
+                        <tr style="font-size: 0.9em;">
+                            <td class="item-name">{{ item.name }} {{ item.new_ordering }}</td>
+                            <td>{{ item.market_price|custom_decimal_places }}</td>
+                            <td>{{ item.count|stringformat:"g" }}</td>
+                            <td>{{ item.total_value|custom_decimal_places }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No items found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Table 5 -->
+        <div class="item-table">
+            <table>
+                <thead>
+                    <tr style="font-size: 0.9em;">
+                        <th>Item Name</th>
+                        <th>Market Value</th>
+                        <th>Item Count</th>
+                        <th>Total Value</th>
+                    </tr>
+                </thead>
+                <tbody style="font-size: 0.9em;">
+                    {% for item in items_part5 %}
                         <tr style="font-size: 0.9em;">
                             <td class="item-name">{{ item.name }} {{ item.new_ordering }}</td>
                             <td>{{ item.market_price|custom_decimal_places }}</td>

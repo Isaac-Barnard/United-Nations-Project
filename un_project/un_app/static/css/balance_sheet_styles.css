@@ -10,6 +10,22 @@ h2.items-heading {
     padding-bottom: 0;
 }
 
+/* Ensure all table divs align evenly at the top */
+.item-table-container div,
+.building-table div {
+    display: inline-block;
+    vertical-align: top;       /* Aligns all tables at the top */
+    white-space: normal;
+    width: 19.9%;              /* Consistent width for item tables */
+}
+
+/* Add scrollable container for item tables */
+.item-table-container {
+    overflow-x: auto;
+    white-space: nowrap; /* Prevents tables from wrapping */
+    width: 125%;
+}
+
 /* Target the Item Name column to truncate long names */
 td.item-name {
     white-space: nowrap;       /* Prevent wrapping */
