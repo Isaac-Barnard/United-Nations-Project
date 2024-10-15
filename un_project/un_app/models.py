@@ -231,7 +231,7 @@ class Item(models.Model):
     ]
 
     name = models.CharField(max_length=100, unique=True)
-    price_type = models.CharField(max_length=10, choices=PRICE_TYPE_CHOICES)
+    price_type = models.CharField(max_length=12, choices=PRICE_TYPE_CHOICES)
     description = models.CharField(max_length=255, blank=True)  # Optional description field
     ordering = models.IntegerField(default=0)  # Field for manual ordering (100's for first table, 200's for second, etc. (ex: 101, 203, 459))
 

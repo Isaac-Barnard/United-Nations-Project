@@ -1,0 +1,188 @@
+name,price_type,description,ordering
+Netherite Helmet,Fixed Price,,200
+Netherite Chestplate,Fixed Price,,201
+Netherite Leggings,Fixed Price,,202
+Netherite Boots,Fixed Price,,203
+Diamond Helmet,Fixed Price,,204
+Diamond Chestplate,Fixed Price,,205
+Diamond Leggings,Fixed Price,,206
+Diamond Boots,Fixed Price,,207
+Gold Helmet,Fixed Price,,208
+Gold Chestplate,Fixed Price,,209
+Gold Leggings,Fixed Price,,210
+Gold Boots,Fixed Price,,211
+Chainmail Helmet,Fixed Price,,212
+Chainmail Chestplate,Fixed Price,,213
+Chainmail Leggings,Fixed Price,,214
+Chainmail Boots,Fixed Price,,215
+Iron Helmet,Fixed Price,,216
+Iron Chestplate,Fixed Price,,217
+Iron Leggings,Fixed Price,,218
+Iron Boots,Fixed Price,,219
+Leather Helmet,Fixed Price,,220
+Leather Chestplate,Fixed Price,,221
+Leather Leggings,Fixed Price,,222
+Leather Boots,Fixed Price,,223
+Netherite Sword,Fixed Price,,300
+Netherite Pickaxe,Fixed Price,,301
+Netherite Axe,Fixed Price,,302
+Netherite Shovel,Fixed Price,,303
+Netherite Hoe,Fixed Price,,304
+Diamond Sword,Fixed Price,,305
+Diamond Pickaxe,Fixed Price,,306
+Diamond Axe,Fixed Price,,307
+Diamond Shovel,Fixed Price,,308
+Diamond Hoe,Fixed Price,,309
+Gold Sword,Fixed Price,,310
+Gold Pickaxe,Fixed Price,,311
+Gold Axe,Fixed Price,,312
+Gold Shovel,Fixed Price,,313
+Gold Hoe,Fixed Price,,314
+Iron Sword,Fixed Price,,315
+Iron Pickaxe,Fixed Price,,316
+Iron Axe,Fixed Price,,317
+Iron Shovel,Fixed Price,,318
+Iron Hoe,Fixed Price,,319
+Stone Sword,Fixed Price,,320
+Stone Pickaxe,Fixed Price,,321
+Stone Axe,Fixed Price,,322
+Stone Shovel,Fixed Price,,323
+Stone Hoe,Fixed Price,,324
+Wood Sword,Fixed Price,,325
+Wood Pickaxe,Fixed Price,,326
+Wood Axe,Fixed Price,,327
+Wood Shovel,Fixed Price,,328
+Wood Hoe,Fixed Price,,329
+Diamond Horse Armor,Fixed Price,,225
+Gold Horse Armor,Fixed Price,,226
+Iron Horse Armor,Fixed Price,,227
+Leather Horse Armor,Fixed Price,,228
+Golden Apple,Fixed Price,,139
+Netherite Scrap,Fixed Price,,112
+Redstone Torch,Fixed Price,,401
+Rail,Fixed Price,,438
+Powered Rail,Fixed Price,,439
+Detector Rail,Fixed Price,,440
+Activator Rail,Fixed Price,,441
+Minecart,Fixed Price,,437
+Shears,Fixed Price,,436
+Bucket,Fixed Price,,438
+Shield,Fixed Price,,435
+Flint & Steel,Fixed Price,,437
+Hopper,Fixed Price,,411
+Piston,Fixed Price,,405
+Sticky Piston,Fixed Price,,406
+Repeater,Fixed Price,,402
+Comparator,Fixed Price,,403
+Observer,Fixed Price,,404
+Cauldron,Fixed Price,,422
+Compass,Fixed Price,,516
+Clock,Fixed Price,,515
+Iron Door,Fixed Price,,525
+Iron Trapdoor,Fixed Price,,526
+Iron Bars,Fixed Price,,527
+Chain,Fixed Price,,532
+Lantern,Fixed Price,,534
+Golden Carrot,Fixed Price,,140
+Dispenser,Fixed Price,,409
+Dropper,Fixed Price,,410
+Anvil,Fixed Price,,423
+Note block,Fixed Price,,413
+Redstone Lamp,Fixed Price,,408
+Spyglass,Fixed Price,,518
+Stonecutter,Fixed Price,,418
+Smithing Table,Fixed Price,,419
+Daylight Detector,Fixed Price,,407
+Lightning Rod,Fixed Price,,520
+Target,Fixed Price,,412
+Lead,Fixed Price,,340
+Brewing Stand,Fixed Price,,421
+Torch,Fixed Price,,433
+Ender Chest,Fixed Price,,424
+Book,Fixed Price,,231
+Item Frame,Fixed Price,,510
+Enchanted Book,Fixed Price,The average price of an enchanted book from a villager,233
+Blast Furnace,Fixed Price,,420
+Nether Star,Fixed Price,,102
+Glass,Fixed Price,,131
+Glass Pane,Fixed Price,,132
+Glass Bottle,Fixed Price,,341
+Bricks,Fixed Price,Clay or nether bricks,133
+Brick Block,Fixed Price,Brick brick block or nether brick block,134
+Green Dye,Fixed Price,,540
+Crack,Fixed Price,Any cracked block that needs to be smelted (ie cracked stone bricks),135
+Smooth Stones,Fixed Price,"Any Smooth block that needs to be smelted (ie smooth stone, smooth sandstone)",136
+Magma Cream,Fixed Price,,117
+Fire Charge,Fixed Price,,236
+Eye of Ender,Fixed Price,,538
+Fireworks,Fixed Price,,237
+TNT,Fixed Price,,238
+Spectral Arrow,Fixed Price,,239
+Glistering Melon,Fixed Price,,539
+Cooked Food,Fixed Price,,141
+Bookshelf,Fixed Price,,232
+Jukebox,Fixed Price,,414
+Enchantment Table,Fixed Price,,417
+Iron Pressure Plate,Fixed Price,,524
+Gold Pressure Plate,Fixed Price,,523
+Flower Pot,Fixed Price,,511
+Hanging Sign,Fixed Price,,533
+End Rod,Fixed Price,,521
+Smithing Template,Fixed Price,,110
+Brush,Fixed Price,,339
+Decorated Pot,Fixed Price,Non-sherd decorated pot (made of just 4 clay bricks),512
+Tinted Glass,Fixed Price,,522
+Calibrated Sculk Sensor,Fixed Price,,428
+Lodestone,Fixed Price,,425
+Quartz Block,Fixed Price,,129
+Campfire,Fixed Price,,517
+Respawn Anchor,Fixed Price,,514
+Candle,Fixed Price,,435
+Wolf Armor,Fixed Price,,229
+Copper Bulb,Fixed Price,,528
+Copper Door,Fixed Price,,529
+Copper Grate,Fixed Price,,530
+Copper Trapdoor,Fixed Price,,531
+Crafter,Fixed Price,,415
+Mace,Fixed Price,,334
+Elytra,Market Rate,,104
+Shulker Box,Market Rate,,105
+Enchanted Golden Apple,Market Rate,,138
+Totem of Undying,Market Rate,,106
+Beacon,Market Rate,,101
+Wither Skull,Market Rate,,503
+Name Tag,Market Rate,,107
+Trident,Market Rate,,333
+Saddle,Market Rate,,108
+Slime Ball,Market Rate,,119
+Honey Bottle,Market Rate,,120
+Nether Quartz,Market Rate,,125
+Blaze Rod,Market Rate,,115
+Obsidian,Market Rate,,130
+Sponge,Market Rate,,123
+Leather,Market Rate,,122
+Gunpowder,Market Rate,,235
+Dragon's Breath,Market Rate,,506
+Wither Rose,Market Rate,,504
+Glowstone,Market Rate,,127
+Goat Horn,Market Rate,,113
+Music Disc,Market Rate,,109
+Ghast Tear,Market Rate,,118
+Turtle Egg,Market Rate,,501
+Dragon Head,Market Rate,,505
+Sea Lantern,Market Rate,,128
+Bell,Market Rate,,513
+Sherd,Market Rate,Counts sherds made into pots too,111
+Amethyst Shard,Market Rate,,124
+Sculk Sensor,Market Rate,,127
+Sculk Shrieker,Market Rate,,129
+Sculk Catalyst,Market Rate,,130
+Sniffer Egg,Market Rate,,502
+Bee Nest,Market Rate,,541
+Honey Comb,Market Rate,,121
+Turtle Scute,Market Rate,,507
+Armadillo Scute,Market Rate,,508
+Heavy Core,Market Rate,,103
+Trial Key,Market Rate,,535
+Ominous Trial Key,Market Rate,,536
+Breeze Rod,Market Rate,,116
