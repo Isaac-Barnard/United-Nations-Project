@@ -277,7 +277,7 @@ class Item(models.Model):
 
 # --------------------------------------------------------------------
 class ItemEvaluation(models.Model):
-    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='item_evaluations', limit_choices_to={'price_type': 'market'})
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='item_evaluations', limit_choices_to={'price_type': 'market_rate'})
     evaluator = models.ForeignKey(Player, on_delete=models.CASCADE, limit_choices_to={'un_rep': True})
     date = models.DateTimeField(auto_now_add=True)
 
@@ -307,16 +307,31 @@ class ItemEvaluationComponent(models.Model):
     
 # --------------------------------------------------------------------
 class ItemCount(models.Model):
-    nation = models.ForeignKey(Nation, on_delete=models.CASCADE)
+    nation = models.ForeignKey(Nation, on_delete=models.CASCADE, null=True, blank=True)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     count = models.DecimalField(max_digits=20, decimal_places=3)  # Allows for 2 decimal places
 
     class Meta:
-        # Ensure the combination of nation and item is unique
-        unique_together = ('nation', 'item')
+        # Ensure the combination of nation/company and item is unique
+        constraints = [
+            models.UniqueConstraint(fields=['nation', 'item'], name='unique_nation_item'),
+            models.UniqueConstraint(fields=['company', 'item'], name='unique_company_item'),
+            models.CheckConstraint(
+                check=(
+                    models.Q(nation__isnull=False, company__isnull=True) |
+                    models.Q(nation__isnull=True, company__isnull=False)
+                ),
+                name='nation_or_company_not_both'
+            )
+        ]
 
     def __str__(self):
-        return f'{self.item.name} - {self.nation.name} x {self.count}'
+        if self.nation:
+            return f'{self.item.name} - {self.nation.name} x {self.count}'
+        elif self.company:
+            return f'{self.item.name} - {self.company.name} x {self.count}'
+        return f'{self.item.name} x {self.count}'
     
 # --------------------------------------------------------------------
 class ItemFixedPriceComponent(models.Model):
