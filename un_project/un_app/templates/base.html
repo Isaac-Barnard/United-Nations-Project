@@ -21,11 +21,23 @@
                     <li><a href="{% url 'player_list' %}">Players</a></li>
                     <!-- Dropdown for Nations -->
                     <li class="dropdown">
-                        <a href="javascript:void(0)" class="dropbtn">Nation Balance Sheets</a>
-                        <div class="dropdown-content">
-                            {% for nation in nations %}
-                                <a href="{% url 'nation_balance_sheet' nation.abbreviation %}">{{ nation.name }}</a>
-                            {% endfor %}
+                        <a href="javascript:void(0)" class="dropbtn">Balance Sheets</a>
+                        <div class="dropdown-content two-columns">
+                            <!-- Nations list -->
+                            <div class="column">
+                                <strong>Nations</strong>
+                                {% for nation in nations %}
+                                    <a href="{% url 'nation_balance_sheet' nation.abbreviation %}">{{ nation.name }}</a>
+                                {% endfor %}
+                            </div>
+                    
+                            <!-- Companies list -->
+                            <div class="column">
+                                <strong>Companies</strong>
+                                {% for company in companies %}
+                                    <a href="{% url 'company_balance_sheet' company.abbreviation %}">{{ company.name }}</a>
+                                {% endfor %}
+                            </div>
                         </div>
                     </li>
                     <li><a href="{% url 'evaluate_buildings' %}">Evaluate Buildings</a></li>

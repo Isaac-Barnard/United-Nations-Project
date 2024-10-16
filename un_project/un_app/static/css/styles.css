@@ -143,9 +143,26 @@ tr:hover {
     display: none;
     position: absolute;
     background-color: #454545;
-    min-width: 160px;
+    width: 400px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
     z-index: 1;
+    flex-direction: row;  /* Align columns horizontally */
+    justify-content: space-between; /* Space between columns */
+    border: 1px solid #ccc;  /* Add border around the dropdown */
+    border-radius: 5px;  /* Optional: rounded corners */
+}
+
+.dropdown-content .column {
+    padding: 2px 2px;
+    flex: 1;  /* Ensure both columns have equal width */
+}
+
+.column strong {
+    display: block;
+    color: white;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ccc;  /* Horizontal line under Nations and Companies */
+    padding-bottom: 5px;
 }
 
 .dropdown-content a {
@@ -163,9 +180,15 @@ tr:hover {
 }
 
 .dropdown:hover .dropdown-content {
-    display: block;
+    display: flex;
 }
 
 .dropdown:hover .dropbtn {
     background-color: #575757;
 }
+
+.column + .column {
+    border-left: 1px solid #ccc;
+    padding-left: 0px;
+}
+
