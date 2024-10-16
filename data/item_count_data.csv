@@ -1,0 +1,877 @@
+nation,company,item,count
+UN,,Beacon,1
+UN,,Shulker Box,10
+UN,,Saddle,1
+UN,,Blaze Rod,569
+UN,,Obsidian,28
+UN,,Glass,704
+UN,,Smooth Stones,32
+UN,,Diamond Helmet,1
+UN,,Diamond Chestplate,1
+UN,,Diamond Leggings,2
+UN,,Diamond Boots,1
+UN,,Gold Helmet,4
+UN,,Gold Chestplate,9
+UN,,Gold Leggings,6
+UN,,Gold Boots,6
+UN,,Iron Chestplate,1
+UN,,Gold Horse Armor,1
+UN,,Iron Pickaxe,1
+UN,,Bucket,2
+UN,,Chain,24
+NOI,,Beacon,2
+NOI,,Elytra,20
+NOI,,Shulker Box,143.5
+NOI,,Totem of Undying,12
+NOI,,Name Tag,20
+NOI,,Saddle,52
+NOI,,Music Disc,29
+NOI,,Smithing Template,19
+NOI,,Sherd,16
+NOI,,Goat Horn,3
+NOI,,Blaze Rod,112
+NOI,,Magma Cream,78
+NOI,,Ghast Tear,10
+NOI,,Slime Ball,1646
+NOI,,Honey Bottle,123
+NOI,,Honey Comb,104
+NOI,,Leather,747
+NOI,,Sponge,141
+NOI,,Amethyst Shard,788
+NOI,,Nether Quartz,1893
+NOI,,Glowstone,78
+NOI,,Quartz Block,389.5
+NOI,,Obsidian,487
+NOI,,Glass,4117
+NOI,,Glass Pane,1264
+NOI,,Bricks,66
+NOI,,Brick Block,4548
+NOI,,Crack,99
+NOI,,Smooth Stones,5539.5
+NOI,,Enchanted Golden Apple,4
+NOI,,Golden Apple,57
+NOI,,Golden Carrot,74
+NOI,,Cooked Food,2082
+NOI,,Netherite Helmet,1
+NOI,,Netherite Chestplate,1
+NOI,,Netherite Leggings,1
+NOI,,Netherite Boots,1
+NOI,,Diamond Helmet,20
+NOI,,Diamond Chestplate,23
+NOI,,Diamond Leggings,25
+NOI,,Diamond Boots,21
+NOI,,Gold Helmet,10
+NOI,,Gold Chestplate,14
+NOI,,Gold Leggings,13
+NOI,,Gold Boots,14
+NOI,,Chainmail Helmet,10
+NOI,,Chainmail Chestplate,15
+NOI,,Chainmail Leggings,18
+NOI,,Chainmail Boots,6
+NOI,,Iron Helmet,22
+NOI,,Iron Chestplate,36
+NOI,,Iron Leggings,22
+NOI,,Iron Boots,19
+NOI,,Leather Helmet,6
+NOI,,Leather Chestplate,5
+NOI,,Leather Leggings,7
+NOI,,Leather Boots,8
+NOI,,Diamond Horse Armor,14
+NOI,,Gold Horse Armor,19
+NOI,,Iron Horse Armor,11
+NOI,,Book,109
+NOI,,Bookshelf,279
+NOI,,Enchanted Book,34
+NOI,,Gunpowder,3346
+NOI,,Fire Charge,90
+NOI,,Fireworks,288
+NOI,,TNT,157
+NOI,,Spectral Arrow,256
+NOI,,Netherite Sword,2
+NOI,,Netherite Pickaxe,2
+NOI,,Netherite Axe,1
+NOI,,Netherite Shovel,1
+NOI,,Diamond Sword,25
+NOI,,Diamond Pickaxe,20
+NOI,,Diamond Axe,2
+NOI,,Diamond Shovel,20
+NOI,,Diamond Hoe,3
+NOI,,Gold Sword,13
+NOI,,Gold Pickaxe,13
+NOI,,Gold Axe,11
+NOI,,Gold Shovel,7
+NOI,,Gold Hoe,9
+NOI,,Iron Sword,30
+NOI,,Iron Pickaxe,32
+NOI,,Iron Axe,9
+NOI,,Iron Shovel,13
+NOI,,Iron Hoe,1
+NOI,,Stone Sword,1
+NOI,,Stone Axe,3
+NOI,,Stone Shovel,1
+NOI,,Stone Hoe,8
+NOI,,Wood Hoe,1
+NOI,,Trident,3
+NOI,,Shield,6
+NOI,,Shears,7
+NOI,,Flint & Steel,23
+NOI,,Bucket,122
+NOI,,Brush,1
+NOI,,Lead,80
+NOI,,Glass Bottle,100
+NOI,,Redstone Torch,154
+NOI,,Repeater,23
+NOI,,Comparator,20
+NOI,,Observer,46
+NOI,,Piston,1
+NOI,,Sticky Piston,38
+NOI,,Daylight Detector,2
+NOI,,Redstone Lamp,97
+NOI,,Dispenser,2
+NOI,,Dropper,53
+NOI,,Hopper,19
+NOI,,Target,9
+NOI,,Note block,3
+NOI,,Jukebox,1
+NOI,,Enchantment Table,1
+NOI,,Smithing Table,2
+NOI,,Blast Furnace,9
+NOI,,Cauldron,33
+NOI,,Anvil,7
+NOI,,Ender Chest,19
+NOI,,Sculk Sensor,59
+NOI,,Sculk Shrieker,3
+NOI,,Sculk Catalyst,20
+NOI,,Torch,365
+NOI,,Lantern,50
+NOI,,Candle,41
+NOI,,Minecart,25
+NOI,,Rail,304
+NOI,,Powered Rail,105
+NOI,,Turtle Egg,19
+NOI,,Wither Rose,13
+NOI,,Dragon Head,22
+NOI,,Dragon's Breath,102
+NOI,,Turtle Scute,28
+NOI,,Item Frame,55
+NOI,,Flower Pot,10
+NOI,,Bell,31
+NOI,,Clock,15
+NOI,,Compass,5
+NOI,,Campfire,1
+NOI,,Lightning Rod,1
+NOI,,End Rod,162
+NOI,,Tinted Glass,349
+NOI,,Iron Door,2
+NOI,,Iron Trapdoor,2
+NOI,,Iron Bars,16
+NOI,,Chain,48
+NOI,,Eye of Ender,1
+NOI,,Glistering Melon,16
+NOI,,Green Dye,608
+NOI,,Bee Nest,19
+EOMR,,Beacon,1
+EOMR,,Elytra,13
+EOMR,,Shulker Box,44.5
+EOMR,,Totem of Undying,2
+EOMR,,Name Tag,10
+EOMR,,Saddle,30
+EOMR,,Music Disc,7
+EOMR,,Smithing Template,15
+EOMR,,Netherite Scrap,1
+EOMR,,Blaze Rod,298
+EOMR,,Magma Cream,4
+EOMR,,Ghast Tear,2
+EOMR,,Slime Ball,209
+EOMR,,Honey Bottle,20
+EOMR,,Honey Comb,10
+EOMR,,Leather,361
+EOMR,,Sponge,15
+EOMR,,Amethyst Shard,80
+EOMR,,Nether Quartz,457
+EOMR,,Glowstone,93
+EOMR,,Quartz Block,165
+EOMR,,Obsidian,406
+EOMR,,Glass,2313
+EOMR,,Glass Pane,2963
+EOMR,,Bricks,114
+EOMR,,Brick Block,112
+EOMR,,Crack,225
+EOMR,,Smooth Stones,1988
+EOMR,,Golden Apple,2
+EOMR,,Golden Carrot,23
+EOMR,,Cooked Food,253
+EOMR,,Netherite Helmet,1
+EOMR,,Netherite Chestplate,1
+EOMR,,Netherite Leggings,2
+EOMR,,Netherite Boots,1
+EOMR,,Diamond Helmet,21
+EOMR,,Diamond Chestplate,22
+EOMR,,Diamond Leggings,18
+EOMR,,Diamond Boots,22
+EOMR,,Gold Helmet,7
+EOMR,,Gold Chestplate,9
+EOMR,,Gold Leggings,6
+EOMR,,Gold Boots,7
+EOMR,,Chainmail Helmet,5
+EOMR,,Chainmail Chestplate,4
+EOMR,,Chainmail Leggings,3
+EOMR,,Chainmail Boots,1
+EOMR,,Iron Helmet,6
+EOMR,,Iron Chestplate,6
+EOMR,,Iron Leggings,8
+EOMR,,Iron Boots,5
+EOMR,,Leather Helmet,1
+EOMR,,Leather Chestplate,3
+EOMR,,Leather Leggings,7
+EOMR,,Leather Boots,6
+EOMR,,Diamond Horse Armor,7
+EOMR,,Gold Horse Armor,15
+EOMR,,Iron Horse Armor,7
+EOMR,,Wolf Armor,1
+EOMR,,Book,55
+EOMR,,Enchanted Book,35
+EOMR,,Gunpowder,310
+EOMR,,Fire Charge,1
+EOMR,,Fireworks,396
+EOMR,,TNT,56
+EOMR,,Spectral Arrow,22
+EOMR,,Netherite Sword,1
+EOMR,,Netherite Pickaxe,2
+EOMR,,Diamond Sword,18
+EOMR,,Diamond Pickaxe,12
+EOMR,,Diamond Axe,6
+EOMR,,Diamond Shovel,19
+EOMR,,Diamond Hoe,1
+EOMR,,Gold Sword,4
+EOMR,,Gold Pickaxe,2
+EOMR,,Gold Axe,6
+EOMR,,Gold Shovel,2
+EOMR,,Gold Hoe,2
+EOMR,,Iron Sword,12
+EOMR,,Iron Pickaxe,18
+EOMR,,Iron Axe,13
+EOMR,,Iron Shovel,10
+EOMR,,Iron Hoe,6
+EOMR,,Stone Sword,6
+EOMR,,Stone Pickaxe,8
+EOMR,,Stone Axe,20
+EOMR,,Stone Shovel,8
+EOMR,,Stone Hoe,13
+EOMR,,Wood Sword,1
+EOMR,,Wood Pickaxe,1
+EOMR,,Wood Axe,2
+EOMR,,Wood Shovel,2
+EOMR,,Wood Hoe,2
+EOMR,,Trident,2
+EOMR,,Shield,1
+EOMR,,Shears,8
+EOMR,,Flint & Steel,6
+EOMR,,Bucket,43
+EOMR,,Lead,40
+EOMR,,Glass Bottle,95
+EOMR,,Redstone Torch,39
+EOMR,,Repeater,21
+EOMR,,Comparator,1
+EOMR,,Sticky Piston,11
+EOMR,,Redstone Lamp,38
+EOMR,,Dispenser,2
+EOMR,,Jukebox,1
+EOMR,,Enchantment Table,2
+EOMR,,Stonecutter,3
+EOMR,,Brewing Stand,2
+EOMR,,Cauldron,9
+EOMR,,Anvil,12
+EOMR,,Torch,818
+EOMR,,Lantern,27
+EOMR,,Minecart,8
+EOMR,,Rail,420
+EOMR,,Powered Rail,44
+EOMR,,Detector Rail,7
+EOMR,,Turtle Egg,2
+EOMR,,Wither Skull,1
+EOMR,,Wither Rose,8
+EOMR,,Armadillo Scute,2
+EOMR,,Clock,5
+EOMR,,Lightning Rod,2
+EOMR,,End Rod,2
+EOMR,,Tinted Glass,23
+EOMR,,Eye of Ender,1
+EOMR,,Glistering Melon,24
+NEL,,Beacon,3
+NEL,,Nether Star,1
+NEL,,Elytra,10
+NEL,,Shulker Box,87.5
+NEL,,Totem of Undying,3
+NEL,,Name Tag,9
+NEL,,Saddle,21
+NEL,,Music Disc,7
+NEL,,Smithing Template,53
+NEL,,Sherd,55
+NEL,,Netherite Scrap,3
+NEL,,Goat Horn,3
+NEL,,Blaze Rod,227
+NEL,,Magma Cream,159
+NEL,,Ghast Tear,33
+NEL,,Slime Ball,599
+NEL,,Honey Bottle,280
+NEL,,Honey Comb,86
+NEL,,Leather,374
+NEL,,Sponge,30
+NEL,,Amethyst Shard,80
+NEL,,Nether Quartz,10
+NEL,,Glowstone,89.5
+NEL,,Quartz Block,970
+NEL,,Obsidian,163
+NEL,,Glass,7585
+NEL,,Glass Pane,377
+NEL,,Bricks,5
+NEL,,Brick Block,440
+NEL,,Smooth Stones,1084.5
+NEL,,Enchanted Golden Apple,5
+NEL,,Golden Apple,32
+NEL,,Cooked Food,691
+NEL,,Netherite Helmet,2
+NEL,,Netherite Chestplate,3
+NEL,,Netherite Leggings,3
+NEL,,Netherite Boots,3
+NEL,,Diamond Helmet,4
+NEL,,Diamond Chestplate,5
+NEL,,Diamond Leggings,9
+NEL,,Diamond Boots,7
+NEL,,Gold Chestplate,1
+NEL,,Gold Boots,2
+NEL,,Chainmail Chestplate,1
+NEL,,Iron Helmet,1
+NEL,,Iron Chestplate,1
+NEL,,Iron Leggings,2
+NEL,,Iron Boots,1
+NEL,,Leather Chestplate,2
+NEL,,Leather Leggings,2
+NEL,,Diamond Horse Armor,10
+NEL,,Book,4
+NEL,,Enchanted Book,20
+NEL,,Gunpowder,100
+NEL,,Fire Charge,6
+NEL,,Fireworks,354
+NEL,,TNT,43
+NEL,,Spectral Arrow,87
+NEL,,Netherite Sword,2
+NEL,,Netherite Pickaxe,3
+NEL,,Netherite Axe,2
+NEL,,Netherite Shovel,1
+NEL,,Netherite Hoe,1
+NEL,,Diamond Sword,10
+NEL,,Diamond Pickaxe,5
+NEL,,Diamond Shovel,7
+NEL,,Gold Sword,1
+NEL,,Iron Sword,2
+NEL,,Iron Pickaxe,2
+NEL,,Iron Axe,1
+NEL,,Iron Hoe,1
+NEL,,Stone Sword,2
+NEL,,Stone Pickaxe,1
+NEL,,Stone Axe,1
+NEL,,Stone Shovel,1
+NEL,,Stone Hoe,1
+NEL,,Wood Shovel,10
+NEL,,Wood Hoe,1
+NEL,,Trident,2
+NEL,,Shield,3
+NEL,,Shears,6
+NEL,,Flint & Steel,2
+NEL,,Bucket,107
+NEL,,Brush,1
+NEL,,Lead,44
+NEL,,Glass Bottle,64
+NEL,,Redstone Torch,37
+NEL,,Repeater,24
+NEL,,Comparator,40
+NEL,,Observer,54
+NEL,,Sticky Piston,34
+NEL,,Redstone Lamp,31
+NEL,,Dispenser,25
+NEL,,Dropper,7
+NEL,,Hopper,4
+NEL,,Target,3
+NEL,,Note block,56
+NEL,,Stonecutter,1
+NEL,,Cauldron,1
+NEL,,Anvil,2
+NEL,,Ender Chest,1
+NEL,,Sculk Sensor,27
+NEL,,Sculk Shrieker,1
+NEL,,Sculk Catalyst,9
+NEL,,Torch,58
+NEL,,Lantern,84
+NEL,,Minecart,30
+NEL,,Powered Rail,45
+NEL,,Detector Rail,10
+NEL,,Activator Rail,2
+NEL,,Wither Skull,1
+NEL,,Wither Rose,67
+NEL,,Dragon Head,4
+NEL,,Dragon's Breath,67
+NEL,,Armadillo Scute,5
+NEL,,Item Frame,26
+NEL,,Bell,3
+NEL,,Spyglass,1
+NEL,,Iron Door,1
+NEL,,Green Dye,532
+QC,,Beacon,1
+QC,,Elytra,6
+QC,,Shulker Box,46
+QC,,Totem of Undying,2
+QC,,Name Tag,5
+QC,,Saddle,21
+QC,,Music Disc,4
+QC,,Smithing Template,13
+QC,,Sherd,4
+QC,,Blaze Rod,523
+QC,,Magma Cream,83
+QC,,Ghast Tear,6
+QC,,Slime Ball,90
+QC,,Honey Bottle,2
+QC,,Leather,40
+QC,,Amethyst Shard,57
+QC,,Nether Quartz,240
+QC,,Glowstone,36
+QC,,Obsidian,76
+QC,,Glass,965
+QC,,Glass Pane,960
+QC,,Bricks,68
+QC,,Brick Block,631.5
+QC,,Crack,91
+QC,,Smooth Stones,996
+QC,,Enchanted Golden Apple,4
+QC,,Golden Apple,12
+QC,,Golden Carrot,40
+QC,,Cooked Food,651
+QC,,Netherite Helmet,1
+QC,,Netherite Chestplate,1
+QC,,Netherite Leggings,1
+QC,,Netherite Boots,1
+QC,,Diamond Helmet,4
+QC,,Diamond Chestplate,4
+QC,,Diamond Leggings,3
+QC,,Diamond Boots,9
+QC,,Gold Chestplate,5
+QC,,Gold Boots,3
+QC,,Chainmail Helmet,1
+QC,,Chainmail Chestplate,2
+QC,,Chainmail Leggings,3
+QC,,Chainmail Boots,4
+QC,,Iron Helmet,2
+QC,,Iron Chestplate,9
+QC,,Iron Leggings,6
+QC,,Iron Boots,10
+QC,,Leather Helmet,1
+QC,,Leather Chestplate,1
+QC,,Leather Boots,1
+QC,,Diamond Horse Armor,5
+QC,,Gold Horse Armor,1
+QC,,Iron Horse Armor,1
+QC,,Book,57
+QC,,Book & Quill,1
+QC,,Bookshelf,34
+QC,,Enchanted Book,35
+QC,,Gunpowder,67
+QC,,Fire Charge,23
+QC,,Fireworks,467
+QC,,TNT,35
+QC,,Netherite Sword,1
+QC,,Netherite Pickaxe,2
+QC,,Netherite Axe,1
+QC,,Netherite Shovel,1
+QC,,Netherite Hoe,1
+QC,,Diamond Sword,4
+QC,,Diamond Pickaxe,8
+QC,,Diamond Shovel,2
+QC,,Diamond Hoe,4
+QC,,Gold Sword,2
+QC,,Iron Sword,9
+QC,,Iron Pickaxe,5
+QC,,Iron Axe,5
+QC,,Iron Shovel,6
+QC,,Iron Hoe,1
+QC,,Stone Sword,2
+QC,,Stone Hoe,2
+QC,,Trident,1
+QC,,Shield,3
+QC,,Shears,49
+QC,,Flint & Steel,4
+QC,,Bucket,50
+QC,,Lead,3
+QC,,Glass Bottle,111
+QC,,Redstone Torch,3
+QC,,Repeater,18
+QC,,Comparator,3
+QC,,Piston,13
+QC,,Dispenser,10
+QC,,Hopper,8
+QC,,Jukebox,1
+QC,,Enchantment Table,1
+QC,,Brewing Stand,6
+QC,,Cauldron,1
+QC,,Anvil,4
+QC,,Ender Chest,1
+QC,,Lodestone,1
+QC,,Sculk Sensor,15
+QC,,Sculk Catalyst,3
+QC,,Torch,361
+QC,,Lantern,98
+QC,,Candle,6
+QC,,Minecart,2
+QC,,Rail,35
+QC,,Powered Rail,10
+QC,,Activator Rail,4
+QC,,Turtle Egg,2
+QC,,Wither Skull,2
+QC,,Wither Rose,73
+QC,,Dragon Head,1
+QC,,Clock,2
+QC,,Compass,1
+QC,,Spyglass,1
+QC,,End Rod,2
+QC,,Eye of Ender,3
+QC,,Glistering Melon,1
+IOK,,Elytra,1
+IOK,,Shulker Box,2
+IOK,,Saddle,5
+IOK,,Music Disc,1
+IOK,,Blaze Rod,70.5
+IOK,,Slime Ball,69
+IOK,,Leather,17
+IOK,,Amethyst Shard,39
+IOK,,Nether Quartz,3
+IOK,,Glowstone,0.5
+IOK,,Obsidian,62
+IOK,,Glass,14
+IOK,,Glass Pane,292
+IOK,,Bricks,209
+IOK,,Brick Block,39
+IOK,,Crack,7
+IOK,,Smooth Stones,45
+IOK,,Golden Apple,1
+IOK,,Cooked Food,81
+IOK,,Diamond Helmet,2
+IOK,,Diamond Chestplate,5
+IOK,,Diamond Leggings,3
+IOK,,Diamond Boots,3
+IOK,,Gold Helmet,1
+IOK,,Gold Chestplate,1
+IOK,,Gold Leggings,2
+IOK,,Gold Boots,3
+IOK,,Chainmail Helmet,1
+IOK,,Chainmail Chestplate,2
+IOK,,Chainmail Boots,2
+IOK,,Leather Helmet,1
+IOK,,Leather Chestplate,3
+IOK,,Leather Leggings,3
+IOK,,Leather Boots,1
+IOK,,Gold Horse Armor,2
+IOK,,Iron Horse Armor,1
+IOK,,Book,1
+IOK,,Bookshelf,2
+IOK,,Enchanted Book,5
+IOK,,Gunpowder,153
+IOK,,Fireworks,51
+IOK,,Diamond Sword,3
+IOK,,Diamond Pickaxe,2
+IOK,,Diamond Axe,1
+IOK,,Diamond Shovel,1
+IOK,,Gold Sword,1
+IOK,,Gold Axe,1
+IOK,,Iron Sword,5
+IOK,,Iron Pickaxe,3
+IOK,,Iron Axe,1
+IOK,,Iron Shovel,5
+IOK,,Iron Hoe,1
+IOK,,Stone Shovel,1
+IOK,,Wood Shovel,1
+IOK,,Shield,3
+IOK,,Shears,3
+IOK,,Flint & Steel,1
+IOK,,Bucket,13
+IOK,,Lead,11
+IOK,,Glass Bottle,1
+IOK,,Hopper,5
+IOK,,Stonecutter,2
+IOK,,Anvil,1
+IOK,,Torch,24
+IOK,,Lantern,7
+IOK,,Minecart,3
+IOK,,Dragon Head,1
+IOK,,Campfire,1
+IOK,,Iron Door,3
+IOK,,Iron Bars,17
+BEL,,Beacon,3
+BEL,,Elytra,31
+BEL,,Shulker Box,147
+BEL,,Totem of Undying,2
+BEL,,Name Tag,1
+BEL,,Saddle,9
+BEL,,Music Disc,14
+BEL,,Smithing Template,45
+BEL,,Netherite Scrap,46
+BEL,,Goat Horn,1
+BEL,,Blaze Rod,140
+BEL,,Magma Cream,80
+BEL,,Slime Ball,20
+BEL,,Honey Bottle,391
+BEL,,Honey Comb,1
+BEL,,Leather,128
+BEL,,Sponge,132
+BEL,,Amethyst Shard,237
+BEL,,Nether Quartz,570
+BEL,,Glowstone,297
+BEL,,Quartz Block,1288
+BEL,,Obsidian,137
+BEL,,Glass,2701
+BEL,,Glass Pane,91
+BEL,,Bricks,6
+BEL,,Brick Block,658
+BEL,,Crack,193
+BEL,,Smooth Stones,4634
+BEL,,Enchanted Golden Apple,4
+BEL,,Golden Apple,124
+BEL,,Golden Carrot,1011
+BEL,,Cooked Food,4696
+BEL,,Netherite Helmet,4
+BEL,,Netherite Chestplate,4
+BEL,,Netherite Leggings,4
+BEL,,Netherite Boots,3
+BEL,,Diamond Helmet,9
+BEL,,Diamond Chestplate,12
+BEL,,Diamond Leggings,17
+BEL,,Diamond Boots,17
+BEL,,Gold Helmet,10
+BEL,,Gold Chestplate,1
+BEL,,Gold Leggings,1
+BEL,,Gold Boots,4
+BEL,,Iron Helmet,7
+BEL,,Iron Chestplate,5
+BEL,,Iron Leggings,4
+BEL,,Iron Boots,8
+BEL,,Diamond Horse Armor,2
+BEL,,Gold Horse Armor,3
+BEL,,Iron Horse Armor,3
+BEL,,Book,142
+BEL,,Bookshelf,50
+BEL,,Enchanted Book,76
+BEL,,Gunpowder,8864
+BEL,,Fire Charge,6
+BEL,,Fireworks,3881
+BEL,,TNT,22
+BEL,,Spectral Arrow,19
+BEL,,Netherite Sword,4
+BEL,,Netherite Pickaxe,7
+BEL,,Netherite Axe,4
+BEL,,Netherite Shovel,3
+BEL,,Diamond Sword,19
+BEL,,Diamond Pickaxe,17
+BEL,,Diamond Axe,11
+BEL,,Diamond Shovel,16
+BEL,,Diamond Hoe,3
+BEL,,Gold Pickaxe,1
+BEL,,Gold Axe,1
+BEL,,Gold Shovel,1
+BEL,,Iron Sword,7
+BEL,,Iron Pickaxe,10
+BEL,,Iron Axe,4
+BEL,,Iron Shovel,5
+BEL,,Stone Sword,2
+BEL,,Wood Hoe,1
+BEL,,Trident,1
+BEL,,Shield,3
+BEL,,Shears,25
+BEL,,Flint & Steel,8
+BEL,,Bucket,36
+BEL,,Lead,21
+BEL,,Glass Bottle,38
+BEL,,Redstone Torch,23
+BEL,,Repeater,14
+BEL,,Comparator,22
+BEL,,Observer,21
+BEL,,Piston,15
+BEL,,Sticky Piston,11
+BEL,,Redstone Lamp,30
+BEL,,Dispenser,2
+BEL,,Dropper,6
+BEL,,Hopper,81
+BEL,,Jukebox,1
+BEL,,Stonecutter,2
+BEL,,Brewing Stand,3
+BEL,,Cauldron,5
+BEL,,Anvil,6
+BEL,,Ender Chest,17
+BEL,,Sculk Sensor,10
+BEL,,Calibrated Sculk Sensor,
+BEL,,Sculk Shrieker,4
+BEL,,Sculk Catalyst,4
+BEL,,Torch,778
+BEL,,Lantern,98
+BEL,,Candle,14
+BEL,,Minecart,6
+BEL,,Rail,181
+BEL,,Powered Rail,10
+BEL,,Detector Rail,4
+BEL,,Activator Rail,13
+BEL,,Dragon Head,13
+BEL,,Item Frame,1
+BEL,,Flower Pot,3
+BEL,,Clock,1
+BEL,,Compass,13
+BEL,,Campfire,17
+BEL,,Spyglass,3
+BEL,,Lightning Rod,1
+BEL,,End Rod,1
+BEL,,Iron Bars,7
+BEL,,Chain,28
+BEL,,Eye of Ender,27
+BEL,,Glistering Melon,5
+CDS,,Elytra,2
+CDS,,Shulker Box,10.5
+CDS,,Name Tag,1
+CDS,,Saddle,2
+CDS,,Smithing Template,2
+CDS,,Blaze Rod,34
+CDS,,Slime Ball,36
+CDS,,Leather,24
+CDS,,Glowstone,1.75
+CDS,,Quartz Block,1
+CDS,,Obsidian,81
+CDS,,Glass,47
+CDS,,Glass Pane,131
+CDS,,Brick Block,23
+CDS,,Smooth Stones,134
+CDS,,Golden Apple,2
+CDS,,Cooked Food,68
+CDS,,Diamond Helmet,1
+CDS,,Diamond Chestplate,3
+CDS,,Diamond Leggings,2
+CDS,,Diamond Boots,1
+CDS,,Gold Helmet,4
+CDS,,Gold Chestplate,1
+CDS,,Gold Leggings,1
+CDS,,Gold Boots,2
+CDS,,Chainmail Helmet,2
+CDS,,Chainmail Chestplate,2
+CDS,,Chainmail Leggings,1
+CDS,,Chainmail Boots,1
+CDS,,Iron Helmet,7
+CDS,,Iron Chestplate,14
+CDS,,Iron Leggings,5
+CDS,,Iron Boots,5
+CDS,,Leather Boots,2
+CDS,,Gold Horse Armor,1
+CDS,,Book,26
+CDS,,Book & Quill,2
+CDS,,Enchanted Book,1
+CDS,,Gunpowder,14
+CDS,,Fireworks,284
+CDS,,Diamond Sword,1
+CDS,,Diamond Pickaxe,5
+CDS,,Diamond Axe,2
+CDS,,Diamond Shovel,6
+CDS,,Iron Sword,9
+CDS,,Iron Pickaxe,3
+CDS,,Iron Axe,5
+CDS,,Iron Shovel,3
+CDS,,Stone Pickaxe,5
+CDS,,Stone Axe,7
+CDS,,Stone Shovel,3
+CDS,,Stone Hoe,2
+CDS,,Wood Shovel,1
+CDS,,Shield,5
+CDS,,Shears,2
+CDS,,Flint & Steel,1
+CDS,,Bucket,11
+CDS,,Lead,2
+CDS,,Glass Bottle,34
+CDS,,Redstone Torch,9
+CDS,,Redstone Lamp,25
+CDS,,Dropper,1
+CDS,,Hopper,1
+CDS,,Brewing Stand,1
+CDS,,Anvil,1
+CDS,,Ender Chest,2
+CDS,,Torch,64
+CDS,,Lantern,16
+CDS,,Dragon Head,2
+CDS,,Item Frame,3
+CDS,,Bell,1
+CDS,,Compass,1
+CDS,,Lightning Rod,1
+CDS,,End Rod,1
+CDS,,Iron Door,2
+CDS,,Iron Bars,16
+CRP,,Totem of Undying,2
+CRP,,Ghast Tear,2
+CRP,,Slime Ball,38
+CRP,,Leather,1
+CRP,,Nether Quartz,1
+CRP,,Glowstone,1.25
+CRP,,Quartz Block,31
+CRP,,Glass,173
+CRP,,Glass Pane,56
+CRP,,Bricks,1.0
+CRP,,Brick Block,98
+CRP,,Smooth Stones,139.5
+CRP,,Cooked Food,60
+CRP,,Diamond Helmet,1
+CRP,,Diamond Boots,1
+CRP,,Gold Chestplate,1
+CRP,,Gold Boots,3
+CRP,,Chainmail Leggings,1
+CRP,,Chainmail Boots,1
+CRP,,Iron Helmet,1
+CRP,,Iron Chestplate,2
+CRP,,Iron Leggings,1
+CRP,,Leather Boots,2
+CRP,,Book,10
+CRP,,Enchanted Book,2
+CRP,,Diamond Sword,1
+CRP,,Diamond Axe,1
+CRP,,Iron Sword,1
+CRP,,Iron Axe,1
+CRP,,Iron Hoe,2
+CRP,,Stone Pickaxe,1
+CRP,,Stone Axe,2
+CRP,,Stone Shovel,1
+CRP,,Stone Hoe,1
+CRP,,Wood Pickaxe,1
+CRP,,Shield,1
+CRP,,Shears,1
+CRP,,Flint & Steel,2
+CRP,,Bucket,12
+CRP,,Glass Bottle,1
+CRP,,Redstone Torch,40
+CRP,,Observer,2
+CRP,,Piston,1
+CRP,,Sticky Piston,1
+CRP,,Hopper,30
+CRP,,Target,2
+CRP,,Enchantment Table,1
+CRP,,Anvil,1
+CRP,,Torch,1
+CRP,,Rail,19
+CRP,,Detector Rail,3
+CRP,,Activator Rail,2
+CRP,,Iron Door,2
+CRP,,Iron Bars,9
+CRP,,Eye of Ender,2
+CRP,,Green Dye,622
+,2OMR,Shulker Box,1
+,II,Elytra,2
+,II,Shulker Box,12
+,II,Diamond Helmet,1
+,II,Diamond Chestplate,1
+,II,Diamond Leggings,1
+,II,Diamond Boots,1
+,II,Gold Chestplate,2
+,II,Gold Boots,4
+,II,Diamond Sword,3
+,II,Diamond Pickaxe,1
+,II,Gold Sword,3
+,II,Gold Pickaxe,1
