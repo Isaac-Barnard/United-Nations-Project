@@ -3,7 +3,7 @@ from django.db.models import F, FloatField, ExpressionWrapper, Count, Value, Sum
 from django.db.models.functions import Coalesce
 from django.contrib.auth.decorators import login_required
 from .forms import BuildingEvaluationForm, ItemEvaluationForm
-from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount, ItemEvaluationComponent, ItemEvaluation, Item
+from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount, ItemEvaluationComponent, ItemEvaluation, Item, Company
 from decimal import Decimal
 
 def home(request):
@@ -86,6 +86,71 @@ def nation_balance_sheet(request, nation_abbreviation):
     return render(request, 'nation_balance_sheet.html', {
         'nation': nation,
         'buildings': buildings,
+        'partial_buildings': partial_buildings,
+        'items_part1': items_part1,  # First set of items
+        'items_part2': items_part2,  # Second set of items
+        'items_part3': items_part3,  # Third set of items
+        'items_part4': items_part4,  # Fourth set of items
+        'items_part5': items_part5,  # Fourth set of items
+    })
+
+
+def company_balance_sheet(request, company_abbreviation):
+    # Get the company by its abbreviation
+    company = get_object_or_404(Company, abbreviation=company_abbreviation)
+    
+    # Fetch all buildings owned by the company
+    #buildings = Building.objects.filter(owner=company)
+    
+    # Fetch buildings where the company is a partial owner
+    partial_buildings = Building.objects.filter(
+        partialbuildingownership__partial_owner_abbreviation=company.abbreviation
+    ).annotate(
+        ownership=F('partialbuildingownership__percentage')
+    ).distinct()
+
+    # Fetch all items and sort by the manual 'ordering' field
+    all_items = Item.objects.all().order_by('ordering')  # Sorted by manual ordering
+    items_with_count = ItemCount.objects.filter(company=company)
+
+    # Create a dictionary to store counts for each item
+    item_count_dict = {item_count.item_id: item_count.count for item_count in items_with_count}
+
+    # Calculate total value and market price for each item
+    item_data = []
+    for item in all_items:
+        item_name = item.name if item.name else "Unnamed Item"
+        market_price = item.market_price if item.market_price else Decimal('0')
+        
+        # Get the count for the item, defaulting to 0 if not present
+        count = item_count_dict.get(item.id, 0)
+        total_value = market_price * count
+
+        item_data.append({
+            'name': item_name,
+            'market_price': market_price,
+            'count': count,
+            'total_value': total_value,
+            'ordering': item.ordering,  # Ensure ordering is included for distribution
+        })
+    
+    # Distribute items based on their 'ordering' value
+    items_part1, items_part2, items_part3, items_part4, items_part5 = [], [], [], [], []
+    for item in item_data:
+        if 100 <= item['ordering'] < 200:
+            items_part1.append(item)  # 100's range goes into items_part1
+        elif 200 <= item['ordering'] < 300:
+            items_part2.append(item)  # 200's range goes into items_part2
+        elif 300 <= item['ordering'] < 400:
+            items_part3.append(item)  # 300's range goes into items_part3
+        elif 400 <= item['ordering'] < 500:
+            items_part4.append(item)  # 400's range goes into items_part4
+        elif 500 <= item['ordering'] < 600:
+            items_part5.append(item)  # 500's range goes into items_part5
+            
+    return render(request, 'company_balance_sheet.html', {
+        'company': company,
+        #'buildings': buildings,
         'partial_buildings': partial_buildings,
         'items_part1': items_part1,  # First set of items
         'items_part2': items_part2,  # Second set of items

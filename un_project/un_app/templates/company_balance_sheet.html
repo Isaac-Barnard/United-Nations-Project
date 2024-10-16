@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ company.abbreviation }} Balance Sheet
+{% endblock %}
+
+{% load static %}
+{% load custom_filters %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/balance_sheet_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>{{ company.name }} ({{ company.abbreviation }}) Balance Sheet</h1>
+
+    <h2 class="items-heading">Owned Items</h2>
+    
+    <!-- Display Item Information in three Tables Side by Side -->
+    <div class="item-table-container">
+        <!-- Table 1 -->
+        <div class="item-table">
+            <table>
+                <thead>
+                    <tr style="font-size: 0.9em;">
+                        <th>Item Name</th>
+                        <th>Market Value</th>
+                        <th>Item Count</th>
+                        <th>Total Value</th>
+                    </tr>
+                </thead>
+                <tbody style="font-size: 0.9em;">
+                    {% for item in items_part1 %}
+                        {% if 'Section Divider' in item.name %}
+                            <tr>
+                                <td colspan="4" style="background-color: transparent; font-size: 0.9em;">&nbsp;</td> <!-- Empty row for divider -->
+                            </tr>
+                        {% else %}
+                            <tr style="font-size: 0.9em;">
+                                <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
+                                <td>{{ item.market_price|custom_decimal_places }}</td>
+                                <td>{{ item.count|stringformat:"g" }}</td>
+                                <td>{{ item.total_value|custom_decimal_places }}</td>
+                            </tr>
+                        {% endif %}
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No items found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Table 2 -->
+        <div class="item-table">
+            <table>
+                <thead>
+                    <tr style="font-size: 0.9em;">
+                        <th>Item Name</th>
+                        <th>Market Value</th>
+                        <th>Item Count</th>
+                        <th>Total Value</th>
+                    </tr>
+                </thead>
+                <tbody style="font-size: 0.9em;">
+                    {% for item in items_part2 %}
+                        {% if 'Section Divider' in item.name %}
+                            <tr class="section-divider-row">
+                                <td colspan="4" style="background-color: transparent; font-size: 0.9em;">&nbsp;</td> <!-- Empty row for divider -->
+                            </tr>
+                        {% else %}
+                            <tr style="font-size: 0.9em;">
+                                <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
+                                <td>{{ item.market_price|custom_decimal_places }}</td>
+                                <td>{{ item.count|stringformat:"g" }}</td>
+                                <td>{{ item.total_value|custom_decimal_places }}</td>
+                            </tr>
+                        {% endif %}
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No items found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                
+            </table>
+        </div>
+
+        <!-- Table 3 -->
+        <div class="item-table">
+            <table>
+                <thead>
+                    <tr style="font-size: 0.9em;">
+                        <th>Item Name</th>
+                        <th>Market Value</th>
+                        <th>Item Count</th>
+                        <th>Total Value</th>
+                    </tr>
+                </thead>
+                <tbody style="font-size: 0.9em;">
+                    {% for item in items_part3 %}
+                    {% if 'Section Divider' in item.name %}
+                    <tr>
+                        <td colspan="4" style="background-color: transparent; font-size: 0.9em;">&nbsp;</td> <!-- Empty row for divider -->
+                    </tr>
+                {% else %}
+                    <tr style="font-size: 0.9em;">
+                        <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
+                        <td>{{ item.market_price|custom_decimal_places }}</td>
+                        <td>{{ item.count|stringformat:"g" }}</td>
+                        <td>{{ item.total_value|custom_decimal_places }}</td>
+                    </tr>
+                {% endif %}
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No items found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- Table 4 -->
+        <div class="item-table">
+            <table>
+                <thead>
+                    <tr style="font-size: 0.9em;">
+                        <th>Item Name</th>
+                        <th>Market Value</th>
+                        <th>Item Count</th>
+                        <th>Total Value</th>
+                    </tr>
+                </thead>
+                <tbody style="font-size: 0.9em;">
+                    {% for item in items_part4 %}
+                    {% if 'Section Divider' in item.name %}
+                    <tr>
+                        <td colspan="4" style="background-color: transparent; font-size: 0.9em;">&nbsp;</td> <!-- Empty row for divider -->
+                    </tr>
+                {% else %}
+                    <tr style="font-size: 0.9em;">
+                        <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
+                        <td>{{ item.market_price|custom_decimal_places }}</td>
+                        <td>{{ item.count|stringformat:"g" }}</td>
+                        <td>{{ item.total_value|custom_decimal_places }}</td>
+                    </tr>
+                {% endif %}
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No items found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Table 5 -->
+        <div class="item-table">
+            <table>
+                <thead>
+                    <tr style="font-size: 0.9em;">
+                        <th>Item Name</th>
+                        <th>Market Value</th>
+                        <th>Item Count</th>
+                        <th>Total Value</th>
+                    </tr>
+                </thead>
+                <tbody style="font-size: 0.9em;">
+                    {% for item in items_part5 %}
+                    {% if 'Section Divider' in item.name %}
+                    <tr>
+                        <td colspan="4" style="background-color: transparent; font-size: 0.9em;">&nbsp;</td> <!-- Empty row for divider -->
+                    </tr>
+                {% else %}
+                    <tr style="font-size: 0.9em;">
+                        <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
+                        <td>{{ item.market_price|custom_decimal_places }}</td>
+                        <td>{{ item.count|stringformat:"g" }}</td>
+                        <td>{{ item.total_value|custom_decimal_places }}</td>
+                    </tr>
+                {% endif %}
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No items found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="building-table" style="display: flex; justify-content: space-between;">
+        <!-- Fully Owned Buildings -->
+            <!-- N/A Companies can't own buildings-->
+
+        <!-- Partially Owned Buildings -->
+        <div class="building-table" style="width: 49.5%;">
+            <h2>Partially Owned Buildings</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Building Name</th>
+                        <th>Ownership</th>
+                        <th>Market Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for building in partial_buildings %}
+                        <tr>
+                            <td class="building-name">{{ building.name }}</td>
+                            <td>{{ building.ownership }}%</td>
+                            <td>{{ building.adjusted_ownership_price|custom_decimal_places }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3">No partially owned buildings found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

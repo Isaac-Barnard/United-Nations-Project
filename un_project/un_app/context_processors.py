@@ -1,9 +1,9 @@
-from .models import Nation
+from .models import Nation, Company
 
-def nations(request):
-    """
-    A context processor to add the list of nations to all templates.
-    """
+def nations_and_companies(request):
+    nations = Nation.objects.all()
+    companies = Company.objects.all()
     return {
-        'nations': Nation.objects.all()
+        'nations': nations,
+        'companies': companies,
     }
