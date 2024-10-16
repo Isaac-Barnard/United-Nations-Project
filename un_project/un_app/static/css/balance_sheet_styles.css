@@ -20,17 +20,17 @@ h2.items-heading {
 /* Each table should be inline-block to fit in the scrollable area */
 .item-table-container .item-table {
     display: inline-block;     /* Aligns all tables horizontally */
-    width: 300px;              /* Set a consistent width for each table */
+    width: 330px;              /* Set a consistent width for each table */
     vertical-align: top;       /* Ensure all tables align at the top */
     white-space: normal;
-    margin-right: 10px;        /* Add spacing between tables */
+    margin-right: 1px;        /* Add spacing between tables */
 }
 
 /* Target the Item Name column to truncate long names */
 td.item-name, td.building-name {
     white-space: nowrap;       /* Prevent wrapping */
     overflow: hidden;          /* Hide overflowed content */
-    text-overflow: ellipsis;   /* Add ellipsis for long text */
+    text-overflow: clip;   /* Add ellipsis for long text */
     max-width: 150px;          /* Set a maximum width for the name columns */
 }
 
@@ -41,22 +41,22 @@ td.item-name, td.building-name {
 
 .item-table th:nth-child(1),  /* Item Name column */
 .item-table td:nth-child(1) {
-    width: 46%;                /* Allocate more space to item name */
+    width: 44%;                /* Allocate more space to item name */
 }
 
 .item-table th:nth-child(2),  /* Market Value column */
 .item-table td:nth-child(2) {
-    width: 18%;
+    width: 16%;
 }
 
 .item-table th:nth-child(3),  /* Item Count column */
 .item-table td:nth-child(3) {
-    width: 18%; 
+    width: 16%; 
 }
 
 .item-table th:nth-child(4),  /* Total Value column */
 .item-table td:nth-child(4) {
-    width: 18%; 
+    width: 24%; 
 }
 
 

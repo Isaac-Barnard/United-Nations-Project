@@ -295,6 +295,7 @@ class ItemEvaluation(models.Model):
             total += Decimal(component.quantity) * Decimal(component.denomination.diamond_equivalent)
         return total
     
+# --------------------------------------------------------------------
 
 class ItemEvaluationComponent(models.Model):
     evaluation = models.ForeignKey(ItemEvaluation, on_delete=models.CASCADE, related_name='evaluation_components')
