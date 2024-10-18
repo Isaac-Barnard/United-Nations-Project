@@ -23,10 +23,10 @@
             <table>
                 <thead>
                     <tr style="font-size: 0.9em;">
-                        <th>Item Name</th>
-                        <th>Market Value</th>
-                        <th>Item Count</th>
+                        <th>Item Type</th>
                         <th>Total Value</th>
+                        <th>Market Value</th>
+                        <th>Number Owned</th>
                     </tr>
                 </thead>
                 <tbody style="font-size: 0.9em;">
@@ -38,9 +38,9 @@
                         {% else %}
                             <tr style="font-size: 0.9em;">
                                 <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
+                                <td>{{ item.total_value|custom_decimal_places }}</td>
                                 <td>{{ item.market_price|custom_decimal_places }}</td>
                                 <td>{{ item.count|stringformat:"g" }}</td>
-                                <td>{{ item.total_value|custom_decimal_places }}</td>
                             </tr>
                         {% endif %}
                     {% empty %}
@@ -57,10 +57,10 @@
             <table>
                 <thead>
                     <tr style="font-size: 0.9em;">
-                        <th>Item Name</th>
-                        <th>Market Value</th>
-                        <th>Item Count</th>
+                        <th>Item Type</th>
                         <th>Total Value</th>
+                        <th>Market Value</th>
+                        <th>Number Owned</th>
                     </tr>
                 </thead>
                 <tbody style="font-size: 0.9em;">
@@ -72,9 +72,9 @@
                         {% else %}
                             <tr style="font-size: 0.9em;">
                                 <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
+                                <td>{{ item.total_value|custom_decimal_places }}</td>
                                 <td>{{ item.market_price|custom_decimal_places }}</td>
                                 <td>{{ item.count|stringformat:"g" }}</td>
-                                <td>{{ item.total_value|custom_decimal_places }}</td>
                             </tr>
                         {% endif %}
                     {% empty %}
@@ -92,10 +92,10 @@
             <table>
                 <thead>
                     <tr style="font-size: 0.9em;">
-                        <th>Item Name</th>
-                        <th>Market Value</th>
-                        <th>Item Count</th>
+                        <th>Item Type</th>
                         <th>Total Value</th>
+                        <th>Market Value</th>
+                        <th>Number Owned</th>
                     </tr>
                 </thead>
                 <tbody style="font-size: 0.9em;">
@@ -107,9 +107,9 @@
                 {% else %}
                     <tr style="font-size: 0.9em;">
                         <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
+                        <td>{{ item.total_value|custom_decimal_places }}</td>
                         <td>{{ item.market_price|custom_decimal_places }}</td>
                         <td>{{ item.count|stringformat:"g" }}</td>
-                        <td>{{ item.total_value|custom_decimal_places }}</td>
                     </tr>
                 {% endif %}
                     {% empty %}
@@ -127,10 +127,10 @@
             <table>
                 <thead>
                     <tr style="font-size: 0.9em;">
-                        <th>Item Name</th>
-                        <th>Market Value</th>
-                        <th>Item Count</th>
+                        <th>Item Type</th>
                         <th>Total Value</th>
+                        <th>Market Value</th>
+                        <th>Number Owned</th>
                     </tr>
                 </thead>
                 <tbody style="font-size: 0.9em;">
@@ -142,9 +142,9 @@
                 {% else %}
                     <tr style="font-size: 0.9em;">
                         <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
+                        <td>{{ item.total_value|custom_decimal_places }}</td>
                         <td>{{ item.market_price|custom_decimal_places }}</td>
                         <td>{{ item.count|stringformat:"g" }}</td>
-                        <td>{{ item.total_value|custom_decimal_places }}</td>
                     </tr>
                 {% endif %}
                     {% empty %}
@@ -161,10 +161,10 @@
             <table>
                 <thead>
                     <tr style="font-size: 0.9em;">
-                        <th>Item Name</th>
-                        <th>Market Value</th>
-                        <th>Item Count</th>
+                        <th>Item Type</th>
                         <th>Total Value</th>
+                        <th>Market Value</th>
+                        <th>Number Owned</th>
                     </tr>
                 </thead>
                 <tbody style="font-size: 0.9em;">
@@ -176,9 +176,9 @@
                 {% else %}
                     <tr style="font-size: 0.9em;">
                         <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
+                        <td>{{ item.total_value|custom_decimal_places }}</td>
                         <td>{{ item.market_price|custom_decimal_places }}</td>
                         <td>{{ item.count|stringformat:"g" }}</td>
-                        <td>{{ item.total_value|custom_decimal_places }}</td>
                     </tr>
                 {% endif %}
                     {% empty %}
