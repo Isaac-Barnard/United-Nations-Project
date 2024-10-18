@@ -1,0 +1,195 @@
+item,denomination,quantity,referenced_item,percentage_of_item
+Netherite Helmet,Netherite Ingot,1,,
+Netherite Chestplate,Netherite Ingot,1,,
+Netherite Leggings,Netherite Ingot,1,,
+Netherite Boots,Netherite Ingot,1,,
+Netherite Helmet,,,Smithing Template,100
+Netherite Chestplate,,,Smithing Template,100
+Netherite Leggings,,,Smithing Template,100
+Netherite Boots,,,Smithing Template,100
+Netherite Helmet,Diamond,5,,
+Netherite Chestplate,Diamond,8,,
+Netherite Leggings,Diamond,7,,
+Netherite Boots,Diamond,4,,
+Diamond Helmet,Diamond,5,,
+Diamond Chestplate,Diamond,8,,
+Diamond Leggings,Diamond,7,,
+Diamond Boots,Diamond,4,,
+Gold Helmet,Gold Ingot,5,,
+Gold Chestplate,Gold Ingot,8,,
+Gold Leggings,Gold Ingot,7,,
+Gold Boots,Gold Ingot,4,,
+Chainmail Helmet,Iron Ingot,10,,
+Chainmail Chestplate,Iron Ingot,16,,
+Chainmail Leggings,Iron Ingot,14,,
+Chainmail Boots,Iron Ingot,8,,
+Iron Helmet,Iron Ingot,5,,
+Iron Chestplate,Iron Ingot,8,,
+Iron Leggings,Iron Ingot,7,,
+Iron Boots,Iron Ingot,4,,
+Leather Helmet,,,Leather,500
+Leather Chestplate,,,Leather,800
+Leather Leggings,,,Leather,700
+Leather Boots,,,Leather,400
+Netherite Sword,Netherite Ingot,1,,
+Netherite Pickaxe,Netherite Ingot,1,,
+Netherite Axe,Netherite Ingot,1,,
+Netherite Shovel,Netherite Ingot,1,,
+Netherite Hoe,Netherite Ingot,1,,
+Netherite Sword,,,Smithing Template,100
+Netherite Pickaxe,,,Smithing Template,100
+Netherite Axe,,,Smithing Template,100
+Netherite Shovel,,,Smithing Template,100
+Netherite Hoe,,,Smithing Template,100
+Netherite Sword,Diamond,2,,
+Netherite Pickaxe,Diamond,3,,
+Netherite Axe,Diamond,3,,
+Netherite Shovel,Diamond,1,,
+Netherite Hoe,Diamond,2,,
+Diamond Sword,Diamond,2,,
+Diamond Pickaxe,Diamond,3,,
+Diamond Axe,Diamond,3,,
+Diamond Shovel,Diamond,1,,
+Diamond Hoe,Diamond,2,,
+Gold Sword,Gold Ingot,2,,
+Gold Pickaxe,Gold Ingot,3,,
+Gold Axe,Gold Ingot,3,,
+Gold Shovel,Gold Ingot,1,,
+Gold Hoe,Gold Ingot,2,,
+Iron Sword,Iron Ingot,2,,
+Iron Pickaxe,Iron Ingot,3,,
+Iron Axe,Iron Ingot,3,,
+Iron Shovel,Iron Ingot,1,,
+Iron Hoe,Iron Ingot,2,,
+Stone Sword,Redstone Dust,2,,
+Stone Pickaxe,Redstone Dust,2,,
+Stone Axe,Redstone Dust,2,,
+Stone Shovel,Redstone Dust,2,,
+Stone Hoe,Redstone Dust,2,,
+Wood Sword,Redstone Dust,1,,
+Wood Pickaxe,Redstone Dust,1,,
+Wood Axe,Redstone Dust,1,,
+Wood Shovel,Redstone Dust,1,,
+Wood Hoe,Redstone Dust,1,,
+Golden Apple,Gold Ingot,8,,
+Netherite Scrap,Diamond,1.5,,
+Redstone Torch,Redstone Dust,1,,
+Rail,Iron Ingot,0.375,,
+Powered Rail,Gold Ingot,0.375,,
+Powered Rail,Redstone Dust,0.0625,,
+Detector Rail,Iron Ingot,0.375,,
+Detector Rail,Redstone Dust,0.0625,,
+Activator Rail,Iron Ingot,0.375,,
+Activator Rail,Redstone Dust,0.0625,,
+Minecart,Iron Ingot,5,,
+Shears,Iron Ingot,2,,
+Bucket,Iron Ingot,3,,
+Shield,Iron Ingot,1,,
+Flint & Steel,Iron Ingot,1,,
+Hopper,Iron Ingot,5,,
+Piston,Iron Ingot,1,,
+Piston,Redstone Dust,1,,
+Sticky Piston,Iron Ingot,1,,
+Sticky Piston,Redstone Dust,1,,
+Sticky Piston,,,Slime Ball,100
+Repeater,Redstone Dust,3,,
+Comparator,Redstone Dust,3,,
+Comparator,,,Nether Quartz,100
+Observer,Redstone Dust,2,,
+Observer,,,Nether Quartz,100
+Cauldron,Iron Ingot,7,,
+Compass,Redstone Dust,1,,
+Compass,Iron Ingot,4,,
+Clock,Gold Ingot,4,,
+Clock,Redstone Dust,1,,
+Iron Door,Iron Ingot,2,,
+Iron Trapdoor,Iron Ingot,4,,
+Iron Bars,Iron Ingot,0.375,,
+Chain,Iron Ingot,1.222,,
+Lantern,Iron Ingot,0.889,,
+Lantern,Coal,1,,
+Golden Carrot,Gold Ingot,0.889,,
+Dispenser,Redstone Dust,1,,
+Dropper,Redstone Dust,1,,
+Anvil,Iron Ingot,31,,
+Note block,Redstone Dust,1,,
+Redstone Lamp,Redstone Dust,4,,
+Redstone Lamp,,,Glowstone,100
+Spyglass,Copper Ingot,2,,
+Spyglass,,,Amethyst Shard,100
+Stonecutter,Iron Ingot,1,,
+Smithing Table,Iron Ingot,2,,
+Daylight Detector,,,Nether Quartz,300
+Daylight Detector,,,Glass,300
+Lightning Rod,Copper Ingot,3,,
+Target,Redstone Dust,4,,
+Lead,,,Slime Ball,100
+Brewing Stand,,,Blaze Rod,100
+Torch,Coal,1,,
+Ender Chest,,,Obsidian,800
+Ender Chest,,,Eye of Ender,100
+Book,,,Leather,100
+Item Frame,,,Leather,100
+Enchanted Book,,,Leather,100
+Enchanted Book,Emerald,34.5,,
+Blast Furnace,Iron Ingot,5,,
+Nether Star,,,Beacon,100
+Nether Star,,,Obsidian,-300
+Nether Star,,,Glass,-300
+Glass,Coal,0.125,,
+Glass Pane,Coal,0.046875,,
+Glass Bottle,Coal,0.125,,
+Bricks,Coal,0.125,,
+Brick Block,Coal,0.5,,
+Green Dye,Coal,0.125,,
+Crack,Coal,0.125,,
+Smooth Stones,Coal,0.125,,
+Magma Cream,,,Blaze Rod,50
+Fire Charge,,,Blaze Rod,50
+Fire Charge,,,Gunpowder,100
+Eye of Ender,,,Blaze Rod,50
+Fireworks,,,Gunpowder,100
+TNT,,,Gunpowder,500
+Spectral Arrow,,,Glowstone,50
+Glistering Melon,Gold Ingot,0.889,,
+Diamond Horse Armor,Diamond,3,,
+Gold Horse Armor,Gold Ingot,3,,
+Iron Horse Armor,Iron Ingot,3,,
+Leather Horse Armor,,,Leather,700
+Cooked Food,Coal,0.125,,
+Bookshelf,,,Leather,300
+Jukebox,Diamond,1,,
+Enchantment Table,Diamond,2,,
+Enchantment Table,,,Book,100
+Enchantment Table,,,Obsidian,400
+Iron Pressure Plate,Iron Ingot,2,,
+Gold Pressure Plate,Gold Ingot,2,,
+Flower Pot,,,Bricks,300
+Hanging Sign,,,Chain,33.3
+End Rod,,,Cooked Food,25
+End Rod,,,Blaze Rod,25
+Smithing Template,Diamond,7,,
+Brush,Copper Ingot,1,,
+Decorated Pot,,,Bricks,400
+Tinted Glass,,,Glass,50
+Tinted Glass,,,Amethyst Shard,200
+Calibrated Sculk Sensor,,,Amethyst Shard,300
+Calibrated Sculk Sensor,,,Sculk Sensor,100
+Lodestone,Netherite Ingot,1,,
+Quartz Block,,,Nether Quartz,400
+Campfire,Coal,1,,
+Respawn Anchor,,,Obsidian,600
+Respawn Anchor,,,Glowstone,300
+Candle,,,Honey Comb,100
+Wolf Armor,,,Armadillo Scute,600
+Copper Bulb,,,Blaze Rod,25
+Copper Bulb,Copper Ingot,6.75,,
+Copper Bulb,Redstone Dust,0.25,,
+Copper Door,Copper Ingot,2,,
+Copper Grate,Copper Ingot,9,,
+Copper Trapdoor,Copper Ingot,3,,
+Crafter,,,Dropper,100
+Crafter,Iron Ingot,5,,
+Crafter,Redstone Dust,2,,
+Mace,,,Heavy Core,100
+Mace,,,Breeze Rod,100
