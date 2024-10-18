@@ -46,17 +46,17 @@ td.item-name, td.building-name {
 
 .item-table th:nth-child(2),  /* Market Value column */
 .item-table td:nth-child(2) {
-    width: 16%;
+    width: 20%;
 }
 
 .item-table th:nth-child(3),  /* Item Count column */
 .item-table td:nth-child(3) {
-    width: 16%; 
+    width: 18%; 
 }
 
 .item-table th:nth-child(4),  /* Total Value column */
 .item-table td:nth-child(4) {
-    width: 24%; 
+    width: 18%; 
 }
 
 
