@@ -254,11 +254,18 @@ class Item(models.Model):
     @property
     def market_price(self):
         if self.price_type == self.FIXED_PRICE:
-            # Calculate the fixed price using ItemFixedPriceComponent
-            total_fixed_price = sum(
-                component.quantity * component.denomination.diamond_equivalent
-                for component in self.price_components.all()
-            )
+            # Calculate the fixed price using all ItemFixedPriceComponents
+            total_fixed_price = Decimal('0')
+
+            for component in self.price_components.all():
+                if component.denomination:
+                    # If the component uses a denomination, multiply the quantity by the denomination's diamond equivalent
+                    total_fixed_price += component.quantity * component.denomination.diamond_equivalent
+                elif component.referenced_item:
+                    # If the component references another item, calculate the percentage of the referenced item's price
+                    referenced_item_price = component.referenced_item.total_diamond_value
+                    total_fixed_price += (component.percentage_of_item / Decimal('100')) * referenced_item_price
+
             return total_fixed_price
 
         elif self.price_type == self.MARKET_RATE:
@@ -269,7 +276,7 @@ class Item(models.Model):
 
             total_value = sum(evaluation.total_diamond_value for evaluation in evaluations)
             market_rate = total_value / evaluations.count()
-        
+
             # Round to 3 decimal places for market rate items
             return market_rate.quantize(Decimal('0.001'))
 
@@ -337,22 +344,39 @@ class ItemCount(models.Model):
 # --------------------------------------------------------------------
 class ItemFixedPriceComponent(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='price_components')
-    denomination = models.ForeignKey(Denomination, on_delete=models.CASCADE)
-    quantity = models.DecimalField(max_digits=20, decimal_places=8)
+    denomination = models.ForeignKey(Denomination, on_delete=models.CASCADE, null=True, blank=True)
+    quantity = models.DecimalField(max_digits=20, decimal_places=8, null=True, blank=True)
+    referenced_item = models.ForeignKey(Item, on_delete=models.CASCADE, null=True, blank=True, related_name='referenced_in_components')
+    percentage_of_item = models.DecimalField(max_digits=20, decimal_places=8, null=True, blank=True, help_text="Percentage of the referenced item's price to use (Ex: 50 = 50%)")
 
     class Meta:
-        # Ensure that an item can have only one fixed price component
-        unique_together = ('item',)
+        # Ensure that an item can have multiple price components but unique combinations of item, denomination, or referenced item
+        constraints = [
+            models.UniqueConstraint(fields=['item', 'denomination', 'referenced_item'], name='unique_price_component'),
+        ]
 
     def __str__(self):
-        return f'{self.quantity} x {self.denomination.name} for {self.item.name}'
+        if self.denomination:
+            return f'{self.quantity} x {self.denomination.name} for {self.item.name}'
+        elif self.referenced_item:
+            return f'{self.percentage_of_item}% of {self.referenced_item.name} for {self.item.name}'
+        return f'Component for {self.item.name}'
 
     def clean(self):
         # Ensure the item is a fixed price item
         if self.item.price_type != Item.FIXED_PRICE:
             raise ValidationError(f"Item '{self.item.name}' must be a fixed-price item to have a fixed price component.")
-    
+        
+        # Ensure that either denomination or referenced_item is provided, but not both
+        if not self.denomination and not self.referenced_item:
+            raise ValidationError("A price component must have either a denomination or a referenced item.")
+        if self.denomination and self.referenced_item:
+            raise ValidationError("A price component cannot have both a denomination and a referenced item.")
+
+        # Ensure that if referenced_item is provided, percentage_of_item must also be provided
+        if self.referenced_item and not self.percentage_of_item:
+            raise ValidationError("When using a referenced item, a percentage of that item’s price must be specified.")
+
     def save(self, *args, **kwargs):
-        # Call the clean method to perform the validation before saving
-        self.clean()
+        self.clean()  # Perform validation before saving
         super().save(*args, **kwargs)
