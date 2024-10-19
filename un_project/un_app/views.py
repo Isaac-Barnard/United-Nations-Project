@@ -53,6 +53,7 @@ def nation_balance_sheet(request, nation_abbreviation):
 
     # Calculate total value and market price for each item
     item_data = []
+    total_value_sum = Decimal('0')  # Initialize total value sum
     for item in all_items:
         item_name = item.name if item.name else "Unnamed Item"
         market_price = item.market_price if item.market_price else Decimal('0')
@@ -60,6 +61,9 @@ def nation_balance_sheet(request, nation_abbreviation):
         # Get the count for the item, defaulting to 0 if not present
         count = item_count_dict.get(item.id, 0)
         total_value = market_price * count
+        
+        # Accumulate the total value for summing
+        total_value_sum += total_value
 
         item_data.append({
             'name': item_name,
@@ -87,11 +91,12 @@ def nation_balance_sheet(request, nation_abbreviation):
         'nation': nation,
         'buildings': buildings,
         'partial_buildings': partial_buildings,
-        'items_part1': items_part1,  # First set of items
-        'items_part2': items_part2,  # Second set of items
-        'items_part3': items_part3,  # Third set of items
-        'items_part4': items_part4,  # Fourth set of items
-        'items_part5': items_part5,  # Fourth set of items
+        'items_part1': items_part1,
+        'items_part2': items_part2,
+        'items_part3': items_part3,
+        'items_part4': items_part4,
+        'items_part5': items_part5,
+        'total_value_sum': total_value_sum,  # Pass the total value sum to the template
     })
 
 
@@ -118,6 +123,7 @@ def company_balance_sheet(request, company_abbreviation):
 
     # Calculate total value and market price for each item
     item_data = []
+    total_value_sum = Decimal('0')  # Initialize total value sum
     for item in all_items:
         item_name = item.name if item.name else "Unnamed Item"
         market_price = item.market_price if item.market_price else Decimal('0')
@@ -125,6 +131,9 @@ def company_balance_sheet(request, company_abbreviation):
         # Get the count for the item, defaulting to 0 if not present
         count = item_count_dict.get(item.id, 0)
         total_value = market_price * count
+        
+        # Accumulate the total value for summing
+        total_value_sum += total_value
 
         item_data.append({
             'name': item_name,
@@ -157,6 +166,7 @@ def company_balance_sheet(request, company_abbreviation):
         'items_part3': items_part3,  # Third set of items
         'items_part4': items_part4,  # Fourth set of items
         'items_part5': items_part5,  # Fourth set of items
+        'total_value_sum': total_value_sum,  # Pass the total value sum to the template
     })
 
 

@@ -189,7 +189,13 @@
                 </tbody>
             </table>
         </div>
+        <!-- Add a row to display the sum of total values -->
+        <div class="total-value-sum">
+            <h3>Total Value of All Items: {{ total_value_sum|custom_decimal_places }}</h3>
+        </div>
     </div>
+
+    
 
 
     <div class="building-table" style="display: flex; justify-content: space-between;">
