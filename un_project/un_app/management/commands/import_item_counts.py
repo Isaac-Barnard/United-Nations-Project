@@ -39,7 +39,10 @@ class Command(BaseCommand):
                     )
 
                     action = "Added" if created else "Updated"
-                    self.stdout.write(self.style.SUCCESS(f"{action} item count: {item_count}"))
+                    if action == "Added":
+                        self.stdout.write(self.style.SUCCESS(f"{action} item count: {item_count}"))
+                    else:
+                        self.stdout.write(self.style.WARNING(f"{action} item count: {item_count}"))
 
                 except Item.DoesNotExist:
                     self.stdout.write(self.style.ERROR(f"Error: Item '{row['item']}' does not exist."))

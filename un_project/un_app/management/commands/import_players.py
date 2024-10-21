@@ -32,7 +32,7 @@ class Command(BaseCommand):
                     if created:
                         self.stdout.write(self.style.SUCCESS(f"Added new player: {player.username}"))
                     else:
-                        self.stdout.write(self.style.SUCCESS(f"Updated player: {player.username}"))
+                        self.stdout.write(self.style.WARNING(f"Updated player: {player.username}"))
 
                 except Nation.DoesNotExist:
                     self.stdout.write(self.style.ERROR(f"Error: Nation with abbreviation '{nation_abbreviation}' does not exist."))

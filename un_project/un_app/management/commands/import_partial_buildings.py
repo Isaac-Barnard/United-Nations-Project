@@ -45,7 +45,7 @@ class Command(BaseCommand):
                     if created:
                         self.stdout.write(self.style.SUCCESS(f"Added partial ownership: {row['partial_owner_abbreviation']} owns {row['percentage']}% of {building.name}"))
                     else:
-                        self.stdout.write(self.style.SUCCESS(f"Updated partial ownership: {row['partial_owner_abbreviation']} owns {row['percentage']}% of {building.name}"))
+                        self.stdout.write(self.style.WARNING(f"Updated partial ownership: {row['partial_owner_abbreviation']} owns {row['percentage']}% of {building.name}"))
 
                 except Building.DoesNotExist:
                     self.stdout.write(self.style.ERROR(f"Error: Building '{row['building_name']}' does not exist."))
