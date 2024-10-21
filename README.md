@@ -10,11 +10,8 @@ __Finance Document__
 https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwNyWo/edit?gid=1449818067#gid=1449818067
 
 
-
-
-
 ## Todo Roadmap
-**- Balance Sheets**
+- **Balance Sheets**
     - [ ] Add Total Value of Total Cash & Cash Equivalents
     - [ ] Add Total Value of buildings
     - [ ] Manually order liquid assets (maybe create asset model with ordering field like item)
@@ -31,13 +28,13 @@ https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwN
     - [ ] Create loan tables for companies
         - [ ] Morgages, loans, and add Total Debt Assets
     - [ ] Create shareholders table for companies (Shareholder, %, diamond equivalent [total assets * %])
-**- Evaluation Pages**
+- **Evaluation Pages**
     - [ ] Must be logged in to see evaluation pages
     - [ ] Make evaluation success better (Instead of taking you to a different page)
     - [ ] Change building/item evaluations to be more like google sheets (ie. other evaluators listed, etc…)
         - [ ] All buildings/items listed
         - [ ] Other evaluator's evaluations listed
-**- Misc.**
+- **Misc.**
     - [ ] Sort buildings
         - [ ] Sort by nation
         - [ ] Sort by territory
