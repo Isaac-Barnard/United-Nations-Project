@@ -62,6 +62,37 @@ class Denomination(models.Model):
         return self.name
     
 # --------------------------------------------------------------------
+class LiquidCount(models.Model):
+    nation = models.ForeignKey(Nation, on_delete=models.CASCADE, null=True, blank=True)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
+    asset_name = models.CharField(max_length=100)
+    denomination = models.ForeignKey(Denomination, on_delete=models.CASCADE)
+    count = models.DecimalField(max_digits=20, decimal_places=3)  # Allows for 2 decimal places
+
+    class Meta:
+        # Ensure the combination of nation/company and item is unique
+        constraints = [
+            models.UniqueConstraint(fields=['nation', 'asset_name'], name='unique_nation_asset'),
+            models.UniqueConstraint(fields=['company', 'asset_name'], name='unique_company_asset'),
+            models.UniqueConstraint(fields=['asset_name', 'denomination'], name='unique_asset_denomination'),
+            models.CheckConstraint(
+                check=(
+                    models.Q(nation__isnull=False, company__isnull=True) |
+                    models.Q(nation__isnull=True, company__isnull=False)
+                ),
+                name='nation_or_company_liquid_not_both'
+            )
+        ]
+
+    def __str__(self):
+        if self.nation:
+            return f'{self.denomination.name} - {self.nation.name} x {self.count} ({self.asset_name})'
+        elif self.company:
+            return f'{self.denomination.name} - {self.company.name} x {self.count} ({self.asset_name})'
+        return f'{self.denomination.name} x {self.count}'
+
+
+# --------------------------------------------------------------------
 #                           Buildings
 # --------------------------------------------------------------------
 class Building(models.Model):
