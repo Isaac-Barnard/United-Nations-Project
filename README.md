@@ -54,7 +54,7 @@ https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwN
             - [ ] Size of nation over time graph
                 - [ ] Total territories, Main tarritories, far colonies, near colonies
         - [ ] Building plot stuff
-            - Convert coordinates to x, inverse z and map it to  graph scatterplot
+            - [ ] Convert coordinates to x, inverse z and map it to  graph scatterplot
     - [ ] Currency converter (ex: convert 42 emeralds and 58 copper to diamonds)
     - [ ] Item price calculator (Select items, see the price of them)
     - [ ] Architectural Styles stuff
