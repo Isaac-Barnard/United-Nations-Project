@@ -471,8 +471,7 @@ QC,,Leather Boots,1
 QC,,Diamond Horse Armor,5
 QC,,Gold Horse Armor,1
 QC,,Iron Horse Armor,1
-QC,,Book,57
-QC,,Book & Quill,1
+QC,,Book,58
 QC,,Bookshelf,34
 QC,,Enchanted Book,35
 QC,,Gunpowder,67
@@ -706,7 +705,6 @@ BEL,,Cauldron,5
 BEL,,Anvil,6
 BEL,,Ender Chest,17
 BEL,,Sculk Sensor,10
-BEL,,Calibrated Sculk Sensor,
 BEL,,Sculk Shrieker,4
 BEL,,Sculk Catalyst,4
 BEL,,Torch,778
@@ -765,8 +763,7 @@ CDS,,Iron Leggings,5
 CDS,,Iron Boots,5
 CDS,,Leather Boots,2
 CDS,,Gold Horse Armor,1
-CDS,,Book,26
-CDS,,Book & Quill,2
+CDS,,Book,28
 CDS,,Enchanted Book,1
 CDS,,Gunpowder,14
 CDS,,Fireworks,284
