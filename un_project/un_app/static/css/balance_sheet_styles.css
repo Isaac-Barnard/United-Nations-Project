@@ -4,6 +4,10 @@ table {
     width: 100%;               /* Ensure the table takes up the full width */
 }
 
+.right-align {
+    text-align: right;
+}
+
 /* Remove the margin below the h2 element for item tables */
 h2.items-heading {
     margin-bottom: 0;
@@ -85,4 +89,58 @@ td.building-name {
 .building-table th:nth-child(3), /* market rate column */
 .building-table td:nth-child(3) {
     width: 15%; 
+}
+
+
+
+____
+/* Styles specifically for item tables */
+.liquid-table table {
+    font-size: .9em;            /* Set a standard font size for item tables */
+    text-align: right;
+}
+
+.liquid-table th:nth-child(1),  /* Asset Name column */
+.liquid-table td:nth-child(1) {
+    width: 20%;                /* Allocate more space to item name */
+}
+.liquid-table th:nth-child(2),  /* total Value column */
+.itliquidem-table td:nth-child(2) {
+    width: 7%;
+}
+.liquid-table th:nth-child(3),  /* Netherite Value column */
+.itliquidem-table td:nth-child(3) {
+    width: 7%;
+}
+.liquid-table th:nth-child(4),  /* Diamond Count column */
+.liquid-table td:nth-child(4) {
+    width: 7%; 
+}
+.liquid-table th:nth-child(5),  /* Gold Value column */
+.liquid-table td:nth-child(5) {
+    width: 7%; 
+}
+.liquid-table th:nth-child(6),  /* Emerald Value column */
+.liquid-table td:nth-child(6) {
+    width: 7%; 
+}
+.liquid-table th:nth-child(7),  /* Iron Value column */
+.liquid-table td:nth-child(7) {
+    width: 7%; 
+}
+.liquid-table th:nth-child(8),  /* Copper Value column */
+.liquid-table td:nth-child(8) {
+    width: 7%; 
+}
+.liquid-table th:nth-child(9),  /* Redstone Value column */
+.liquid-table td:nth-child(9) {
+    width: 7%; 
+}
+.liquid-table th:nth-child(10),  /* Lapis Value column */
+.liquid-table td:nth-child(10) {
+    width: 7%; 
+}
+.liquid-table th:nth-child(11),  /* Coal Value column */
+.liquid-table td:nth-child(11) {
+    width: 7%; 
 }

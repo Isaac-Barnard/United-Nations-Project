@@ -3,7 +3,7 @@ from django.db.models import F, FloatField, ExpressionWrapper, Count, Value, Sum
 from django.db.models.functions import Coalesce
 from django.contrib.auth.decorators import login_required
 from .forms import BuildingEvaluationForm, ItemEvaluationForm
-from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount, ItemEvaluationComponent, ItemEvaluation, Item, Company
+from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount, ItemEvaluationComponent, ItemEvaluation, Item, Company, LiquidCount
 from decimal import Decimal
 
 def home(request):
@@ -33,7 +33,7 @@ def player_list(request):
 def nation_balance_sheet(request, nation_abbreviation):
     # Get the nation by its abbreviation
     nation = get_object_or_404(Nation, abbreviation=nation_abbreviation)
-    
+    denominations = Denomination.objects.all()
     # Fetch all buildings owned by the nation
     buildings = Building.objects.filter(owner=nation)
     
@@ -50,6 +50,31 @@ def nation_balance_sheet(request, nation_abbreviation):
 
     # Create a dictionary to store counts for each item
     item_count_dict = {item_count.item_id: item_count.count for item_count in items_with_count}
+
+    # Fetch the liquid assets for the nation
+    liquid_assets = LiquidCount.objects.filter(nation=nation).order_by('asset_name', 'denomination')
+
+   # Create a dictionary to store liquid asset counts for each asset name
+    liquid_asset_data = {}
+    for asset in liquid_assets.values('asset_name').distinct():
+        asset_name = asset['asset_name']
+        asset_counts = []
+        total_in_diamonds = Decimal('0')  # Initialize the total value in diamonds
+        for denomination in denominations:
+            # Try to get the count for the denomination; default to 0 if none exists
+            count = liquid_assets.filter(asset_name=asset_name, denomination=denomination).first()
+            count_value = count.count if count else 0
+            asset_counts.append(count_value)
+
+            # Calculate the diamond equivalent
+            diamond_value = count_value * denomination.diamond_equivalent
+            total_in_diamonds += diamond_value
+
+        liquid_asset_data[asset_name] = {
+            'counts': asset_counts,
+            'total_in_diamonds': total_in_diamonds  # Store the total in diamonds
+        }
+
 
     # Calculate total value and market price for each item
     item_data = []
@@ -96,7 +121,9 @@ def nation_balance_sheet(request, nation_abbreviation):
         'items_part3': items_part3,
         'items_part4': items_part4,
         'items_part5': items_part5,
-        'total_value_sum': total_value_sum,  # Pass the total value sum to the template
+        'total_value_sum': total_value_sum,
+        'denominations': denominations,
+        'liquid_asset_data': liquid_asset_data,
     })
 
 

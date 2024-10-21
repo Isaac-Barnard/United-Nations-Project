@@ -14,6 +14,31 @@
 {% block content %}
     <h1>{{ nation.name }} ({{ nation.abbreviation }}) Balance Sheet</h1>
 
+    <h2 class="liquid-heading">Liquid Assets</h2>
+
+    <table class="liquid-table">
+        <thead>
+            <tr style="font-size: .95em;">
+                <th>Asset Name</th>
+                <th>Total in Diamonds</th>
+                {% for denomination in denominations %}
+                    <th>{{ denomination.name }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody style="font-size: .95em;">
+            {% for asset_name, data in liquid_asset_data.items %}
+            <tr style="font-size: .95em;">
+                <td>{{ asset_name }}</td>
+                <td class="right-align">{{ data.total_in_diamonds|custom_decimal_places }}</td>
+                {% for count in data.counts %}
+                <td class="right-align">{{ count|stringformat:"g" }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
     <h2 class="items-heading">Owned Items</h2>
     
     <!-- Display Item Information in three Tables Side by Side -->
@@ -38,9 +63,9 @@
                         {% else %}
                             <tr style="font-size: 0.9em;">
                                 <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
-                                <td>{{ item.total_value|custom_decimal_places }}</td>
-                                <td>{{ item.market_price|custom_decimal_places }}</td>
-                                <td>{{ item.count|stringformat:"g" }}</td>
+                                <td class="right-align">{{ item.total_value|custom_decimal_places }}</td>
+                                <td class="right-align">{{ item.market_price|custom_decimal_places }}</td>
+                                <td class="right-align">{{ item.count|stringformat:"g" }}</td>
                             </tr>
                         {% endif %}
                     {% empty %}
@@ -72,9 +97,9 @@
                         {% else %}
                             <tr style="font-size: 0.9em;">
                                 <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
-                                <td>{{ item.total_value|custom_decimal_places }}</td>
-                                <td>{{ item.market_price|custom_decimal_places }}</td>
-                                <td>{{ item.count|stringformat:"g" }}</td>
+                                <td class="right-align">{{ item.total_value|custom_decimal_places }}</td>
+                                <td class="right-align">{{ item.market_price|custom_decimal_places }}</td>
+                                <td class="right-align">{{ item.count|stringformat:"g" }}</td>
                             </tr>
                         {% endif %}
                     {% empty %}
@@ -107,9 +132,9 @@
                 {% else %}
                     <tr style="font-size: 0.9em;">
                         <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
-                        <td>{{ item.total_value|custom_decimal_places }}</td>
-                        <td>{{ item.market_price|custom_decimal_places }}</td>
-                        <td>{{ item.count|stringformat:"g" }}</td>
+                        <td class="right-align">{{ item.total_value|custom_decimal_places }}</td>
+                        <td class="right-align">{{ item.market_price|custom_decimal_places }}</td>
+                        <td class="right-align">{{ item.count|stringformat:"g" }}</td>
                     </tr>
                 {% endif %}
                     {% empty %}
@@ -142,9 +167,9 @@
                 {% else %}
                     <tr style="font-size: 0.9em;">
                         <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
-                        <td>{{ item.total_value|custom_decimal_places }}</td>
-                        <td>{{ item.market_price|custom_decimal_places }}</td>
-                        <td>{{ item.count|stringformat:"g" }}</td>
+                        <td class="right-align">{{ item.total_value|custom_decimal_places }}</td>
+                        <td class="right-align">{{ item.market_price|custom_decimal_places }}</td>
+                        <td class="right-align">{{ item.count|stringformat:"g" }}</td>
                     </tr>
                 {% endif %}
                     {% empty %}
@@ -176,9 +201,9 @@
                 {% else %}
                     <tr style="font-size: 0.9em;">
                         <td class="item-name"> {{ item.name }} {{ item.new_ordering }}</td>
-                        <td>{{ item.total_value|custom_decimal_places }}</td>
-                        <td>{{ item.market_price|custom_decimal_places }}</td>
-                        <td>{{ item.count|stringformat:"g" }}</td>
+                        <td class="right-align">{{ item.total_value|custom_decimal_places }}</td>
+                        <td class="right-align">{{ item.market_price|custom_decimal_places }}</td>
+                        <td class="right-align">{{ item.count|stringformat:"g" }}</td>
                     </tr>
                 {% endif %}
                     {% empty %}
@@ -189,6 +214,7 @@
                 </tbody>
             </table>
         </div>
+        
         <!-- Add a row to display the sum of total values -->
         <div class="total-value-sum">
             <h3>Total Value of All Items: {{ total_value_sum|custom_decimal_places }}</h3>
@@ -204,7 +230,7 @@
             <h2>Owned Buildings</h2>
             <table>
                 <thead>
-                    <tr>
+                    <tr style="font-size: 0.95em;">
                         <th>Building Name</th>
                         <th>Ownership</th>
                         <th>Market Value</th>
@@ -212,7 +238,7 @@
                 </thead>
                 <tbody>
                     {% for building in buildings %}
-                        <tr>
+                        <tr style="font-size: 0.95em;">
                             <td class="building-name">{{ building.name }}</td>
                             <td>{{ building.adjusted_ownership }}%</td>
                             <td>{{ building.adjusted_ownership_price|custom_decimal_places }}</td>
@@ -227,7 +253,7 @@
             <h2>Partially Owned Buildings</h2>
             <table>
                 <thead>
-                    <tr>
+                    <tr style="font-size: 0.95em;">
                         <th>Building Name</th>
                         <th>Ownership</th>
                         <th>Market Value</th>
@@ -235,7 +261,7 @@
                 </thead>
                 <tbody>
                     {% for building in partial_buildings %}
-                        <tr>
+                        <tr style="font-size: 0.95em;">
                             <td class="building-name">{{ building.name }}</td>
                             <td>{{ building.ownership }}%</td>
                             <td>{{ building.adjusted_ownership_price|custom_decimal_places }}</td>
