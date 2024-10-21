@@ -14,6 +14,31 @@
 {% block content %}
     <h1>{{ company.name }} ({{ company.abbreviation }}) Balance Sheet</h1>
 
+    <h2 class="liquid-heading">Liquid Assets</h2>
+
+    <table class="liquid-table">
+        <thead>
+            <tr style="font-size: .95em;">
+                <th>Asset Name</th>
+                <th>Total in Diamonds</th>
+                {% for denomination in denominations %}
+                    <th>{{ denomination.name }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody style="font-size: .95em;">
+            {% for asset_name, data in liquid_asset_data.items %}
+            <tr style="font-size: .95em;">
+                <td>{{ asset_name }}</td>
+                <td class="right-align">{{ data.total_in_diamonds|custom_decimal_places }}</td>
+                {% for count in data.counts %}
+                <td class="right-align">{{ count|stringformat:"g" }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
     <h2 class="items-heading">Owned Items</h2>
     
     <!-- Display Item Information in three Tables Side by Side -->

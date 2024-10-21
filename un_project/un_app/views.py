@@ -130,6 +130,7 @@ def nation_balance_sheet(request, nation_abbreviation):
 def company_balance_sheet(request, company_abbreviation):
     # Get the company by its abbreviation
     company = get_object_or_404(Company, abbreviation=company_abbreviation)
+    denominations = Denomination.objects.all()
     
     # Fetch all buildings owned by the company
     #buildings = Building.objects.filter(owner=company)
@@ -147,6 +148,30 @@ def company_balance_sheet(request, company_abbreviation):
 
     # Create a dictionary to store counts for each item
     item_count_dict = {item_count.item_id: item_count.count for item_count in items_with_count}
+
+    # Fetch the liquid assets for the company
+    liquid_assets = LiquidCount.objects.filter(company=company).order_by('asset_name', 'denomination')
+
+    # Create a dictionary to store liquid asset counts for each asset name
+    liquid_asset_data = {}
+    for asset in liquid_assets.values('asset_name').distinct():
+        asset_name = asset['asset_name']
+        asset_counts = []
+        total_in_diamonds = Decimal('0')  # Initialize the total value in diamonds
+        for denomination in denominations:
+            # Try to get the count for the denomination; default to 0 if none exists
+            count = liquid_assets.filter(asset_name=asset_name, denomination=denomination).first()
+            count_value = count.count if count else 0
+            asset_counts.append(count_value)
+
+            # Calculate the diamond equivalent
+            diamond_value = count_value * denomination.diamond_equivalent
+            total_in_diamonds += diamond_value
+
+        liquid_asset_data[asset_name] = {
+            'counts': asset_counts,
+            'total_in_diamonds': total_in_diamonds  # Store the total in diamonds
+        }
 
     # Calculate total value and market price for each item
     item_data = []
@@ -194,6 +219,8 @@ def company_balance_sheet(request, company_abbreviation):
         'items_part4': items_part4,  # Fourth set of items
         'items_part5': items_part5,  # Fourth set of items
         'total_value_sum': total_value_sum,  # Pass the total value sum to the template
+        'denominations': denominations,
+        'liquid_asset_data': liquid_asset_data,
     })
 
 
