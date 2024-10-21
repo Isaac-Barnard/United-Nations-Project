@@ -1,0 +1,329 @@
+nation,company,asset_name,denomination,count
+UN,,Treasury Chest,Diamond,68
+UN,,Treasury Chest,Gold Ingot,57.888
+UN,,Treasury Chest,Emerald,183
+UN,,Treasury Chest,Iron Ingot,1131
+UN,,Treasury Chest,Copper Ingot,690
+UN,,Treasury Chest,Redstone Dust,186
+UN,,Treasury Chest,Lapis Lazuli,584
+UN,,Treasury Chest,Coal,603
+UN,,Far Colonies Storages,Gold Ingot,1
+UN,,Far Colonies Storages,Iron Ingot,58
+UN,,Far Colonies Storages,Copper Ingot,12076
+UN,,Far Colonies Storages,Redstone Dust,33
+UN,,Far Colonies Storages,Lapis Lazuli,1087
+UN,,Far Colonies Storages,Coal,13
+NOI,,Central NOI Treasury,Netherite Ingot,14
+NOI,,Central NOI Treasury,Diamond,1609
+NOI,,Central NOI Treasury,Gold Ingot,1736
+NOI,,Central NOI Treasury,Emerald,1213
+NOI,,Central NOI Treasury,Iron Ingot,1339
+NOI,,Central NOI Treasury,Copper Ingot,765
+NOI,,Central NOI Treasury,Redstone Dust,1881
+NOI,,Central NOI Treasury,Lapis Lazuli,1584
+NOI,,Central NOI Treasury,Coal,396
+NOI,,NOI Treasury,Diamond,2
+NOI,,NOI Treasury,Gold Ingot,1152
+NOI,,NOI Treasury,Emerald,1728
+NOI,,NOI Treasury,Iron Ingot,6336
+NOI,,NOI Treasury,Copper Ingot,5688
+NOI,,NOI Treasury,Redstone Dust,16128
+NOI,,NOI Treasury,Lapis Lazuli,5760
+NOI,,NOI Treasury,Coal,2880
+NOI,,Various Beacons,Iron Ingot,2952
+NOI,,Jesus' Storages,Diamond,8
+NOI,,Jesus' Storages,Gold Ingot,52
+NOI,,Jesus' Storages,Emerald,5
+NOI,,Jesus' Storages,Iron Ingot,177
+NOI,,Jesus' Storages,Redstone Dust,159
+NOI,,Jesus' Storages,Lapis Lazuli,36
+NOI,,Jesus' Storages,Coal,236
+NOI,,Crusty Storages,Iron Ingot,32
+NOI,,Crusty Storages,Copper Ingot,174
+NOI,,Crusty Storages,Coal,116
+NOI,,Misc. Storages,Gold Ingot,87
+NOI,,Misc. Storages,Emerald,3
+NOI,,Misc. Storages,Iron Ingot,549.777
+NOI,,Misc. Storages,Copper Ingot,368
+NOI,,Misc. Storages,Redstone Dust,185
+NOI,,Misc. Storages,Lapis Lazuli,353
+NOI,,Misc. Storages,Coal,423
+EOMR,,Treasury,Netherite Ingot,11
+EOMR,,Treasury,Diamond,276
+EOMR,,Treasury,Gold Ingot,2541.777
+EOMR,,Treasury,Emerald,25
+EOMR,,Treasury,Iron Ingot,1417
+EOMR,,Treasury,Copper Ingot,2036
+EOMR,,Treasury,Redstone Dust,165
+EOMR,,Treasury,Lapis Lazuli,946
+EOMR,,Treasury,Coal,1264
+EOMR,,Reid Plains Storages,Gold Ingot,17
+EOMR,,Reid Plains Storages,Emerald,1
+EOMR,,Reid Plains Storages,Iron Ingot,112.111
+EOMR,,Reid Plains Storages,Copper Ingot,32
+EOMR,,Reid Plains Storages,Redstone Dust,7
+EOMR,,Reid Plains Storages,Lapis Lazuli,709
+EOMR,,Reid Plains Storages,Coal,1114
+EOMR,,Northmost Lake Aternos Storages,Gold Ingot,0.111
+EOMR,,Northmost Lake Aternos Storages,Emerald,1
+EOMR,,Northmost Lake Aternos Storages,Redstone Dust,99
+EOMR,,Northmost Lake Aternos Storages,Lapis Lazuli,77
+EOMR,,Northmost Lake Aternos Storages,Coal,45
+EOMR,,Far Colonies Storages,Iron Ingot,40
+EOMR,,Far Colonies Storages,Redstone Dust,94
+EOMR,,Far Colonies Storages,Coal,17
+EOMR,,Far East District Storages,Redstone Dust,128
+EOMR,,Far East District Storages,Coal,88
+EOMR,,Bozeman Storages,Diamond,6
+EOMR,,Bozeman Storages,Gold Ingot,55.555
+EOMR,,Bozeman Storages,Iron Ingot,220
+EOMR,,Bozeman Storages,Redstone Dust,1062
+EOMR,,Bozeman Storages,Lapis Lazuli,276
+EOMR,,Bozeman Storages,Coal,233
+EOMR,,New Reid City Storages,Diamond,9
+EOMR,,New Reid City Storages,Gold Ingot,26.555
+EOMR,,New Reid City Storages,Emerald,1
+EOMR,,New Reid City Storages,Iron Ingot,741
+EOMR,,New Reid City Storages,Copper Ingot,2813
+EOMR,,New Reid City Storages,Redstone Dust,9
+EOMR,,New Reid City Storages,Coal,468
+EOMR,,Old Belize Storages,Diamond,11
+EOMR,,Old Belize Storages,Gold Ingot,0.666
+EOMR,,Old Belize Storages,Iron Ingot,143
+EOMR,,Old Belize Storages,Copper Ingot,3894
+EOMR,,Old Belize Storages,Redstone Dust,75
+EOMR,,Old Belize Storages,Lapis Lazuli,33
+EOMR,,Old Belize Storages,Coal,47
+EOMR,,Reid Vegas Storages,Gold Ingot,2.555
+EOMR,,Reid Vegas Storages,Iron Ingot,10
+EOMR,,Reid Vegas Storages,Copper Ingot,1
+EOMR,,Reid Vegas Storages,Redstone Dust,2724
+EOMR,,Reid Vegas Storages,Lapis Lazuli,6
+EOMR,,Reid Vegas Storages,Coal,17
+EOMR,,Beacons,Iron Ingot,1476
+EOMR,,Misc. Storages,Iron Ingot,3
+EOMR,,Misc. Storages,Redstone Dust,76
+EOMR,,Misc. Storages,Coal,69
+EOMR,,TheArmchair Assets,Diamond,68
+EOMR,,TheArmchair Assets,Gold Ingot,42
+EOMR,,TheArmchair Assets,Emerald,36
+EOMR,,TheArmchair Assets,Iron Ingot,504
+EOMR,,TheArmchair Assets,Copper Ingot,805
+EOMR,,TheArmchair Assets,Redstone Dust,873
+EOMR,,TheArmchair Assets,Lapis Lazuli,576
+EOMR,,TheArmchair Assets,Coal,1422
+EOMR,,Awesome_Hippy Assets,Iron Ingot,2.111
+EOMR,,Awesome_Hippy Assets,Lapis Lazuli,20
+EOMR,,BingusIsSoCool Assets,Emerald,2
+EOMR,,Fr0zenGh0ul Assets,Diamond,263
+EOMR,,Fr0zenGh0ul Assets,Gold Ingot,315
+EOMR,,Fr0zenGh0ul Assets,Emerald,2
+EOMR,,Fr0zenGh0ul Assets,Iron Ingot,149
+EOMR,,Fr0zenGh0ul Assets,Copper Ingot,1104
+EOMR,,Fr0zenGh0ul Assets,Redstone Dust,16
+EOMR,,Fr0zenGh0ul Assets,Lapis Lazuli,59
+EOMR,,Fr0zenGh0ul Assets,Coal,1
+EOMR,,Triton1037 Assets,Diamond,31
+EOMR,,Triton1037 Assets,Gold Ingot,94
+EOMR,,Triton1037 Assets,Iron Ingot,72
+EOMR,,Triton1037 Assets,Copper Ingot,51
+EOMR,,Triton1037 Assets,Redstone Dust,19
+EOMR,,Triton1037 Assets,Lapis Lazuli,76
+EOMR,,Triton1037 Assets,Coal,85
+EOMR,,UdLickThat Assets,Iron Ingot,1
+EOMR,,UdLickThat Assets,Coal,371
+EOMR,,WTFNash Assets,Iron Ingot,4
+EOMR,,HAZ6R Assets,Coal,64
+NEL,,Central Nelsonia Treasury,Netherite Ingot,17.000
+NEL,,Central Nelsonia Treasury,Diamond,1236
+NEL,,Central Nelsonia Treasury,Gold Ingot,2060
+NEL,,Central Nelsonia Treasury,Emerald,2424
+NEL,,Central Nelsonia Treasury,Iron Ingot,779
+NEL,,Central Nelsonia Treasury,Copper Ingot,10
+NEL,,Central Nelsonia Treasury,Redstone Dust,469
+NEL,,Central Nelsonia Treasury,Lapis Lazuli,125
+NEL,,Storage System Storages,Diamond,5
+NEL,,Storage System Storages,Gold Ingot,57
+NEL,,Storage System Storages,Emerald,6
+NEL,,Storage System Storages,Iron Ingot,154.444
+NEL,,Storage System Storages,Copper Ingot,68
+NEL,,Storage System Storages,Redstone Dust,3291
+NEL,,Storage System Storages,Lapis Lazuli,1447
+NEL,,Storage System Storages,Coal,410
+NEL,,Storage System Door,Diamond,108
+NEL,,Mining House,Diamond,15
+NEL,,Mining House,Iron Ingot,75
+NEL,,Mining House,Redstone Dust,73
+NEL,,Mining House,Lapis Lazuli,1
+NEL,,Mining House,Coal,198
+NEL,,AJ Storages,Gold Ingot,3.444
+NEL,,AJ Storages,Emerald,47
+NEL,,AJ Storages,Iron Ingot,11
+NEL,,AJ Storages,Redstone Dust,32
+NEL,,AJ Storages,Coal,42
+NEL,,Mining Beacon,Emerald,1557
+NEL,,Colonies Storages,Gold Ingot,1
+NEL,,Colonies Storages,Coal,37
+NEL,,Misc. Storages,Gold Ingot,0.555
+NEL,,Misc. Storages,Iron Ingot,2.222
+NEL,,Misc. Storages,Redstone Dust,14
+NEL,,Misc. Storages,Coal,141
+QC,,Central Treasury,Netherite Ingot,5
+QC,,Central Treasury,Diamond,494
+QC,,Central Treasury,Gold Ingot,1025
+QC,,Central Treasury,Emerald,1003
+QC,,Central Treasury,Iron Ingot,1528
+QC,,Central Treasury,Copper Ingot,467
+QC,,Central Treasury,Redstone Dust,5585
+QC,,Central Treasury,Lapis Lazuli,2220
+QC,,Central Treasury,Coal,1435
+QC,,House Storages,Gold Ingot,6.111
+QC,,House Storages,Emerald,9
+QC,,House Storages,Iron Ingot,14
+QC,,House Storages,Copper Ingot,10
+QC,,House Storages,Redstone Dust,67
+QC,,House Storages,Lapis Lazuli,22
+QC,,House Storages,Coal,44
+QC,,Far Colonies Storages,Iron Ingot,4
+QC,,Far Colonies Storages,Copper Ingot,64
+QC,,Far Colonies Storages,Lapis Lazuli,3
+QC,,Far Colonies Storages,Coal,65
+QC,,Beacon Pyramid,Iron Ingot,1476
+QC,,Misc. Storages,Gold Ingot,126.111
+QC,,Misc. Storages,Emerald,9
+QC,,Misc. Storages,Iron Ingot,282
+QC,,Misc. Storages,Copper Ingot,329
+QC,,Misc. Storages,Redstone Dust,32
+QC,,Misc. Storages,Lapis Lazuli,92
+QC,,Misc. Storages,Coal,208
+IOK,,Central Treasury,Diamond,31
+IOK,,Central Treasury,Emerald,5
+IOK,,Central Treasury,Redstone Dust,65
+IOK,,Central Treasury,Lapis Lazuli,128
+IOK,,Treasury,Gold Ingot,116
+IOK,,Treasury,Iron Ingot,201.666
+IOK,,Treasury,Copper Ingot,10
+IOK,,Treasury,Redstone Dust,181
+IOK,,Treasury,Lapis Lazuli,113
+IOK,,Misc. Storages,Gold Ingot,18
+IOK,,Misc. Storages,Iron Ingot,45
+IOK,,Misc. Storages,Copper Ingot,6
+IOK,,Misc. Storages,Redstone Dust,17
+IOK,,Misc. Storages,Lapis Lazuli,32
+IOK,,Misc. Storages,Coal,80
+BEL,,Treasury,Gold Ingot,1
+BEL,,Treasury,Iron Ingot,176
+BEL,,Treasury,Copper Ingot,1261
+BEL,,Treasury,Redstone Dust,17
+BEL,,Treasury,Lapis Lazuli,1220
+BEL,,Treasury,Coal,10
+BEL,,Mainland Storages,Diamond,1
+BEL,,Mainland Storages,Gold Ingot,0.555
+BEL,,Mainland Storages,Iron Ingot,78.555
+BEL,,Mainland Storages,Copper Ingot,522
+BEL,,Mainland Storages,Lapis Lazuli,15
+BEL,,Mainland Storages,Coal,197
+BEL,,Beacon Pyramids,Iron Ingot,7380
+BEL,,Mining Storages,Gold Ingot,31
+BEL,,Mining Storages,Iron Ingot,385
+BEL,,Mining Storages,Copper Ingot,916
+BEL,,Mining Storages,Redstone Dust,10
+BEL,,Mining Storages,Lapis Lazuli,200
+BEL,,Mining Storages,Coal,371
+BEL,,Hole Storages,Gold Ingot,0.444
+BEL,,Hole Storages,Emerald,60
+BEL,,Hole Storages,Iron Ingot,1037.888
+BEL,,Hole Storages,Coal,64
+BEL,,Lulu Storages,Gold Ingot,19.111
+BEL,,Lulu Storages,Emerald,640
+BEL,,Lulu Storages,Iron Ingot,33.111
+BEL,,Lulu Storages,Copper Ingot,1
+BEL,,Lulu Storages,Coal,101
+BEL,,Misc. Storages,Iron Ingot,323
+BEL,,Misc. Storages,Copper Ingot,572
+BEL,,Misc. Storages,Redstone Dust,30
+BEL,,Misc. Storages,Lapis Lazuli,14
+BEL,,Misc. Storages,Coal,892
+BEL,,YerLoss Assets,Netherite Ingot,1
+BEL,,YerLoss Assets,Diamond,903
+BEL,,YerLoss Assets,Gold Ingot,217.444
+BEL,,YerLoss Assets,Emerald,398
+BEL,,YerLoss Assets,Iron Ingot,14437
+BEL,,YerLoss Assets,Copper Ingot,71
+BEL,,YerLoss Assets,Redstone Dust,17
+BEL,,YerLoss Assets,Lapis Lazuli,1160
+BEL,,YerLoss Assets,Coal,802
+BEL,,Kazeroni Assets,Diamond,14
+BEL,,Kazeroni Assets,Gold Ingot,4
+BEL,,Kazeroni Assets,Emerald,350
+BEL,,Kazeroni Assets,Iron Ingot,2880
+BEL,,Kazeroni Assets,Redstone Dust,342
+BEL,,Kazeroni Assets,Lapis Lazuli,112
+BEL,,Kazeroni Assets,Coal,46
+BEL,,Aakinator Assets,Netherite Ingot,2
+BEL,,Aakinator Assets,Diamond,528
+BEL,,Aakinator Assets,Gold Ingot,368.111
+BEL,,Aakinator Assets,Emerald,11
+BEL,,Aakinator Assets,Iron Ingot,257.666
+BEL,,Aakinator Assets,Redstone Dust,54
+BEL,,Aakinator Assets,Lapis Lazuli,91
+BEL,,Aakinator Assets,Coal,103
+BEL,,zVulgerz Assets,Diamond,125
+BEL,,zVulgerz Assets,Gold Ingot,0.111
+BEL,,zVulgerz Assets,Emerald,13
+BEL,,zVulgerz Assets,Iron Ingot,1545.555
+BEL,,zVulgerz Assets,Redstone Dust,843
+BEL,,zVulgerz Assets,Lapis Lazuli,2674
+BEL,,zVulgerz Assets,Coal,541
+BEL,,LuluLikeThat Assets,Netherite Ingot,11
+BEL,,LuluLikeThat Assets,Diamond,128
+BEL,,LuluLikeThat Assets,Gold Ingot,455
+BEL,,LuluLikeThat Assets,Emerald,75
+BEL,,LuluLikeThat Assets,Iron Ingot,30
+BEL,,LuluLikeThat Assets,Redstone Dust,2151
+BEL,,LuluLikeThat Assets,Lapis Lazuli,1143
+BEL,,LuluLikeThat Assets,Coal,261
+CDS,,Central Treasury,Diamond,47
+CDS,,Central Treasury,Gold Ingot,101
+CDS,,Central Treasury,Emerald,6
+CDS,,Central Treasury,Iron Ingot,508
+CDS,,Central Treasury,Redstone Dust,915
+CDS,,Central Treasury,Coal,455
+CDS,,Misc. Storages,Iron Ingot,2.444
+CDS,,Misc. Storages,Copper Ingot,68
+CDS,,Misc. Storages,Redstone Dust,92
+CDS,,Misc. Storages,Coal,220
+CDS,,Dinav Assets,Diamond,14
+CDS,,Dinav Assets,Gold Ingot,34
+CDS,,Dinav Assets,Emerald,18
+CDS,,Dinav Assets,Iron Ingot,64
+CDS,,Dinav Assets,Redstone Dust,64
+CDS,,Dinav Assets,Lapis Lazuli,31
+CDS,,Vullby Assets,Diamond,1
+CDS,,Vullby Assets,Emerald,1
+CDS,,Vullby Assets,Iron Ingot,3
+CDS,,Vullby Assets,Redstone Dust,20
+CDS,,Vullby Assets,Coal,9
+CDS,,MCMasterNathan Assets,Diamond,87
+CDS,,MCMasterNathan Assets,Gold Ingot,77
+CDS,,MCMasterNathan Assets,Emerald,34
+CDS,,MCMasterNathan Assets,Iron Ingot,255.555
+CDS,,MCMasterNathan Assets,Redstone Dust,734
+CDS,,MCMasterNathan Assets,Lapis Lazuli,523
+CDS,,MCMasterNathan Assets,Coal,686
+CRP,,Treasury,Redstone Dust,7
+CRP,,Treasury,Lapis Lazuli,128
+CRP,,Central Treasury,Diamond,355
+CRP,,Central Treasury,Emerald,28
+CRP,,Central Treasury,Coal,456
+CRP,,Misc. Storages,Iron Ingot,3.333
+CRP,,Misc. Storages,Lapis Lazuli,76
+,2OMR,Central Treasury,Diamond,7
+,II,Central Treasury,Diamond,2
+,II,Central Treasury,Gold Ingot,109
+,II,Central Treasury,Emerald,6
+,II,Central Treasury,Iron Ingot,2971
+,II,Central Treasury,Copper Ingot,3418
+,II,Central Treasury,Redstone Dust,198
+,II,Central Treasury,Lapis Lazuli,36
+,II,Central Treasury,Coal,333

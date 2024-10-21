@@ -72,9 +72,9 @@ class LiquidCount(models.Model):
     class Meta:
         # Ensure the combination of nation/company and item is unique
         constraints = [
-            models.UniqueConstraint(fields=['nation', 'asset_name'], name='unique_nation_asset'),
-            models.UniqueConstraint(fields=['company', 'asset_name'], name='unique_company_asset'),
-            models.UniqueConstraint(fields=['asset_name', 'denomination'], name='unique_asset_denomination'),
+            models.UniqueConstraint(fields=['nation', 'asset_name', 'denomination'], name='unique_nation_asset_denomination'),
+            models.UniqueConstraint(fields=['company', 'asset_name', 'denomination'], name='unique_company_asset'),
+            #models.UniqueConstraint(fields=['asset_name', 'denomination'], name='unique_asset_denomination'),
             models.CheckConstraint(
                 check=(
                     models.Q(nation__isnull=False, company__isnull=True) |
