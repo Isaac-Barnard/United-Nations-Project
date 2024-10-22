@@ -17,6 +17,10 @@ body {
     flex-grow: 1;
 }
 
+.right-align {
+    text-align: right;
+}
+
 
 main {
     padding: 2rem;
@@ -70,6 +74,7 @@ main {
 table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 0.95rem;
 }
 
 table, th, td {
@@ -79,6 +84,7 @@ table, th, td {
 th, td {
     padding: 10px;
     text-align: left;
+    font-size: 0.95rem;
 }
 
 

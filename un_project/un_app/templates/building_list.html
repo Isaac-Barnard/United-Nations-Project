@@ -10,6 +10,7 @@
     <table>
         <thead>
             <tr>
+                <th>Rank</th>
                 <th>Name</th>
                 <th>Territory</th>
                 <th>Owner</th>
@@ -28,6 +29,7 @@
             {% if buildings %}
                 {% for building in buildings %}
                 <tr>
+                    <td class="right-align">{{ building.rank }}</td>
                     <td>{{ building.name }}</td>
                     <td>{{ building.territory.name }}</td>
                     <td>{{ building.owner.abbreviation }}</td>
@@ -36,7 +38,7 @@
                             {{ builder.username }}{% if not forloop.last %}, {% endif %}
                         {% endfor %}
                     </td>
-                    <td>{{ building.year_completed }}</td>
+                    <td class="right-align">{{ building.year_completed }}</td>
                     <td>
                         {% if building.completed %}
                             <!-- Leave blank if true -->
@@ -44,7 +46,7 @@
                             False
                         {% endif %}
                     </td>
-                    <td>{{ building.height }}</td>
+                    <td class="right-align">{{ building.height }}</td>
                     <td>{{ building.coordinates }}</td>
                     <td>
                         {% if building.historic_site %}

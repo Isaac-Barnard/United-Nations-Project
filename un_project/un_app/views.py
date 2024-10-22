@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.db.models import F, FloatField, ExpressionWrapper, Count, Value, Sum
-from django.db.models.functions import Coalesce
+from django.db.models import F, FloatField, ExpressionWrapper, Count, Value, Sum, Window
+from django.db.models.functions import Coalesce, Rank
 from django.contrib.auth.decorators import login_required
 from .forms import BuildingEvaluationForm, ItemEvaluationForm
 from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount, ItemEvaluationComponent, ItemEvaluation, Item, Company, LiquidCount
@@ -17,8 +17,13 @@ def building_list(request):
         calculated_height=ExpressionWrapper(
             Coalesce(F('y_level_high_pt'), Value(0)) - Coalesce(F('y_level_ground'), Value(0)),
             output_field=FloatField()
+        ),
+        # Add rank based on calculated height
+        rank=Window(
+            expression=Rank(),
+            order_by=F('calculated_height').desc()
         )
-    ).order_by('-calculated_height')  # Sort by calculated height
+    ).order_by('-calculated_height')
 
     return render(request, 'building_list.html', {'buildings': buildings})
 
