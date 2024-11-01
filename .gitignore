@@ -8,3 +8,4 @@ __pycache__
 
 # Ignore server custom config file
 conf
+.stash/
