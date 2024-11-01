@@ -25,7 +25,7 @@ SECRET_KEY = 'xx7av6y(1gj3gu(3ro0-=s5^8r@8o=bt0t9_q!y15_rkma%%lh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['direct.ws-studios.com', 'ws-studios.com', 'werespecialstudios.com']
 
 
 # Application definition
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'un_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['/database/United_Nations/un_project/un_app/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
