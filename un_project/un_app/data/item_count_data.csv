@@ -1,23 +1,58 @@
 nation,company,item,count
 UN,,Beacon,1
 UN,,Shulker Box,10
-UN,,Saddle,1
+UN,,Saddle,4
+UN,,Music Disc,1
 UN,,Blaze Rod,569
-UN,,Obsidian,28
-UN,,Glass,704
-UN,,Smooth Stones,32
+UN,,Magma Cream,7
+UN,,Ghast Tear,1
+UN,,Slime Ball,115
+UN,,Honey Comb,6
+UN,,Glowstone,33
+UN,,Quartz Block,13
+UN,,Obsidian,220
+UN,,Glass,1124
+UN,,Glass Pane,436
+UN,,Brick Block,5.5
+UN,,Smooth Stones,304
 UN,,Diamond Helmet,1
 UN,,Diamond Chestplate,1
 UN,,Diamond Leggings,2
 UN,,Diamond Boots,1
 UN,,Gold Helmet,4
-UN,,Gold Chestplate,9
+UN,,Gold Chestplate,11
 UN,,Gold Leggings,6
-UN,,Gold Boots,6
-UN,,Iron Chestplate,1
+UN,,Gold Boots,10
+UN,,Chainmail Chestplate,2
+UN,,Chainmail Boots,2
+UN,,Iron Helmet,1
+UN,,Iron Chestplate,2
+UN,,Leather Helmet,1
+UN,,Leather Chestplate,6
+UN,,Leather Leggings,4
+UN,,Leather Boots,11
 UN,,Gold Horse Armor,1
+UN,,Iron Horse Armor,1
+UN,,Netherite Pickaxe,1
+UN,,Iron Sword,1
 UN,,Iron Pickaxe,1
-UN,,Bucket,2
+UN,,Stone Hoe,3
+UN,,Wood Shovel,2
+UN,,Shield,1
+UN,,Shears,1
+UN,,Bucket,4
+UN,,Glass Bottle,1
+UN,,Redstone Torch,26
+UN,,Repeater,10
+UN,,Stonecutter,1
+UN,,Brewing Stand,2
+UN,,Torch,9
+UN,,Lantern,32
+UN,,Minecart,22
+UN,,Rail,565
+UN,,Powered Rail,10
+UN,,Detector Rail,28
+UN,,Iron Bars,227
 UN,,Chain,24
 NOI,,Beacon,2
 NOI,,Elytra,20
