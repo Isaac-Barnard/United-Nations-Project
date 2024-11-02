@@ -1,0 +1,145 @@
+/* Ensure the table layout is fixed */
+table {
+    table-layout: fixed;       /* Enforces fixed table layout */
+    width: 100%;               /* Ensure the table takes up the full width */
+}
+
+.right-align {
+    text-align: right;
+}
+
+/* Remove the margin below the h2 element for item tables */
+h2.items-heading {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Scrollable container */
+.item-table-container {
+    overflow-x: auto;          /* Enable horizontal scrolling */
+    white-space: nowrap;       /* Prevents tables from wrapping */
+    width: 100%;               /* Full width of the container */
+}
+
+/* Each table should be inline-block to fit in the scrollable area */
+.item-table-container .item-table {
+    display: inline-block;     /* Aligns all tables horizontally */
+    width: 330px;              /* Set a consistent width for each table */
+    vertical-align: top;       /* Ensure all tables align at the top */
+    white-space: normal;
+    margin-right: 1px;        /* Add spacing between tables */
+}
+
+/* Target the Item Name column to truncate long names */
+td.item-name, td.building-name {
+    white-space: nowrap;       /* Prevent wrapping */
+    overflow: hidden;          /* Hide overflowed content */
+    text-overflow: clip;   /* Add ellipsis for long text */
+    max-width: 150px;          /* Set a maximum width for the name columns */
+}
+
+/* Styles specifically for item tables */
+.item-table table {
+    font-size: 1em;            /* Set a standard font size for item tables */
+}
+
+.item-table th:nth-child(1),  /* Item Name column */
+.item-table td:nth-child(1) {
+    width: 44%;                /* Allocate more space to item name */
+}
+
+.item-table th:nth-child(2),  /* Market Value column */
+.item-table td:nth-child(2) {
+    width: 20%;
+}
+
+.item-table th:nth-child(3),  /* Item Count column */
+.item-table td:nth-child(3) {
+    width: 18%; 
+}
+
+.item-table th:nth-child(4),  /* Total Value column */
+.item-table td:nth-child(4) {
+    width: 18%; 
+}
+
+
+/* Target the Item Name column to truncate long names */
+td.building-name {
+    white-space: nowrap;       /* Prevent wrapping */
+    overflow: clip;          /* Hide overflowed content */
+    max-width: 150px;          /* Set a maximum width for the item name column */
+}
+
+.building-table table {
+    font-size: .9em;  /* Default font size for building tables */
+}
+
+/* Styles specific to the item tables */
+.building-table th:nth-child(1), /* Item Name column */
+.building-table td:nth-child(1) {
+    width: 70%;
+}
+
+.building-table th:nth-child(2), /* Count column */
+.building-table td:nth-child(2) {
+    width: 15%;
+}
+
+.building-table th:nth-child(3), /* market rate column */
+.building-table td:nth-child(3) {
+    width: 15%; 
+}
+
+
+
+/* Styles specifically for item tables */
+.liquid-table table {
+    font-size: .9em;            /* Set a standard font size for item tables */
+    text-align: right;
+}
+
+.liquid-table th:nth-child(1),  /* Asset Name column */
+.liquid-table td:nth-child(1) {
+    width: 20%;                /* Allocate more space to item name */
+}
+.liquid-table th:nth-child(2),  /* total Value column */
+.itliquidem-table td:nth-child(2) {
+    width: 7%;
+}
+.liquid-table th:nth-child(3),  /* Netherite Value column */
+.itliquidem-table td:nth-child(3) {
+    width: 7%;
+}
+.liquid-table th:nth-child(4),  /* Diamond Count column */
+.liquid-table td:nth-child(4) {
+    width: 7%; 
+}
+.liquid-table th:nth-child(5),  /* Gold Value column */
+.liquid-table td:nth-child(5) {
+    width: 7%; 
+}
+.liquid-table th:nth-child(6),  /* Emerald Value column */
+.liquid-table td:nth-child(6) {
+    width: 7%; 
+}
+.liquid-table th:nth-child(7),  /* Iron Value column */
+.liquid-table td:nth-child(7) {
+    width: 7%; 
+}
+.liquid-table th:nth-child(8),  /* Copper Value column */
+.liquid-table td:nth-child(8) {
+    width: 7%; 
+}
+.liquid-table th:nth-child(9),  /* Redstone Value column */
+.liquid-table td:nth-child(9) {
+    width: 7%; 
+}
+.liquid-table th:nth-child(10),  /* Lapis Value column */
+.liquid-table td:nth-child(10) {
+    width: 7%; 
+}
+.liquid-table th:nth-child(11),  /* Coal Value column */
+.liquid-table td:nth-child(11) {
+    width: 7%; 
+}
