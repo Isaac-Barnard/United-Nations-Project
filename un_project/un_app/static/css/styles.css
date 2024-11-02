@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #fafafa;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -116,12 +116,12 @@ th, td {
 }
 
 th {
-    background-color: #b7b7b7;
+    background-color: #a2a2a2;
     text-align: center;
 }
 
 tr:nth-child(even) {
-    background-color: #efefef;
+    background-color: #e7e7e7;
 }
 
 tr:nth-child(odd) {
