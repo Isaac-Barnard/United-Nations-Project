@@ -12,6 +12,7 @@ class BuildingDataView(APIView):
                 "z_coordinate": float(building.z_coordinate),
                 "height": building.height,
                 "owner": building.owner.name,
+                "owner_abbreviation": building.owner.abbreviation,
                 "price": float(building.price),
                 # Add other fields as needed
             }

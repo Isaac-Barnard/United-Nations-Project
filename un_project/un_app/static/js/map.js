@@ -15,6 +15,71 @@ L.tileLayer('/static/map_tiles/{z}/{x}/{y}.png', {
     noWrap: true,
 }).addTo(map);
 
+// Define custom icons for different owners
+const icons = {
+    'NOI': L.icon({
+        iconUrl: '/static/images/building_icons/noi_building_icon.png',  // Add custom icon images here
+        iconSize: [30, 30],
+        iconAnchor: [15, 30],
+        popupAnchor: [0, -30],
+    }),
+    'EOMR': L.icon({
+        iconUrl: '/static/images/building_icons/eomr_building_icon.png',
+        iconSize: [30, 30],
+        iconAnchor: [15, 30],
+        popupAnchor: [0, -30],
+    }),
+    'IOK': L.icon({
+        iconUrl: '/static/images/building_icons/iok_building_icon.png',
+        iconSize: [30, 30],
+        iconAnchor: [15, 30],
+        popupAnchor: [0, -30],
+    }),
+    'NEL': L.icon({
+        iconUrl: '/static/images/building_icons/nel_building_icon.png',
+        iconSize: [30, 30],
+        iconAnchor: [15, 30],
+        popupAnchor: [0, -30],
+    }),
+    'QC': L.icon({
+        iconUrl: '/static/images/building_icons/qc_building_icon.png',
+        iconSize: [30, 30],
+        iconAnchor: [15, 30],
+        popupAnchor: [0, -30],
+    }),
+    'BEL': L.icon({
+        iconUrl: '/static/images/building_icons/bel_building_icon.png',
+        iconSize: [30, 30],
+        iconAnchor: [15, 30],
+        popupAnchor: [0, -30],
+    }),
+    'CDS': L.icon({
+        iconUrl: '/static/images/building_icons/cds_building_icon.png',
+        iconSize: [30, 30],
+        iconAnchor: [15, 30],
+        popupAnchor: [0, -30],
+    }),
+    'CRP': L.icon({
+        iconUrl: '/static/images/building_icons/crp_building_icon.png',
+        iconSize: [30, 30],
+        iconAnchor: [15, 30],
+        popupAnchor: [0, -30],
+    }),
+    'UN': L.icon({
+        iconUrl: '/static/images/building_icons/un_building_icon.png',
+        iconSize: [30, 30],
+        iconAnchor: [15, 30],
+        popupAnchor: [0, -30],
+    }),
+    'default': L.icon({  // Add a default fallback icon
+        iconUrl: '/static/images/building_icons/default_building_icon.png',
+        iconSize: [30, 30],
+        iconAnchor: [15, 30],
+        popupAnchor: [0, -30],
+})
+    // Add more owners as needed
+};
+
 // Fetch building data and add markers
 fetch('/un_api/buildings/')
     .then(response => response.json())
@@ -25,8 +90,11 @@ fetch('/un_api/buildings/')
             const x = parseFloat(building.x_coordinate);
             const y = parseFloat(building.z_coordinate) * -1;
 
+            // Select icon based on the owner's abbreviation
+            const icon = icons[building.owner_abbreviation] || icons['default'];
+
             // Add marker at the transformed coordinates
-            const marker = L.marker([y, x]).addTo(map);
+            const marker = L.marker([y, x], { icon: icon }).addTo(map);
             marker.bindPopup(`
                 <strong>${building.name}</strong><br>
                 Owner: ${building.owner}<br>
