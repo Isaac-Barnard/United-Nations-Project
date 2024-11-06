@@ -1,20 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Server Map
+{% endblock %}
+
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Server Map</title>
+
+{% block extra_css %}
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         #map { height: 600px; width: 100%; }
     </style>
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
     <h1>Server Map</h1>
     <div id="map"></div>
+{% endblock %}
 
+{% block extra_js %}
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="{% static 'js/map.js' %}"></script> <!-- Link to the external JavaScript file -->
-    
-</body>
-</html>
+    <script src="{% static 'js/map.js' %}"></script> <!-- External JavaScript file for map logic -->
+{% endblock %}
