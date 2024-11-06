@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'un_app'
+    'rest_framework',  # Django REST Framework for API functionality
+    'un_app',          # Your main app containing the Building model
+    'un_api',             # New app for API views
 ]
 
 MIDDLEWARE = [

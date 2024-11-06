@@ -64,4 +64,7 @@ https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwN
         - [ ] Amortiziation Scheule?
         - [ ] Inflation calculator?
         - [ ] Change base currence (ex: change all values to gold or netherite)?
+    - [ ] Display map/maps?
+        - [ ] Interactive map that shows buildings (Using coordinates)
+        - [ ] Somehow display historical/informative maps
     
