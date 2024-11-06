@@ -1,3 +1,9 @@
+// Set map bounds using coordinates of the Minecraft world
+const x_top_left = -1562; // x-coordinate of the top-left corner
+const z_top_left = -419;  // z-coordinate of the top-left corner
+const x_bottom_right = 857; // x-coordinate of the bottom-right corner
+const z_bottom_right = 906; // z-coordinate of the bottom-right corner
+
 // Initialize map using L.CRS.Simple to remove latitude/longitude constraints
 const map = L.map('map', {
     center: [0, 0],
@@ -7,13 +13,17 @@ const map = L.map('map', {
     crs: L.CRS.Simple      // Use simple coordinate system
 });
 
-// Add map tiles (adjust the URL pattern if needed based on your tile structure)
-L.tileLayer('/static/map_tiles/{z}/{x}/{y}.png', {
-    maxZoom: 10,
-    minZoom: -2,
-    tileSize: 256,
-    noWrap: true,
-}).addTo(map);
+// Define the image bounds using top-left and bottom-right corners
+const imageBounds = [
+    [-z_top_left, x_top_left],      // Top-left corner: invert z-coordinate
+    [-z_bottom_right, x_bottom_right]  // Bottom-right corner: invert z-coordinate
+];
+
+// Add the PNG as an image overlay layer
+L.imageOverlay('/static/images/maps/Official UN Map (10_21_24).png', imageBounds).addTo(map);
+
+// Fit the map view to the image bounds
+map.fitBounds(imageBounds);
 
 // Define custom icons for different owners
 const icons = {
@@ -94,7 +104,7 @@ fetch('/un_api/buildings/')
             const icon = icons[building.owner_abbreviation] || icons['default'];
 
             // Add marker at the transformed coordinates
-            const marker = L.marker([y, x], { icon: icon }).addTo(map);
+            const marker = L.marker([y+7, x], { icon: icon }).addTo(map);
             marker.bindPopup(`
                 <strong>${building.name}</strong><br>
                 Owner: ${building.owner}<br>
@@ -105,11 +115,3 @@ fetch('/un_api/buildings/')
             `);
         });
     });
-
-
-
-
-
-
-
-
