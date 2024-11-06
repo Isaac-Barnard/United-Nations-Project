@@ -98,8 +98,10 @@ fetch('/un_api/buildings/')
             marker.bindPopup(`
                 <strong>${building.name}</strong><br>
                 Owner: ${building.owner}<br>
+                Builder: ${building.builders}<br>
                 Height: ${building.height}<br>
                 Price: ${building.price}<br>
+                Coords: ${building.x_coordinate}/~/${building.z_coordinate}<br>
             `);
         });
     });

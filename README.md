@@ -67,5 +67,6 @@ https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwN
             - [x] Convert coordinates to x, inverse z
             - [x] Color data points to each nation
             - [x] Add data for each building when data is clicked on
+            - [ ] Filter out nether/end buildings
         - [ ] Somehow display historical/informative maps
     

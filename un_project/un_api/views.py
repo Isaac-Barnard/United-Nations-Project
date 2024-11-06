@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from un_app.models import Building  # adjust path as needed to import Building model
+from un_app.models import Building
+from un_app.templatetags.custom_filters import custom_decimal_places
 
 class BuildingDataView(APIView):
     def get(self, request):
@@ -13,7 +14,8 @@ class BuildingDataView(APIView):
                 "height": building.height,
                 "owner": building.owner.name,
                 "owner_abbreviation": building.owner.abbreviation,
-                "price": float(building.price),
+                "price": custom_decimal_places(building.price),
+                "builders": [builder.username for builder in building.main_builders.all()],
                 # Add other fields as needed
             }
             for building in buildings
