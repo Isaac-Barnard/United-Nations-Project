@@ -18,6 +18,7 @@ https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwN
     - [ ] Move item calculations to the database rather then when the page is loaded to speed up loading times
         - [x] Items: Total Value, Market Value
         - [ ] Buildings: ?
+        - [ ] Liquid Assests: ?
         - [ ] Total Value of ___'s
     - [ ] Create liability tables
         - [ ] Add Mortgages section
@@ -70,6 +71,7 @@ https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwN
             - [x] Convert coordinates to x, inverse z
             - [x] Color data points to each nation
             - [x] Add data for each building when data is clicked on
-            - [ ] Filter out nether/end buildings
+            - [x] Filter out nether/end buildings
+            - [ ] Extended map to show more land
         - [ ] Somehow display historical/informative maps
     

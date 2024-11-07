@@ -5,7 +5,7 @@ from un_app.templatetags.custom_filters import custom_decimal_places
 
 class BuildingDataView(APIView):
     def get(self, request):
-        buildings = Building.objects.all()
+        buildings = Building.objects.exclude(territory__name__in=["The Nether", "The End"])
         data = [
             {
                 "name": building.name,
