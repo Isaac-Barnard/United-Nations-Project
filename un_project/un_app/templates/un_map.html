@@ -9,7 +9,18 @@
 {% block extra_css %}
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
-        #map { height: 600px; width: 100%; }
+        #map {
+            height: 600px;
+            width: 100%;
+            position: relative;
+            z-index: 1; /* Set a low z-index for the map */
+        }
+
+        /* Ensure the dropdown content appears above the map */
+        .dropdown-content {
+            position: absolute;
+            z-index: 10; /* Higher z-index to appear above the map */
+        }
     </style>
 {% endblock %}
 
