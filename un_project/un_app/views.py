@@ -118,18 +118,14 @@ def nation_balance_sheet(request, nation_abbreviation):
             items_part5.append(item)  # 500's range goes into items_part5
             
     return render(request, 'nation_balance_sheet.html', {
-        'nation': nation,
-        'buildings': buildings,
-        'partial_buildings': partial_buildings,
-        'items_part1': items_part1,
-        'items_part2': items_part2,
-        'items_part3': items_part3,
-        'items_part4': items_part4,
-        'items_part5': items_part5,
-        'total_value_sum': total_value_sum,
-        'denominations': denominations,
-        'liquid_asset_data': liquid_asset_data,
-    })
+    'nation': nation,
+    'buildings': buildings,
+    'partial_buildings': partial_buildings,
+    'items_parts': [items_part1, items_part2, items_part3, items_part4, items_part5],  # Pass as a single list
+    'total_value_sum': total_value_sum,
+    'denominations': denominations,
+    'liquid_asset_data': liquid_asset_data,
+})
 
 
 def company_balance_sheet(request, company_abbreviation):
