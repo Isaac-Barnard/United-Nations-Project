@@ -53,8 +53,11 @@ def nation_balance_sheet(request, nation_abbreviation):
     all_items = Item.objects.all().order_by('ordering')  # Sorted by manual ordering
     items_with_count = ItemCount.objects.filter(nation=nation)
 
-    # Create a dictionary to store counts for each item
-    item_count_dict = {item_count.item_id: item_count.count for item_count in items_with_count}
+    # Create a dictionary to store count and total_values for each item
+    item_count_dict = {
+        item_count.item_id: (item_count.count, item_count.total_value) 
+        for item_count in items_with_count
+    }
 
     # Fetch the liquid assets for the nation
     liquid_assets = LiquidCount.objects.filter(nation=nation).order_by('asset_name', 'denomination')
@@ -86,18 +89,17 @@ def nation_balance_sheet(request, nation_abbreviation):
     total_value_sum = Decimal('0')  # Initialize total value sum
     for item in all_items:
         item_name = item.name if item.name else "Unnamed Item"
-        market_price = item.market_price if item.market_price else Decimal('0')
-        
-        # Get the count for the item, defaulting to 0 if not present
-        count = item_count_dict.get(item.id, 0)
-        total_value = market_price * count
+        market_value = item.market_value if item.market_value else Decimal('0')
+
+        # Get the count and total_value for the item, defaulting to 0 if not present
+        count, total_value = item_count_dict.get(item.id, (0, 0))
         
         # Accumulate the total value for summing
         total_value_sum += total_value
 
         item_data.append({
             'name': item_name,
-            'market_price': market_price,
+            'market_value': market_value,
             'count': count,
             'total_value': total_value,
             'ordering': item.ordering,  # Ensure ordering is included for distribution
@@ -136,7 +138,7 @@ def company_balance_sheet(request, company_abbreviation):
     # Fetch all buildings owned by the company
     #buildings = Building.objects.filter(owner=company)
     
-    # Fetch buildings where the company is a partial owner
+     # Fetch buildings where the nation is a partial owner
     partial_buildings = Building.objects.filter(
         partialbuildingownership__partial_owner_abbreviation=company.abbreviation
     ).annotate(
@@ -147,8 +149,11 @@ def company_balance_sheet(request, company_abbreviation):
     all_items = Item.objects.all().order_by('ordering')  # Sorted by manual ordering
     items_with_count = ItemCount.objects.filter(company=company)
 
-    # Create a dictionary to store counts for each item
-    item_count_dict = {item_count.item_id: item_count.count for item_count in items_with_count}
+    # Create a dictionary to store count and total_values for each item
+    item_count_dict = {
+        item_count.item_id: (item_count.count, item_count.total_value) 
+        for item_count in items_with_count
+    }
 
     # Fetch the liquid assets for the company
     liquid_assets = LiquidCount.objects.filter(company=company).order_by('asset_name', 'denomination')
@@ -179,18 +184,17 @@ def company_balance_sheet(request, company_abbreviation):
     total_value_sum = Decimal('0')  # Initialize total value sum
     for item in all_items:
         item_name = item.name if item.name else "Unnamed Item"
-        market_price = item.market_price if item.market_price else Decimal('0')
-        
-        # Get the count for the item, defaulting to 0 if not present
-        count = item_count_dict.get(item.id, 0)
-        total_value = market_price * count
+        market_value = item.market_value if item.market_value else Decimal('0')
+
+        # Get the count and total_value for the item, defaulting to 0 if not present
+        count, total_value = item_count_dict.get(item.id, (0, 0))
         
         # Accumulate the total value for summing
         total_value_sum += total_value
 
         item_data.append({
             'name': item_name,
-            'market_price': market_price,
+            'market_value': market_value,
             'count': count,
             'total_value': total_value,
             'ordering': item.ordering,  # Ensure ordering is included for distribution
@@ -214,12 +218,8 @@ def company_balance_sheet(request, company_abbreviation):
         'company': company,
         #'buildings': buildings,
         'partial_buildings': partial_buildings,
-        'items_part1': items_part1,  # First set of items
-        'items_part2': items_part2,  # Second set of items
-        'items_part3': items_part3,  # Third set of items
-        'items_part4': items_part4,  # Fourth set of items
-        'items_part5': items_part5,  # Fourth set of items
-        'total_value_sum': total_value_sum,  # Pass the total value sum to the template
+        'items_parts': [items_part1, items_part2, items_part3, items_part4, items_part5],  # Pass as a single list
+        'total_value_sum': total_value_sum,
         'denominations': denominations,
         'liquid_asset_data': liquid_asset_data,
     })

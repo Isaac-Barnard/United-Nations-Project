@@ -64,7 +64,7 @@
                                 <tr style="font-size: 0.9em;">
                                     <td class="item-name">{{ item.name }} {{ item.new_ordering }}</td>
                                     <td class="right-align">{{ item.total_value|custom_decimal_places }}</td>
-                                    <td class="right-align">{{ item.market_price|custom_decimal_places }}</td>
+                                    <td class="right-align">{{ item.market_value|custom_decimal_places }}</td>
                                     <td class="right-align">{{ item.count|stringformat:"g" }}</td>
                                 </tr>
                             {% endif %}

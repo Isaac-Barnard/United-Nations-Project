@@ -158,10 +158,10 @@ class Building(models.Model):
         if evaluation_count < 2:
             return Decimal('0')
 
-        total_value = Decimal('0')
+        _total_value = Decimal('0')
         for evaluation in evaluations:
-            total_value += evaluation.total_diamond_value
-        avg_price = total_value / Decimal(evaluation_count)
+            _total_value += evaluation.total_diamond_value
+        avg_price = _total_value / Decimal(evaluation_count)
         return avg_price
 
     @property
@@ -267,6 +267,8 @@ class Item(models.Model):
     price_type = models.CharField(max_length=15, choices=PRICE_TYPE_CHOICES)
     description = models.CharField(max_length=255, blank=True)  # Optional description field
     ordering = models.IntegerField(default=0)  # Field for manual ordering (100's for first table, 200's for second, etc. (ex: 101, 203, 459))
+    # Precalculated values:
+    market_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
 
     def __str__(self):
         return self.name
@@ -316,8 +318,8 @@ class Item(models.Model):
             evaluations = self.item_evaluations.all()
             if not evaluations.exists():
                 return Decimal('0')
-            total_value = sum(evaluation.total_diamond_value for evaluation in evaluations)
-            market_rate = total_value / evaluations.count()
+            _total_value = sum(evaluation.total_diamond_value for evaluation in evaluations)
+            market_rate = _total_value / evaluations.count()
             return market_rate.quantize(Decimal('0.000001'))
         return Decimal('0')
 
@@ -357,7 +359,9 @@ class ItemCount(models.Model):
     nation = models.ForeignKey(Nation, on_delete=models.CASCADE, null=True, blank=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    count = models.DecimalField(max_digits=20, decimal_places=3)  # Allows for 2 decimal places
+    count = models.DecimalField(max_digits=20, decimal_places=3)
+    # Precalculated Values:
+    total_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
 
     class Meta:
         # Ensure the combination of nation/company and item is unique
@@ -423,9 +427,9 @@ class ItemFixedPriceComponent(models.Model):
         super().save(*args, **kwargs)
 
 
-def __str__(self):
-        if self.denomination:
-            return f'{self.quantity} x {self.denomination.name} for {self.item.name}'
-        elif self.referenced_item:
-            return f'{self.percentage_of_item}% of {self.referenced_item.name} for {self.item.name}'
-        return f'Component for {self.item.name}'
+    def __str__(self):
+            if self.denomination:
+                return f'{self.quantity} x {self.denomination.name} for {self.item.name}'
+            elif self.referenced_item:
+                return f'{self.percentage_of_item}% of {self.referenced_item.name} for {self.item.name}'
+            return f'Component for {self.item.name}'
