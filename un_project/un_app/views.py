@@ -370,3 +370,7 @@ def evaluate_items(request):
         'evaluation_form': evaluation_form,
         'denominations': denominations  # Ensure denominations are passed on GET request
     })
+
+
+def un_map(request):
+    return render(request, 'un_map.html')

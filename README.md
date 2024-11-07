@@ -53,8 +53,6 @@ https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwN
             - [ ] Create historical records for size of nation data
             - [ ] Size of nation over time graph
                 - [ ] Total territories, Main tarritories, far colonies, near colonies
-        - [ ] Building plot stuff
-            - [ ] Convert coordinates to x, inverse z and map it to  graph scatterplot
     - [ ] Currency converter (ex: convert 42 emeralds and 58 copper to diamonds)
     - [ ] Item price calculator (Select items, see the price of them)
     - [ ] Architectural Styles stuff
@@ -64,4 +62,11 @@ https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwN
         - [ ] Amortiziation Scheule?
         - [ ] Inflation calculator?
         - [ ] Change base currence (ex: change all values to gold or netherite)?
+    - [ ] Display map/maps?
+        - [ ] Interactive map that shows buildings (Using coordinates)
+            - [x] Convert coordinates to x, inverse z
+            - [x] Color data points to each nation
+            - [x] Add data for each building when data is clicked on
+            - [ ] Filter out nether/end buildings
+        - [ ] Somehow display historical/informative maps
     

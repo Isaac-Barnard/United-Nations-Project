@@ -12,6 +12,7 @@ sqlalchemy-utils = "^0.41.2"
 sqlmodel = "^0.0.22"
 django = "^5.1.1"
 psycopg2 = "^2.9.9"
+djangorestframework = "^3.15.2"
 
 
 [build-system]
