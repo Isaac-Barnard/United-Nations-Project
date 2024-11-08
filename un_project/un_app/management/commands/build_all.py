@@ -26,6 +26,9 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting creating denominations...\n----------------------------------------------------"))
             call_command('create_denominations')
 
+            self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of players from {player_data_csv}...\n----------------------------------------------------"))
+            call_command('import_players', player_data_csv)
+
             self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting creating users...\n----------------------------------------------------"))
             call_command('create_users')
 
@@ -37,9 +40,6 @@ class Command(BaseCommand):
 
             self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of territories from {territory_data_csv}...\n----------------------------------------------------"))
             call_command('import_territories', territory_data_csv)
-
-            self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of players from {player_data_csv}...\n----------------------------------------------------"))
-            call_command('import_players', player_data_csv)
 
             self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of buildings from {building_data_csv}...\n----------------------------------------------------"))
             call_command('import_buildings', building_data_csv)

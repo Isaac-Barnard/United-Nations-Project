@@ -352,6 +352,9 @@ class BuildingEvaluationComponent(models.Model):
     denomination = models.ForeignKey(Denomination, on_delete=models.CASCADE)
     quantity = models.DecimalField(max_digits=20, decimal_places=8)
 
+    class Meta:
+        unique_together = ('evaluation', 'denomination')
+
 
     def __str__(self):
         formatted_quantity = f"{self.quantity:.3f}"  # Format quantity to 3 decimal places
@@ -457,6 +460,9 @@ class ItemEvaluationComponent(models.Model):
     evaluation = models.ForeignKey(ItemEvaluation, on_delete=models.CASCADE, related_name='evaluation_components')
     denomination = models.ForeignKey(Denomination, on_delete=models.CASCADE)
     quantity = models.DecimalField(max_digits=20, decimal_places=8)
+
+    class Meta:
+        unique_together = ('evaluation', 'denomination')
 
     def __str__(self):
         return f'{self.quantity} x {self.denomination.name} x {self.evaluation}'
