@@ -76,8 +76,47 @@ class Company(models.Model):
     total_item_asset_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
     total_building_asset_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
 
+    # Calculate total liquid asset value
+    def calculate_total_liquid_asset_value(self):
+        total = self.liquidcount_set.aggregate(
+            total_value=Coalesce(
+                Sum(
+                    F('count') * F('denomination__diamond_equivalent'),
+                    output_field=DecimalField(max_digits=20, decimal_places=6)
+                ), 
+                Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
+            )
+        )['total_value'] or Decimal('0')
+        return total
+
+    # Calculate total item asset value
+    def calculate_total_item_asset_value(self):
+        total = self.itemcount_set.aggregate(
+            total_value=Coalesce(
+                Sum('total_value', output_field=DecimalField(max_digits=20, decimal_places=6)),
+                Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
+            )
+        )['total_value'] or Decimal('0')
+        return total
+
+    # Calculate total building asset value
+    def calculate_total_building_asset_value(self):
+        # Sum of partial ownerships
+        company_content_type = ContentType.objects.get_for_model(Company)
+        partials_total = PartialBuildingOwnership.objects.filter(
+            partial_owner_type=company_content_type,
+            partial_owner_abbreviation=self.abbreviation
+        ).aggregate(
+            total_value=Coalesce(
+                Sum('partial_price', output_field=DecimalField(max_digits=20, decimal_places=6)),
+                Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
+            )
+        )['total_value'] or Decimal('0')
+
+        return partials_total
+
     def __str__(self):
-        return self.abbreviation
+        return f"{self.name} ({self.abbreviation})"
     
 # --------------------------------------------------------------------
 class Player(models.Model):

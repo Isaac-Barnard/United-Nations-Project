@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.contrib.contenttypes.models import ContentType
-from .models import Item, ItemCount, ItemEvaluation, ItemFixedPriceComponent, ItemEvaluationComponent, Building, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Nation, LiquidCount
+from .models import Item, ItemCount, ItemEvaluation, ItemFixedPriceComponent, ItemEvaluationComponent, Building, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Nation, LiquidCount, Company
 
 # --------------------------------------------------------------------
 #                           Buildings
@@ -159,65 +159,84 @@ def update_item_fixed_price_value(sender, instance, **kwargs):
 
 @receiver(post_save, sender=LiquidCount)
 @receiver(post_delete, sender=LiquidCount)
-def update_nation_total_liquid_asset_value(sender, instance, **kwargs):
+def update_total_liquid_asset_value(sender, instance, **kwargs):
     nation = instance.nation
+    company = instance.company
     if nation:
         total = nation.calculate_total_liquid_asset_value()
-        # Use update() to avoid recursion
         Nation.objects.filter(pk=nation.pk).update(total_liquid_asset_value=total)
+    elif company:
+        total = company.calculate_total_liquid_asset_value()
+        Company.objects.filter(pk=company.pk).update(total_liquid_asset_value=total)
+
 
 @receiver(post_save, sender=ItemCount)
 @receiver(post_delete, sender=ItemCount)
-def update_nation_total_item_asset_value(sender, instance, **kwargs):
+def update_total_item_asset_value(sender, instance, **kwargs):
     nation = instance.nation
+    company = instance.company
     if nation:
         total = nation.calculate_total_item_asset_value()
-        # Use update() to avoid recursion
         Nation.objects.filter(pk=nation.pk).update(total_item_asset_value=total)
+    elif company:
+        total = company.calculate_total_item_asset_value()
+        Company.objects.filter(pk=company.pk).update(total_item_asset_value=total)
 
-def update_nation_total_building_asset_value(building):
-    owner_ids_to_update = set()
 
-    # Add the building's owner
+def update_total_building_asset_value(building):
+    nation_owner_ids_to_update = set()
+    company_owner_ids_to_update = set()
+
+    # For Nations, add the building's owner
     if building.owner_id:
-        owner_ids_to_update.add(building.owner_id)
+        nation_owner_ids_to_update.add(building.owner_id)
 
-    # Add nations with partial ownership
-    nation_content_type = ContentType.objects.get_for_model(Nation)
-    partials = building.partialbuildingownership_set.filter(
-        partial_owner_type=nation_content_type
-    ).values_list('partial_owner_abbreviation', flat=True).distinct()
+    # Collect Nations and Companies with partial ownership
+    partials = building.partialbuildingownership_set.all()
 
-    for abbreviation in partials:
-        try:
-            nation = Nation.objects.get(abbreviation=abbreviation)
-            owner_ids_to_update.add(nation.id)
-        except Nation.DoesNotExist:
-            pass
+    for partial in partials:
+        if partial.partial_owner_type.model == 'nation':
+            try:
+                nation = Nation.objects.get(abbreviation=partial.partial_owner_abbreviation)
+                nation_owner_ids_to_update.add(nation.id)
+            except Nation.DoesNotExist:
+                pass
+        elif partial.partial_owner_type.model == 'company':
+            try:
+                company = Company.objects.get(abbreviation=partial.partial_owner_abbreviation)
+                company_owner_ids_to_update.add(company.id)
+            except Company.DoesNotExist:
+                pass
 
-    # Update total_building_asset_value for each nation
-    for nation_id in owner_ids_to_update:
+    # Update total_building_asset_value for Nations
+    for nation_id in nation_owner_ids_to_update:
         nation = Nation.objects.get(pk=nation_id)
         total = nation.calculate_total_building_asset_value()
         Nation.objects.filter(pk=nation.pk).update(total_building_asset_value=total)
+
+    # Update total_building_asset_value for Companies
+    for company_id in company_owner_ids_to_update:
+        company = Company.objects.get(pk=company_id)
+        total = company.calculate_total_building_asset_value()
+        Company.objects.filter(pk=company.pk).update(total_building_asset_value=total)
 
 
 @receiver(post_save, sender=Building)
 @receiver(post_delete, sender=Building)
 def building_changed(sender, instance, **kwargs):
-    update_nation_total_building_asset_value(instance)
+    update_total_building_asset_value(instance)
 
 @receiver(post_save, sender=PartialBuildingOwnership)
 @receiver(post_delete, sender=PartialBuildingOwnership)
 def partial_ownership_changed(sender, instance, **kwargs):
-    update_nation_total_building_asset_value(instance.building)
+    update_total_building_asset_value(instance.building)
 
 @receiver(post_save, sender=BuildingEvaluation)
 @receiver(post_delete, sender=BuildingEvaluation)
 def building_evaluation_changed(sender, instance, **kwargs):
-    update_nation_total_building_asset_value(instance.building)
+    update_total_building_asset_value(instance.building)
 
 @receiver(post_save, sender=BuildingEvaluationComponent)
 @receiver(post_delete, sender=BuildingEvaluationComponent)
 def building_evaluation_component_changed(sender, instance, **kwargs):
-    update_nation_total_building_asset_value(instance.evaluation.building)
+    update_total_building_asset_value(instance.evaluation.building)
