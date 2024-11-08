@@ -17,8 +17,10 @@ def update_ownership_minus_partial(sender, instance, **kwargs):
         building = instance.building
 
     # Calculate ownership_minus_partial using adjusted_ownership
-    building.ownership_minus_partial = building.adjusted_ownership
-    building.save(update_fields=['ownership_minus_partial'])
+    ownership_minus_partial = building.adjusted_ownership
+
+    # Use update() to avoid triggering signals
+    Building.objects.filter(pk=building.pk).update(ownership_minus_partial=ownership_minus_partial)
 
 
 @receiver(post_save, sender=Building)
@@ -30,15 +32,27 @@ def update_ownership_minus_partial(sender, instance, **kwargs):
 @receiver(post_delete, sender=BuildingEvaluationComponent)
 def update_price_minus_partial(sender, instance, **kwargs):
     """Recalculate price_minus_partial whenever there is a relevant change in Building, PartialBuildingOwnership, BuildingEvaluation, or BuildingEvaluationComponent."""
-    
+
     if isinstance(instance, Building):
+        # If the instance is a Building, use it directly
         building = instance
-    elif isinstance(instance, (PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent)):
+    elif isinstance(instance, PartialBuildingOwnership):
+        # If it's a PartialBuildingOwnership, access the related Building
         building = instance.building
+    elif isinstance(instance, BuildingEvaluation):
+        # If it's a BuildingEvaluation, access the related Building
+        building = instance.building
+    elif isinstance(instance, BuildingEvaluationComponent):
+        # If it's a BuildingEvaluationComponent, access the Building through evaluation
+        building = instance.evaluation.building
+    else:
+        return  # Exit if none of the expected types
 
     # Calculate price_minus_partial using adjusted_ownership_price
-    building.price_minus_partial = building.adjusted_ownership_price
-    building.save(update_fields=['price_minus_partial'])
+    price_minus_partial = building.adjusted_ownership_price
+
+    # Use update() to avoid triggering signals
+    Building.objects.filter(pk=building.pk).update(price_minus_partial=price_minus_partial)
 
 
 @receiver(post_save, sender=Building)
@@ -50,24 +64,36 @@ def update_price_minus_partial(sender, instance, **kwargs):
 @receiver(post_delete, sender=BuildingEvaluationComponent)
 def update_partial_price(sender, instance, **kwargs):
     """Recalculate partial_price in PartialBuildingOwnership whenever there is a relevant change in related models."""
-    
+
     if isinstance(instance, PartialBuildingOwnership):
         # Recalculate partial_price for the current PartialBuildingOwnership instance
-        instance.partial_price = instance.partial_ownership_price()
-        instance.save(update_fields=['partial_price'])
-    
+        partial_price = instance.partial_ownership_price()
+        PartialBuildingOwnership.objects.filter(pk=instance.pk).update(partial_price=partial_price)
+
     elif isinstance(instance, Building):
         # Update partial_price for all related PartialBuildingOwnership entries
-        for partial_ownership in instance.partialbuildingownership_set.all():
-            partial_ownership.partial_price = partial_ownership.partial_ownership_price()
-            partial_ownership.save(update_fields=['partial_price'])
-    
-    elif isinstance(instance, (BuildingEvaluation, BuildingEvaluationComponent)):
-        # Get the building and update all related PartialBuildingOwnership entries
+        partial_ownerships = instance.partialbuildingownership_set.all()
+        for partial_ownership in partial_ownerships:
+            partial_price = partial_ownership.partial_ownership_price()
+            PartialBuildingOwnership.objects.filter(pk=partial_ownership.pk).update(partial_price=partial_price)
+
+    elif isinstance(instance, BuildingEvaluation):
+        # Get the building directly from the evaluation
         building = instance.building
-        for partial_ownership in building.partialbuildingownership_set.all():
-            partial_ownership.partial_price = partial_ownership.partial_ownership_price()
-            partial_ownership.save(update_fields=['partial_price'])
+        # Update all related PartialBuildingOwnership entries
+        partial_ownerships = building.partialbuildingownership_set.all()
+        for partial_ownership in partial_ownerships:
+            partial_price = partial_ownership.partial_ownership_price()
+            PartialBuildingOwnership.objects.filter(pk=partial_ownership.pk).update(partial_price=partial_price)
+
+    elif isinstance(instance, BuildingEvaluationComponent):
+        # Access the building through the evaluation on the BuildingEvaluationComponent
+        building = instance.evaluation.building
+        # Update all related PartialBuildingOwnership entries
+        partial_ownerships = building.partialbuildingownership_set.all()
+        for partial_ownership in partial_ownerships:
+            partial_price = partial_ownership.partial_ownership_price()
+            PartialBuildingOwnership.objects.filter(pk=partial_ownership.pk).update(partial_price=partial_price)
 
 # --------------------------------------------------------------------
 #                             Items

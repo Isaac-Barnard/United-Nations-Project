@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.contenttypes.models import ContentType
+from django.db.models import Q
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db.models.functions import Coalesce
 from django.contrib.auth.models import User
@@ -167,8 +168,9 @@ class Building(models.Model):
         total_value = sum(evaluation.total_diamond_value for evaluation in evaluations)
 
         # Calculate the average price
-        avg_price = Decimal(total_value) / Decimal(evaluation_count)
-        return avg_price / evaluation_count
+        avg_price = total_value / Decimal(evaluation_count)
+        #return avg_price / evaluation_count
+        return avg_price
 
     @property
     def adjusted_ownership(self):
@@ -176,11 +178,10 @@ class Building(models.Model):
         Calculate the adjusted ownership for the building.
         Ownership is 100% minus the sum of partial owners' percentages who are not the main owner.
         """
-        total_ownership = self.partialbuildingownership_set.aggregate(
-            total_ownership=Coalesce(
-                Sum('percentage', filter=~F('partial_owner_abbreviation') == self.owner.abbreviation),
-                Value(0)
-            )
+        total_ownership = self.partialbuildingownership_set.filter(
+            ~Q(partial_owner_abbreviation=self.owner.abbreviation)
+        ).aggregate(
+            total_ownership=Coalesce(Sum('percentage'), Value(0))
         )['total_ownership'] or 0
 
         return 100 - total_ownership
@@ -196,12 +197,12 @@ class Building(models.Model):
 class PartialBuildingOwnership(models.Model):
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
     partial_owner_type = models.ForeignKey(
-        ContentType, 
+        ContentType,
         on_delete=models.CASCADE,
         limit_choices_to={'model__in': ('nation', 'company')}  # Only allow Nation and Company
     )
     partial_owner_abbreviation = models.CharField(max_length=100)  # Must match Nation or Company abbreviation
-    partial_owner = GenericForeignKey('partial_owner_type', 'partial_owner_abbreviation')
+    #partial_owner = GenericForeignKey('partial_owner_type', 'partial_owner_abbreviation')
     percentage = models.IntegerField()  # Whole percentage, no decimal places
     # Precalculated fields
     partial_price = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
@@ -210,13 +211,19 @@ class PartialBuildingOwnership(models.Model):
         unique_together = ('building', 'partial_owner_type', 'partial_owner_abbreviation')
 
     def clean(self):
-        """Validate that partial_owner_abbreviation matches either Nation or Company."""
-        if self.partial_owner_type.model == 'nation':
-            if not Nation.objects.filter(abbreviation=self.partial_owner_abbreviation).exists():
-                raise ValidationError(f"{self.partial_owner_abbreviation} is not a valid Nation abbreviation.")
-        elif self.partial_owner_type.model == 'company':
-            if not Company.objects.filter(abbreviation=self.partial_owner_abbreviation).exists():
-                raise ValidationError(f"{self.partial_owner_abbreviation} is not a valid Company abbreviation.")
+        """Validate that partial_owner_abbreviation matches an existing Nation or Company."""
+        model_class = self.partial_owner_type.model_class()
+        if not model_class.objects.filter(abbreviation=self.partial_owner_abbreviation).exists():
+            raise ValidationError(f"{self.partial_owner_abbreviation} is not a valid {model_class.__name__} abbreviation.")
+        
+    @property
+    def partial_owner(self):
+        """Fetch the partial owner instance based on abbreviation."""
+        model_class = self.partial_owner_type.model_class()
+        try:
+            return model_class.objects.get(abbreviation=self.partial_owner_abbreviation)
+        except model_class.DoesNotExist:
+            return None
 
     def partial_ownership_price(self):
         """Calculate the price based on the partial ownership percentage."""
