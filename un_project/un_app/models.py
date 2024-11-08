@@ -1,26 +1,80 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import Q
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db.models.functions import Coalesce
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.db.models import Avg, F, Sum, Value
+from django.db.models import Avg, F, Q, Sum, Value, DecimalField
 from decimal import Decimal
 
 # --------------------------------------------------------------------
 class Nation(models.Model):
     name = models.CharField(max_length=100, unique=True)
     abbreviation = models.CharField(max_length=100, unique=True)
+    # Precalculated fields
+    total_liquid_asset_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
+    total_item_asset_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
+    total_building_asset_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
+
+    # Calculate total liquid asset value
+    def calculate_total_liquid_asset_value(self):
+        total = self.liquidcount_set.aggregate(
+            total_value=Coalesce(
+                Sum(
+                    F('count') * F('denomination__diamond_equivalent'),
+                    output_field=DecimalField(max_digits=20, decimal_places=6)
+                ), 
+                Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
+            )
+        )['total_value'] or Decimal('0')
+        return total
+
+    # Calculate total item asset value
+    def calculate_total_item_asset_value(self):
+        total = self.itemcount_set.aggregate(
+            total_value=Coalesce(
+                Sum('total_value', output_field=DecimalField(max_digits=20, decimal_places=6)),
+                Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
+            )
+        )['total_value'] or Decimal('0')
+        return total
+
+    # Calculate total building asset value
+    def calculate_total_building_asset_value(self):
+        # Sum of buildings owned by the nation
+        buildings_total = self.owned_buildings.aggregate(
+            total_value=Coalesce(
+                Sum('price_minus_partial', output_field=DecimalField(max_digits=20, decimal_places=6)),
+                Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
+            )
+        )['total_value'] or Decimal('0')
+
+        # Sum of partial ownerships
+        nation_content_type = ContentType.objects.get_for_model(Nation)
+        partials_total = PartialBuildingOwnership.objects.filter(
+            partial_owner_type=nation_content_type,
+            partial_owner_abbreviation=self.abbreviation
+        ).aggregate(
+            total_value=Coalesce(
+                Sum('partial_price', output_field=DecimalField(max_digits=20, decimal_places=6)),
+                Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
+            )
+        )['total_value'] or Decimal('0')
+
+        return buildings_total + partials_total
 
     def __str__(self):
-        return self.abbreviation
+        return f"{self.name} ({self.abbreviation})"
     
 # --------------------------------------------------------------------
 class Company(models.Model):
     name = models.CharField(max_length=100, unique=True)
     abbreviation = models.CharField(max_length=100, unique=True)
+    # Precalculated fields
+    total_liquid_asset_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
+    total_item_asset_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
+    total_building_asset_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
 
     def __str__(self):
         return self.abbreviation

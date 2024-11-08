@@ -38,6 +38,9 @@
             {% endfor %}
         </tbody>
     </table>
+    <div class="total-value-sum">
+        <h3>Total Value of All Liquid Assets: {{ nation.total_liquid_asset_value|custom_decimal_places }}</h3>
+    </div>
 
     <h2 class="items-heading">Owned Items</h2>
     
@@ -80,7 +83,7 @@
         
         <!-- Add a row to display the sum of total values -->
         <div class="total-value-sum">
-            <h3>Total Value of All Items: {{ total_value_sum|custom_decimal_places }}</h3>
+            <h3>Total Value of All Items: {{ nation.total_item_asset_value|custom_decimal_places }}</h3>
         </div>
     </div>
 
@@ -137,5 +140,8 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="total-value-sum">
+        <h3>Total Value of All Buildings: {{ nation.total_building_asset_value|custom_decimal_places }}</h3>
     </div>
 {% endblock %}

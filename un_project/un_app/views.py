@@ -87,16 +87,12 @@ def nation_balance_sheet(request, nation_abbreviation):
 
     # Calculate total value and market price for each item
     item_data = []
-    total_value_sum = Decimal('0')  # Initialize total value sum
     for item in all_items:
         item_name = item.name if item.name else "Unnamed Item"
         market_value = item.market_value if item.market_value else Decimal('0')
 
         # Get the count and total_value for the item, defaulting to 0 if not present
         count, total_value = item_count_dict.get(item.id, (0, 0))
-        
-        # Accumulate the total value for summing
-        total_value_sum += total_value
 
         item_data.append({
             'name': item_name,
@@ -125,7 +121,6 @@ def nation_balance_sheet(request, nation_abbreviation):
     'buildings': buildings,
     'partial_buildings': partial_buildings,
     'items_parts': [items_part1, items_part2, items_part3, items_part4, items_part5],  # Pass as a single list
-    'total_value_sum': total_value_sum,
     'denominations': denominations,
     'liquid_asset_data': liquid_asset_data,
 })
@@ -182,16 +177,12 @@ def company_balance_sheet(request, company_abbreviation):
 
     # Calculate total value and market price for each item
     item_data = []
-    total_value_sum = Decimal('0')  # Initialize total value sum
     for item in all_items:
         item_name = item.name if item.name else "Unnamed Item"
         market_value = item.market_value if item.market_value else Decimal('0')
 
         # Get the count and total_value for the item, defaulting to 0 if not present
         count, total_value = item_count_dict.get(item.id, (0, 0))
-        
-        # Accumulate the total value for summing
-        total_value_sum += total_value
 
         item_data.append({
             'name': item_name,
@@ -220,7 +211,6 @@ def company_balance_sheet(request, company_abbreviation):
         #'buildings': buildings,
         'partial_buildings': partial_buildings,
         'items_parts': [items_part1, items_part2, items_part3, items_part4, items_part5],  # Pass as a single list
-        'total_value_sum': total_value_sum,
         'denominations': denominations,
         'liquid_asset_data': liquid_asset_data,
     })
