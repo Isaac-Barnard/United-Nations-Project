@@ -46,7 +46,8 @@ def nation_balance_sheet(request, nation_abbreviation):
     partial_buildings = Building.objects.filter(
         partialbuildingownership__partial_owner_abbreviation=nation.abbreviation
     ).annotate(
-        ownership=F('partialbuildingownership__percentage')
+        ownership=F('partialbuildingownership__percentage'),
+        partial_price=F('partialbuildingownership__partial_price')
     ).distinct()
 
     # Fetch all items and sort by the manual 'ordering' field

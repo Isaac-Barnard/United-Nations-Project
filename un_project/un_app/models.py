@@ -129,6 +129,9 @@ class Building(models.Model):
                                   help_text="Medal of Papa Quinn (MoPQ) award for architecture or another MoPQ award related to a building.")
     architectural_style = models.CharField(max_length=100, null=True, blank=True,
                                            help_text="The architectural style of the building if it falls into one")
+    # Precalculated fields
+    ownership_minus_partial = models.IntegerField(default=0)
+    price_minus_partial = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
 
     def save(self, *args, **kwargs):
         current_year = timezone.now().year
@@ -155,14 +158,17 @@ class Building(models.Model):
     def price(self):
         evaluations = self.building_evaluations.all()
         evaluation_count = evaluations.count()
+
+        # If there are fewer than two evaluations, return 0 as specified
         if evaluation_count < 2:
             return Decimal('0')
+    
+        # Calculate the total value by summing up each evaluation's total_diamond_value
+        total_value = sum(evaluation.total_diamond_value for evaluation in evaluations)
 
-        _total_value = Decimal('0')
-        for evaluation in evaluations:
-            _total_value += evaluation.total_diamond_value
-        avg_price = _total_value / Decimal(evaluation_count)
-        return avg_price
+        # Calculate the average price
+        avg_price = Decimal(total_value) / Decimal(evaluation_count)
+        return avg_price / evaluation_count
 
     @property
     def adjusted_ownership(self):
@@ -197,6 +203,8 @@ class PartialBuildingOwnership(models.Model):
     partial_owner_abbreviation = models.CharField(max_length=100)  # Must match Nation or Company abbreviation
     partial_owner = GenericForeignKey('partial_owner_type', 'partial_owner_abbreviation')
     percentage = models.IntegerField()  # Whole percentage, no decimal places
+    # Precalculated fields
+    partial_price = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
 
     class Meta:
         unique_together = ('building', 'partial_owner_type', 'partial_owner_abbreviation')
@@ -210,7 +218,6 @@ class PartialBuildingOwnership(models.Model):
             if not Company.objects.filter(abbreviation=self.partial_owner_abbreviation).exists():
                 raise ValidationError(f"{self.partial_owner_abbreviation} is not a valid Company abbreviation.")
 
-    @property
     def partial_ownership_price(self):
         """Calculate the price based on the partial ownership percentage."""
         if self.building.price:
@@ -244,6 +251,7 @@ class BuildingEvaluationComponent(models.Model):
     evaluation = models.ForeignKey(BuildingEvaluation, on_delete=models.CASCADE, related_name='evaluation_components')
     denomination = models.ForeignKey(Denomination, on_delete=models.CASCADE)
     quantity = models.DecimalField(max_digits=20, decimal_places=8)
+
 
     def __str__(self):
         formatted_quantity = f"{self.quantity:.3f}"  # Format quantity to 3 decimal places

@@ -81,7 +81,7 @@ const icons = {
         iconAnchor: [15, 30],
         popupAnchor: [0, -30],
     }),
-    'default': L.icon({  // Add a default fallback icon
+    '': L.icon({  // Add a default fallback icon
         iconUrl: '/static/images/building_icons/default_building_icon.png',
         iconSize: [30, 30],
         iconAnchor: [15, 30],

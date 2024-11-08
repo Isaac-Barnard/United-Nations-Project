@@ -103,8 +103,8 @@
                     {% for building in buildings %}
                         <tr style="font-size: 0.95em;">
                             <td class="building-name">{{ building.name }}</td>
-                            <td>{{ building.adjusted_ownership }}%</td>
-                            <td>{{ building.adjusted_ownership_price|custom_decimal_places }}</td>
+                            <td>{{ building.ownership_minus_partial }}%</td>
+                            <td>{{ building.price_minus_partial|custom_decimal_places }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -127,7 +127,7 @@
                         <tr style="font-size: 0.95em;">
                             <td class="building-name">{{ building.name }}</td>
                             <td>{{ building.ownership }}%</td>
-                            <td>{{ building.adjusted_ownership_price|custom_decimal_places }}</td>
+                            <td>{{ building.partial_price|custom_decimal_places }}</td>
                         </tr>
                     {% empty %}
                         <tr>

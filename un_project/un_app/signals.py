@@ -1,6 +1,77 @@
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
-from .models import Item, ItemCount, ItemEvaluation, ItemFixedPriceComponent, ItemEvaluationComponent
+from .models import Item, ItemCount, ItemEvaluation, ItemFixedPriceComponent, ItemEvaluationComponent, Building, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent
+
+# --------------------------------------------------------------------
+#                           Buildings
+# --------------------------------------------------------------------
+
+@receiver(post_save, sender=Building)
+@receiver(post_save, sender=PartialBuildingOwnership)
+@receiver(post_delete, sender=PartialBuildingOwnership)
+def update_ownership_minus_partial(sender, instance, **kwargs):
+    """Recalculate ownership_minus_partial whenever there is a change in Building or PartialBuildingOwnership."""
+    if isinstance(instance, Building):
+        building = instance
+    else:
+        building = instance.building
+
+    # Calculate ownership_minus_partial using adjusted_ownership
+    building.ownership_minus_partial = building.adjusted_ownership
+    building.save(update_fields=['ownership_minus_partial'])
+
+
+@receiver(post_save, sender=Building)
+@receiver(post_save, sender=PartialBuildingOwnership)
+@receiver(post_delete, sender=PartialBuildingOwnership)
+@receiver(post_save, sender=BuildingEvaluation)
+@receiver(post_delete, sender=BuildingEvaluation)
+@receiver(post_save, sender=BuildingEvaluationComponent)
+@receiver(post_delete, sender=BuildingEvaluationComponent)
+def update_price_minus_partial(sender, instance, **kwargs):
+    """Recalculate price_minus_partial whenever there is a relevant change in Building, PartialBuildingOwnership, BuildingEvaluation, or BuildingEvaluationComponent."""
+    
+    if isinstance(instance, Building):
+        building = instance
+    elif isinstance(instance, (PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent)):
+        building = instance.building
+
+    # Calculate price_minus_partial using adjusted_ownership_price
+    building.price_minus_partial = building.adjusted_ownership_price
+    building.save(update_fields=['price_minus_partial'])
+
+
+@receiver(post_save, sender=Building)
+@receiver(post_save, sender=PartialBuildingOwnership)
+@receiver(post_delete, sender=PartialBuildingOwnership)
+@receiver(post_save, sender=BuildingEvaluation)
+@receiver(post_delete, sender=BuildingEvaluation)
+@receiver(post_save, sender=BuildingEvaluationComponent)
+@receiver(post_delete, sender=BuildingEvaluationComponent)
+def update_partial_price(sender, instance, **kwargs):
+    """Recalculate partial_price in PartialBuildingOwnership whenever there is a relevant change in related models."""
+    
+    if isinstance(instance, PartialBuildingOwnership):
+        # Recalculate partial_price for the current PartialBuildingOwnership instance
+        instance.partial_price = instance.partial_ownership_price()
+        instance.save(update_fields=['partial_price'])
+    
+    elif isinstance(instance, Building):
+        # Update partial_price for all related PartialBuildingOwnership entries
+        for partial_ownership in instance.partialbuildingownership_set.all():
+            partial_ownership.partial_price = partial_ownership.partial_ownership_price()
+            partial_ownership.save(update_fields=['partial_price'])
+    
+    elif isinstance(instance, (BuildingEvaluation, BuildingEvaluationComponent)):
+        # Get the building and update all related PartialBuildingOwnership entries
+        building = instance.building
+        for partial_ownership in building.partialbuildingownership_set.all():
+            partial_ownership.partial_price = partial_ownership.partial_ownership_price()
+            partial_ownership.save(update_fields=['partial_price'])
+
+# --------------------------------------------------------------------
+#                             Items
+# --------------------------------------------------------------------
 
 @receiver(post_save, sender=ItemCount)
 @receiver(post_delete, sender=ItemCount)
