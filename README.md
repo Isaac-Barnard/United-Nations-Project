@@ -18,7 +18,7 @@ https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwN
     - [x] Move item calculations to the database rather then when the page is loaded to speed up loading times
         - [x] Items: Total Value, Market Value
         - [x] Buildings: partial stuff
-        - [x] Liquid Assests: Asset totals
+        - [ ] Liquid Assests: Asset totals
         - [x] Total Value of items, liquid, buildings
     - [ ] Create liability tables
         - [ ] Add Mortgages section

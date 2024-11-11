@@ -203,7 +203,7 @@ class LiquidCount(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['asset_container', 'denomination'], name='unique_nation_asset_denomination'),
             models.UniqueConstraint(fields=['asset_container', 'denomination'], name='unique_company_asset_enomination'),
-            #models.UniqueConstraint(fields=['asset_container', 'denomination'], name='unique_asset_denomination'),
+            models.UniqueConstraint(fields=['asset_container', 'denomination'], name='unique_asset_denomination'),
         ]
 
     def __str__(self):
