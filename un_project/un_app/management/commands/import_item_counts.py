@@ -1,4 +1,5 @@
 import csv
+from decimal import Decimal
 from django.core.management.base import BaseCommand
 from un_app.models import ItemCount, Item, Nation, Company
 
@@ -30,12 +31,15 @@ class Command(BaseCommand):
                         self.stdout.write(self.style.ERROR(f"Error: Both nation and company provided for item '{row['item']}'"))
                         continue
 
+                    # Convert the count to Decimal
+                    count_value = Decimal(row['count'])
+
                     # Create or update the ItemCount object
                     item_count, created = ItemCount.objects.update_or_create(
                         item=item,
                         nation=nation,
                         company=company,
-                        defaults={'count': row['count']}
+                        defaults={'count': count_value}
                     )
 
                     action = "Added" if created else "Updated"

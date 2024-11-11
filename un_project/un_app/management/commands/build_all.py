@@ -13,6 +13,7 @@ class Command(BaseCommand):
         partial_building_data_csv = os.path.join('un_app', 'data', 'partial_building_data.csv')
         nation_data_csv = os.path.join('un_app', 'data', 'nation_data.csv')
         market_rate_item_evaluation_csv = os.path.join('un_app', 'data', 'market_rate_item_evaluations_data.csv')
+        liquid_cash_container_data_csv = os.path.join('un_app', 'data', 'liquid_cash_container_data.csv')
         liquid_cash_data_csv = os.path.join('un_app', 'data', 'liquid_cash_data.csv')
         item_counts_data_csv = os.path.join('un_app', 'data', 'item_count_data.csv')
         fixed_price_item_csv = os.path.join('un_app', 'data', 'fixed_price_item_data.csv')
@@ -26,6 +27,9 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting creating denominations...\n----------------------------------------------------"))
             call_command('create_denominations')
 
+            self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of players from {player_data_csv}...\n----------------------------------------------------"))
+            call_command('import_players', player_data_csv)
+
             self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting creating users...\n----------------------------------------------------"))
             call_command('create_users')
 
@@ -38,9 +42,6 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of territories from {territory_data_csv}...\n----------------------------------------------------"))
             call_command('import_territories', territory_data_csv)
 
-            self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of players from {player_data_csv}...\n----------------------------------------------------"))
-            call_command('import_players', player_data_csv)
-
             self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of buildings from {building_data_csv}...\n----------------------------------------------------"))
             call_command('import_buildings', building_data_csv)
 
@@ -52,6 +53,9 @@ class Command(BaseCommand):
 
             self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of liquid cash from {liquid_cash_data_csv}...\n----------------------------------------------------"))
             call_command('import_liquid_count', liquid_cash_data_csv)
+
+            self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of liquid cash from {liquid_cash_data_csv}...\n----------------------------------------------------"))
+            call_command('import_liquid_containers', liquid_cash_container_data_csv)
 
             self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of fixed price items from {fixed_price_item_csv}...\n----------------------------------------------------"))
             call_command('import_fixed_item_prices', fixed_price_item_csv)

@@ -27,17 +27,20 @@
             </tr>
         </thead>
         <tbody style="font-size: .95em;">
-            {% for asset_name, data in liquid_asset_data.items %}
+            {% for asset_data in liquid_asset_data %}
             <tr style="font-size: .95em;">
-                <td>{{ asset_name }}</td>
-                <td class="right-align">{{ data.total_in_diamonds|custom_decimal_places }}</td>
-                {% for count in data.counts %}
-                <td class="right-align">{{ count|stringformat:"g" }}</td>
+                <td>{{ asset_data.container_name }}</td>
+                <td class="right-align">{{ asset_data.total_in_diamonds|custom_decimal_places }}</td>
+                {% for count in asset_data.counts %}
+                    <td class="right-align">{{ count|stringformat:"g" }}</td>
                 {% endfor %}
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    <div class="total-value-sum">
+        <h3>Total Value of All Liquid Assets: {{ company.total_liquid_asset_value|custom_decimal_places }}</h3>
+    </div>
 
     <h2 class="items-heading">Owned Items</h2>
     
@@ -80,7 +83,7 @@
         
         <!-- Add a row to display the sum of total values -->
         <div class="total-value-sum">
-            <h3>Total Value of All Items: {{ total_value_sum|custom_decimal_places }}</h3>
+            <h3>Total Value of All Items: {{ company.total_item_asset_value|custom_decimal_places }}</h3>
         </div>
     </div>
 
@@ -115,5 +118,8 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="total-value-sum">
+        <h3>Total Value of All Buildings: {{ company.total_building_asset_value|custom_decimal_places }}</h3>
     </div>
 {% endblock %}

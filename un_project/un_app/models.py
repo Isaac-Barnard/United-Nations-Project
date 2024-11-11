@@ -5,24 +5,125 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db.models.functions import Coalesce
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.db.models import Avg, F, Sum, Value
+from django.db.models import Avg, F, Q, Sum, Value, DecimalField
 from decimal import Decimal
 
 # --------------------------------------------------------------------
 class Nation(models.Model):
     name = models.CharField(max_length=100, unique=True)
     abbreviation = models.CharField(max_length=100, unique=True)
+    # Precalculated fields
+    total_liquid_asset_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
+    total_item_asset_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
+    total_building_asset_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
+
+    # Calculate total liquid asset value
+    def calculate_total_liquid_asset_value(self):
+        total_value = Decimal('0')
+        # Iterate over each LiquidAssetContainer related to this nation
+        for container in LiquidAssetContainer.objects.filter(nation=self):
+            # Calculate the total diamond value for each container
+            container_total = container.liquidcount_set.aggregate(
+                total_value=Coalesce(
+                    Sum(
+                        F('count') * F('denomination__diamond_equivalent'),
+                        output_field=DecimalField(max_digits=20, decimal_places=6)
+                    ),
+                    Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
+                )
+            )['total_value'] or Decimal('0')
+            
+            # Add to the total for the nation
+            total_value += container_total
+        return total_value
+
+    # Calculate total item asset value
+    def calculate_total_item_asset_value(self):
+        total = self.itemcount_set.aggregate(
+            total_value=Coalesce(
+                Sum('total_value', output_field=DecimalField(max_digits=20, decimal_places=6)),
+                Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
+            )
+        )['total_value'] or Decimal('0')
+        return total
+
+    # Calculate total building asset value
+    def calculate_total_building_asset_value(self):
+        # Sum of buildings owned by the nation
+        buildings_total = self.owned_buildings.aggregate(
+            total_value=Coalesce(
+                Sum('price_minus_partial', output_field=DecimalField(max_digits=20, decimal_places=6)),
+                Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
+            )
+        )['total_value'] or Decimal('0')
+
+        # Sum of partial ownerships
+        nation_content_type = ContentType.objects.get_for_model(Nation)
+        partials_total = PartialBuildingOwnership.objects.filter(
+            partial_owner_type=nation_content_type,
+            partial_owner_abbreviation=self.abbreviation
+        ).aggregate(
+            total_value=Coalesce(
+                Sum('partial_price', output_field=DecimalField(max_digits=20, decimal_places=6)),
+                Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
+            )
+        )['total_value'] or Decimal('0')
+
+        return buildings_total + partials_total
 
     def __str__(self):
-        return self.abbreviation
+        return f"{self.name} ({self.abbreviation})"
     
 # --------------------------------------------------------------------
 class Company(models.Model):
     name = models.CharField(max_length=100, unique=True)
     abbreviation = models.CharField(max_length=100, unique=True)
+    # Precalculated fields
+    total_liquid_asset_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
+    total_item_asset_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
+    total_building_asset_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
+
+    # Calculate total liquid asset value
+    def calculate_total_liquid_asset_value(self):
+        total = self.liquidcount_set.aggregate(
+            total_value=Coalesce(
+                Sum(
+                    F('count') * F('denomination__diamond_equivalent'),
+                    output_field=DecimalField(max_digits=20, decimal_places=6)
+                ), 
+                Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
+            )
+        )['total_value'] or Decimal('0')
+        return total
+
+    # Calculate total item asset value
+    def calculate_total_item_asset_value(self):
+        total = self.itemcount_set.aggregate(
+            total_value=Coalesce(
+                Sum('total_value', output_field=DecimalField(max_digits=20, decimal_places=6)),
+                Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
+            )
+        )['total_value'] or Decimal('0')
+        return total
+
+    # Calculate total building asset value
+    def calculate_total_building_asset_value(self):
+        # Sum of partial ownerships
+        company_content_type = ContentType.objects.get_for_model(Company)
+        partials_total = PartialBuildingOwnership.objects.filter(
+            partial_owner_type=company_content_type,
+            partial_owner_abbreviation=self.abbreviation
+        ).aggregate(
+            total_value=Coalesce(
+                Sum('partial_price', output_field=DecimalField(max_digits=20, decimal_places=6)),
+                Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
+            )
+        )['total_value'] or Decimal('0')
+
+        return partials_total
 
     def __str__(self):
-        return self.abbreviation
+        return f"{self.name} ({self.abbreviation})"
     
 # --------------------------------------------------------------------
 class Player(models.Model):
@@ -62,33 +163,54 @@ class Denomination(models.Model):
         return self.name
     
 # --------------------------------------------------------------------
-class LiquidCount(models.Model):
+#                        Liquid Assets
+# --------------------------------------------------------------------
+class LiquidAssetContainer(models.Model):
+    name = models.CharField(max_length=100)
     nation = models.ForeignKey(Nation, on_delete=models.CASCADE, null=True, blank=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
-    asset_name = models.CharField(max_length=100)
+    ordering = models.IntegerField(default=0)  # Field for manual ordering
+    
+    class Meta:
+        # Ensure the combination of nation/company and item is unique
+        constraints = [
+            models.UniqueConstraint(fields=['nation', 'name'], name='unique_nation_asset'),
+            models.UniqueConstraint(fields=['company', 'name'], name='unique_company_asset'),
+            models.CheckConstraint(
+                check=(
+                    models.Q(nation__isnull=False, company__isnull=True) |
+                    models.Q(nation__isnull=True, company__isnull=False)
+                ),
+                name='nation_or_company_asset_not_both'
+            )
+        ]
+
+    def __str__(self):
+        if self.nation:
+            return f'{self.nation.abbreviation} - ({self.name})'
+        elif self.company:
+            return f'{self.company.abbreviation} - ({self.name})'
+        return f'{self.name}'
+
+# --------------------------------------------------------------------
+class LiquidCount(models.Model):
+    asset_container = models.ForeignKey(LiquidAssetContainer, on_delete=models.CASCADE, null=True, blank=True)
     denomination = models.ForeignKey(Denomination, on_delete=models.CASCADE)
     count = models.DecimalField(max_digits=20, decimal_places=3)  # Allows for 2 decimal places
 
     class Meta:
         # Ensure the combination of nation/company and item is unique
         constraints = [
-            models.UniqueConstraint(fields=['nation', 'asset_name', 'denomination'], name='unique_nation_asset_denomination'),
-            models.UniqueConstraint(fields=['company', 'asset_name', 'denomination'], name='unique_company_asset'),
-            #models.UniqueConstraint(fields=['asset_name', 'denomination'], name='unique_asset_denomination'),
-            models.CheckConstraint(
-                check=(
-                    models.Q(nation__isnull=False, company__isnull=True) |
-                    models.Q(nation__isnull=True, company__isnull=False)
-                ),
-                name='nation_or_company_liquid_not_both'
-            )
+            models.UniqueConstraint(fields=['asset_container', 'denomination'], name='unique_nation_asset_denomination'),
+            models.UniqueConstraint(fields=['asset_container', 'denomination'], name='unique_company_asset_enomination'),
+            models.UniqueConstraint(fields=['asset_container', 'denomination'], name='unique_asset_denomination'),
         ]
 
     def __str__(self):
-        if self.nation:
-            return f'{self.denomination.name} - {self.nation.name} x {self.count} ({self.asset_name})'
-        elif self.company:
-            return f'{self.denomination.name} - {self.company.name} x {self.count} ({self.asset_name})'
+        if self.asset_container.nation:
+            return f'({self.asset_container}) - {self.denomination.name} x {self.count}'
+        elif self.asset_container.company:
+            return f'({self.asset_container}) - {self.denomination.name} x {self.count}'
         return f'{self.denomination.name} x {self.count}'
 
 
@@ -129,6 +251,9 @@ class Building(models.Model):
                                   help_text="Medal of Papa Quinn (MoPQ) award for architecture or another MoPQ award related to a building.")
     architectural_style = models.CharField(max_length=100, null=True, blank=True,
                                            help_text="The architectural style of the building if it falls into one")
+    # Precalculated fields
+    ownership_minus_partial = models.IntegerField(default=0)
+    price_minus_partial = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
 
     def save(self, *args, **kwargs):
         current_year = timezone.now().year
@@ -155,13 +280,17 @@ class Building(models.Model):
     def price(self):
         evaluations = self.building_evaluations.all()
         evaluation_count = evaluations.count()
+
+        # If there are fewer than two evaluations, return 0 as specified
         if evaluation_count < 2:
             return Decimal('0')
+    
+        # Calculate the total value by summing up each evaluation's total_diamond_value
+        total_value = sum(evaluation.total_diamond_value for evaluation in evaluations)
 
-        _total_value = Decimal('0')
-        for evaluation in evaluations:
-            _total_value += evaluation.total_diamond_value
-        avg_price = _total_value / Decimal(evaluation_count)
+        # Calculate the average price
+        avg_price = total_value / Decimal(evaluation_count)
+        #return avg_price / evaluation_count
         return avg_price
 
     @property
@@ -170,11 +299,10 @@ class Building(models.Model):
         Calculate the adjusted ownership for the building.
         Ownership is 100% minus the sum of partial owners' percentages who are not the main owner.
         """
-        total_ownership = self.partialbuildingownership_set.aggregate(
-            total_ownership=Coalesce(
-                Sum('percentage', filter=~F('partial_owner_abbreviation') == self.owner.abbreviation),
-                Value(0)
-            )
+        total_ownership = self.partialbuildingownership_set.filter(
+            ~Q(partial_owner_abbreviation=self.owner.abbreviation)
+        ).aggregate(
+            total_ownership=Coalesce(Sum('percentage'), Value(0))
         )['total_ownership'] or 0
 
         return 100 - total_ownership
@@ -190,27 +318,34 @@ class Building(models.Model):
 class PartialBuildingOwnership(models.Model):
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
     partial_owner_type = models.ForeignKey(
-        ContentType, 
+        ContentType,
         on_delete=models.CASCADE,
         limit_choices_to={'model__in': ('nation', 'company')}  # Only allow Nation and Company
     )
     partial_owner_abbreviation = models.CharField(max_length=100)  # Must match Nation or Company abbreviation
-    partial_owner = GenericForeignKey('partial_owner_type', 'partial_owner_abbreviation')
+    #partial_owner = GenericForeignKey('partial_owner_type', 'partial_owner_abbreviation')
     percentage = models.IntegerField()  # Whole percentage, no decimal places
+    # Precalculated fields
+    partial_price = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
 
     class Meta:
         unique_together = ('building', 'partial_owner_type', 'partial_owner_abbreviation')
 
     def clean(self):
-        """Validate that partial_owner_abbreviation matches either Nation or Company."""
-        if self.partial_owner_type.model == 'nation':
-            if not Nation.objects.filter(abbreviation=self.partial_owner_abbreviation).exists():
-                raise ValidationError(f"{self.partial_owner_abbreviation} is not a valid Nation abbreviation.")
-        elif self.partial_owner_type.model == 'company':
-            if not Company.objects.filter(abbreviation=self.partial_owner_abbreviation).exists():
-                raise ValidationError(f"{self.partial_owner_abbreviation} is not a valid Company abbreviation.")
-
+        """Validate that partial_owner_abbreviation matches an existing Nation or Company."""
+        model_class = self.partial_owner_type.model_class()
+        if not model_class.objects.filter(abbreviation=self.partial_owner_abbreviation).exists():
+            raise ValidationError(f"{self.partial_owner_abbreviation} is not a valid {model_class.__name__} abbreviation.")
+        
     @property
+    def partial_owner(self):
+        """Fetch the partial owner instance based on abbreviation."""
+        model_class = self.partial_owner_type.model_class()
+        try:
+            return model_class.objects.get(abbreviation=self.partial_owner_abbreviation)
+        except model_class.DoesNotExist:
+            return None
+
     def partial_ownership_price(self):
         """Calculate the price based on the partial ownership percentage."""
         if self.building.price:
@@ -244,6 +379,10 @@ class BuildingEvaluationComponent(models.Model):
     evaluation = models.ForeignKey(BuildingEvaluation, on_delete=models.CASCADE, related_name='evaluation_components')
     denomination = models.ForeignKey(Denomination, on_delete=models.CASCADE)
     quantity = models.DecimalField(max_digits=20, decimal_places=8)
+
+    class Meta:
+        unique_together = ('evaluation', 'denomination')
+
 
     def __str__(self):
         formatted_quantity = f"{self.quantity:.3f}"  # Format quantity to 3 decimal places
@@ -349,6 +488,9 @@ class ItemEvaluationComponent(models.Model):
     evaluation = models.ForeignKey(ItemEvaluation, on_delete=models.CASCADE, related_name='evaluation_components')
     denomination = models.ForeignKey(Denomination, on_delete=models.CASCADE)
     quantity = models.DecimalField(max_digits=20, decimal_places=8)
+
+    class Meta:
+        unique_together = ('evaluation', 'denomination')
 
     def __str__(self):
         return f'{self.quantity} x {self.denomination.name} x {self.evaluation}'

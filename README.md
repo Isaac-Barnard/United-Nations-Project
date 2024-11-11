@@ -12,14 +12,14 @@ https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwN
 
 ## Todo Roadmap
 - **Balance Sheets**
-    - [ ] Add Total Value of Total Cash & Cash Equivalents
-    - [ ] Add Total Value of buildings
-    - [ ] Manually order liquid assets (maybe create asset model with ordering field like item)
-    - [ ] Move item calculations to the database rather then when the page is loaded to speed up loading times
+    - [x] Add Total Value of Total Cash & Cash Equivalents
+    - [x] Add Total Value of buildings
+    - [x] Manually order liquid assets (maybe create asset model with ordering field like item)
+    - [x] Move item calculations to the database rather then when the page is loaded to speed up loading times
         - [x] Items: Total Value, Market Value
-        - [ ] Buildings: ?
-        - [ ] Liquid Assests: ?
-        - [ ] Total Value of ___'s
+        - [x] Buildings: partial stuff
+        - [ ] Liquid Assests: Asset totals
+        - [x] Total Value of items, liquid, buildings
     - [ ] Create liability tables
         - [ ] Add Mortgages section
         - [ ] Add Regular Loans section (Maybe rename?)
