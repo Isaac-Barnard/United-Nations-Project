@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.contrib.contenttypes.models import ContentType
-from .models import Item, ItemCount, ItemEvaluation, ItemFixedPriceComponent, ItemEvaluationComponent, Building, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Nation, LiquidCount, Company
+from .models import Item, ItemCount, ItemEvaluation, ItemFixedPriceComponent, ItemEvaluationComponent, Building, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Nation, LiquidCount, Company, LiquidAssetContainer
 
 # --------------------------------------------------------------------
 #                           Buildings
@@ -160,6 +160,20 @@ def update_item_fixed_price_value(sender, instance, **kwargs):
 @receiver(post_save, sender=LiquidCount)
 @receiver(post_delete, sender=LiquidCount)
 def update_total_liquid_asset_value(sender, instance, **kwargs):
+    container = instance.asset_container
+    if container:
+        nation = container.nation
+        company = container.company
+        if nation:
+            total = nation.calculate_total_liquid_asset_value()
+            Nation.objects.filter(pk=nation.pk).update(total_liquid_asset_value=total)
+        elif company:
+            total = company.calculate_total_liquid_asset_value()
+            Company.objects.filter(pk=company.pk).update(total_liquid_asset_value=total)
+
+@receiver(post_save, sender=LiquidAssetContainer)
+@receiver(post_delete, sender=LiquidAssetContainer)
+def update_total_liquid_asset_value_on_container_change(sender, instance, **kwargs):
     nation = instance.nation
     company = instance.company
     if nation:

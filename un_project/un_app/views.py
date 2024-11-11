@@ -3,7 +3,7 @@ from django.db.models import F, FloatField, ExpressionWrapper, Count, Value, Sum
 from django.db.models.functions import Coalesce, Rank
 from django.contrib.auth.decorators import login_required
 from .forms import BuildingEvaluationForm, ItemEvaluationForm
-from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount, ItemEvaluationComponent, ItemEvaluation, Item, Company, LiquidCount
+from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount, ItemEvaluationComponent, ItemEvaluation, Item, Company, LiquidCount, LiquidAssetContainer
 from decimal import Decimal
 
 def home(request):
@@ -60,29 +60,29 @@ def nation_balance_sheet(request, nation_abbreviation):
         for item_count in items_with_count
     }
 
-    # Fetch the liquid assets for the nation
-    liquid_assets = LiquidCount.objects.filter(nation=nation).order_by('asset_name', 'denomination')
+    # Fetch and sort liquid asset containers by ordering
+    liquid_containers = LiquidAssetContainer.objects.filter(nation=nation).order_by('ordering')
+    liquid_asset_data = []
 
-   # Create a dictionary to store liquid asset counts for each asset name
-    liquid_asset_data = {}
-    for asset in liquid_assets.values('asset_name').distinct():
-        asset_name = asset['asset_name']
-        asset_counts = []
-        total_in_diamonds = Decimal('0')  # Initialize the total value in diamonds
+    # Loop through each container to retrieve LiquidCounts and calculate values
+    for container in liquid_containers:
+        container_total_in_diamonds = Decimal('0')
+        container_counts = []
+
+        # Calculate counts and diamond equivalents for each denomination
         for denomination in denominations:
-            # Try to get the count for the denomination; default to 0 if none exists
-            count = liquid_assets.filter(asset_name=asset_name, denomination=denomination).first()
-            count_value = count.count if count else 0
-            asset_counts.append(count_value)
+            count_entry = container.liquidcount_set.filter(denomination=denomination).first()
+            count_value = count_entry.count if count_entry else Decimal('0')
+            container_counts.append(count_value)
 
-            # Calculate the diamond equivalent
-            diamond_value = count_value * denomination.diamond_equivalent
-            total_in_diamonds += diamond_value
+            # Calculate diamond equivalent for this denomination
+            container_total_in_diamonds += count_value * denomination.diamond_equivalent
 
-        liquid_asset_data[asset_name] = {
-            'counts': asset_counts,
-            'total_in_diamonds': total_in_diamonds  # Store the total in diamonds
-        }
+        liquid_asset_data.append({
+            'container_name': container.name,
+            'counts': container_counts,
+            'total_in_diamonds': container_total_in_diamonds,
+        })
 
 
     # Calculate total value and market price for each item
@@ -151,29 +151,29 @@ def company_balance_sheet(request, company_abbreviation):
         for item_count in items_with_count
     }
 
-    # Fetch the liquid assets for the company
-    liquid_assets = LiquidCount.objects.filter(company=company).order_by('asset_name', 'denomination')
+    # Fetch and sort liquid asset containers by ordering
+    liquid_containers = LiquidAssetContainer.objects.filter(company=company).order_by('ordering')
+    liquid_asset_data = []
 
-    # Create a dictionary to store liquid asset counts for each asset name
-    liquid_asset_data = {}
-    for asset in liquid_assets.values('asset_name').distinct():
-        asset_name = asset['asset_name']
-        asset_counts = []
-        total_in_diamonds = Decimal('0')  # Initialize the total value in diamonds
+    # Loop through each container to retrieve LiquidCounts and calculate values
+    for container in liquid_containers:
+        container_total_in_diamonds = Decimal('0')
+        container_counts = []
+
+        # Calculate counts and diamond equivalents for each denomination
         for denomination in denominations:
-            # Try to get the count for the denomination; default to 0 if none exists
-            count = liquid_assets.filter(asset_name=asset_name, denomination=denomination).first()
-            count_value = count.count if count else 0
-            asset_counts.append(count_value)
+            count_entry = container.liquidcount_set.filter(denomination=denomination).first()
+            count_value = count_entry.count if count_entry else Decimal('0')
+            container_counts.append(count_value)
 
-            # Calculate the diamond equivalent
-            diamond_value = count_value * denomination.diamond_equivalent
-            total_in_diamonds += diamond_value
+            # Calculate diamond equivalent for this denomination
+            container_total_in_diamonds += count_value * denomination.diamond_equivalent
 
-        liquid_asset_data[asset_name] = {
-            'counts': asset_counts,
-            'total_in_diamonds': total_in_diamonds  # Store the total in diamonds
-        }
+        liquid_asset_data.append({
+            'container_name': container.name,
+            'counts': container_counts,
+            'total_in_diamonds': container_total_in_diamonds,
+        })
 
     # Calculate total value and market price for each item
     item_data = []
