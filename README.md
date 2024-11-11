@@ -34,6 +34,7 @@ https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwN
     - [ ] Create shareholders table for companies (Shareholder, %, diamond equivalent [total assets * %])
 - **Evaluation Pages**
     - [ ] Must be logged in to see evaluation pages
+    - [ ] Be able to change your older evaluations
     - [ ] Make evaluation success better (Instead of taking you to a different page)
     - [ ] Change building/item evaluations to be more like google sheets (ie. other evaluators listed, etc…)
         - [ ] All buildings/items listed
@@ -74,4 +75,6 @@ https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwN
             - [x] Filter out nether/end buildings
             - [ ] Extended map to show more land
         - [ ] Somehow display historical/informative maps
+    - [ ] Add new/update building page
+        - [ ] Be able to search for existing buildings (narrows down list as you type more letters)
     
