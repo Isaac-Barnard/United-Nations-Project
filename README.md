@@ -15,11 +15,14 @@ https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwN
     - [x] Add Total Value of Total Cash & Cash Equivalents
     - [x] Add Total Value of buildings
     - [x] Manually order liquid assets (maybe create asset model with ordering field like item)
-    - [x] Move item calculations to the database rather then when the page is loaded to speed up loading times
+    - [ ] Move item calculations to the database rather then when the page is loaded to speed up loading times
         - [x] Items: Total Value, Market Value
         - [x] Buildings: partial stuff
-        - [ ] Liquid Assests: Asset totals
         - [x] Total Value of items, liquid, buildings
+        - [ ] Liquid Assests: Per asset totals
+        - [ ] Building heights
+        - [ ] Nation average height & # of buildings
+        - [ ] Territory average height & # of buildings
     - [ ] Create liability tables
         - [ ] Add Mortgages section
         - [ ] Add Regular Loans section (Maybe rename?)
@@ -39,25 +42,31 @@ https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwN
     - [ ] Change building/item evaluations to be more like google sheets (ie. other evaluators listed, etc…)
         - [ ] All buildings/items listed
         - [ ] Other evaluator's evaluations listed
+- **Graphs**
+    - [ ] Create historical records of nation/company assets (Total assets, liquid, items, buildings, other assets)
+    - [ ] Individual nation/company graphs in their balance sheets
+        - [ ] Total assets, liquid, items, buildings, other assets graphs over time
+    - [ ] Pie chart of total assets of all nations (To show breakup of total world wealth)
+    - [ ] Bar chart of current assets by nation 
+        - [ ] Total assets, liquid, items, buildings, other assets graphs by nation
+    - [ ] Line graph of assets over time by nation
+        - [ ] Total assets, liquid, items, buildings, other assets graphs by nation by time
+    - [ ] Size of nation stuff
+        - [ ] Create historical records for size of nation data
+        - [ ] Size of nation over time graph
+            - [ ] Total territories, Main tarritories, far colonies, near colonies
 - **Misc.**
     - [ ] Sort buildings
         - [ ] Sort by nation
         - [ ] Sort by territory
         - [ ] Sort by year
         - [ ] Sort by building price
-    - [ ] Create Graphs
-        - [ ] Create historical records of nation/company assets (Total assets, liquid, items, buildings, other assets)
-        - [ ] Individual nation/company graphs in their balance sheets
-            - [ ] Total assets, liquid, items, buildings, other assets graphs over time
-        - [ ] Pie chart of total assets of all nations (To show breakup of total world wealth)
-        - [ ] Bar chart of current assets by nation 
-            - [ ] Total assets, liquid, items, buildings, other assets graphs by nation
-        - [ ] Line graph of assets over time by nation
-            - [ ] Total assets, liquid, items, buildings, other assets graphs by nation by time
-        - [ ] Size of nation stuff
-            - [ ] Create historical records for size of nation data
-            - [ ] Size of nation over time graph
-                - [ ] Total territories, Main tarritories, far colonies, near colonies
+    - [ ] Overall info page
+        - [ ] Per nation Average Height & # of Buildings info
+        - [ ] Per nation # of buildings built per year
+        - [ ] Total # of buildings per nation
+        - [ ] Per territory Average Height & # of Buildings info
+        - [ ] Up and coming territories
     - [ ] Currency converter (ex: convert 42 emeralds and 58 copper to diamonds)
     - [ ] Item price calculator (Select items, see the price of them)
     - [ ] Architectural Styles stuff

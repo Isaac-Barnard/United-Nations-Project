@@ -106,12 +106,13 @@ fetch('/un_api/buildings/')
             // Add marker at the transformed coordinates
             const marker = L.marker([y+7, x], { icon: icon }).addTo(map);
             marker.bindPopup(`
-                <strong>${building.name}</strong><br>
-                Owner: ${building.owner}<br>
-                Builder: ${building.builders}<br>
-                Height: ${building.height}<br>
-                Price: ${building.price}<br>
-                Coords: ${building.x_coordinate}/~/${building.z_coordinate}<br>
+                <strong style="font-size: 1.2em;">${building.name}</strong><br>
+                <u>Owner:</u> ${building.owner}<br>
+                <u>Builder:</u> ${building.builders}<br>
+                <u>Territory:</u> ${building.territory}<br>
+                <u>Height:</u> ${building.height}<br>
+                <u>Price:</u> ${building.price}<br>
+                <u>Coords:</u> ${building.x_coordinate}/~/${building.z_coordinate}<br>
             `);
         });
     });

@@ -16,6 +16,7 @@ class BuildingDataView(APIView):
                 "owner_abbreviation": building.owner.abbreviation,
                 "price": custom_decimal_places(building.price),
                 "builders": [builder.username for builder in building.main_builders.all()],
+                "territory": building.territory.name
                 # Add other fields as needed
             }
             for building in buildings
