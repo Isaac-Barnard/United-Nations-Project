@@ -31,10 +31,8 @@
         <form method="post">
             {% csrf_token %}
             {{ evaluation_form.building.label_tag }} {{ evaluation_form.building }}
-            
-            <h2>Selected Building: <span id="selected-building-name">None</span></h2>
 
-            <h2>Evaluations for <span id="selected-building-name"></span></h2>
+            <h2>Evaluations for <span id="selected-building-name">None</span></h2>
             <table>
                 <thead>
                     <tr id="evaluation-table-header">
@@ -56,8 +54,6 @@
                     {% endfor %}
                 </tbody>
             </table>
-
-            <h2>Input Quantities for Each Denomination</h2>
 
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
@@ -108,26 +104,34 @@
                 });
             </script>
 
-            <table>
-                <tr>
-                    {% for field in evaluation_form %}
-                        {% if field.name != 'building' %}
-                            <th>{{ field.label }}</th>
-                        {% endif %}
-                    {% endfor %}
-                </tr>
-                <tr>
-                    {% for field in evaluation_form %}
-                        {% if field.name != 'building' %}
-                            <td>
-                                <input type="number" name="{{ field.name }}" id="{{ field.name }}" value="0" step="any" />
-                            </td>
-                        {% endif %}
-                    {% endfor %}
-                </tr>
-            </table>
+            <h2>Input Quantities for Each Denomination</h2>
 
-            <h2>Running Total (in Diamonds): <span id="total_diamond_value">0</span></h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Total Diamond Value</th>
+                        {% for field in evaluation_form %}
+                            {% if field.name != 'building' %}
+                                <th>{{ field.label }}</th>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ user.username }}</td> <!-- Display the current user's username -->
+                        <td><span id="total_diamond_value">0</span></td> <!-- Running Total in Diamonds -->
+                        {% for field in evaluation_form %}
+                            {% if field.name != 'building' %}
+                                <td>
+                                    <input type="number" name="{{ field.name }}" id="{{ field.name }}" value="0" step="any" />
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
 
             <button type="submit">Submit Evaluation</button>
         </form>

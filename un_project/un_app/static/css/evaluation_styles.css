@@ -10,7 +10,7 @@ table tr, table td, table th {
 }
 
 table tr:hover {
-    background-color: transparent; /* Remove hover effect */
+    background-color: none; /* Remove hover effect */
 }
 
 /* Set input field width */
@@ -18,11 +18,11 @@ input[type="number"] {
     width: 80px;
 }
 
-tr:nth-child(odd) {
+tr:nth-child(even) {
     background-color: #e7e7e7;
 }
 
-tr:nth-child(even) {
+tr:nth-child(odd) {
     background-color: #ffffff;
 }
 
