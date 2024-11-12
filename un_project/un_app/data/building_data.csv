@@ -1,6 +1,6 @@
 name,territory,owner,main_builder,y_level_high_pt,y_level_ground,year_completed,completed,x_coordinate,z_coordinate,historic_site,architectural_genius,mopq_award,architectural_style
 Reid's Armor Stand Building,New Reid City,EOMR,OldManReidGaming,158,67,2022,TRUE,-7,389,FALSE,TRUE,Won,OMR Modernist
-Knew Knoo Tower 1,Knew Knoo City,IOK,TallerFiber1,165.4375,75,2023,FALSE,222,-8,FALSE,FALSE,,
+Knew Knoo Tower 1,Knew Knoo City,IOK,Tallerfiber1,165.4375,75,2023,FALSE,222,-8,FALSE,FALSE,,
 Other Tower - Cool Looking One,South Lake Aternos,NOI,Axeman_76,143.5,65,2020,TRUE,-154,237,TRUE,TRUE,Won,NOI Medieval
 Trump Tower,Desert of Gett,CRP,Yahtta,149,71,2019,TRUE,-331,366,FALSE,FALSE,,Gett Ruins
 Isaac Pillager Tower,East Lake Aternos,NOI,Axeman_76,139,63,2020,TRUE,118,-45,FALSE,FALSE,,NOI Medieval
@@ -16,7 +16,7 @@ Big Boy Castle,NOI Mainland,NOI,Axeman_76,124,65,2021,FALSE,-218,-146,TRUE,FALSE
 NoI I Tower,South Lake Aternos,NOI,Axeman_76,121,63,2019,TRUE,-131,72,TRUE,FALSE,,NOI Classical
 Blackstone Bridge,Nelson Mountain Colony,NEL,Cowman7,119,65,2022,TRUE,-274,-19616,FALSE,FALSE,,
 Ass'ociated Investments Headquarters,Reid Vegas,EOMR,"Axeman_76, OldManReidGaming",123,69,2021,FALSE,450,601,FALSE,FALSE,Nominated,
-Charlie & Miranda's Dick,GuanKnoonamo,IOK,TallerFiber1,118,67,2019,TRUE,77,37,FALSE,FALSE,,Statues
+Charlie & Miranda's Dick,GuanKnoonamo,IOK,Tallerfiber1,118,67,2019,TRUE,77,37,FALSE,FALSE,,Statues
 NOI Ski Resort,Big Guy Slopes,NOI,Axeman_76,122.5,72,2022,TRUE,-181,390,FALSE,FALSE,,Specialty
 Bass Pro Shop,NOI Diplomatic Quarter,NOI,Axeman_76,113,63,2021,TRUE,-565,79,FALSE,TRUE,Won,Super-Projects
 OMR Report building,New Reid City,EOMR,OldManReidGaming,114,65,2023,FALSE,36,407,FALSE,FALSE,,
@@ -28,25 +28,25 @@ NoI-EOMR Embassy,New Reid City,NOI,Axeman_76,106,64,2020,FALSE,42,294,FALSE,FALS
 Elytra Tower,NOI Mainland,NOI,Axeman_76,108,66,2019,TRUE,-157,-58,FALSE,FALSE,,NOI Classical
 A Tall bombed building,Desert of Gett,CRP,Yahtta,110,69,2019,TRUE,-315,337,FALSE,FALSE,,Gett Ruins
 Windmill,East Lake Aternos,NOI,Axeman_76,116,75,2020,TRUE,177,-34,TRUE,FALSE,,
-Tree Farm,Nelsonia Heartland,NEL,"Cowman7, Vlueban",103,64,2020,TRUE,-309,127,FALSE,FALSE,,Farms
+Tree Farm,Nelsonia Heartland,NEL,"Cowman7, vlueban",103,64,2020,TRUE,-309,127,FALSE,FALSE,,Farms
 I Dome,South Lake Aternos,NOI,Axeman_76,102,63,2019,TRUE,-149,131,TRUE,FALSE,,NOI Classical
 CDS Hotel,CDS Mainland,CDS,Danav215,108,72,2020,TRUE,124,-101,FALSE,FALSE,,
 Boner Suites,New Reid City,EOMR,OldManReidGaming,101,65,2020,TRUE,18,267,FALSE,FALSE,,OMR Brutalist
-Grand Isle of Knoo Embassy,New Reid City,IOK,TallerFiber1,99,65,2022,TRUE,63,315,FALSE,FALSE,,Grum Brutalist
+Grand Isle of Knoo Embassy,New Reid City,IOK,Tallerfiber1,99,65,2022,TRUE,63,315,FALSE,FALSE,,Grum Brutalist
 AfricInn 2.0,Desert of Gett,CRP,"OldManReidGaming, Axeman_76",107,74,2019,TRUE,-372,328,FALSE,FALSE,,3rd-World Eyesores
-Quinn Funny House,Quinn Mountain Colony,QC,Vlueban,150,117,2022,TRUE,-400,-19467,FALSE,FALSE,,
+Quinn Funny House,Quinn Mountain Colony,QC,vlueban,150,117,2022,TRUE,-400,-19467,FALSE,FALSE,,
 West NRC Netherack Suicide Tower,West New Reid City,EOMR,OldManReidGaming,97,64,2020,TRUE,-89,246,FALSE,FALSE,,3rd-World Eyesores
 Large Pillar Building (TBD Name),Big Guy Slopes,NOI,Axeman_76,111.5,80,2022,FALSE,-91,438,FALSE,FALSE,,
 JWO2 City,CDS Mainland,CDS,Danav215,94,63,2019,TRUE,27,-93,FALSE,FALSE,,
-Blackstone Castle,South How Water River,QC,Vlueban,112,81,2021,TRUE,-238,200,FALSE,FALSE,Nominated,
+Blackstone Castle,South How Water River,QC,vlueban,112,81,2021,TRUE,-238,200,FALSE,FALSE,Nominated,
 The EOMR Department of Defence and Intelligence,New Reid City,EOMR,OldManReidGaming,96,65,2023,FALSE,15,287,FALSE,FALSE,,
-GuanKnoonamo Watchtower,GuanKnoonamo,IOK,TallerFiber1,98,68,2020,TRUE,108,100,FALSE,FALSE,,
+GuanKnoonamo Watchtower,GuanKnoonamo,IOK,Tallerfiber1,98,68,2020,TRUE,108,100,FALSE,FALSE,,
 Nether Skeleton Farm,The Nether,NEL,Cowman7,73,43,2021,TRUE,184,-87,FALSE,FALSE,,Farms
 Isaac Outpost,North Lake Aternos,NOI,Axeman_76,103.5,74,2019,TRUE,-20,-172,TRUE,FALSE,,NOI Classical
 NOI-IOK Embassy,Knew Knoo City,NOI,Axeman_76,104,75,2020,TRUE,207,32,FALSE,FALSE,,
-The Lookout,South Confluence,QC,Vlueban,97,69,2022,TRUE,-601,271,FALSE,FALSE,,
+The Lookout,South Confluence,QC,vlueban,97,69,2022,TRUE,-601,271,FALSE,FALSE,,
 Factory,Southmost Lake Aternos,NOI,Axeman_76,90.5,63,2021,FALSE,-151,292,FALSE,FALSE,,Copper Craze
-GuanKnoonamo Bay Prison Tower,Isle of Knoo,IOK,TallerFiber1,92,65,2019,TRUE,0,35,FALSE,FALSE,,
+GuanKnoonamo Bay Prison Tower,Isle of Knoo,IOK,Tallerfiber1,92,65,2019,TRUE,0,35,FALSE,FALSE,,
 NOI International Museum of History,West OMR,NOI,Axeman_76,90,63,2020,TRUE,-32,6,TRUE,FALSE,,Neo-UN Classical
 Sphere RR Stop,Desert of Gett,UN,Yahtta,100,74,2019,TRUE,-299,392,FALSE,FALSE,,
 NOI Canyon,East Lake Aternos,NOI,Axeman_76,89,63,2020,TRUE,216,-32,FALSE,FALSE,,
@@ -56,7 +56,7 @@ Garrett,South Lake Aternos,NOI,Axeman_76,89,64,2020,TRUE,-129,167,TRUE,FALSE,,
 Antichrist,West OMR,NOI,Danav215,157,132,2019,TRUE,-61,1,TRUE,FALSE,,Statues
 St. Wend's Cathedral,Dinav Floating Platform,CDS,Danav215,90,66,2019,TRUE,-30,-74,FALSE,FALSE,,
 Grum Manor,Knew Knoo City,IOK,Axeman_76,106,82,2020,TRUE,195,61,FALSE,FALSE,,
-The Papo Tavern ,Gaylard Plains,QC,"Cowman7, Vlueban",97,74,2022,TRUE,-545,242,FALSE,FALSE,,
+The Papo Tavern ,Gaylard Plains,QC,"Cowman7, vlueban",97,74,2022,TRUE,-545,242,FALSE,FALSE,,
 Small Castle,NOI Mainland,NOI,Axeman_76,87,64,2019,TRUE,-232,-51,FALSE,FALSE,,NOI Renaissance
 UN Building,West OMR,UN,"Cowman7, Axeman_76",94,63,2019,TRUE,-152,36,TRUE,FALSE,,United Nations Classical
 Dashie Pene Island,Dashie Desert,EOMR,Triton1037,85.5,63,2022,TRUE,-666,735,FALSE,FALSE,,
@@ -64,7 +64,7 @@ Nelson's House,Nelsonia Heartland,NEL,Cowman7,86,64,2020,TRUE,-353,58,FALSE,FALS
 Jesus' Compound,Reid Plains,EOMR,"pretzel_captcha, Axeman_76, Cowman7",98,76,2021,FALSE,176,416,FALSE,FALSE,,
 GuanKnoonamo Farms,GuanKnoonamo,IOK,Yahtta,92,72,2019,TRUE,75,97,FALSE,FALSE,,Farms
 Nelsonia Tree Service LLC,Nelsonia Heartland,NEL,Cowman7,84,64,2021,TRUE,-312,146,FALSE,FALSE,,
-Big Black Cock House (BBC House),East How Water River,QC,Vlueban,90,71,2019,TRUE,-248,83,FALSE,FALSE,,
+Big Black Cock House (BBC House),East How Water River,QC,vlueban,90,71,2019,TRUE,-248,83,FALSE,FALSE,,
 "New Reid City Water ""Treatment"" Facilities",New Reid City,EOMR,OldManReidGaming,82,63,2022,TRUE,-9,287,FALSE,FALSE,,Specialty
 Far Castle,NOI Mountain Colony,NOI,Axeman_76,139,120,2022,TRUE,141,-19937,FALSE,FALSE,,
 Colosseum,NOI Mainland,NOI,Axeman_76,90,72,2019,TRUE,-319,-70,TRUE,FALSE,,
@@ -73,31 +73,31 @@ Pene Tower - North,Northmost Lake Aternos,EOMR,OldManReidGaming,82.5,65,2021,TRU
 Airmchair Ali Construction HQ,Reid Plains,EOMR,TheArmchair,88.5,71,2022,FALSE,272,449,FALSE,FALSE,,
 Dashie Watchtower,Dashie Desert,EOMR,OldManReidGaming,80,63,2022,TRUE,-651,691,FALSE,FALSE,,
 Danav's Frigate,Dinav Floating Platform,CDS,Danav215,80,63,2019,TRUE,-22,-23,FALSE,FALSE,,
-Knew Knoo Hotel,Knew Knoo City,IOK,TallerFiber1,92,75,2020,TRUE,194,15,FALSE,FALSE,,Grum Modernist
+Knew Knoo Hotel,Knew Knoo City,IOK,Tallerfiber1,92,75,2020,TRUE,194,15,FALSE,FALSE,,Grum Modernist
 Floating Tree House,Komsomolsk na Amure,CRP,Yahtta,106,89,2019,TRUE,-475,366,FALSE,FALSE,,Gett Ruins
 Far North Farm,Northmost Lake Aternos,EOMR,TheArmchair,80,63,2021,TRUE,81,-255,FALSE,FALSE,,Farms
 SS Old Man Reid,Dinav Floating Platform,CDS,Danav215,80,63,2019,TRUE,-22,-26,FALSE,FALSE,,Specialty
 Mafia Outpost #1,CDS Mainland,CDS,Danav215,85,69,2020,TRUE,113,-146,FALSE,FALSE,,
-Grumpartment of Manifest Destiny,East Grum Chum,IOK,TallerFiber1,94,78,2021,TRUE,249,73,FALSE,FALSE,,Grum Brutalist
-The Church,Gaylard Plains,QC,Vlueban,88,72,2022,TRUE,-583,244,FALSE,FALSE,,
+Grumpartment of Manifest Destiny,East Grum Chum,IOK,Tallerfiber1,94,78,2021,TRUE,249,73,FALSE,FALSE,,Grum Brutalist
+The Church,Gaylard Plains,QC,vlueban,88,72,2022,TRUE,-583,244,FALSE,FALSE,,
 Giant Crafting Table House,GuanKnoonamo,IOK,"Axeman_76, Cowman7",87,71,2019,TRUE,75,70,FALSE,FALSE,,Crafting Table
 EOMR New Capitol,New Reid City,EOMR,OldManReidGaming,82,66,2022,TRUE,28,335,FALSE,FALSE,,Neo-UN Classical
 Isaac Original House,NOI Mainland,NOI,Axeman_76,80,64,2019,TRUE,-129,-71,TRUE,FALSE,,NOI Ancient
 Laborer's International Union of EOMR,Reid Plains,EOMR,OldManReidGaming,87,71,2020,FALSE,286,463,FALSE,FALSE,,Crafting Table
 "Realty Building - ""Rental Shit""",West OMR,UN,OldManReidGaming,79,63,2020,TRUE,-121,12,FALSE,FALSE,,
-Condo from Hell,East Grum Chum,IOK,TallerFiber1,83.5625,68,2022,TRUE,288,101,FALSE,FALSE,,
+Condo from Hell,East Grum Chum,IOK,Tallerfiber1,83.5625,68,2022,TRUE,288,101,FALSE,FALSE,,
 Railroad HQ,South Lake Aternos,UN,Cowman7,78.5,63,2019,TRUE,-93,69,TRUE,FALSE,,
 Yer Cowboy Building,Old Belize,EOMR,YerLoss,83,68,2022,FALSE,-10,696,FALSE,FALSE,,
 "The Capitol Building of the ""Nation"" of Crippal",Desert of Gett,CRP,Yahtta,84,69,2019,TRUE,-290,326,FALSE,FALSE,,Gett Ruins
 NOI Iron Farm,NOI Mainland,NOI,Axeman_76,79,64,2019,TRUE,-277,-19,TRUE,FALSE,,Farms
 Isaac Barn,NOI Mainland,NOI,Axeman_76,79,64,2019,TRUE,-174,-70,FALSE,FALSE,,
 Green Fog Ring Building,South Lake Aternos,NOI,Axeman_76,78,63,2020,TRUE,-101,195,TRUE,FALSE,,
-Cavern Tavern,Threesome Highlands,QC,Vlueban,94,79,2023,FALSE,-809,-11,FALSE,FALSE,,
+Cavern Tavern,Threesome Highlands,QC,vlueban,94,79,2023,FALSE,-809,-11,FALSE,FALSE,,
 Cozy Cabin,Big Guy Slopes,NOI,Axeman_76,122,107,2023,TRUE,-141,537,FALSE,FALSE,,
 Ghoul's Secret Base,Reid Plains,EOMR,Fr0zenGh0ul,84.5,70,2021,TRUE,279,510,FALSE,FALSE,,
 Bozeman Villager Breeder,"Bozeman, Montana",EOMR,Axeman_76,130,116,2021,TRUE,136,412,FALSE,FALSE,,
 Yer Mountainside Building,"Bozeman, Montana",EOMR,YerLoss,89,75,2022,FALSE,100,585,FALSE,FALSE,,
-Grum & Pern Gaylard Field,Collegia,IOK,TallerFiber1,79,65,2020,TRUE,212,121,FALSE,FALSE,Nominated,Specialty
+Grum & Pern Gaylard Field,Collegia,IOK,Tallerfiber1,79,65,2020,TRUE,212,121,FALSE,FALSE,Nominated,Specialty
 Creeper Farm,East How Water River,QC,Cowman7,84,70,2020,TRUE,-234,129,FALSE,FALSE,,Farms
 Blaze Farm,The Nether,NEL,Cowman7,80,66,2021,TRUE,184,-46,FALSE,FALSE,,Farms
 Original Sorting System,NOI Mainland,NOI,Axeman_76,78,64,2019,TRUE,-191,-45,TRUE,FALSE,,
@@ -105,23 +105,23 @@ Reid Plains City Hall,Reid Plains,EOMR,OldManReidGaming,82,68,2022,TRUE,334,466,
 Water Base,Wild West,NEL,Cowman7,203,111,2023,FALSE,-889,56,FALSE,FALSE,,Ungle Modernist
 Medal of Papa Quinn Building,West OMR,UN,"Cowman7, OldManReidGaming",76.5,63,2020,TRUE,-80,21,FALSE,FALSE,,
 #SJW Hall,Collegia,EOMR,OldManReidGaming,79,66,2019,TRUE,53,131,FALSE,FALSE,,OMR Brutalist
-St. Paul's Cathedral,Knew Knoo City,IOK,TallerFiber1,85,72,2020,TRUE,143,19,FALSE,FALSE,,
+St. Paul's Cathedral,Knew Knoo City,IOK,Tallerfiber1,85,72,2020,TRUE,143,19,FALSE,FALSE,,
 EOMR Original Capitol,New Reid City,EOMR,OldManReidGaming,77,64,2019,TRUE,60,266,FALSE,FALSE,,
 NoI Capitol,NOI Mainland,NOI,Axeman_76,77,64,2019,TRUE,-147,-43,TRUE,FALSE,,
 Oxidome,NOI Mountain Colony,NOI,Axeman_76,140,127,2021,TRUE,-74,-19843,FALSE,FALSE,,Copper Craze
-Papo Welfare House,South How Water River,QC,Vlueban,95,82,2021,TRUE,-319,253,FALSE,FALSE,,
+Papo Welfare House,South How Water River,QC,vlueban,95,82,2021,TRUE,-319,253,FALSE,FALSE,,
 Zombie Observation Spawner,UN Resort,UN,Cowman7,78,65,2021,TRUE,404,200,FALSE,FALSE,,
 Danny's House,CDS Mainland,CDS,Vullby,75.5,63,2019,TRUE,78,-64,FALSE,FALSE,,
 OMR College School of Engineering,Collegia,EOMR,OldManReidGaming,78,66,2020,TRUE,187,164,FALSE,FALSE,,
 College Station Hub,Collegia,UN,"Axeman_76, Cowman7",79,67,2020,TRUE,80,132,FALSE,FALSE,,
 OMR Realty Offices,New Reid City,EOMR,OldManReidGaming,76,64,2020,TRUE,76,274,FALSE,FALSE,,OMR Brutalist
-Bottom Cavern Thing,Threesome Highlands,QC,Vlueban,75,63,2023,FALSE,-804,13,FALSE,FALSE,,
+Bottom Cavern Thing,Threesome Highlands,QC,vlueban,75,63,2023,FALSE,-804,13,FALSE,FALSE,,
 Gaylard Gasthaus,Gaylard Plains,NEL,Cowman7,83.5,72,2022,TRUE,-485,265,FALSE,FALSE,,
 Bamboo Farm,Komsomolsk na Amure,CRP,Yahtta,77.5,66,2019,TRUE,-507,385,FALSE,FALSE,,Farms
-QuInn,East How Water River,QC,Vlueban,81,70,2019,TRUE,-244,57,FALSE,FALSE,,
+QuInn,East How Water River,QC,vlueban,81,70,2019,TRUE,-244,57,FALSE,FALSE,,
 Pene Tower - East,Far East District,EOMR,OldManReidGaming,81,70,2020,TRUE,351,133,FALSE,FALSE,,
-Grand Isle of Knoo Capitol,Knew Knoo City,IOK,TallerFiber1,86,75,2020,TRUE,224,17,FALSE,FALSE,,Grum Brutalist
-Grum Zoo/Shopping Mall/Basketball Court/Farm,Knew Knoo City,IOK,TallerFiber1,83,72,2020,TRUE,145,58,FALSE,FALSE,,
+Grand Isle of Knoo Capitol,Knew Knoo City,IOK,Tallerfiber1,86,75,2020,TRUE,224,17,FALSE,FALSE,,Grum Brutalist
+Grum Zoo/Shopping Mall/Basketball Court/Farm,Knew Knoo City,IOK,Tallerfiber1,83,72,2020,TRUE,145,58,FALSE,FALSE,,
 Cactus Farm,Komsomolsk na Amure,CRP,Yahtta,78,67,2019,TRUE,-527,387,FALSE,FALSE,,Farms
 Sorting System,Nelsonia Heartland,NEL,Cowman7,75,64,2020,TRUE,-369,99,FALSE,FALSE,,Ungle Renaissance
 UN Dome,UN Mountain Colony,UN,Cowman7,136,125,2021,FALSE,-88,-19925,FALSE,FALSE,,United Nations Classical
@@ -129,23 +129,23 @@ Presidential Palace of the Confederacy of EOMR,West New Reid City,EOMR,OldManRei
 Residential Station Hub,Archiva,UN,"Axeman_76, Cowman7",73.5,63,2022,TRUE,31,-19,FALSE,FALSE,,
 UN Resort Pool,UN Resort,UN,Cowman7,73.0625,63,2020,TRUE,365,201,FALSE,FALSE,,
 CDS Castle,CDS Mainland,CDS,Danav215,73,63,2019,TRUE,30,-52,FALSE,FALSE,,
-Knoo Castle,Collegia,IOK,TallerFiber1,80,70,2020,TRUE,148,94,FALSE,FALSE,,
+Knoo Castle,Collegia,IOK,Tallerfiber1,80,70,2020,TRUE,148,94,FALSE,FALSE,,
 Danav's House,Dinav Floating Platform,CDS,Danav215,76,66,2019,TRUE,-35,-57,FALSE,FALSE,,
-Random Ass Stone House (RASH),East How Water River,QC,Vlueban,80,70,2020,TRUE,-253,129,FALSE,FALSE,,
-Knoo Harbor,GuanKnoonamo,IOK,TallerFiber1,73,63,2020,TRUE,33,100,FALSE,FALSE,,Grum Modernist
-The Mud & Stone Representatives Building of Quinn’s Country,New Reid City,QC,Vlueban,74,64,2022,TRUE,-5,319,FALSE,FALSE,,
+Random Ass Stone House (RASH),East How Water River,QC,vlueban,80,70,2020,TRUE,-253,129,FALSE,FALSE,,
+Knoo Harbor,GuanKnoonamo,IOK,Tallerfiber1,73,63,2020,TRUE,33,100,FALSE,FALSE,,Grum Modernist
+The Mud & Stone Representatives Building of Quinn’s Country,New Reid City,QC,vlueban,74,64,2022,TRUE,-5,319,FALSE,FALSE,,
 EOMR East Crippal Company,Desert of Gett,EOMR,Fr0zenGh0ul,72.5,63,2021,TRUE,-240,339,FALSE,FALSE,,
 Influence Station,Knew Knoo City,UN,"Axeman_76, Cowman7",72.5,63,2019,TRUE,109,5,FALSE,FALSE,,
-Mountaintop Birch House,Knew Knoo City,IOK,TallerFiber1,99,92,2021,TRUE,223,45,FALSE,FALSE,,
+Mountaintop Birch House,Knew Knoo City,IOK,Tallerfiber1,99,92,2021,TRUE,223,45,FALSE,FALSE,,
 Nelson's Nether Portal,Nelsonia Heartland,NEL,Cowman7,73.5,64,2020,TRUE,-333,42,FALSE,FALSE,,
 Jose's House,Archiva,UN,TeatedPuddle65,73,64,2019,TRUE,26,13,TRUE,FALSE,,
-Knoo Shed,Isle of Knoo,IOK,TallerFiber1,72,63,2019,TRUE,0,66,FALSE,FALSE,,Grum Primative
+Knoo Shed,Isle of Knoo,IOK,Tallerfiber1,72,63,2019,TRUE,0,66,FALSE,FALSE,,Grum Primative
 NOI Station,NOI Mainland,UN,Axeman_76,72,63,2019,TRUE,-181,-2,TRUE,FALSE,,
 Far North Hotel,Northmost Lake Aternos,EOMR,TheArmchair,79,70,2021,TRUE,100,-272,FALSE,FALSE,,
-Quinn's House,Quinn Mainland,QC,Vlueban,73,64,2019,TRUE,-197,41,FALSE,FALSE,,
+Quinn's House,Quinn Mainland,QC,vlueban,73,64,2019,TRUE,-197,41,FALSE,FALSE,,
 Blackstone Baseball Building (BBB),Reid Plains,NOI,Axeman_76,82,73,2020,TRUE,223,398,FALSE,FALSE,,
 Fort Ali,Reidwaukee Point,EOMR,TheArmchair,77,68,2022,FALSE,224,562,FALSE,FALSE,,
-Bitch Village,South How Water River,QC,Vlueban,73,64,2020,TRUE,-317,188,FALSE,FALSE,,
+Bitch Village,South How Water River,QC,vlueban,73,64,2020,TRUE,-317,188,FALSE,FALSE,,
 UN Resort Hotel,UN Resort,UN,"Cowman7, Axeman_76",77,65,2021,FALSE,417,241,FALSE,FALSE,,
 East OMR Crack House,West New Reid City,EOMR,OldManReidGaming,73,64,2022,TRUE,-62,273,FALSE,FALSE,,
 Historic OMRC Capitol,West OMR,UN,OldManReidGaming,72,63,2019,TRUE,-120,28,TRUE,FALSE,,
@@ -158,8 +158,8 @@ Cloak and Dagger Society,CDS Mainland,CDS,Danav215,75,67,2019,TRUE,84,-93,FALSE,
 Getaway Chopper Osprey-007,CDS Mainland,CDS,Danav215,76,68,2020,TRUE,108,-175,FALSE,FALSE,,
 Twin Tit Towers,Desert of Gett,CRP,Yahtta,71,63,2019,TRUE,-302,510,FALSE,FALSE,,Gett Ruins
 NOI Harbor,East Server Sea,NOI,Axeman_76,71,63,2022,FALSE,-222,632,FALSE,FALSE,,
-"Knoo Court: The Law ""Center"" of the ""Developed"" World",GuanKnoonamo,IOK,TallerFiber1,78,70,2019,TRUE,70,107,FALSE,FALSE,,Grum Primative
-Knew Knoo City Information Center,Knew Knoo City,IOK,TallerFiber1,83,75,2020,TRUE,196,38,FALSE,FALSE,,Grum Primative
+"Knoo Court: The Law ""Center"" of the ""Developed"" World",GuanKnoonamo,IOK,Tallerfiber1,78,70,2019,TRUE,70,107,FALSE,FALSE,,Grum Primative
+Knew Knoo City Information Center,Knew Knoo City,IOK,Tallerfiber1,83,75,2020,TRUE,196,38,FALSE,FALSE,,Grum Primative
 2nd Bank of OMR,New Reid City,EOMR,OldManReidGaming,72,64,2022,TRUE,67,348,FALSE,FALSE,,
 OMR Cathedral,New Reid City,EOMR,BingusIsSoCool,83,64,2022,FALSE,-13,341,FALSE,FALSE,,
 Former Shop,NOI Mainland,NOI,Axeman_76,72,64,2019,TRUE,-198,-11,FALSE,FALSE,,
@@ -168,7 +168,7 @@ Kchanistan,Reid Plains,EOMR,Udlickthat,77,69,2022,FALSE,309,443,FALSE,FALSE,,
 Ali's New House,Reid Plains,EOMR,TheArmchair,80,72,2021,TRUE,235,492,FALSE,FALSE,,
 OMR Villager Compound,Reid Plains,EOMR,OldManReidGaming,76,68,2020,TRUE,182,345,FALSE,FALSE,,
 OMR Sign,Reidwaukee Point,EOMR,OldManReidGaming,78,70,2021,TRUE,366,550,FALSE,FALSE,,Statues
-Base Tavern,South How Water River,QC,Vlueban,71,63,2022,TRUE,-429,262,FALSE,FALSE,,
+Base Tavern,South How Water River,QC,vlueban,71,63,2022,TRUE,-429,262,FALSE,FALSE,,
 Southmost Opium Farm,Southmost Lake Aternos,EOMR,OldManReidGaming,71,63,2022,TRUE,-212,249,FALSE,FALSE,,
 Islander Station,West OMR,UN,OldManReidGaming,71,63,2019,TRUE,-57,-4,TRUE,FALSE,,
 UN Nelsonia RR Stop,Nelsonia Heartland,UN,Axeman_76,72,64,2023,FALSE,-308,89,TRUE,FALSE,,
@@ -183,9 +183,9 @@ OMR Lumber Co - Bozeman Office,"Bozeman, Montana",EOMR,OldManReidGaming,115,108,
 OMR Furnace Mining Office,"Bozeman, Montana",EOMR,OldManReidGaming,85,78,2022,FALSE,-41,523,FALSE,FALSE,,
 Evan's House,Desert of Gett,CRP,Yahtta,71,64,2019,TRUE,-322,550,FALSE,FALSE,,Gett Ruins
 Gay Sheep Farm,East How Water River,QC,Cowman7,77,70,2021,TRUE,-220,129,FALSE,FALSE,,
-OMR vs. Knoo War Memorial,Far East District,EOMR,TallerFiber1,73,66,2022,TRUE,361,96,FALSE,FALSE,,
+OMR vs. Knoo War Memorial,Far East District,EOMR,Tallerfiber1,73,66,2022,TRUE,361,96,FALSE,FALSE,,
 Grum Station,GuanKnoonamo,UN,OldManReidGaming,71,64,2019,TRUE,20,48,TRUE,FALSE,,
-Knoo House 2.0,GuanKnoonamo,IOK,TallerFiber1,74,67,2019,TRUE,53,64,FALSE,FALSE,,Grum Primative
+Knoo House 2.0,GuanKnoonamo,IOK,Tallerfiber1,74,67,2019,TRUE,53,64,FALSE,FALSE,,Grum Primative
 Ungle Bridge Guard,Nelson Mountain Colony,NEL,Cowman7,125,118,2022,TRUE,-169,-19623,FALSE,FALSE,,Statues
 Villager Breeder,NOI Mainland,NOI,Axeman_76,71,64,2019,TRUE,-237,-22,FALSE,FALSE,,Farms
 Ice Boat Station,NOI Mainland,NOI,Axeman_76,71,64,2019,TRUE,-211,-22,FALSE,FALSE,,
@@ -193,23 +193,23 @@ Slime Farm,NOI Mainland,NOI,Cowman7,83,76,2020,TRUE,-129,-139,FALSE,FALSE,,
 Ghoul's House,Reid Plains,EOMR,Fr0zenGh0ul,79,72,2020,TRUE,235,465,FALSE,FALSE,,
 Crusty House,Crustyland,NOI,pebblyboy,70,63,2023,FALSE,-486,-148,FALSE,FALSE,,
 Crustyland Ice Boat Station,Crustyland,NOI,Axeman_76,70,63,2023,TRUE,-488,-114,FALSE,FALSE,,
-Papogoda,East How Water River,QC,Vlueban,70,63,2023,FALSE,-247,40,FALSE,FALSE,,
+Papogoda,East How Water River,QC,vlueban,70,63,2023,FALSE,-247,40,FALSE,FALSE,,
 Private Smokes,CDS Mainland,CDS,Danav215,69.5,63,2020,TRUE,88,-194,FALSE,FALSE,,
 CDS Mafia Guards,CDS Mainland,CDS,Danav215,70.5,64,2020,TRUE,80,-124,FALSE,FALSE,,Statues
-Random Ass Birtch House (RABH),East How Water River,QC,Vlueban,81.5,75,2019,TRUE,-257,99,FALSE,FALSE,,
+Random Ass Birtch House (RABH),East How Water River,QC,vlueban,81.5,75,2019,TRUE,-257,99,FALSE,FALSE,,
 Lesser Lighthouse Village,Gaylard Plains,NEL,Cowman7,78.5,72,2022,FALSE,-500,278,FALSE,FALSE,,
 Axeman Farms,West Server Sea,NOI,Axeman_76,73.5,67,2022,FALSE,-500,674,FALSE,FALSE,,Farms
-Stronghold Lounge,Big Ocean Outlands,UN,Vlueban,69.5,63,,TRUE,-2075,1083,FALSE,FALSE,,
+Stronghold Lounge,Big Ocean Outlands,UN,vlueban,69.5,63,,TRUE,-2075,1083,FALSE,FALSE,,
 OMR Logging Dashieland Ofiice,Dashie Desert,EOMR,OldManReidGaming,70,64,2022,TRUE,-641,669,FALSE,FALSE,,
 Crippal Archery Arena,Desert of Gett,CRP,Yahtta,77,71,2019,TRUE,-265,436,FALSE,FALSE,,
 Evan Base West RR Stop,Desert of Gett,UN,Yahtta,70,64,2019,TRUE,-344,527,FALSE,FALSE,,
 OMR Sawmill & Lumber Co. HQ,Far East District,EOMR,OldManReidGaming,75,69,2020,TRUE,331,128,FALSE,FALSE,,OMR Primitive
-Wind Whispering Yoga Studio,GuanKnoonamo,IOK,TallerFiber1,73,67,2020,TRUE,82,51,FALSE,FALSE,,Grum Primative
+Wind Whispering Yoga Studio,GuanKnoonamo,IOK,Tallerfiber1,73,67,2020,TRUE,82,51,FALSE,FALSE,,Grum Primative
 Crafting Table House,Komsomolsk na Amure,CRP,"Cowman7, Axeman_76",77,71,2019,TRUE,-471,378,FALSE,FALSE,,Crafting Table
 The Nelsonia Tower of Peace and Prosperity,Nelsonia Heartland,NEL,Cowman7,78,64,2022,FALSE,-408,76,FALSE,FALSE,,Ungle Modernist
-Quinn's Capitol/Welcome Center,Quinn Mainland,QC,Vlueban,70,64,2019,TRUE,-182,14,FALSE,FALSE,,
+Quinn's Capitol/Welcome Center,Quinn Mainland,QC,vlueban,70,64,2019,TRUE,-182,14,FALSE,FALSE,,
 NoI Shopping Center,West OMR,UN,Axeman_76,69,63,2020,TRUE,-104,1,FALSE,FALSE,,
-Isle of Knoo Forestry Division HQ,East Grum Chum,IOK,TallerFiber1,76.5625,71,2022,TRUE,290,72,FALSE,FALSE,,
+Isle of Knoo Forestry Division HQ,East Grum Chum,IOK,Tallerfiber1,76.5625,71,2022,TRUE,290,72,FALSE,FALSE,,
 Ardetraz,Ardeshir Islands,NOI,Axeman_76,69,63.5,2020,FALSE,50,-147,FALSE,FALSE,,
 Creeper Farm AFK Platform,East How Water River,QC,Cowman7,196.0625,191,2020,TRUE,-233,127,FALSE,FALSE,,
 Floating Area,Old Belize,EOMR,YerLoss,89,84,2021,TRUE,98,713,FALSE,FALSE,,
@@ -220,24 +220,24 @@ Glass Cross Residence Hall,Collegia,EOMR,OldManReidGaming,74,69,2020,TRUE,176,14
 OMR College School of Business,Collegia,EOMR,OldManReidGaming,94,89,2022,FALSE,228,286,FALSE,FALSE,,
 OMR College Entrapranure Center,Collegia,EOMR,OldManReidGaming,90,85,2022,FALSE,263,202,FALSE,FALSE,,
 Former OMR Embassy,Desert of Gett,CRP,OldManReidGaming,73,68,2019,TRUE,-294,308,FALSE,FALSE,,
-Leaf Pyramid,East How Water River,QC,Vlueban,76,71,2019,TRUE,-255,112,FALSE,FALSE,,
+Leaf Pyramid,East How Water River,QC,vlueban,76,71,2019,TRUE,-255,112,FALSE,FALSE,,
 Mining Dome,Komsomolsk na Amure,CRP,Yahtta,74,69,2019,TRUE,-463,419,FALSE,FALSE,,
 Komsomolsk na Amure Station,Komsomolsk na Amure,UN,Yahtta,74,69,2019,TRUE,-468,396,FALSE,FALSE,,
 pai n.,Nelsonia Heartland,NEL,Cowman7,69,64,2021,TRUE,-337,111,FALSE,FALSE,,Statues
 Mining House,Nelsonia Heartland,NEL,Cowman7,69,64,2020,TRUE,-380,61,FALSE,FALSE,,Ungle Reconstruction
 Nelson's Bees,Nelsonia Heartland,NEL,Cowman7,69,64,2021,TRUE,-311,146,FALSE,FALSE,,
 EOMR-NOI Embassy,NOI Diplomatic Quarter,EOMR,OldManReidGaming,72,67,2021,TRUE,-514,-19,FALSE,FALSE,,
-QC-NOI Embassy,NOI Diplomatic Quarter,QC,Vlueban,72,67,2021,TRUE,-498,-20,FALSE,FALSE,,
+QC-NOI Embassy,NOI Diplomatic Quarter,QC,vlueban,72,67,2021,TRUE,-498,-20,FALSE,FALSE,,
 AJ's House,Northmost Lake Aternos,NEL,ShadowBoogie15,72,67,2021,TRUE,160,-276,FALSE,FALSE,,
 Ali's Up Nort Der Ay,Northmost Lake Aternos,EOMR,TheArmchair,69,64,2021,TRUE,115,-238,FALSE,FALSE,,
 Bee Igloo Glue Factory,OMR Mountain Colony,EOMR,OldManReidGaming,141,136,2022,TRUE,214,-19722,FALSE,FALSE,,
 Hockey Rink,OMR Mountain Colony,EOMR,OldManReidGaming,143,138,2022,TRUE,317,-19561,FALSE,FALSE,,
-Quinn's Shed,Quinn Mainland,QC,Vlueban,70,65,2019,TRUE,-207,10,FALSE,FALSE,,
+Quinn's Shed,Quinn Mainland,QC,vlueban,70,65,2019,TRUE,-207,10,FALSE,FALSE,,
 Baseball Field Station Hub,Reid Plains,UN,Axeman_76,78,71,2022,TRUE,264,431,FALSE,FALSE,,
 Bees - Reid Vegas,North Reid Vegas,EOMR,OldManReidGaming,77,72,2021,TRUE,511,555,FALSE,FALSE,,
 Farmhouse - Bad,North Reid Vegas,EOMR,OldManReidGaming,72,67,2020,TRUE,466,481,FALSE,FALSE,,
-Pancake House,South How Water River,QC,Vlueban,89,84,2020,TRUE,-386,241,FALSE,FALSE,,
-Warped Village,South How Water River,QC,Vlueban,68,63,2020,TRUE,-399,189,FALSE,FALSE,,
+Pancake House,South How Water River,QC,vlueban,89,84,2020,TRUE,-386,241,FALSE,FALSE,,
+Warped Village,South How Water River,QC,vlueban,68,63,2020,TRUE,-399,189,FALSE,FALSE,,
 Esophagus Mausoleum,UN Resort,EOMR,OldManReidGaming,69,64,2020,TRUE,198,221,FALSE,FALSE,,OMR Primitive
 UN Resort Station,UN Resort,UN,OldManReidGaming,70,65,2020,TRUE,358,285,FALSE,FALSE,,
 TheArmchair Diplomats' Quarters,West New Reid City,EOMR,TheArmchair,68,63,2022,TRUE,-68,331,FALSE,FALSE,,
@@ -247,14 +247,14 @@ OMR Mining Company West Bozeman,"Bozeman, Montana",EOMR,OldManReidGaming,84,80,2
 On-Campus Gambling House,Collegia,EOMR,OldManReidGaming,67,63,2019,TRUE,-4,165,FALSE,FALSE,,OMR Primitive
 Camp,Dinav Floating Platform,CDS,Danav215,70,66,2019,TRUE,-23,-60,FALSE,FALSE,,
 OMR Far East Storage Center,Far East District,EOMR,OldManReidGaming,67,63,2020,TRUE,502,61,FALSE,FALSE,,OMR Primitive
-GuanKnoonamo Company Trade Post,GuanKnoonamo,IOK,TallerFiber1,74,70,2019,TRUE,120,83,FALSE,FALSE,,Grum Primative
-GuanKnoonamo Storage,GuanKnoonamo,IOK,TallerFiber1,74,70,2019,TRUE,61,99,FALSE,FALSE,,Grum Primative
+GuanKnoonamo Company Trade Post,GuanKnoonamo,IOK,Tallerfiber1,74,70,2019,TRUE,120,83,FALSE,FALSE,,Grum Primative
+GuanKnoonamo Storage,GuanKnoonamo,IOK,Tallerfiber1,74,70,2019,TRUE,61,99,FALSE,FALSE,,Grum Primative
 Nether Storage,Nelsonia Heartland,NEL,Cowman7,68,64,2020,TRUE,-311,54,FALSE,FALSE,,Ungle Reconstruction
 Utility Shed,Nelsonia Heartland,NEL,Cowman7,68,64,2020,TRUE,-325,75,FALSE,FALSE,,Ungle Reconstruction
 OMR Storage Center,New Reid City,EOMR,OldManReidGaming,68,64,2019,TRUE,88,302,FALSE,FALSE,,OMR Primitive
 Reid's House I guess,New Reid City,EOMR,OldManReidGaming,68,64,2019,TRUE,74,264,FALSE,FALSE,,OMR Primitive
 Chess Arena,Reid Vegas,EOMR,OldManReidGaming,75,71,2020,TRUE,412,600,FALSE,FALSE,,
-Farmhouse - Good,North Reid Vegas,EOMR,Vlueban,71,67,2021,TRUE,481,484,FALSE,FALSE,,
+Farmhouse - Good,North Reid Vegas,EOMR,vlueban,71,67,2021,TRUE,481,484,FALSE,FALSE,,
 Zombie Spawner w/ Observation,UN Resort,UN,Cowman7,69,65,2021,TRUE,329,254,FALSE,FALSE,,
 Historic OMRC No Man's Land Wall,West OMR,UN,OldManReidGaming,67,63,2019,TRUE,-92,-19,TRUE,FALSE,,
 -1100 RR Stop,West Exaroton Coasts,UN,Yahtta,82,78,2020,TRUE,-1138,456,FALSE,FALSE,,
@@ -264,8 +264,8 @@ Grum & Pern Field Station,Collegia,UN,OldManReidGaming,72.5,69,2020,TRUE,161,140
 Evan's Ocean Villa,Isle of Evan,CRP,Yahtta,71.5,68,2019,TRUE,-379,732,FALSE,FALSE,,
 Mining Slaves Quarters,"Bozeman, Montana",EOMR,OldManReidGaming,108,105,2020,TRUE,124,381,FALSE,FALSE,,OMR Primitive
 Evan Base East RR Stop,Desert of Gett,UN,Yahtta,67,64,2020,TRUE,-301,540,FALSE,FALSE,,
-Guanknoonamo Food Shop for Nether Travlers,East Grum Chum,IOK,TallerFiber1,75,72,2022,TRUE,264,108,FALSE,FALSE,,
-Knoo Brothel of Objects also GuanKnoonamo Motel,GuanKnoonamo,IOK,TallerFiber1,75,72,2019,TRUE,65,88,FALSE,FALSE,,Grum Primative
+Guanknoonamo Food Shop for Nether Travlers,East Grum Chum,IOK,Tallerfiber1,75,72,2022,TRUE,264,108,FALSE,FALSE,,
+Knoo Brothel of Objects also GuanKnoonamo Motel,GuanKnoonamo,IOK,Tallerfiber1,75,72,2019,TRUE,65,88,FALSE,FALSE,,Grum Primative
 EOMR-IOK Embassy,Knew Knoo City,EOMR,OldManReidGaming,78,75,2021,TRUE,184,35,FALSE,FALSE,,
 Ungle Original Mine,Nelsonia Heartland,NEL,Cowman7,67,64,2020,TRUE,-328,127,FALSE,FALSE,,Ungle Reconstruction
 Isaac Villager Compound,NOI Mainland,NOI,Axeman_76,73,70,2019,TRUE,-325,-24,TRUE,FALSE,,
@@ -291,7 +291,7 @@ East Assman Stoning Canal,Axeman Park,NOI,Axeman_76,65,63,2023,TRUE,-427,-162,FA
 West Wester Assman Canal,West NOI,NOI,Axeman_76,65,63,2023,TRUE,-635,-50,FALSE,FALSE,,
 Wester Fjord Canal,West NOI,NOI,Axeman_76,65,63,2023,TRUE,-733,19,FALSE,FALSE,,
 How Professional Aquaduct,NOI Diplomatic Quarter,NEL,Cowman7,69,63,2023,TRUE,-500,185,FALSE,FALSE,,
-Cherry Building,South How Water River,QC,Vlueban,80,63,2023,TRUE,-263,227,FALSE,FALSE,,
+Cherry Building,South How Water River,QC,vlueban,80,63,2023,TRUE,-263,227,FALSE,FALSE,,
 West New Reid City Phlaure Guardn,West New Reid City,EOMR,OldManReidGaming,66,63,2023,TRUE,-58,305,FALSE,FALSE,,
 Axeman Park Square,Axeman Park,NOI,Axeman_76,75,70,2023,TRUE,-355,-131,FALSE,FALSE,,
 Welcome to Belize Highway,"Bozeman, Montana",EOMR,HAZ6R,96,73,2023,TRUE,71,572,FALSE,FALSE,,
@@ -302,12 +302,12 @@ West New Reid City Station,West New Reid City,UN,Axeman_76,68,63,2023,FALSE,-53,
 Server Sea Lighthouse,East Server Sea,NOI,Axeman_76,95.5,65,2023,TRUE,-186,666,FALSE,FALSE,,
 Enderman Farm,The End,UN,Cowman7,52,2,2020,TRUE,265,2,FALSE,FALSE,,Farms
 Megyggrisil,Nelsonia Heartland,NEL,Cowman7,105,64,2023,FALSE,-369,153,FALSE,FALSE,,Ungle Modernist
-The Knice Center,East Grum Chum,IOK,TallerFiber1,82,73,2023,FALSE,265,31,FALSE,FALSE,,
-Grum Waterways Knoocuaduct,Knew Knoo City,IOK,TallerFiber1,78,70,2023,TRUE,294,-10,FALSE,FALSE,,
-Grum Waterways Headquarters,Knew Knoo City,IOK,TallerFiber1,91.4375,81,2023,TRUE,243,11,FALSE,FALSE,,
+The Knice Center,East Grum Chum,IOK,Tallerfiber1,82,73,2023,FALSE,265,31,FALSE,FALSE,,
+Grum Waterways Knoocuaduct,Knew Knoo City,IOK,Tallerfiber1,78,70,2023,TRUE,294,-10,FALSE,FALSE,,
+Grum Waterways Headquarters,Knew Knoo City,IOK,Tallerfiber1,91.4375,81,2023,TRUE,243,11,FALSE,FALSE,,
 The Boner Zoner,Maybe Grum Forest,IOK,OldManReidGaming,87.4375,71,2023,TRUE,292,-69,FALSE,FALSE,,Farms
-The Oricle at Grumpaii,Grumpeii,IOK,TallerFiber1,76,70,2023,TRUE,360,-23,FALSE,FALSE,,
-Grumpaii Ruins,Grumpeii,IOK,TallerFiber1,76,71,2023,TRUE,374,-16,FALSE,FALSE,,
+The Oricle at Grumpaii,Grumpeii,IOK,Tallerfiber1,76,70,2023,TRUE,360,-23,FALSE,FALSE,,
+Grumpaii Ruins,Grumpeii,IOK,Tallerfiber1,76,71,2023,TRUE,374,-16,FALSE,FALSE,,
 The Z Warehouse,Old Belize,EOMR,HAZ6R,84,74,2024,FALSE,34,637,FALSE,FALSE,Eligible,
 Mountainside Building,Big Guy Slopes,NOI,Axeman_76,,,2024,FALSE,-140,360,FALSE,FALSE,Eligible,
 OMR Homeless Encampment,Homeless Haven,EOMR,OldManReidGaming,75,71,2024,TRUE,443,316,FALSE,FALSE,Eligible,3rd-World Eyesores
@@ -316,7 +316,7 @@ Belizean Iron Farm,Belizean Water Waterway,BEL,zVulgerz,114.5,77,2023,TRUE,-1005
 Wasteful Factory,New Belize Mainland,BEL,YerLoss,99,65,2024,TRUE,-792,305,FALSE,FALSE,Eligible,
 Beizian Cactus Farm,Belizean Water Waterway,BEL,Kazeroni,76.5,63,2024,TRUE,-1039,288,FALSE,FALSE,Eligible,
 Firewatch Tower #1,Threesome Highlands,NOI,Axeman_76,,,2024,FALSE,-790,-88,FALSE,FALSE,Eligible,
-Papo Hobbit Hole,Threesome Highlands,QC,Vlueban,76,71,2024,TRUE,-770,15,FALSE,FALSE,Eligible,
+Papo Hobbit Hole,Threesome Highlands,QC,vlueban,76,71,2024,TRUE,-770,15,FALSE,FALSE,Eligible,
 New Belize Outer Walls,New Belize Mainland,BEL,YerLoss,107.5625,63,2024,TRUE,-895,294,FALSE,FALSE,Eligible,
 Big Hole Stone Sorter,Belizean Water Waterway,BEL,YerLoss,31.5,-6,2024,TRUE,-1064,108,FALSE,FALSE,Eligible,
 The Homeless Flatlands of Reid Plains Governal Building,Homeless Haven,EOMR,OldManReidGaming,78,69,2024,TRUE,426,348,FALSE,FALSE,Eligible,
@@ -362,14 +362,14 @@ Soup City Nether Portal,Soup City,EOMR,ICQO,71,64,2024,TRUE,790,774,FALSE,FALSE,
 Pool/Baby Zombie Jockey Encloser,Soup City,EOMR,ICQO,67,64,2024,TRUE,788,791,FALSE,FALSE,Eligible,
 Froglight Farm AFK Platform,The Nether,NEL,Cowman7,256,252,2024,TRUE,-81,375,FALSE,FALSE,Eligible,
 Far Far Away Villager Trading Hut,Nelsonian Buildboard Lands,NEL,Cowman7,66,63,2024,TRUE,4788,-139,FALSE,FALSE,Eligible,
-New Tall Grum Tower,East Grum Chum,IOK,TallerFiber1,113,63,2024,TRUE,321,34,FALSE,FALSE,Eligible,
-Harbor House #1,Desert of Gett,IOK,TallerFiber2,69,63,2024,TRUE,-325,631,FALSE,FALSE,Eligible,
-Harbor House #2,Desert of Gett,IOK,TallerFiber3,69,63,2024,TRUE,-315,635,FALSE,FALSE,Eligible,
+New Tall Grum Tower,East Grum Chum,IOK,Tallerfiber1,113,63,2024,TRUE,321,34,FALSE,FALSE,Eligible,
+Harbor House #1,Desert of Gett,IOK,Tallerfiber1,69,63,2024,TRUE,-325,631,FALSE,FALSE,Eligible,
+Harbor House #2,Desert of Gett,IOK,Tallerfiber1,69,63,2024,TRUE,-315,635,FALSE,FALSE,Eligible,
 Fucking Insane Floating Island,Far Away Belizean Floating Island,BEL,YerLoss,170,88,2024,FALSE,-11600,-118,FALSE,FALSE,Eligible,
 Giant Nelsonian Floating Builboard,Nelsonian Buildboard Lands,NEL,Cowman7,111,81,2024,FALSE,4863,0,FALSE,FALSE,Eligible,
 Eastern Outpost,Maybe Grum Forest,NOI,Axeman_76,99,88,2024,TRUE,379,-139,FALSE,FALSE,Eligible,
 Ocean Mob Grinder,Big Ocean Outlands,BEL,zVulgerz,197,127,,TRUE,-1807,-112,FALSE,FALSE,,
-Grumdenburg Gate,Knew Knoo City,IOK,TallerFiber1,111,81,2024,TRUE,305,-10,FALSE,FALSE,Eligible,
+Grumdenburg Gate,Knew Knoo City,IOK,Tallerfiber1,111,81,2024,TRUE,305,-10,FALSE,FALSE,Eligible,
 The Joys of Serfdom,Saint Burgergrad,EOMR,Triton1037,75,71,2024,TRUE,750,263,FALSE,FALSE,Eligible,
 Old Belize Station Hub,Old Belize,UN,Axeman_76,78,72,2024,TRUE,24,603,FALSE,FALSE,Eligible,
 OMR P Diddy Mansion,Old Man Meadow,EOMR,OldManReidGaming,,,2024,FALSE,751,551,FALSE,FALSE,Eligible,

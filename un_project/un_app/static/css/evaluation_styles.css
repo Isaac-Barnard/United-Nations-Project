@@ -1,0 +1,27 @@
+/* Table styling to remove alternating row colors and hover effect */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+table tr, table td, table th {
+    padding: 5px; /* Compact padding for cells */
+}
+
+table tr:hover {
+    background-color: transparent; /* Remove hover effect */
+}
+
+/* Set input field width */
+input[type="number"] {
+    width: 80px;
+}
+
+tr:nth-child(odd) {
+    background-color: #e7e7e7;
+}
+
+tr:nth-child(even) {
+    background-color: #ffffff;
+}

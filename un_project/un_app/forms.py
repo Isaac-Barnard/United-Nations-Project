@@ -10,11 +10,14 @@ class BuildingEvaluationForm(forms.Form):
         
         # Dynamically add a DecimalField for each denomination
         denominations = Denomination.objects.all()
+        special_names = {"Redstone Dust", "Lapis Lazuli", "Coal"}
+
         for denomination in denominations:
             field_name = f'denomination_{denomination.id}'
+            label = f'{denomination.name}' if denomination.name in special_names else f'{denomination.name}s'
             self.fields[field_name] = forms.DecimalField(
                 max_digits=20, decimal_places=8, min_value=0, required=False,
-                label=f'{denomination.name} Quantity', initial=0
+                label=label, initial=0
             )
 
 
@@ -26,9 +29,12 @@ class ItemEvaluationForm(forms.Form):
         
         # Dynamically add a DecimalField for each denomination
         denominations = Denomination.objects.all()
+        special_names = {"Redstone Dust", "Lapis Lazuli", "Coal"}
+
         for denomination in denominations:
             field_name = f'denomination_{denomination.id}'
+            label = f'{denomination.name}' if denomination.name in special_names else f'{denomination.name}s'
             self.fields[field_name] = forms.DecimalField(
                 max_digits=20, decimal_places=8, min_value=0, required=False,
-                label=f'{denomination.name} Quantity', initial=0
+                label=label, initial=0
             )

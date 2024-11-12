@@ -5,6 +5,10 @@
     Evaluate Buildings
 {% endblock %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/evaluation_styles.css' %}">
+{% endblock %}
+
 {% block content %}
     {% if user.is_authenticated %}
     <span>Logged in as {{ user.username }}: </span>
@@ -27,23 +31,27 @@
             {% csrf_token %}
             {{ evaluation_form.building.label_tag }} {{ evaluation_form.building }}
 
-            <h2>Running Total (in Diamonds): <span id="total_diamond_value">0</span></h2>
-
             <h2>Input Quantities for Each Denomination</h2>
             <table>
                 <tr>
-                    <th>Denomination</th>
-                    <th>Quantity</th>
+                    {% for field in evaluation_form %}
+                        {% if field.name != 'building' %}
+                            <th>{{ field.label }}</th>
+                        {% endif %}
+                    {% endfor %}
                 </tr>
-                {% for field in evaluation_form %}
-                    {% if field.name != 'building' %}
-                        <tr>
-                            <td>{{ field.label }}</td>
-                            <td><input type="number" name="{{ field.name }}" id="{{ field.name }}" value="0" step="any" /></td>
-                        </tr>
-                    {% endif %}
-                {% endfor %}
+                <tr>
+                    {% for field in evaluation_form %}
+                        {% if field.name != 'building' %}
+                            <td>
+                                <input type="number" name="{{ field.name }}" id="{{ field.name }}" value="0" step="any" />
+                            </td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
             </table>
+
+            <h2>Running Total (in Diamonds): <span id="total_diamond_value">0</span></h2>
 
             <button type="submit">Submit Evaluation</button>
         </form>
