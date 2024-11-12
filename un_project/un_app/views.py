@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import BuildingEvaluationForm, ItemEvaluationForm
 from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount, ItemEvaluationComponent, ItemEvaluation, Item, Company, LiquidCount, LiquidAssetContainer
 from decimal import Decimal
+from django.http import JsonResponse
 
 def home(request):
     return render(request, 'home.html')
@@ -221,10 +222,13 @@ def company_balance_sheet(request, company_abbreviation):
 def evaluate_buildings(request):
     # Fetch the denominations to pass to the template
     denominations = Denomination.objects.all().order_by('priority')
+    selected_building = None
+    evaluation_data = []
     
     if request.method == 'POST':
         evaluation_form = BuildingEvaluationForm(request.POST)
         if evaluation_form.is_valid():
+            selected_building = evaluation_form.cleaned_data['building']  # Get the selected building
             evaluator = request.user
 
             # Check if evaluator has a related UserProfile and Player instance
@@ -245,21 +249,35 @@ def evaluate_buildings(request):
                     'denominations': denominations,  # Ensure denominations are passed in case of error
                     'error_message': 'You do not have permission to evaluate buildings.'
                 })
+            
+            # Fetch existing evaluations for the selected building
+            evaluations = BuildingEvaluation.objects.filter(building=selected_building).select_related('evaluator').prefetch_related('evaluation_components')
 
-            # Get building
-            building = evaluation_form.cleaned_data['building']
+            # Fetch existing evaluations for the selected building
+            evaluations = BuildingEvaluation.objects.filter(building=selected_building).select_related('evaluator').prefetch_related('evaluation_components')
+
+            for evaluation in evaluations:
+                evaluator_name = evaluation.evaluator.username
+                component_data = {denom.id: 0 for denom in denominations}  # Initialize all to 0
+                for component in evaluation.evaluation_components.all():
+                    component_data[component.denomination.id] = component.quantity  # Update with actual values
+
+                evaluation_data.append({
+                    'evaluator': evaluator_name,
+                    'components': component_data
+                })
 
             # Check if evaluator has already evaluated this building
-            if BuildingEvaluation.objects.filter(building=building, evaluator=evaluator_player).exists():
+            if BuildingEvaluation.objects.filter(building=selected_building, evaluator=evaluator_player).exists():
                 return render(request, 'evaluate_buildings.html', {
                     'evaluation_form': evaluation_form,
-                    'denominations': denominations,  # Ensure denominations are passed in case of error
+                    'denominations': denominations,
                     'error_message': 'You have already evaluated this building.'
                 })
 
             # Create BuildingEvaluation
             building_evaluation = BuildingEvaluation.objects.create(
-                building=building,
+                building=selected_building,
                 evaluator=evaluator_player
             )
 
@@ -282,7 +300,33 @@ def evaluate_buildings(request):
     # Always pass the denominations to the template
     return render(request, 'evaluate_buildings.html', {
         'evaluation_form': evaluation_form,
-        'denominations': denominations  # Ensure denominations are passed on GET request
+        'denominations': denominations,
+        'selected_building': selected_building,
+        'evaluation_data': evaluation_data,  # Pass evaluations to the template
+    })
+
+@login_required
+def get_building_evaluations(request, building_id):
+    denominations = Denomination.objects.all().order_by('priority')
+    evaluations = BuildingEvaluation.objects.filter(building_id=building_id).select_related('evaluator').prefetch_related('evaluation_components')
+    evaluation_data = []
+
+    for evaluation in evaluations:
+        evaluator_name = evaluation.evaluator.username
+        component_data = {denom.name: 0 for denom in denominations}  # Initialize with denomination names
+
+        for component in evaluation.evaluation_components.all():
+            component_data[component.denomination.name] = float(component.quantity)  # Use denomination name
+
+        evaluation_data.append({
+            'evaluator': evaluator_name,
+            'components': component_data,
+            'total_diamond_value': float(evaluation.total_diamond_value)
+        })
+
+    return JsonResponse({
+        'denominations': [denom.name for denom in denominations],
+        'evaluation_data': evaluation_data
     })
 
 

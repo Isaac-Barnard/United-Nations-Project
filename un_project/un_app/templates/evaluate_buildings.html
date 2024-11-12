@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_filters %}
 
 {% block title %}
     Evaluate Buildings
@@ -30,8 +31,83 @@
         <form method="post">
             {% csrf_token %}
             {{ evaluation_form.building.label_tag }} {{ evaluation_form.building }}
+            
+            <h2>Selected Building: <span id="selected-building-name">None</span></h2>
+
+            <h2>Evaluations for <span id="selected-building-name"></span></h2>
+            <table>
+                <thead>
+                    <tr id="evaluation-table-header">
+                        <th>Evaluator</th>
+                        <th>Total Diamond Value</th> 
+                        {% for denomination in denominations %}
+                            <th>{{ denomination.name }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody id="evaluation-table-body">
+                    {% for evaluation in evaluation_data %}
+                        <tr>
+                            <td>{{ evaluation.evaluator }}</td>
+                            {% for denomination in denominations %}
+                                <td>{{ evaluation.components|get_item:denomination.id|default:0 }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
             <h2>Input Quantities for Each Denomination</h2>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const buildingDropdown = document.getElementById('{{ evaluation_form.building.id_for_label }}');
+                    const selectedBuildingName = document.getElementById('selected-building-name');
+                    const evaluationTableBody = document.getElementById('evaluation-table-body');
+                    const evaluationTableHeader = document.getElementById('evaluation-table-header');
+            
+                    function updateEvaluations(buildingId) {
+                        fetch(`/get_evaluations/${buildingId}/`)
+                            .then(response => response.json())
+                            .then(data => {
+                                selectedBuildingName.textContent = buildingDropdown.options[buildingDropdown.selectedIndex].text;
+                                
+                                // Add column headers with Total Diamond Value before denominations
+                                evaluationTableHeader.innerHTML = '<th>Evaluator</th><th>Total Diamond Value</th>';
+                                data.denominations.forEach(denom => {
+                                    evaluationTableHeader.innerHTML += `<th>${denom}</th>`;
+                                });
+            
+                                evaluationTableBody.innerHTML = '';
+                                data.evaluation_data.forEach(evaluation => {
+                                    let row = `<tr><td>${evaluation.evaluator}</td>`;
+                                    row += `<td>${evaluation.total_diamond_value.toFixed(3)}</td>`;  // Display total diamond value with 3 decimal places
+                                    
+                                    // Add denomination quantities using denomination names
+                                    data.denominations.forEach(denom => {
+                                        row += `<td>${evaluation.components[denom] || 0}</td>`;
+                                    });
+                                    
+                                    row += '</tr>';
+                                    evaluationTableBody.innerHTML += row;
+                                });
+                            });
+                    }
+            
+                    buildingDropdown.addEventListener('change', function () {
+                        const buildingId = buildingDropdown.value;
+                        if (buildingId) {
+                            updateEvaluations(buildingId);
+                        }
+                    });
+            
+                    // Load evaluations for the initially selected building, if any
+                    if (buildingDropdown.value) {
+                        updateEvaluations(buildingDropdown.value);
+                    }
+                });
+            </script>
+
             <table>
                 <tr>
                     {% for field in evaluation_form %}

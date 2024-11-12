@@ -25,3 +25,37 @@ tr:nth-child(odd) {
 tr:nth-child(even) {
     background-color: #ffffff;
 }
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Center-align the header row */
+th {
+    text-align: center;
+    padding: 8px;
+}
+
+/* Left-align the first column (evaluator names) */
+td:first-child {
+    text-align: left;
+}
+
+
+/* Right-align all other cells */
+td {
+    text-align: right;
+    padding: 8px;
+}
+
+/* Add a thicker border between the second and third column */
+td:nth-child(2), th:nth-child(2) {
+    border-right: 3px solid; /* Adjust color and thickness as needed */
+}
+
+/* Optional: Set a minimum width for each column for readability */
+th, td {
+    min-width: 80px; /* Adjust this value as needed */
+}
