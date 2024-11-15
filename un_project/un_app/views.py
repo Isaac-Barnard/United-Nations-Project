@@ -259,6 +259,7 @@ def evaluate_buildings(request):
             for evaluation in evaluations:
                 evaluator_name = evaluation.evaluator.username
                 component_data = {denom.id: 0 for denom in denominations}  # Initialize all to 0
+                
                 for component in evaluation.evaluation_components.all():
                     component_data[component.denomination.id] = component.quantity  # Update with actual values
 

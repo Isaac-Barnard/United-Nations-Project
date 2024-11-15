@@ -32,7 +32,7 @@
             {% csrf_token %}
             {{ evaluation_form.building.label_tag }} {{ evaluation_form.building }}
 
-            <h2>Evaluations for <span id="selected-building-name">None</span></h2>
+            <h2>Evaluations for <span id="selected-building-name">N/A</span></h2>
             <table>
                 <thead>
                     <tr id="evaluation-table-header">
@@ -44,14 +44,21 @@
                     </tr>
                 </thead>
                 <tbody id="evaluation-table-body">
-                    {% for evaluation in evaluation_data %}
+                    {% if evaluation_data %}
+                        {% for evaluation in evaluation_data %}
+                            <tr>
+                                <td>{{ evaluation.evaluator }}</td>
+                                <td>{{ evaluation.total_diamond_value }}</td>
+                                {% for denomination in denominations %}
+                                    <td>{{ evaluation.components|get_item:denomination.id|default:0 }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    {% else %}
                         <tr>
-                            <td>{{ evaluation.evaluator }}</td>
-                            {% for denomination in denominations %}
-                                <td>{{ evaluation.components|get_item:denomination.id|default:0 }}</td>
-                            {% endfor %}
+                            <td colspan="{{ denominations|length|add:2 }}">No evaluations available for this building.</td>
                         </tr>
-                    {% endfor %}
+                    {% endif %}
                 </tbody>
             </table>
 
