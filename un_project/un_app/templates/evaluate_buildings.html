@@ -56,7 +56,7 @@
                         {% endfor %}
                     {% else %}
                         <tr>
-                            <td colspan="{{ denominations|length|add:2 }}">No evaluations available for this building.</td>
+                            <td colspan="{{ denominations|length|add:2 }}"> Please select a building to evaluate.</td>
                         </tr>
                     {% endif %}
                 </tbody>
@@ -82,18 +82,26 @@
                                 });
             
                                 evaluationTableBody.innerHTML = '';
-                                data.evaluation_data.forEach(evaluation => {
-                                    let row = `<tr><td>${evaluation.evaluator}</td>`;
-                                    row += `<td>${evaluation.total_diamond_value.toFixed(3)}</td>`;  // Display total diamond value with 3 decimal places
-                                    
-                                    // Add denomination quantities using denomination names
-                                    data.denominations.forEach(denom => {
-                                        row += `<td>${evaluation.components[denom] || 0}</td>`;
+                                if (data.evaluation_data.length > 0) {
+                                    data.evaluation_data.forEach(evaluation => {
+                                        let row = `<tr><td>${evaluation.evaluator}</td>`;
+                                        row += `<td>${evaluation.total_diamond_value.toFixed(3)}</td>`;
+                                        
+                                        data.denominations.forEach(denom => {
+                                            row += `<td>${evaluation.components[denom] || 0}</td>`;
+                                        });
+                                        
+                                        row += '</tr>';
+                                        evaluationTableBody.innerHTML += row;
                                     });
-                                    
-                                    row += '</tr>';
-                                    evaluationTableBody.innerHTML += row;
-                                });
+                                } else {
+                                    // Add the "No evaluations" message with proper colspan
+                                    evaluationTableBody.innerHTML = `
+                                        <tr>
+                                            <td colspan="${data.denominations.length + 2}">No evaluations available for this ${buildingDropdown.id.includes('building') ? 'building' : 'item'} yet.</td>
+                                        </tr>
+                                    `;
+                                }
                             });
                     }
             
@@ -132,7 +140,8 @@
                         {% for field in evaluation_form %}
                             {% if field.name != 'building' %}
                                 <td>
-                                    <input type="number" name="{{ field.name }}" id="{{ field.name }}" value="0" step="any" />
+                                    <input type="number" name="{{ field.name }}" id="{{ field.name }}" value="0" min="0" step="any" />
+</td>
                                 </td>
                             {% endif %}
                         {% endfor %}
@@ -153,6 +162,75 @@
                 "denomination_{{ denomination.id }}": {{ denomination.diamond_equivalent }}{% if not forloop.last %},{% endif %}
             {% endfor %}
         }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            const submitButton = document.querySelector('button[type="submit"]');
+            
+            function validateForm(e) {
+                // Get denomination values
+                const denominationValues = JSON.parse(document.getElementById('denomination_values').textContent);
+                let totalValue = 0;
+                
+                // Calculate total value
+                Object.keys(denominationValues).forEach(key => {
+                    const input = document.getElementById(key);
+                    if (input) {
+                        const value = parseFloat(input.value) || 0;
+                        totalValue += value * denominationValues[key];
+                    }
+                });
+                
+                // If total is 0 or negative, prevent submission
+                if (totalValue <= 0) {
+                    e.preventDefault();
+                    alert('Total diamond value must be greater than 0 to submit an evaluation.');
+                    submitButton.disabled = true;
+                    return false;
+                }
+                
+                submitButton.disabled = false;
+                return true;
+            }
+            
+            // Add form submission validation
+            form.addEventListener('submit', validateForm);
+            
+            // Add input validation for all denomination inputs
+            const inputs = form.querySelectorAll('input[type="number"]');
+            inputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    // Calculate total for enable/disable button
+                    const denominationValues = JSON.parse(document.getElementById('denomination_values').textContent);
+                    let totalValue = 0;
+                    
+                    Object.keys(denominationValues).forEach(key => {
+                        const input = document.getElementById(key);
+                        if (input) {
+                            const value = parseFloat(input.value) || 0;
+                            totalValue += value * denominationValues[key];
+                        }
+                    });
+                    
+                    // Update submit button state
+                    submitButton.disabled = totalValue <= 0;
+                });
+            });
+            
+            // Initial validation
+            const denominationValues = JSON.parse(document.getElementById('denomination_values').textContent);
+            let initialTotal = 0;
+            Object.keys(denominationValues).forEach(key => {
+                const input = document.getElementById(key);
+                if (input) {
+                    const value = parseFloat(input.value) || 0;
+                    initialTotal += value * denominationValues[key];
+                }
+            });
+            submitButton.disabled = initialTotal <= 0;
+        });
     </script>
 
     <!-- Link to the external JavaScript file -->

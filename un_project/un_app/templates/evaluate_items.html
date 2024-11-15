@@ -56,7 +56,7 @@
                         {% endfor %}
                     {% else %}
                         <tr>
-                            <td colspan="{{ denominations|length|add:2 }}">No evaluations available for this item.</td>
+                            <td colspan="{{ denominations|length|add:2 }}">Please select an item to evaluate</td>
                         </tr>
                     {% endif %}
                 </tbody>
@@ -75,23 +75,36 @@
                             .then(data => {
                                 selectedItemName.textContent = itemDropdown.options[itemDropdown.selectedIndex].text;
                                 
+                                // Update header
                                 evaluationTableHeader.innerHTML = '<th>Evaluator</th><th>Total Diamond Value</th>';
                                 data.denominations.forEach(denom => {
                                     evaluationTableHeader.innerHTML += `<th>${denom}</th>`;
                                 });
-            
+                                
+                                // Clear existing table content
                                 evaluationTableBody.innerHTML = '';
-                                data.evaluation_data.forEach(evaluation => {
-                                    let row = `<tr><td>${evaluation.evaluator}</td>`;
-                                    row += `<td>${evaluation.total_diamond_value.toFixed(3)}</td>`;
-                                    
-                                    data.denominations.forEach(denom => {
-                                        row += `<td>${evaluation.components[denom] || 0}</td>`;
+
+                                // Check if there are any evaluations
+                                if (data.evaluation_data.length > 0) {
+                                    data.evaluation_data.forEach(evaluation => {
+                                        let row = `<tr><td>${evaluation.evaluator}</td>`;
+                                        row += `<td>${evaluation.total_diamond_value.toFixed(3)}</td>`;
+                                        
+                                        data.denominations.forEach(denom => {
+                                            row += `<td>${evaluation.components[denom] || 0}</td>`;
+                                        });
+                                        
+                                        row += '</tr>';
+                                        evaluationTableBody.innerHTML += row;
                                     });
-                                    
-                                    row += '</tr>';
-                                    evaluationTableBody.innerHTML += row;
-                                });
+                                } else {
+                                    // Add the "No evaluations" message with proper colspan
+                                    evaluationTableBody.innerHTML = `
+                                        <tr>
+                                            <td colspan="${data.denominations.length + 2}">No evaluations available for this ${itemDropdown.id.includes('item') ? 'item' : 'item'} yet.</td>
+                                        </tr>
+                                    `;
+                                }
                             });
                     }
             
@@ -130,7 +143,7 @@
                         {% for field in evaluation_form %}
                             {% if field.name != 'item' %}
                                 <td>
-                                    <input type="number" name="{{ field.name }}" id="{{ field.name }}" value="0" step="any" />
+                                    <input type="number" name="{{ field.name }}" id="{{ field.name }}" value="0" min="0" step="any" />
                                 </td>
                             {% endif %}
                         {% endfor %}
