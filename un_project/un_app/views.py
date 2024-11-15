@@ -337,12 +337,14 @@ def evaluation_success(request):
 
 @login_required
 def evaluate_items(request):
-    # Fetch the denominations to pass to the template
     denominations = Denomination.objects.all().order_by('priority')
+    selected_item = None
+    evaluation_data = []
     
     if request.method == 'POST':
         evaluation_form = ItemEvaluationForm(request.POST)
         if evaluation_form.is_valid():
+            selected_item = evaluation_form.cleaned_data['item']
             evaluator = request.user
 
             # Check if evaluator has a related UserProfile and Player instance
@@ -374,10 +376,31 @@ def evaluate_items(request):
                     'denominations': denominations,  # Ensure denominations are passed in case of error
                     'error_message': 'You have already evaluated this item.'
                 })
+            
+            evaluations = ItemEvaluation.objects.filter(item=selected_item).select_related('evaluator').prefetch_related('evaluation_components')
+
+            for evaluation in evaluations:
+                evaluator_name = evaluation.evaluator.username
+                component_data = {denom.id: 0 for denom in denominations}
+                
+                for component in evaluation.evaluation_components.all():
+                    component_data[component.denomination.id] = component.quantity
+
+                evaluation_data.append({
+                    'evaluator': evaluator_name,
+                    'components': component_data
+                })
+
+            if ItemEvaluation.objects.filter(item=selected_item, evaluator=evaluator_player).exists():
+                return render(request, 'evaluate_items.html', {
+                    'evaluation_form': evaluation_form,
+                    'denominations': denominations,
+                    'error_message': 'You have already evaluated this item.'
+                })
 
             # Create ItemEvaluation
             item_evaluation = ItemEvaluation.objects.create(
-                item=item,
+                item=selected_item,
                 evaluator=evaluator_player
             )
 
@@ -400,7 +423,33 @@ def evaluate_items(request):
     # Always pass the denominations to the template
     return render(request, 'evaluate_items.html', {
         'evaluation_form': evaluation_form,
-        'denominations': denominations  # Ensure denominations are passed on GET request
+        'denominations': denominations,
+        'selected_item': selected_item,
+        'evaluation_data': evaluation_data,
+    })
+
+@login_required
+def get_item_evaluations(request, item_id):
+    denominations = Denomination.objects.all().order_by('priority')
+    evaluations = ItemEvaluation.objects.filter(item_id=item_id).select_related('evaluator').prefetch_related('evaluation_components')
+    evaluation_data = []
+
+    for evaluation in evaluations:
+        evaluator_name = evaluation.evaluator.username
+        component_data = {denom.name: 0 for denom in denominations}
+
+        for component in evaluation.evaluation_components.all():
+            component_data[component.denomination.name] = float(component.quantity)
+
+        evaluation_data.append({
+            'evaluator': evaluator_name,
+            'components': component_data,
+            'total_diamond_value': float(evaluation.total_diamond_value)
+        })
+
+    return JsonResponse({
+        'denominations': [denom.name for denom in denominations],
+        'evaluation_data': evaluation_data
     })
 
 

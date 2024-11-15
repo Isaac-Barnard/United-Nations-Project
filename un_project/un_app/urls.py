@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import building_list, player_list, home, nation_balance_sheet, evaluate_buildings, evaluation_success, evaluate_items, company_balance_sheet, un_map, get_building_evaluations
+from .views import building_list, player_list, home, nation_balance_sheet, evaluate_buildings, evaluation_success, evaluate_items, company_balance_sheet, un_map, get_building_evaluations, get_item_evaluations
 
 urlpatterns = [
     path('', home, name='home'),  # Default home page
@@ -12,5 +12,6 @@ urlpatterns = [
     path('evaluation-success/', evaluation_success, name='evaluation_success'),
     path('accounts/', include('django.contrib.auth.urls')),  # Include built-in auth URLs
     path('evaluate-items/', evaluate_items, name='evaluate_items'),
+    path('get_item_evaluations/<int:item_id>/', get_item_evaluations, name='get_item_evaluations'),
     path('map/', un_map, name='un_map'),
 ]

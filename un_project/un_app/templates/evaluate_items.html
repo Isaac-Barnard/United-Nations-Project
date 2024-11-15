@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_filters %}
 
 {% block title %}
     Evaluate Items
@@ -31,30 +32,113 @@
             {% csrf_token %}
             {{ evaluation_form.item.label_tag }} {{ evaluation_form.item }}
 
-
-            <h2>Input Quantities for Each Denomination</h2>
+            <h2>Evaluations for <span id="selected-item-name">N/A</span></h2>
             <table>
-                <tr>
-                    {% for field in evaluation_form %}
-                        {% if field.name != 'item' %}
-                            <th>{{ field.label }}</th>
-                        {% endif %}
-                    {% endfor %}
-                </tr>
-                <tr>
-                    {% for field in evaluation_form %}
-                        {% if field.name != 'item' %}
-                            <td>
-                                <input type="number" name="{{ field.name }}" id="{{ field.name }}" value="0" step="any" />
-                            </td>
-                        {% endif %}
-                    {% endfor %}
-                </tr>
+                <thead>
+                    <tr id="evaluation-table-header">
+                        <th>Evaluator</th>
+                        <th>Total Diamond Value</th>
+                        {% for denomination in denominations %}
+                            <th>{{ denomination.name }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody id="evaluation-table-body">
+                    {% if evaluation_data %}
+                        {% for evaluation in evaluation_data %}
+                            <tr>
+                                <td>{{ evaluation.evaluator }}</td>
+                                <td>{{ evaluation.total_diamond_value }}</td>
+                                {% for denomination in denominations %}
+                                    <td>{{ evaluation.components|get_item:denomination.id|default:0 }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="{{ denominations|length|add:2 }}">No evaluations available for this item.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
             </table>
 
-            <h2>Running Total (in Diamonds): <span id="total_diamond_value">0</span></h2>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const itemDropdown = document.getElementById('{{ evaluation_form.item.id_for_label }}');
+                    const selectedItemName = document.getElementById('selected-item-name');
+                    const evaluationTableBody = document.getElementById('evaluation-table-body');
+                    const evaluationTableHeader = document.getElementById('evaluation-table-header');
+            
+                    function updateEvaluations(itemId) {
+                        fetch(`/get_item_evaluations/${itemId}/`)
+                            .then(response => response.json())
+                            .then(data => {
+                                selectedItemName.textContent = itemDropdown.options[itemDropdown.selectedIndex].text;
+                                
+                                evaluationTableHeader.innerHTML = '<th>Evaluator</th><th>Total Diamond Value</th>';
+                                data.denominations.forEach(denom => {
+                                    evaluationTableHeader.innerHTML += `<th>${denom}</th>`;
+                                });
+            
+                                evaluationTableBody.innerHTML = '';
+                                data.evaluation_data.forEach(evaluation => {
+                                    let row = `<tr><td>${evaluation.evaluator}</td>`;
+                                    row += `<td>${evaluation.total_diamond_value.toFixed(3)}</td>`;
+                                    
+                                    data.denominations.forEach(denom => {
+                                        row += `<td>${evaluation.components[denom] || 0}</td>`;
+                                    });
+                                    
+                                    row += '</tr>';
+                                    evaluationTableBody.innerHTML += row;
+                                });
+                            });
+                    }
+            
+                    itemDropdown.addEventListener('change', function () {
+                        const itemId = itemDropdown.value;
+                        if (itemId) {
+                            updateEvaluations(itemId);
+                        }
+                    });
+            
+                    if (itemDropdown.value) {
+                        updateEvaluations(itemDropdown.value);
+                    }
+                });
+            </script>
 
-            <button type="submit">Submit Evaluation</button>
+
+            <h2>Input Quantities for Each Denomination</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Total Diamond Value</th>
+                        {% for field in evaluation_form %}
+                            {% if field.name != 'item' %}
+                                <th>{{ field.label }}</th>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td><span id="total_diamond_value">0</span></td>
+                        {% for field in evaluation_form %}
+                            {% if field.name != 'item' %}
+                                <td>
+                                    <input type="number" name="{{ field.name }}" id="{{ field.name }}" value="0" step="any" />
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+
+           <button type="submit">Submit Evaluation</button>
         </form>
     {% else %}
         <p>Please log in to submit an evaluation.</p>
