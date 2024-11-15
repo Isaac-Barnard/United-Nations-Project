@@ -158,6 +158,10 @@ tr:hover {
     border-radius: 5px;  /* Optional: rounded corners */
 }
 
+#evaluations-dropdown .dropdown-content {
+    width: 200px;
+}
+
 .dropdown-content .column {
     padding: 2px 2px;
     flex: 1;  /* Ensure both columns have equal width */
@@ -182,7 +186,7 @@ tr:hover {
 }
 
 .dropdown-content a:hover {
-    background-color: #575757;
+    background-color: #535353;
 }
 
 .dropdown:hover .dropdown-content {

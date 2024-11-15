@@ -41,7 +41,7 @@ https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwN
     - [ ] Make evaluation success better (Instead of taking you to a different page)
     - [ ] Change building/item evaluations to be more like google sheets (ie. other evaluators listed, etc…)
         - [ ] All buildings/items listed
-        - [ ] Other evaluator's evaluations listed
+        - [x] Other evaluator's evaluations listed
 - **Graphs**
     - [ ] Create historical records of nation/company assets (Total assets, liquid, items, buildings, other assets)
     - [ ] Individual nation/company graphs in their balance sheets
