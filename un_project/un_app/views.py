@@ -216,7 +216,19 @@ def company_balance_sheet(request, company_abbreviation):
         'liquid_asset_data': liquid_asset_data,
     })
 
-
+def calculate_total_diamond_value(form_data, denominations):
+    """Helper function to calculate total diamond value"""
+    total_diamond_value = 0
+    for denomination in denominations:
+        field_name = f'denomination_{denomination.id}'
+        quantity = form_data.get(field_name, 0)
+        if isinstance(quantity, str):
+            try:
+                quantity = float(quantity)
+            except ValueError:
+                quantity = 0
+        total_diamond_value += quantity * denomination.diamond_equivalent
+    return total_diamond_value
 
 @login_required
 def evaluate_buildings(request):
@@ -228,6 +240,7 @@ def evaluate_buildings(request):
     if request.method == 'POST':
         evaluation_form = BuildingEvaluationForm(request.POST)
         if evaluation_form.is_valid():
+
             selected_building = evaluation_form.cleaned_data['building']  # Get the selected building
             evaluator = request.user
 
@@ -250,8 +263,16 @@ def evaluate_buildings(request):
                     'error_message': 'You do not have permission to evaluate buildings.'
                 })
             
-            # Fetch existing evaluations for the selected building
-            evaluations = BuildingEvaluation.objects.filter(building=selected_building).select_related('evaluator').prefetch_related('evaluation_components')
+            # Calculate total diamond value
+            total_diamond_value = calculate_total_diamond_value(evaluation_form.cleaned_data, denominations)
+            
+            # Check if the evaluation is greater than 0
+            if total_diamond_value <= 0:
+                return render(request, 'evaluate_buildings.html', {
+                    'evaluation_form': evaluation_form,
+                    'denominations': denominations,
+                    'error_message': 'The evaluation must be greater than 0.'
+                })
 
             # Fetch existing evaluations for the selected building
             evaluations = BuildingEvaluation.objects.filter(building=selected_building).select_related('evaluator').prefetch_related('evaluation_components')
@@ -364,6 +385,17 @@ def evaluate_items(request):
                     'evaluation_form': evaluation_form,
                     'denominations': denominations,  # Ensure denominations are passed in case of error
                     'error_message': 'You do not have permission to evaluate items.'
+                })
+            
+            # Calculate total diamond value
+            total_diamond_value = calculate_total_diamond_value(evaluation_form.cleaned_data, denominations)
+            
+            # Check if the evaluation is greater than 0
+            if total_diamond_value <= 0:
+                return render(request, 'evaluate_items.html', {
+                    'evaluation_form': evaluation_form,
+                    'denominations': denominations,
+                    'error_message': 'The evaluation must be greater than 0.'
                 })
 
             # Get item
