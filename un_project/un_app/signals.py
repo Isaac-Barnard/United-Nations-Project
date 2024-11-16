@@ -1,7 +1,10 @@
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.contrib.contenttypes.models import ContentType
-from .models import Item, ItemCount, ItemEvaluation, ItemFixedPriceComponent, ItemEvaluationComponent, Building, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Nation, LiquidCount, Company, LiquidAssetContainer
+from decimal import Decimal
+from django.db.models import Sum
+from django.db import models
+from .models import Item, ItemCount, ItemEvaluation, ItemFixedPriceComponent, ItemEvaluationComponent, Building, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Nation, LiquidCount, Company, LiquidAssetContainer, LiabilityPayment, Liability
 
 # --------------------------------------------------------------------
 #                           Buildings
@@ -254,3 +257,24 @@ def building_evaluation_changed(sender, instance, **kwargs):
 @receiver(post_delete, sender=BuildingEvaluationComponent)
 def building_evaluation_component_changed(sender, instance, **kwargs):
     update_total_building_asset_value(instance.evaluation.building)
+
+
+@receiver(post_save, sender=LiabilityPayment)
+def update_liability_after_payment(sender, instance, **kwargs):
+    """Update the liability's remaining value whenever a payment is created or modified"""
+    liability = instance.liability
+    total_payments = LiabilityPayment.objects.filter(liability=liability).aggregate(
+        total=models.Sum('diamond_amount'))['total'] or Decimal('0')
+    
+    liability.remaining_diamond_value = liability.total_diamond_value - total_payments
+    liability.save()
+
+@receiver(post_delete, sender=LiabilityPayment)
+def update_liability_after_payment_delete(sender, instance, **kwargs):
+    """Update the liability's remaining value whenever a payment is deleted"""
+    liability = instance.liability
+    total_payments = LiabilityPayment.objects.filter(liability=liability).aggregate(
+        total=models.Sum('diamond_amount'))['total'] or Decimal('0')
+    
+    liability.remaining_diamond_value = liability.total_diamond_value - total_payments
+    liability.save()

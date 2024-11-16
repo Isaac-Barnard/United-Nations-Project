@@ -1,0 +1,11 @@
+debtor_type,debtor_abbreviation,creditor_type,creditor_abbreviation,liability_type,description,creation_date,due_date,total_diamond_value
+nation,UN,nation,CRP,promise,One-Time Annexation and Auction of Bad Land Near the United Nations,2/2/22,,7
+nation,UN,nation,CRP,promise,One-Time Annexation and Auction of Bad Land Near the United Nations V2,2/5/22,,10
+nation,NOI,nation,CDS,promise,Treaty of JWO2 and Tallerfiber1 Partitions,1/6/20,,2
+nation,EOMR,nation,CRP,promise,Dissolution of First Bank of Old Man Reid Compensation,12/9/20,,3.073
+nation,NEL,nation,EOMR,fine,Case 23: Confederate Provinces of East OMR v. Cowman7,12/28/23,,26
+nation,NEL,nation,EOMR,fine,Case 24: Confederate Provinces of East OMR v. Cowman7,12/28/23,,10.21
+nation,IOK,company,2OMR,mortgage,Reid's Armor Stand Building Lease,11/22/22,,36
+nation,BEL,nation,IOK,fine,Treaty of Reid Vegas (IOK),12/15/22,,122.134
+nation,BEL,nation,EOMR,fine,Treaty of Reid Vegas (EOMR),12/15/22,,328.505091
+nation,BEL,nation,UN,fine,Case 25: United Nations v. New Belize,9/11/24,,96
