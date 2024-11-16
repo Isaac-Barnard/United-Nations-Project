@@ -48,6 +48,11 @@ nav ul li.menu-logo img {
     margin-left: 50px;  /* Add space between the logo and the menu items */
 }
 
+.menu-logo a:hover {
+    opacity: 0.9;
+    cursor: pointer;
+}
+
 nav ul li {
     display: inline;
     margin-right: 20px;
