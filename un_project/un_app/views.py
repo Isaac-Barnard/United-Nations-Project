@@ -2,8 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import F, FloatField, ExpressionWrapper, Count, Value, Sum, Window
 from django.db.models.functions import Coalesce, Rank
 from django.contrib.auth.decorators import login_required
+from django.contrib.contenttypes.models import ContentType
 from .forms import BuildingEvaluationForm, ItemEvaluationForm
-from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount, ItemEvaluationComponent, ItemEvaluation, Item, Company, LiquidCount, LiquidAssetContainer
+from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount, ItemEvaluationComponent, ItemEvaluation, Item, Company, LiquidCount, LiquidAssetContainer, LiabilityPayment, Liability
 from decimal import Decimal
 from django.http import JsonResponse
 
@@ -116,6 +117,19 @@ def nation_balance_sheet(request, nation_abbreviation):
             items_part4.append(item)  # 400's range goes into items_part4
         elif 500 <= item['ordering'] < 600:
             items_part5.append(item)  # 500's range goes into items_part5
+
+    # Fetch liabilities where this nation is the debtor
+    nation_content_type = ContentType.objects.get_for_model(Nation)
+    liabilities = Liability.objects.filter(
+        debtor_type=nation_content_type,
+        debtor_abbreviation=nation_abbreviation
+    ).order_by('liability_type', 'creditor_abbreviation')
+
+    # Calculate liability totals
+    total_liabilities = liabilities.aggregate(
+        total=Sum('total_diamond_value'))['total'] or Decimal('0')
+    total_remaining_liabilities = liabilities.aggregate(
+        total=Sum('remaining_diamond_value'))['total'] or Decimal('0')
             
     return render(request, 'nation_balance_sheet.html', {
     'nation': nation,
@@ -124,6 +138,9 @@ def nation_balance_sheet(request, nation_abbreviation):
     'items_parts': [items_part1, items_part2, items_part3, items_part4, items_part5],  # Pass as a single list
     'denominations': denominations,
     'liquid_asset_data': liquid_asset_data,
+    'liabilities': liabilities,
+    'total_liabilities': total_liabilities,
+    'total_remaining_liabilities': total_remaining_liabilities,
 })
 
 
@@ -206,6 +223,21 @@ def company_balance_sheet(request, company_abbreviation):
             items_part4.append(item)  # 400's range goes into items_part4
         elif 500 <= item['ordering'] < 600:
             items_part5.append(item)  # 500's range goes into items_part5
+
+    
+    # Fetch liabilities where this company is the debtor
+    company_content_type = ContentType.objects.get_for_model(Company)
+    liabilities = Liability.objects.filter(
+        debtor_type=company_content_type,
+        debtor_abbreviation=company_abbreviation
+    ).order_by('liability_type', 'creditor_abbreviation')
+
+    # Calculate liability totals
+    total_liabilities = liabilities.aggregate(
+        total=Sum('total_diamond_value'))['total'] or Decimal('0')
+    total_remaining_liabilities = liabilities.aggregate(
+        total=Sum('remaining_diamond_value'))['total'] or Decimal('0')
+    
             
     return render(request, 'company_balance_sheet.html', {
         'company': company,
@@ -214,6 +246,9 @@ def company_balance_sheet(request, company_abbreviation):
         'items_parts': [items_part1, items_part2, items_part3, items_part4, items_part5],  # Pass as a single list
         'denominations': denominations,
         'liquid_asset_data': liquid_asset_data,
+        'liabilities': liabilities,
+        'total_liabilities': total_liabilities,
+        'total_remaining_liabilities': total_remaining_liabilities,
     })
 
 def calculate_total_diamond_value(form_data, denominations):

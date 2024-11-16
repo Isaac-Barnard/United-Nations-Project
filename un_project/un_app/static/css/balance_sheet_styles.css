@@ -143,3 +143,10 @@ td.building-name {
 .liquid-table td:nth-child(11) {
     width: 7%; 
 }
+
+
+
+.liability-table td.right-align {
+    text-align: right;
+}
+

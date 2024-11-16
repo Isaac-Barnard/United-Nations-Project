@@ -122,4 +122,49 @@
     <div class="total-value-sum">
         <h3>Total Value of All Buildings: {{ company.total_building_asset_value|custom_decimal_places }}</h3>
     </div>
+
+
+    <h2>Liabilities</h2>
+    <div class="liability-section">
+        <table class="liability-table">
+            <colgroup>
+                <col style="width: 10%">  <!-- Type -->
+                <col style="width: 10%">  <!-- Creditor -->
+                <col style="width: 40%">  <!-- Description -->
+                <col style="width: 10%">  <!-- Total Value -->
+                <col style="width: 10%">  <!-- Paid Amount -->
+                <col style="width: 10%">  <!-- Remaining -->
+            </colgroup>
+            <thead>
+                <tr style="font-size: 0.95em;">
+                    <th>Type</th>
+                    <th>Creditor</th>
+                    <th>Description</th>
+                    <th>Total Value</th>
+                    <th>Paid Amount</th>
+                    <th>Remaining</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for liability in liabilities %}
+                    <tr style="font-size: 0.95em;">
+                        <td>{{ liability.get_liability_type_display }}</td>
+                        <td>{{ liability.creditor_abbreviation }}</td>
+                        <td class="description">{{ liability.description }}</td>
+                        <td class="right-align">{{ liability.total_diamond_value|custom_decimal_places }}</td>
+                        <td class="right-align">{{ liability.total_diamond_value|subtract:liability.remaining_diamond_value|custom_decimal_places }}</td>
+                        <td class="right-align">{{ liability.remaining_diamond_value|custom_decimal_places }}</td>
+                    </tr>
+                {% empty %}
+                    <tr><td colspan="6">No liabilities found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Total Liabilities -->
+    <div class="total-value-sum" style="display: flex; gap: 2rem; justify-content: flex-start;">
+        <h3>Total Liabilities: {{ total_liabilities|custom_decimal_places }}</h3>
+        <h3>Total Remaining Liabilities: {{ total_remaining_liabilities|custom_decimal_places }}</h3>
+    </div>
 {% endblock %}

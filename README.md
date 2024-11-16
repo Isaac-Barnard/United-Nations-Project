@@ -23,10 +23,10 @@ https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwN
         - [ ] Building heights
         - [ ] Nation average height & # of buildings
         - [ ] Territory average height & # of buildings
-    - [ ] Create liability tables
-        - [ ] Add Mortgages section
-        - [ ] Add Regular Loans section (Maybe rename?)
-        - [ ] Add Total Liabilities
+    - [x] Create liability tables
+        - [x] Add Liability section
+        - [x] Add Severl different types of liabilities
+        - [x] Add Total Liabilities
     - [ ] Create receivables & other assets tables
         - [ ] Add Receivables
         - [ ] Add Stock Investments
