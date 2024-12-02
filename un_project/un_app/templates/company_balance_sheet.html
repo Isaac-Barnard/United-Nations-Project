@@ -40,6 +40,7 @@
     </table>
     <div class="total-value-sum">
         <h3>Total Value of All Liquid Assets: {{ company.total_liquid_asset_value|custom_decimal_places }}</h3>
+        <h3 style="margin-top: 1rem; border-top: 1px solid #ccc; padding-top: 1rem;"></h3>
     </div>
 
     <h2 class="items-heading">Owned Items</h2>
@@ -87,7 +88,42 @@
         </div>
     </div>
 
+    <h2 style="margin-top: 1rem; border-top: 1px solid #ccc; padding-top: 1rem;">
+        Total Assets Sum</h2>
+    <table class="total-assets-sum-table">
+        <thead>
+            <tr style="font-size: 0.9em;">
+                <th>Asset Category</th>
+                <th>Value Equivalent</th>
+            </tr>
+        </thead>
+        <tbody style="font-size: .95em;">
+            <tr">
+                <td>Total Liquid Assets:</td>
+                <td class="right-align">{{ company.total_liquid_asset_value|custom_decimal_places }}</td>
+            </tr>
+            <tr>
+                <td>Total Item Values:</td>
+                <td class="right-align">{{ company.total_item_asset_value|custom_decimal_places }}</td>
+            </tr>
+            <tr>
+                <td>Total Building Values:</td>
+                <td class="right-align">{{ company.total_building_asset_value|custom_decimal_places }}</td>
+            </tr>
+            <tr>
+                <td>Total Remaining Liabilities:</td>
+                <td class="right-align">{{ total_remaining_liabilities|custom_decimal_places }}</td>
+            </tr>
+            <tr style="border-top: 3px solid; font-weight: bold;">
+                <td>Total Assets:</td>
+                <td class="right-align">{{ total_assets|custom_decimal_places }}</td>
+            </tr>
+        </tbody>
+    </table>
 
+
+
+    <h3 style="margin-top: 1rem; border-top: 1px solid #ccc; padding-top: 1rem;"></h3>
     <div class="building-table" style="display: flex; justify-content: space-between;">
         <!-- Fully Owned Buildings -->
             <!-- N/A Companies can't own buildings-->
@@ -123,8 +159,7 @@
         <h3>Total Value of All Buildings: {{ company.total_building_asset_value|custom_decimal_places }}</h3>
     </div>
 
-
-    <h2>Liabilities</h2>
+    <h2 style="margin-top: 1rem; border-top: 1px solid #ccc; padding-top: 1rem;">Liabilities</h2>
     <div class="liability-section">
         <table class="liability-table">
             <colgroup>

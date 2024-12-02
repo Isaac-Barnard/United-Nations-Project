@@ -130,6 +130,15 @@ def nation_balance_sheet(request, nation_abbreviation):
         total=Sum('total_diamond_value'))['total'] or Decimal('0')
     total_remaining_liabilities = liabilities.aggregate(
         total=Sum('remaining_diamond_value'))['total'] or Decimal('0')
+    
+    # Calculate total assets
+    total_assets = (
+        nation.total_liquid_asset_value + 
+        nation.total_item_asset_value + 
+        nation.total_building_asset_value - 
+        total_remaining_liabilities
+    )
+    
             
     return render(request, 'nation_balance_sheet.html', {
     'nation': nation,
@@ -141,6 +150,7 @@ def nation_balance_sheet(request, nation_abbreviation):
     'liabilities': liabilities,
     'total_liabilities': total_liabilities,
     'total_remaining_liabilities': total_remaining_liabilities,
+    'total_assets': total_assets,
 })
 
 
@@ -238,6 +248,14 @@ def company_balance_sheet(request, company_abbreviation):
     total_remaining_liabilities = liabilities.aggregate(
         total=Sum('remaining_diamond_value'))['total'] or Decimal('0')
     
+    # Calculate total assets
+    total_assets = (
+        company.total_liquid_asset_value + 
+        company.total_item_asset_value + 
+        company.total_building_asset_value - 
+        total_remaining_liabilities
+    )
+    
             
     return render(request, 'company_balance_sheet.html', {
         'company': company,
@@ -249,6 +267,7 @@ def company_balance_sheet(request, company_abbreviation):
         'liabilities': liabilities,
         'total_liabilities': total_liabilities,
         'total_remaining_liabilities': total_remaining_liabilities,
+        'total_assets': total_assets,
     })
 
 def calculate_total_diamond_value(form_data, denominations):

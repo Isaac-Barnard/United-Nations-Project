@@ -42,7 +42,7 @@ Setting up the repo is pretty easy:
         - [ ] Add Receivables
         - [ ] Add Stock Investments
         - [ ] Lists Liabilities
-    - [ ] Create total assets rundown (Total Cash & Cash Equivalents, Total Items, Total Territories, Other Assets & Liabilities = Total Assets)
+    - [x] Create total assets rundown (Total Cash & Cash Equivalents, Total Items, Total Territories, Other Assets & Liabilities = Total Assets)
     - [ ] Create loan tables for companies
         - [ ] Morgages, loans, and add Total Debt Assets
     - [ ] Create shareholders table for companies (Shareholder, %, diamond equivalent [total assets * %])

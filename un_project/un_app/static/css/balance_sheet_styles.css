@@ -64,6 +64,24 @@ td.item-name, td.building-name {
 }
 
 
+.total-assets-sum-table-container {
+    width: 50%;
+    margin: 0 auto; /* Center the table horizontally */
+}
+
+.total-assets-sum-table {
+    width: 50%; /* Make the table take up the full width of the container */
+    border-collapse: collapse; /* Optional: make borders look cleaner */
+}
+
+.total-assets-sum-table th, 
+.total-assets-sum-table td {
+    text-align: left; /* Adjust alignment as needed */
+    padding: 0.5rem; /* Add padding for readability */
+}
+
+
+
 /* Target the Item Name column to truncate long names */
 td.building-name {
     white-space: nowrap;       /* Prevent wrapping */
@@ -149,4 +167,5 @@ td.building-name {
 .liability-table td.right-align {
     text-align: right;
 }
+
 
