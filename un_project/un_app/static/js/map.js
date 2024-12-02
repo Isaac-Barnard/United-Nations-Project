@@ -91,7 +91,13 @@ const icons = {
 };
 
 // Fetch building data and add markers
-fetch('/un_api/buildings/')
+let dir = document.URL.split('/')[3]; // gets parent dir
+if (dir === "map") { // does nothing if on localhost
+    dir = "";
+}
+url = dir + '/un_api/buildings/'; // adds parent dir to url
+let url = dir + '/un_api/buildings/';
+fetch(url)
     .then(response => response.json())
     .then(data => {
         data.forEach(building => {
