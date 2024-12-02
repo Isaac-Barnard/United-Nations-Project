@@ -91,8 +91,8 @@ const icons = {
 };
 
 // Fetch building data and add markers
-let dir = document.URL.split('/')[3]; // gets parent dir
-if (dir === "map") { // does nothing if on localhost
+let dir = '/' + document.URL.split('/')[3]; // gets parent dir
+if (dir === "/map") { // filters out localhost
     dir = "";
 }
 url = dir + '/un_api/buildings/'; // adds parent dir to url
