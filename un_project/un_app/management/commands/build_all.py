@@ -27,17 +27,17 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting creating denominations...\n----------------------------------------------------"))
             call_command('create_denominations')
 
-            self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of players from {player_data_csv}...\n----------------------------------------------------"))
-            call_command('import_players', player_data_csv)
-
-            self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting creating users...\n----------------------------------------------------"))
-            call_command('create_users')
-
             self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of nations from {nation_data_csv}...\n----------------------------------------------------"))
             call_command('import_nations', nation_data_csv)
 
             self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of companies from {company_data_csv}...\n----------------------------------------------------"))
             call_command('import_companies', company_data_csv)
+
+            self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of players from {player_data_csv}...\n----------------------------------------------------"))
+            call_command('import_players', player_data_csv)
+
+            self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting creating users...\n----------------------------------------------------"))
+            call_command('create_users')
 
             self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of territories from {territory_data_csv}...\n----------------------------------------------------"))
             call_command('import_territories', territory_data_csv)
