@@ -11,8 +11,8 @@ https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwN
 
 
 ## SetUp
-Setting up the repo is pretty easy.
-1. Clone the repo.
+Setting up the repo is pretty easy:
+1. Clone the repo
 2. Go to the folder: 
 `cd un_project/`
 3. In that folder set up the database by importing/creating all the data by running:
