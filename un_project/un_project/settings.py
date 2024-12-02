@@ -25,7 +25,7 @@ SECRET_KEY = 'xx7av6y(1gj3gu(3ro0-=s5^8r@8o=bt0t9_q!y15_rkma%%lh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ws-studios.com', 'werespecialstudios.com', '127.0.0.1']]
 
 
 # Application definition
@@ -40,16 +40,30 @@ INSTALLED_APPS = [
     'rest_framework',  # Django REST Framework for API functionality
     'un_app',          # Your main app containing the Building model
     'un_api',             # New app for API views
+    'corsheaders',      # CORS headers for api and login usage
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+ORS_ALLOW_ALL_ORIGINS: [
+    'https://ws-studios.com',
+    'https://werespecialstudios.com'
+]
+
+CSRF_TRUSTED_ORIGINS: [
+    'https://ws-studios.com',
+    'https://werespecialstudios.com'
 ]
 
 ROOT_URLCONF = 'un_project.urls'
