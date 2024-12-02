@@ -25,7 +25,7 @@ SECRET_KEY = 'xx7av6y(1gj3gu(3ro0-=s5^8r@8o=bt0t9_q!y15_rkma%%lh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ws-studios.com', 'werespecialstudios.com', '127.0.0.1']]
+ALLOWED_HOSTS = ['ws-studios.com', 'werespecialstudios.com', '127.0.0.1']
 
 
 # Application definition
@@ -56,14 +56,14 @@ MIDDLEWARE = [
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-ORS_ALLOW_ALL_ORIGINS: [
+CORS_ALLOWED_ORIGINS = [
     'https://ws-studios.com',
-    'https://werespecialstudios.com'
+    'https://werespecialstudios.com',
 ]
 
-CSRF_TRUSTED_ORIGINS: [
+CSRF_TRUSTED_ORIGINS = [
     'https://ws-studios.com',
-    'https://werespecialstudios.com'
+    'https://werespecialstudios.com',
 ]
 
 ROOT_URLCONF = 'un_project.urls'

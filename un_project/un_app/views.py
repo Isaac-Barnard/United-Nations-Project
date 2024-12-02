@@ -162,7 +162,7 @@ def company_balance_sheet(request, company_abbreviation):
     # Fetch all buildings owned by the company
     #buildings = Building.objects.filter(owner=company)
     
-     # Fetch buildings where the nation is a partial owner
+     # Fetch buildings where the company is a partial owner
     partial_buildings = Building.objects.filter(
         partialbuildingownership__partial_owner_abbreviation=company.abbreviation
     ).annotate(
