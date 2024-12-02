@@ -85,16 +85,23 @@ class Company(models.Model):
 
     # Calculate total liquid asset value
     def calculate_total_liquid_asset_value(self):
-        total = self.liquidcount_set.aggregate(
-            total_value=Coalesce(
-                Sum(
-                    F('count') * F('denomination__diamond_equivalent'),
-                    output_field=DecimalField(max_digits=20, decimal_places=6)
-                ), 
-                Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
-            )
-        )['total_value'] or Decimal('0')
-        return total
+        total_value = Decimal('0')
+        # Iterate over each LiquidAssetContainer related to this company
+        for container in LiquidAssetContainer.objects.filter(company=self):
+            # Calculate the total diamond value for each container
+            container_total = container.liquidcount_set.aggregate(
+                total_value=Coalesce(
+                    Sum(
+                        F('count') * F('denomination__diamond_equivalent'),
+                        output_field=DecimalField(max_digits=20, decimal_places=6)
+                    ),
+                    Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
+                )
+            )['total_value'] or Decimal('0')
+            
+            # Add to the total for the company
+            total_value += container_total
+        return total_value
 
     # Calculate total item asset value
     def calculate_total_item_asset_value(self):
