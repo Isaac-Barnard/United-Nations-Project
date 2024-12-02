@@ -56,6 +56,18 @@ nav ul li.menu-logo img {
 nav ul li {
     display: inline;
     margin-right: 20px;
+    position: relative;
+}
+
+nav ul li:not(:last-child):not(.menu-logo)::after {
+    content: "";
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 24px; /* Adjust height of the vertical line */
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent white line */
 }
 
 nav ul li a {
