@@ -14,14 +14,11 @@ https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwN
 Setting up the repo is pretty easy.
 1. Clone the repo.
 2. Go to the folder: 
-
 `cd un_project/`
 3. In that folder set up the database by importing/creating all the data by running:
-
 `python manage.py build_all`
 4. Start the server and enjoy:
-
-`pythin manage.py runserver`
+`python manage.py runserver`
 
 
 ## Todo Roadmap
