@@ -52,10 +52,10 @@ class Command(BaseCommand):
             call_command('import_market_item_evaluations', market_rate_item_evaluation_csv)
 
             self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of liquid cash from {liquid_cash_data_csv}...\n----------------------------------------------------"))
-            call_command('import_liquid_count', liquid_cash_data_csv)
+            call_command('import_liquid_containers', liquid_cash_container_data_csv)
 
             self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of liquid cash from {liquid_cash_data_csv}...\n----------------------------------------------------"))
-            call_command('import_liquid_containers', liquid_cash_container_data_csv)
+            call_command('import_liquid_count', liquid_cash_data_csv)
 
             self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of fixed price items from {fixed_price_item_csv}...\n----------------------------------------------------"))
             call_command('import_fixed_item_prices', fixed_price_item_csv)
