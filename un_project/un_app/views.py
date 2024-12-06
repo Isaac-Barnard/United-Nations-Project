@@ -140,6 +140,52 @@ def nation_balance_sheet(request, nation_abbreviation):
     # Calculate receivables totals
     total_receivables = receivables.aggregate(
         total=Sum('remaining_diamond_value'))['total'] or Decimal('0')
+    
+
+    #fetch stock investments
+    nation_content_type = ContentType.objects.get_for_model(Nation)
+    company_content_type = ContentType.objects.get_for_model(Company)
+    stock_investments = CompanyShareholder.objects.filter(
+        shareholder_type=nation_content_type,
+        shareholder_abbreviation=nation_abbreviation
+    ).select_related('company')
+
+    # Calculate total value of investments
+    total_investment_value = Decimal('0')
+    for investment in stock_investments:
+        company = investment.company
+        
+        # Get company's receivables
+        company_receivables = Liability.objects.filter(
+            creditor_type=company_content_type,
+            creditor_abbreviation=company.abbreviation
+        ).aggregate(
+            total=Coalesce(
+                Sum('remaining_diamond_value'),
+                Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
+            )
+        )['total']
+
+        # Get company's liabilities
+        company_liabilities = Liability.objects.filter(
+            debtor_type=company_content_type,
+            debtor_abbreviation=company.abbreviation
+        ).aggregate(
+            total=Coalesce(
+                Sum('remaining_diamond_value'),
+                Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
+            )
+        )['total']
+
+        company_value = (
+            company.total_liquid_asset_value + 
+            company.total_item_asset_value + 
+            company.total_building_asset_value +
+            company_receivables -
+            company_liabilities
+        )
+        investment.value = (Decimal(str(investment.percentage)) * company_value) / Decimal('100')
+        total_investment_value += investment.value
 
     
     # Calculate total assets
@@ -147,6 +193,7 @@ def nation_balance_sheet(request, nation_abbreviation):
         nation.total_liquid_asset_value + 
         nation.total_item_asset_value + 
         nation.total_building_asset_value + 
+        total_investment_value +
         total_receivables -
         total_remaining_liabilities
     )
@@ -164,6 +211,8 @@ def nation_balance_sheet(request, nation_abbreviation):
     'total_remaining_liabilities': total_remaining_liabilities,
     'receivables': receivables,
     'total_receivables': total_receivables,
+    'stock_investments': stock_investments,
+    'total_investment_value': total_investment_value,
     'total_assets': total_assets,
 })
 
@@ -271,12 +320,57 @@ def company_balance_sheet(request, company_abbreviation):
     # Calculate receivables totals
     total_receivables = receivables.aggregate(
         total=Sum('remaining_diamond_value'))['total'] or Decimal('0')
+
+    # fetch stock investments
+    company_content_type = ContentType.objects.get_for_model(Company)
+    stock_investments = CompanyShareholder.objects.filter(
+        shareholder_type=company_content_type,
+        shareholder_abbreviation=company_abbreviation
+    ).select_related('company')
+
+    # Calculate total value of investments
+    total_investment_value = Decimal('0')
+    for investment in stock_investments:
+        company = investment.company
+        
+        # Get company's receivables
+        company_receivables = Liability.objects.filter(
+            creditor_type=company_content_type,
+            creditor_abbreviation=company.abbreviation
+        ).aggregate(
+            total=Coalesce(
+                Sum('remaining_diamond_value'),
+                Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
+            )
+        )['total']
+
+        # Get company's liabilities
+        company_liabilities = Liability.objects.filter(
+            debtor_type=company_content_type,
+            debtor_abbreviation=company.abbreviation
+        ).aggregate(
+            total=Coalesce(
+                Sum('remaining_diamond_value'),
+                Value(0, output_field=DecimalField(max_digits=20, decimal_places=6))
+            )
+        )['total']
+
+        company_value = (
+            company.total_liquid_asset_value + 
+            company.total_item_asset_value + 
+            company.total_building_asset_value +
+            company_receivables -
+            company_liabilities
+        )
+        investment.value = (Decimal(str(investment.percentage)) * company_value) / Decimal('100')
+        total_investment_value += investment.value
     
     # Calculate total assets
     total_assets = (
         company.total_liquid_asset_value + 
         company.total_item_asset_value + 
         company.total_building_asset_value +
+        total_investment_value +
         total_receivables -
         total_remaining_liabilities
     )
@@ -301,6 +395,8 @@ def company_balance_sheet(request, company_abbreviation):
         'total_remaining_liabilities': total_remaining_liabilities,
         'receivables': receivables,
         'total_receivables': total_receivables,
+        'stock_investments': stock_investments,
+        'total_investment_value': total_investment_value,
         'total_assets': total_assets,
     })
 

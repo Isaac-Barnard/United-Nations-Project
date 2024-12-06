@@ -83,42 +83,57 @@ td.item-name, td.building-name {
 
 
 
-.liability-table th:nth-child(1),  /* Item Name column */
-.liability-table td:nth-child(1) {
+.receivable-table th:nth-child(1),  /* Item Name column */
+.receivable-table td:nth-child(1) {
     width: 23%;                /* Allocate more space to item name */
 }
 
-.liability-table th:nth-child(2),  /* Item Name column */
-.liability-table td:nth-child(2) {
+.receivable-table th:nth-child(2),  /* Item Name column */
+.receivable-table td:nth-child(2) {
     width: 67%;                /* Allocate more space to item name */
 }
 
-.liability-table th:nth-child(3),  /* Item Name column */
-.liability-table td:nth-child(3) {
+.receivable-table th:nth-child(3),  /* Item Name column */
+.receivable-table td:nth-child(3) {
+    width: 10%;                /* Allocate more space to item name */
+}
+
+
+.receivable-table th:nth-child(1),  /* Item Name column */
+.receivable-table td:nth-child(1) {
+    width: 23%;                /* Allocate more space to item name */
+}
+
+.receivable-table th:nth-child(2),  /* Item Name column */
+.receivable-table td:nth-child(2) {
+    width: 67%;                /* Allocate more space to item name */
+}
+
+.receivable-table th:nth-child(3),  /* Item Name column */
+.receivable-table td:nth-child(3) {
     width: 10%;                /* Allocate more space to item name */
 }
 
 
 
-
 .shareholders-table {
-    width: 50%; /* Make the table take up the full width of the container */
+    width: 60%; /* Make the table take up the full width of the container */
     border-collapse: collapse; /* Optional: make borders look cleaner */
 }
 
 .shareholders-table th:nth-child(1),  /* Item Name column */
 .shareholders-table td:nth-child(1) {
-    width: 33%;                /* Allocate more space to item name */
+    width: 40%;                /* Allocate more space to item name */
 }
 
 .shareholders-table th:nth-child(2),  /* Item Name column */
 .shareholders-table td:nth-child(2) {
-    width: 15%;                /* Allocate more space to item name */
+    width: 30%;                /* Allocate more space to item name */
 }
 
 .shareholders-table th:nth-child(3),  /* Item Name column */
 .shareholders-table td:nth-child(3) {
-    width: 15%;                /* Allocate more space to item name */
+    width: 30%;                /* Allocate more space to item name */
 }
 
 

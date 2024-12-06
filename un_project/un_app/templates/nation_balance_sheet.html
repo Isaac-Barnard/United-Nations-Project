@@ -116,6 +116,10 @@
                 <td class="right-align">{{ total_receivables|custom_decimal_places }}</td>
             </tr>
             <tr>
+                <td>Total Stock Investments:</td>
+                <td class="right-align">{{ total_investment_value|custom_decimal_places }}</td>
+            </tr>
+            <tr>
                 <td>Total Remaining Liabilities:</td>
                 <td class="right-align">{% if total_remaining_liabilities != 0 %}-{% endif %}{{ total_remaining_liabilities|custom_decimal_places }}</td>
             </tr>
@@ -129,8 +133,8 @@
 
     <h3 style="margin-top: 1rem; border-top: 1px solid #ccc; padding-top: 1rem;"></h3>
     <h2>Receivables</h2>
-    <div class="liability-section">
-        <table class="liability-table">
+    <div class="receivable-section">
+        <table class="receivable-table">
             <thead>
                 <tr style="font-size: 0.95em;">
                     <th>Debtor</th>
@@ -155,6 +159,37 @@
     <!-- Total Receivables -->
     <div class="total-value-sum" style="display: flex; gap: 2rem; justify-content: flex-start;">
         <h3>Total Receivables: {{ total_receivables|custom_decimal_places }}</h3>
+    </div>
+
+    <h3 style="margin-top: 1rem; border-top: 1px solid #ccc; padding-top: 1rem;"></h3>
+
+    <h2>Stock Investments</h2>
+    <div class="shareholders-heading">
+        <table class="shareholders-table">
+            <thead>
+                <tr style="font-size: 0.95em;">
+                    <th>Company</th>
+                    <th>Ownership Percentage</th>
+                    <th>Value of Investment</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for investment in stock_investments %}
+                    <tr style="font-size: 0.95em;">
+                        <td>{{ investment.company.name }} ({{ investment.company.abbreviation }})</td>
+                        <td class="right-align">{{ investment.percentage }}%</td>
+                        <td class="right-align">{{ investment.value|custom_decimal_places }}</td>
+                    </tr>
+                {% empty %}
+                    <tr><td colspan="3">No stock investments found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Total Investments -->
+    <div class="total-value-sum" style="display: flex; gap: 2rem; justify-content: flex-start;">
+        <h3>Total Value of Stock Investments: {{ total_investment_value|custom_decimal_places }}</h3>
     </div>
 
 
