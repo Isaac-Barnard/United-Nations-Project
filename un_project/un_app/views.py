@@ -1,10 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.db.models import F, FloatField, ExpressionWrapper, Count, Value, Sum, Window
+from django.db.models import F, FloatField, ExpressionWrapper, Count, Value, Sum, Window, DecimalField
 from django.db.models.functions import Coalesce, Rank
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from .forms import BuildingEvaluationForm, ItemEvaluationForm
-from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount, ItemEvaluationComponent, ItemEvaluation, Item, Company, LiquidCount, LiquidAssetContainer, LiabilityPayment, Liability
+from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount, ItemEvaluationComponent, ItemEvaluation, Item, Company, LiquidCount, LiquidAssetContainer, LiabilityPayment, Liability, CompanyShareholder
 from decimal import Decimal
 from django.http import JsonResponse
 
@@ -281,10 +281,17 @@ def company_balance_sheet(request, company_abbreviation):
         total_remaining_liabilities
     )
     
+    # Fetch shareholders and calculate their share values
+    shareholders = company.shareholders.all()
+    # Calculate share values manually instead of using annotation
+    for shareholder in shareholders:
+        shareholder.share_value = (Decimal(str(shareholder.percentage)) * total_assets) / Decimal('100')
+
             
     return render(request, 'company_balance_sheet.html', {
         'company': company,
         #'buildings': buildings,
+        'shareholders': shareholders,  # Now includes share_value
         'partial_buildings': partial_buildings,
         'items_parts': [items_part1, items_part2, items_part3, items_part4, items_part5],  # Pass as a single list
         'denominations': denominations,

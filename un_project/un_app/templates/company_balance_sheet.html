@@ -14,6 +14,36 @@
 {% block content %}
     <h1>{{ company.name }} ({{ company.abbreviation }}) Balance Sheet</h1>
 
+    <h2 class="shareholders-heading">Shareholders</h2>
+    <table class="shareholders-table">
+        <thead>
+            <tr>
+                <th>Shareholder</th>
+                <th>Percentage Owned</th>
+                <th>Equivalent Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for shareholder in shareholders %}
+            <tr>
+                <td>{{ shareholder.shareholder_name }}</td>
+                <td class="right-align">{{ shareholder.percentage }}%</td>
+                <td class="right-align">{{ shareholder.share_value|custom_decimal_places }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No shareholders found.</td>
+            </tr>
+            {% endfor %}
+            <tr style="border-top: 3px solid; font-weight: bold;" class="total-row">
+                <td><strong>Total</strong></td>
+                <td class="right-align"><strong>100%</strong></td>
+                <td class="right-align"><strong>{{ total_assets|custom_decimal_places }}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 style="margin-top: 1rem; border-top: 1px solid #ccc; padding-top: 1rem;"></h3>
     <h2 class="liquid-heading">Liquid Assets</h2>
 
     <table class="liquid-table">
@@ -111,12 +141,12 @@
                 <td class="right-align">{{ company.total_building_asset_value|custom_decimal_places }}</td>
             </tr>
             <tr>
-                <td>Total Remaining Liabilities:</td>
-                <td class="right-align">{{ total_remaining_liabilities|custom_decimal_places }}</td>
-            </tr>
-            <tr>
                 <td>Total Receivables:</td>
                 <td class="right-align">{{ total_receivables|custom_decimal_places }}</td>
+            </tr>
+            <tr>
+                <td>Total Remaining Liabilities:</td>
+                <td class="right-align">{% if total_remaining_liabilities != 0 %}-{% endif %}{{ total_remaining_liabilities|custom_decimal_places }}</td>
             </tr>
             <tr style="border-top: 3px solid; font-weight: bold;">
                 <td>Total Assets:</td>
@@ -140,12 +170,12 @@
             <tbody>
                 {% for receivable in receivables %}
                     <tr style="font-size: 0.95em;">
-                        <td>{{ receivable.debtor_abbreviation }}</td>
+                        <td>{{ receivable.debtor_name }}</td>
                         <td class="description">{{ receivable.description }}</td>
                         <td class="right-align">{{ receivable.remaining_diamond_value|custom_decimal_places }}</td>
                     </tr>
                 {% empty %}
-                    <tr><td colspan="6">No receivables found.</td></tr>
+                    <tr><td colspan="3">No receivables found.</td></tr>
                 {% endfor %}
             </tbody>
         </table>
