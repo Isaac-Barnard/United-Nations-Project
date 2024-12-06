@@ -114,6 +114,10 @@
                 <td>Total Remaining Liabilities:</td>
                 <td class="right-align">{{ total_remaining_liabilities|custom_decimal_places }}</td>
             </tr>
+            <tr>
+                <td>Total Receivables:</td>
+                <td class="right-align">{{ total_receivables|custom_decimal_places }}</td>
+            </tr>
             <tr style="border-top: 3px solid; font-weight: bold;">
                 <td>Total Assets:</td>
                 <td class="right-align">{{ total_assets|custom_decimal_places }}</td>
@@ -121,6 +125,36 @@
         </tbody>
     </table>
 
+
+    <h3 style="margin-top: 1rem; border-top: 1px solid #ccc; padding-top: 1rem;"></h3>
+    <h2>Receivables</h2>
+    <div class="liability-section">
+        <table class="liability-table">
+            <thead>
+                <tr style="font-size: 0.95em;">
+                    <th>Debtor</th>
+                    <th>Description</th>
+                    <th>Remaining</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for receivable in receivables %}
+                    <tr style="font-size: 0.95em;">
+                        <td>{{ receivable.debtor_abbreviation }}</td>
+                        <td class="description">{{ receivable.description }}</td>
+                        <td class="right-align">{{ receivable.remaining_diamond_value|custom_decimal_places }}</td>
+                    </tr>
+                {% empty %}
+                    <tr><td colspan="6">No receivables found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Total Receivables -->
+    <div class="total-value-sum" style="display: flex; gap: 2rem; justify-content: flex-start;">
+        <h3>Total Receivables: {{ total_receivables|custom_decimal_places }}</h3>
+    </div>
 
 
     <h3 style="margin-top: 1rem; border-top: 1px solid #ccc; padding-top: 1rem;"></h3>

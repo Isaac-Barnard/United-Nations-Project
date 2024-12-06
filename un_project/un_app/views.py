@@ -262,11 +262,22 @@ def company_balance_sheet(request, company_abbreviation):
     total_remaining_liabilities = liabilities.aggregate(
         total=Sum('remaining_diamond_value'))['total'] or Decimal('0')
     
+    # Fetch receivables (liabilities where this company is the creditor)
+    receivables = Liability.objects.filter(
+        creditor_type=company_content_type,
+        creditor_abbreviation=company_abbreviation
+    ).order_by('liability_type', 'debtor_abbreviation')
+
+    # Calculate receivables totals
+    total_receivables = receivables.aggregate(
+        total=Sum('remaining_diamond_value'))['total'] or Decimal('0')
+    
     # Calculate total assets
     total_assets = (
         company.total_liquid_asset_value + 
         company.total_item_asset_value + 
-        company.total_building_asset_value - 
+        company.total_building_asset_value +
+        total_receivables -
         total_remaining_liabilities
     )
     
@@ -281,6 +292,8 @@ def company_balance_sheet(request, company_abbreviation):
         'liabilities': liabilities,
         'total_liabilities': total_liabilities,
         'total_remaining_liabilities': total_remaining_liabilities,
+        'receivables': receivables,
+        'total_receivables': total_receivables,
         'total_assets': total_assets,
     })
 
