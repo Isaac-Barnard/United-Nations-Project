@@ -20,6 +20,7 @@ class Command(BaseCommand):
         company_data_csv = os.path.join('un_app', 'data', 'company_data.csv')
         building_evaluation_data_csv = os.path.join('un_app', 'data', 'building_evaluation_data.csv')
         building_data_csv = os.path.join('un_app', 'data', 'building_data.csv')
+        shareholder_data_csv = os.path.join('un_app', 'data', 'shareholder_data')
 
         
         try:
@@ -68,6 +69,9 @@ class Command(BaseCommand):
 
             self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of item counts from {item_counts_data_csv}...\n----------------------------------------------------"))
             call_command('import_item_counts', item_counts_data_csv)
+
+            self.stdout.write(self.style.SUCCESS(f"----------------------------------------------------\nStarting import of item counts from {item_counts_data_csv}...\n----------------------------------------------------"))
+            call_command('import_shareholders', shareholder_data_csv)
 
 
             self.stdout.write(self.style.SUCCESS('All imports completed successfully!'))

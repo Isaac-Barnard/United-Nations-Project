@@ -44,7 +44,7 @@ Setting up the repo is pretty easy:
     - [x] Create total assets rundown (Total Cash & Cash Equivalents, Total Items, Total Territories, Other Assets & Liabilities = Total Assets)
     - [ ] Create loan tables for companies
         - [ ] Morgages, loans, and add Total Debt Assets
-    - [ ] Create shareholders table for companies (Shareholder, %, diamond equivalent [total assets * %])
+    - [x] Create shareholders table for companies (Shareholder, %, diamond equivalent [total assets * %])
 - **Evaluation Pages**
     - [ ] Must be logged in to see evaluation pages
     - [ ] Be able to change your older evaluations
