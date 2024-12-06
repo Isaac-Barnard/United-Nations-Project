@@ -39,9 +39,8 @@ Setting up the repo is pretty easy:
         - [x] Add Severl different types of liabilities
         - [x] Add Total Liabilities
     - [ ] Create receivables & other assets tables
-        - [ ] Add Receivables
+        - [x] Add Receivables
         - [ ] Add Stock Investments
-        - [ ] Lists Liabilities
     - [x] Create total assets rundown (Total Cash & Cash Equivalents, Total Items, Total Territories, Other Assets & Liabilities = Total Assets)
     - [ ] Create loan tables for companies
         - [ ] Morgages, loans, and add Total Debt Assets
