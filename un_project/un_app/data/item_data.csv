@@ -1,206 +1,216 @@
 name,price_type,description,ordering
-Netherite Helmet,Fixed Price,,200
-Netherite Chestplate,Fixed Price,,201
-Netherite Leggings,Fixed Price,,202
-Netherite Boots,Fixed Price,,203
-Diamond Helmet,Fixed Price,,204
-Diamond Chestplate,Fixed Price,,205
-Diamond Leggings,Fixed Price,,206
-Diamond Boots,Fixed Price,,207
-Gold Helmet,Fixed Price,,208
-Gold Chestplate,Fixed Price,,209
-Gold Leggings,Fixed Price,,210
-Gold Boots,Fixed Price,,211
-Chainmail Helmet,Fixed Price,,212
-Chainmail Chestplate,Fixed Price,,213
-Chainmail Leggings,Fixed Price,,214
-Chainmail Boots,Fixed Price,,215
-Iron Helmet,Fixed Price,,216
-Iron Chestplate,Fixed Price,,217
-Iron Leggings,Fixed Price,,218
-Iron Boots,Fixed Price,,219
-Leather Helmet,Fixed Price,,220
-Leather Chestplate,Fixed Price,,221
-Leather Leggings,Fixed Price,,222
-Leather Boots,Fixed Price,,223
-Netherite Sword,Fixed Price,,300
-Netherite Pickaxe,Fixed Price,,301
-Netherite Axe,Fixed Price,,302
-Netherite Shovel,Fixed Price,,303
-Netherite Hoe,Fixed Price,,304
-Diamond Sword,Fixed Price,,305
-Diamond Pickaxe,Fixed Price,,306
-Diamond Axe,Fixed Price,,307
-Diamond Shovel,Fixed Price,,308
-Diamond Hoe,Fixed Price,,309
-Gold Sword,Fixed Price,,310
-Gold Pickaxe,Fixed Price,,311
-Gold Axe,Fixed Price,,312
-Gold Shovel,Fixed Price,,313
-Gold Hoe,Fixed Price,,314
-Iron Sword,Fixed Price,,315
-Iron Pickaxe,Fixed Price,,316
-Iron Axe,Fixed Price,,317
-Iron Shovel,Fixed Price,,318
-Iron Hoe,Fixed Price,,319
-Stone Sword,Fixed Price,,320
-Stone Pickaxe,Fixed Price,,321
-Stone Axe,Fixed Price,,322
-Stone Shovel,Fixed Price,,323
-Stone Hoe,Fixed Price,,324
-Wood Sword,Fixed Price,,325
-Wood Pickaxe,Fixed Price,,326
-Wood Axe,Fixed Price,,327
-Wood Shovel,Fixed Price,,328
-Wood Hoe,Fixed Price,,329
-Diamond Horse Armor,Fixed Price,,225
-Gold Horse Armor,Fixed Price,,226
-Iron Horse Armor,Fixed Price,,227
-Leather Horse Armor,Fixed Price,,228
-Golden Apple,Fixed Price,,139
+Beacon,Market Rate,,101
+Nether Star,Fixed Price,,102
+Heavy Core,Market Rate,,103
+Elytra,Market Rate,,104
+Shulker Box,Market Rate,,105
+Totem of Undying,Market Rate,,106
+Name Tag,Market Rate,,107
+Saddle,Market Rate,,108
+Music Disc,Market Rate,,109
+Smithing Template,Fixed Price,,110
+Sherd,Market Rate,Counts sherds made into pots too,111
 Netherite Scrap,Fixed Price,,112
+Goat Horn,Market Rate,,113
+--- Section Divider 1 ---,Section Divider,,114
+Blaze Rod,Market Rate,,115
+Breeze Rod,Market Rate,,116
+Magma Cream,Fixed Price,,117
+Ghast Tear,Market Rate,,118
+Slime Ball,Market Rate,,119
+Honey Bottle,Market Rate,,120
+Honey Comb,Market Rate,,121
+Leather,Market Rate,,122
+Sponge,Market Rate,,123
+Amethyst Shard,Market Rate,,124
+Nether Quartz,Market Rate,,125
+--- Section Divider 2 ---,Section Divider,,126
+Glowstone,Market Rate,,127
+Sea Lantern,Market Rate,,128
+Quartz Block,Fixed Price,,129
+Obsidian,Market Rate,,130
+Glass,Fixed Price,,131
+Glass Pane,Fixed Price,,132
+Bricks,Fixed Price,Clay or nether bricks,133
+Brick Block,Fixed Price,Brick brick block or nether brick block,134
+Resin Clump,Market Rate,,135
+Resin Brick,Fixed Price,,136
+Resin Block,Fixed Price,,137
+Crack,Fixed Price,Any cracked block that needs to be smelted (ie cracked stone bricks),138
+Smooth Stones,Fixed Price,"Any Smooth block that needs to be smelted (ie smooth stone, smooth sandstone)",139
+--- Section Divider 3 ---,Section Divider,,140
+Book,Fixed Price,,141
+Bookshelf,Fixed Price,,142
+Enchanted Book,Fixed Price,The average price of an enchanted book from a villager,143
+Netherite Helmet,Fixed Price,,201
+Netherite Chestplate,Fixed Price,,202
+Netherite Leggings,Fixed Price,,203
+Netherite Boots,Fixed Price,,204
+Diamond Helmet,Fixed Price,,205
+Diamond Chestplate,Fixed Price,,206
+Diamond Leggings,Fixed Price,,207
+Diamond Boots,Fixed Price,,208
+Gold Helmet,Fixed Price,,209
+Gold Chestplate,Fixed Price,,210
+Gold Leggings,Fixed Price,,211
+Gold Boots,Fixed Price,,212
+Chainmail Helmet,Fixed Price,,213
+Chainmail Chestplate,Fixed Price,,214
+Chainmail Leggings,Fixed Price,,215
+Chainmail Boots,Fixed Price,,216
+Iron Helmet,Fixed Price,,217
+Iron Chestplate,Fixed Price,,218
+Iron Leggings,Fixed Price,,219
+Iron Boots,Fixed Price,,220
+Leather Helmet,Fixed Price,,221
+Leather Chestplate,Fixed Price,,222
+Leather Leggings,Fixed Price,,223
+Leather Boots,Fixed Price,,224
+--- Section Divider 4 ---,Section Divider,,225
+--- Section Divider 4.5 ---,Section Divider,,226
+Diamond Horse Armor,Fixed Price,,227
+Gold Horse Armor,Fixed Price,,228
+Iron Horse Armor,Fixed Price,,229
+Leather Horse Armor,Fixed Price,,230
+Wolf Armor,Fixed Price,,231
+--- Section Divider 5 ---,Section Divider,,232
+--- Section Divider 6 ---,Section Divider,,233
+Bucket,Fixed Price,,234
+Lead,Fixed Price,,235
+Glass Bottle,Fixed Price,,236
+--- Section Divider 7 ---,Section Divider,,237
+--- Section Divider 8 ---,Section Divider,,238
+--- Section Divider 9 ---,Section Divider,,239
+Enchanted Golden Apple,Market Rate,,240
+Golden Apple,Fixed Price,,241
+Golden Carrot,Fixed Price,,242
+Cooked Food,Fixed Price,,243
+Netherite Sword,Fixed Price,,301
+Netherite Pickaxe,Fixed Price,,302
+Netherite Axe,Fixed Price,,303
+Netherite Shovel,Fixed Price,,304
+Netherite Hoe,Fixed Price,,305
+Diamond Sword,Fixed Price,,306
+Diamond Pickaxe,Fixed Price,,307
+Diamond Axe,Fixed Price,,308
+Diamond Shovel,Fixed Price,,309
+Diamond Hoe,Fixed Price,,310
+Gold Sword,Fixed Price,,311
+Gold Pickaxe,Fixed Price,,312
+Gold Axe,Fixed Price,,313
+Gold Shovel,Fixed Price,,314
+Gold Hoe,Fixed Price,,315
+Iron Sword,Fixed Price,,316
+Iron Pickaxe,Fixed Price,,317
+Iron Axe,Fixed Price,,318
+Iron Shovel,Fixed Price,,319
+Iron Hoe,Fixed Price,,320
+Stone Sword,Fixed Price,,321
+Stone Pickaxe,Fixed Price,,322
+Stone Axe,Fixed Price,,323
+Stone Shovel,Fixed Price,,324
+Stone Hoe,Fixed Price,,325
+Wood Sword,Fixed Price,,326
+Wood Pickaxe,Fixed Price,,327
+Wood Axe,Fixed Price,,328
+Wood Shovel,Fixed Price,,329
+Wood Hoe,Fixed Price,,330
+--- Section Divider 9.3 ---,Section Divider,,331
+Trident,Market Rate,,332
+Mace,Fixed Price,,333
+Shield,Fixed Price,,334
+Shears,Fixed Price,,335
+Flint & Steel,Fixed Price,,336
+Brush,Fixed Price,,337
+--- Section Divider 9.6 ---,Section Divider,,338
+Gunpowder,Market Rate,,339
+Fire Charge,Fixed Price,,340
+Fireworks,Fixed Price,,341
+TNT,Fixed Price,,342
+Spectral Arrow,Fixed Price,,343
 Redstone Torch,Fixed Price,,401
-Rail,Fixed Price,,438
-Powered Rail,Fixed Price,,439
-Detector Rail,Fixed Price,,440
-Activator Rail,Fixed Price,,441
-Minecart,Fixed Price,,437
-Shears,Fixed Price,,336
-Bucket,Fixed Price,,338
-Shield,Fixed Price,,335
-Flint & Steel,Fixed Price,,337
-Hopper,Fixed Price,,411
-Piston,Fixed Price,,405
-Sticky Piston,Fixed Price,,406
 Repeater,Fixed Price,,402
 Comparator,Fixed Price,,403
 Observer,Fixed Price,,404
-Cauldron,Fixed Price,,422
-Compass,Fixed Price,,516
-Clock,Fixed Price,,515
-Iron Door,Fixed Price,,525
-Iron Trapdoor,Fixed Price,,526
-Iron Bars,Fixed Price,,527
-Chain,Fixed Price,,532
-Lantern,Fixed Price,,434
-Golden Carrot,Fixed Price,,140
+Piston,Fixed Price,,405
+Sticky Piston,Fixed Price,,406
+Daylight Detector,Fixed Price,,407
+Redstone Lamp,Fixed Price,,408
 Dispenser,Fixed Price,,409
 Dropper,Fixed Price,,410
-Anvil,Fixed Price,,423
+Hopper,Fixed Price,,411
+Target,Fixed Price,,412
 Note block,Fixed Price,,413
-Redstone Lamp,Fixed Price,,408
-Spyglass,Fixed Price,,518
+Jukebox,Fixed Price,,414
+Crafter,Fixed Price,,415
+--- Section Divider 10 ---,Section Divider,,416
+Enchantment Table,Fixed Price,,417
 Stonecutter,Fixed Price,,418
 Smithing Table,Fixed Price,,419
-Daylight Detector,Fixed Price,,407
-Lightning Rod,Fixed Price,,520
-Target,Fixed Price,,412
-Lead,Fixed Price,,340
-Brewing Stand,Fixed Price,,421
-Torch,Fixed Price,,433
-Ender Chest,Fixed Price,,424
-Book,Fixed Price,,232
-Item Frame,Fixed Price,,510
-Enchanted Book,Fixed Price,The average price of an enchanted book from a villager,234
 Blast Furnace,Fixed Price,,420
-Nether Star,Fixed Price,,102
-Glass,Fixed Price,,131
-Glass Pane,Fixed Price,,132
-Glass Bottle,Fixed Price,,341
-Bricks,Fixed Price,Clay or nether bricks,133
-Brick Block,Fixed Price,Brick brick block or nether brick block,134
-Green Dye,Fixed Price,,540
-Crack,Fixed Price,Any cracked block that needs to be smelted (ie cracked stone bricks),135
-Smooth Stones,Fixed Price,"Any Smooth block that needs to be smelted (ie smooth stone, smooth sandstone)",136
-Magma Cream,Fixed Price,,117
-Fire Charge,Fixed Price,,237
-Eye of Ender,Fixed Price,,538
-Fireworks,Fixed Price,,238
-TNT,Fixed Price,,239
-Spectral Arrow,Fixed Price,,240
-Glistering Melon,Fixed Price,,539
-Cooked Food,Fixed Price,,141
-Bookshelf,Fixed Price,,233
-Jukebox,Fixed Price,,414
-Enchantment Table,Fixed Price,,417
-Iron Pressure Plate,Fixed Price,,524
-Gold Pressure Plate,Fixed Price,,523
-Flower Pot,Fixed Price,,511
-Hanging Sign,Fixed Price,,533
-End Rod,Fixed Price,,521
-Smithing Template,Fixed Price,,110
-Brush,Fixed Price,,339
-Decorated Pot,Fixed Price,Non-sherd decorated pot (made of just 4 clay bricks),512
-Tinted Glass,Fixed Price,,522
-Calibrated Sculk Sensor,Fixed Price,,428
+Brewing Stand,Fixed Price,,421
+Cauldron,Fixed Price,,422
+Anvil,Fixed Price,,423
+Ender Chest,Fixed Price,,424
 Lodestone,Fixed Price,,425
-Quartz Block,Fixed Price,,129
-Campfire,Fixed Price,,517
-Respawn Anchor,Fixed Price,,514
-Candle,Fixed Price,,435
-Wolf Armor,Fixed Price,,229
-Copper Bulb,Fixed Price,,528
-Copper Door,Fixed Price,,529
-Copper Grate,Fixed Price,,530
-Copper Trapdoor,Fixed Price,,531
-Crafter,Fixed Price,,415
-Mace,Fixed Price,,334
-Elytra,Market Rate,,104
-Shulker Box,Market Rate,,105
-Enchanted Golden Apple,Market Rate,,138
-Totem of Undying,Market Rate,,106
-Beacon,Market Rate,,101
-Wither Skull,Market Rate,,503
-Name Tag,Market Rate,,107
-Trident,Market Rate,,333
-Saddle,Market Rate,,108
-Slime Ball,Market Rate,,119
-Honey Bottle,Market Rate,,120
-Nether Quartz,Market Rate,,125
-Blaze Rod,Market Rate,,115
-Obsidian,Market Rate,,130
-Sponge,Market Rate,,123
-Leather,Market Rate,,122
-Gunpowder,Market Rate,,236
-Dragon's Breath,Market Rate,,506
-Wither Rose,Market Rate,,504
-Glowstone,Market Rate,,127
-Goat Horn,Market Rate,,113
-Music Disc,Market Rate,,109
-Ghast Tear,Market Rate,,118
+--- Section Divider 11 ---,Section Divider,,426
+--- Section Divider 11.5 ---,Section Divider,,427
+Sculk Sensor,Market Rate,,428
+Calibrated Sculk Sensor,Fixed Price,,429
+Sculk Shrieker,Market Rate,,430
+Sculk Catalyst,Market Rate,,431
+--- Section Divider 12 ---,Section Divider,,432
+--- Section Divider 13 ---,Section Divider,,433
+Torch,Fixed Price,,434
+Lantern,Fixed Price,,435
+Candle,Fixed Price,,436
+--- Section Divider 14 ---,Section Divider,,437
+--- Section Divider 14.5 ---,Section Divider,,438
+Minecart,Fixed Price,,439
+Rail,Fixed Price,,440
+Powered Rail,Fixed Price,,441
+Detector Rail,Fixed Price,,442
+Activator Rail,Fixed Price,,443
 Turtle Egg,Market Rate,,501
-Dragon Head,Market Rate,,505
-Sea Lantern,Market Rate,,128
-Bell,Market Rate,,513
-Sherd,Market Rate,Counts sherds made into pots too,111
-Amethyst Shard,Market Rate,,124
-Sculk Sensor,Market Rate,,427
-Sculk Shrieker,Market Rate,,429
-Sculk Catalyst,Market Rate,,430
 Sniffer Egg,Market Rate,,502
-Bee Nest,Market Rate,,541
-Honey Comb,Market Rate,,121
+Wither Skull,Market Rate,,503
+Wither Rose,Market Rate,,504
+Dragon Head,Market Rate,,505
+Dragon's Breath,Market Rate,,506
 Turtle Scute,Market Rate,,507
 Armadillo Scute,Market Rate,,508
-Heavy Core,Market Rate,,103
-Trial Key,Market Rate,,535
-Ominous Trial Key,Market Rate,,536
-Breeze Rod,Market Rate,,116
---- Section Divider 1 ---,Section Divider,,114
---- Section Divider 2 ---,Section Divider,,126
---- Section Divider 3 ---,Section Divider,,137
---- Section Divider 4 ---,Section Divider,,224
---- Section Divider 5 ---,Section Divider,,230
---- Section Divider 6 ---,Section Divider,,231
---- Section Divider 7 ---,Section Divider,,235
---- Section Divider 8 ---,Section Divider,,331
---- Section Divider 9 ---,Section Divider,,332
---- Section Divider 10 ---,Section Divider,,416
---- Section Divider 11 ---,Section Divider,,426
---- Section Divider 12 ---,Section Divider,,431
---- Section Divider 13 ---,Section Divider,,432
---- Section Divider 14 ---,Section Divider,,436
---- Section Divider 15 ---,Section Divider,,509
---- Section Divider 16 --,Section Divider,,519
---- Section Divider 17 ---,Section Divider,,534
---- Section Divider 18 ---,Section Divider,,537
+Bee Nest,Market Rate,,509
+--- Section Divider 15 ---,Section Divider,,510
+Item Frame,Fixed Price,,511
+Flower Pot,Fixed Price,,512
+Decorated Pot,Fixed Price,Non-sherd decorated pot (made of just 4 clay bricks),513
+Bell,Market Rate,,514
+Respawn Anchor,Fixed Price,,515
+Clock,Fixed Price,,516
+Compass,Fixed Price,,517
+Campfire,Fixed Price,,518
+Spyglass,Fixed Price,,519
+--- Section Divider 16 --,Section Divider,,520
+Lightning Rod,Fixed Price,,521
+End Rod,Fixed Price,,522
+Tinted Glass,Fixed Price,,523
+Gold Pressure Plate,Fixed Price,,524
+Iron Pressure Plate,Fixed Price,,525
+Iron Door,Fixed Price,,526
+Iron Trapdoor,Fixed Price,,527
+Iron Bars,Fixed Price,,528
+Copper Bulb,Fixed Price,,529
+Copper Door,Fixed Price,,530
+Copper Grate,Fixed Price,,531
+Copper Trapdoor,Fixed Price,,532
+Chain,Fixed Price,,533
+Hanging Sign,Fixed Price,,534
+--- Section Divider 17 ---,Section Divider,,535
+Trial Key,Market Rate,,536
+Ominous Trial Key,Market Rate,,537
+Ominous Bottle,Market Rate,,538
+--- Section Divider 18 ---,Section Divider,,539
+Eye of Ender,Fixed Price,,540
+Glistering Melon,Fixed Price,,541
+Green Dye,Fixed Price,,542
+Creaking Heart,Fixed Price,,543
