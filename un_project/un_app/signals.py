@@ -222,6 +222,10 @@ def update_total_liquid_asset_value_on_container_change(sender, instance, **kwar
 
 @receiver(post_save, sender=ItemCount)
 @receiver(post_delete, sender=ItemCount)
+@receiver(post_save, sender=ItemFixedPriceComponent)
+@receiver(post_delete, sender=ItemFixedPriceComponent)
+@receiver(post_save, sender=ItemEvaluationComponent)
+@receiver(post_delete, sender=ItemEvaluationComponent)
 def update_total_item_asset_value(sender, instance, **kwargs):
     nation = instance.nation
     company = instance.company
