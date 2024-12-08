@@ -114,14 +114,47 @@ def update_item_total_value(sender, instance, **kwargs):
 
 @receiver(post_save, sender=Item)
 @receiver(post_delete, sender=Item)
-def update_item_counts_total_value_on_market_value_change(sender, instance, **kwargs):
-    """Recalculate total_value in all related ItemCount instances when Item's market_value changes."""
-    # Retrieve all ItemCount instances associated with the Item and update their total_value
-    item_counts = instance.itemcount_set.all()
+@receiver(post_save, sender=ItemFixedPriceComponent)
+@receiver(post_delete, sender=ItemFixedPriceComponent)
+@receiver(post_save, sender=ItemEvaluationComponent)
+@receiver(post_delete, sender=ItemEvaluationComponent)
+def update_item_counts_on_price_component_change(sender, instance, **kwargs):
+    """
+    Recalculate total_value in all related ItemCount instances when a price component changes.
+    This affects both the direct item and any items that reference this item in their components.
+    """
+    # Get the directly related item
+    item = instance.item
+    
+    # First update ItemCounts for the direct item
+    item_counts = ItemCount.objects.filter(item=item)
+    if item.price_type == Item.FIXED_PRICE:
+        new_value = item.total_diamond_value
+    elif item.price_type == Item.MARKET_RATE:
+        new_value = item.market_price
+    else:  # SECTION_DIVIDER
+        new_value = Decimal('0')
+
     for item_count in item_counts:
-        item_count.total_value = item_count.count * instance.market_value
-        # Use update to avoid triggering additional signals and recursion
-        ItemCount.objects.filter(id=item_count.id).update(total_value=item_count.total_value)
+        total_value = item_count.count * new_value
+        ItemCount.objects.filter(id=item_count.id).update(total_value=total_value)
+
+    # Then find and update any items that reference this item in their components
+    referencing_components = ItemFixedPriceComponent.objects.filter(referenced_item=item)
+    for comp in referencing_components:
+        referenced_item = comp.item
+        referenced_item_counts = ItemCount.objects.filter(item=referenced_item)
+        
+        if referenced_item.price_type == Item.FIXED_PRICE:
+            ref_new_value = referenced_item.total_diamond_value
+        elif referenced_item.price_type == Item.MARKET_RATE:
+            ref_new_value = referenced_item.market_price
+        else:  # SECTION_DIVIDER
+            ref_new_value = Decimal('0')
+
+        for item_count in referenced_item_counts:
+            total_value = item_count.count * ref_new_value
+            ItemCount.objects.filter(id=item_count.id).update(total_value=total_value)
 
 
 @receiver(post_save, sender=ItemEvaluation)

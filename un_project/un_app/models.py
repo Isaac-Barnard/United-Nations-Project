@@ -771,3 +771,8 @@ class ItemFixedPriceComponent(models.Model):
             elif self.referenced_item:
                 return f'{self.percentage_of_item}% of {self.referenced_item.name} for {self.item.name}'
             return f'Component for {self.item.name}'
+    
+    @property
+    def related_item_counts(self):
+        """Get all ItemCount instances related to this component's item."""
+        return ItemCount.objects.filter(item=self.item)
