@@ -24,7 +24,7 @@ h2.items-heading {
 /* Each table should be inline-block to fit in the scrollable area */
 .item-table-container .item-table {
     display: inline-block;     /* Aligns all tables horizontally */
-    width: 330px;              /* Set a consistent width for each table */
+    width: 370px;              /* Set a consistent width for each table */
     vertical-align: top;       /* Ensure all tables align at the top */
     white-space: normal;
     margin-right: 1px;        /* Add spacing between tables */
