@@ -20,22 +20,22 @@ Ghast Tear,Market Rate,,118
 Slime Ball,Market Rate,,119
 Honey Bottle,Market Rate,,120
 Honey Comb,Market Rate,,121
-Leather,Market Rate,,122
-Sponge,Market Rate,,123
-Amethyst Shard,Market Rate,,124
-Nether Quartz,Market Rate,,125
---- Section Divider 2 ---,Section Divider,,126
-Glowstone,Market Rate,,127
-Sea Lantern,Market Rate,,128
-Quartz Block,Fixed Price,,129
-Obsidian,Market Rate,,130
-Glass,Fixed Price,,131
-Glass Pane,Fixed Price,,132
-Bricks,Fixed Price,Clay or nether bricks,133
-Brick Block,Fixed Price,Brick brick block or nether brick block,134
-Resin Clump,Market Rate,,135
+Resin Clump,Market Rate,,122
+Leather,Market Rate,,123
+Sponge,Market Rate,,124
+Amethyst Shard,Market Rate,,125
+Nether Quartz,Market Rate,,126
+--- Section Divider 2 ---,Section Divider,,127
+Glowstone,Market Rate,,128
+Sea Lantern,Market Rate,,129
+Quartz Block,Fixed Price,,130
+Obsidian,Market Rate,,131
+Glass,Fixed Price,,132
+Glass Pane,Fixed Price,,133
+Bricks,Fixed Price,Clay or nether bricks,134
+Brick Block,Fixed Price,Brick brick block or nether brick block,135
 Resin Brick,Fixed Price,,136
-Resin Block,Fixed Price,,137
+Resin Brick Block,Fixed Price,,137
 Crack,Fixed Price,Any cracked block that needs to be smelted (ie cracked stone bricks),138
 Smooth Stones,Fixed Price,"Any Smooth block that needs to be smelted (ie smooth stone, smooth sandstone)",139
 --- Section Divider 3 ---,Section Divider,,140
