@@ -91,12 +91,12 @@ const icons = {
 };
 
 // Fetch building data and add markers
-let dir = '/' + document.URL.split('/')[3]; // gets parent dir
-if (dir === "/map") { // filters out localhost
-    dir = "";
-}
-url = dir + '/un_api/buildings/'; // adds parent dir to url
-let url = dir + '/un_api/buildings/';
+let url_split = document.URL.split('/'); // Get url as array
+url_split.pop(); // Remove blank spaace
+url_split.pop(); // Remove current page, we are left with parent page
+
+let dir = url_split.join('/'); // restructure array as string
+let url = dir + '/un_api/buildings/'; // adds parent dir to url
 fetch(url)
     .then(response => response.json())
     .then(data => {
