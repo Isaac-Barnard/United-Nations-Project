@@ -95,8 +95,8 @@ let dir = '/' + document.URL.split('/')[3]; // gets parent dir
 if (dir === "/map") { // filters out localhost
     dir = "";
 }
-url = dir + '/un_api/buildings/'; // adds parent dir to url
-let url = dir + '/un_api/buildings/';
+
+let url = dir + '/un_api/buildings/'; // adds parent dir to url
 fetch(url)
     .then(response => response.json())
     .then(data => {
