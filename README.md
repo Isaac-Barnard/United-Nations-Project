@@ -10,7 +10,7 @@ __Finance Document__
 https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwNyWo/edit?gid=1449818067#gid=1449818067
 
 
-## SetUp
+## Setup
 Setting up the repo is pretty easy:
 1. Clone the repo
 2. Go to the folder: 
@@ -26,24 +26,24 @@ Setting up the repo is pretty easy:
     - [x] Add Total Value of Total Cash & Cash Equivalents
     - [x] Add Total Value of buildings
     - [x] Manually order liquid assets (maybe create asset model with ordering field like item)
-    - [ ] Move item calculations to the database rather then when the page is loaded to speed up loading times
+    - [ ] Move item calculations to the database rather than when the page is loaded to speed up loading times
         - [x] Items: Total Value, Market Value
         - [x] Buildings: partial stuff
         - [x] Total Value of items, liquid, buildings
-        - [ ] Liquid Assests: Per asset totals
+        - [ ] Liquid Assets: Per asset totals
         - [ ] Building heights
         - [ ] Nation average height & # of buildings
         - [ ] Territory average height & # of buildings
     - [x] Create liability tables
         - [x] Add Liability section
-        - [x] Add Severl different types of liabilities
+        - [x] Add Several different types of liabilities
         - [x] Add Total Liabilities
     - [x] Create receivables & other assets tables
         - [x] Add Receivables
         - [x] Add Stock Investments
     - [x] Create total assets rundown (Total Cash & Cash Equivalents, Total Items, Total Territories, Other Assets & Liabilities = Total Assets)
     - [ ] Create loan tables for companies
-        - [ ] Morgages, loans, and add Total Debt Assets
+        - [ ] Mortgages, loans, and add Total Debt Assets
     - [x] Create shareholders table for companies (Shareholder, %, diamond equivalent [total assets * %])
 - **Evaluation Pages**
     - [ ] Must be logged in to see evaluation pages
@@ -64,7 +64,7 @@ Setting up the repo is pretty easy:
     - [ ] Size of nation stuff
         - [ ] Create historical records for size of nation data
         - [ ] Size of nation over time graph
-            - [ ] Total territories, Main tarritories, far colonies, near colonies
+            - [ ] Total territories, Main territories, far colonies, near colonies
 - **Misc.**
     - [ ] Sort buildings
         - [ ] Sort by nation
@@ -81,11 +81,11 @@ Setting up the repo is pretty easy:
     - [ ] Item price calculator (Select items, see the price of them)
     - [ ] Architectural Styles stuff
     - [ ] Realty Commision?
-    - [ ] Reids stuff
+    - [ ] Reid's stuff
         - [ ] Credit score?
-        - [ ] Amortiziation Scheule?
+        - [ ] Amortization Schedule?
         - [ ] Inflation calculator?
-        - [ ] Change base currence (ex: change all values to gold or netherite)?
+        - [ ] Change base currency (ex: change all values to gold or netherite)?
     - [ ] Display map/maps?
         - [ ] Interactive map that shows buildings (Using coordinates)
             - [x] Convert coordinates to x, inverse z
