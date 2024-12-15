@@ -406,11 +406,6 @@ class LiabilityPayment(models.Model):
         return f"Payment of {self.diamond_amount} diamonds for {self.liability} (Payment: {self.payment_number})"
 
 # --------------------------------------------------------------------
-#                           Receivables
-# --------------------------------------------------------------------
-
-
-# --------------------------------------------------------------------
 #                           Buildings
 # --------------------------------------------------------------------
 class Building(models.Model):
