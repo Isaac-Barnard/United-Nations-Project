@@ -3,7 +3,7 @@ from django.db.models import F, FloatField, ExpressionWrapper, Count, Value, Sum
 from django.db.models.functions import Coalesce, Rank
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
-from .forms import BuildingEvaluationForm, ItemEvaluationForm, ItemCounterForm
+from .forms import BuildingEvaluationForm, ItemEvaluationForm, ItemCounterForm, LiquidAssetForm
 from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount, ItemEvaluationComponent, ItemEvaluation, Item, Company, LiquidCount, LiquidAssetContainer, LiabilityPayment, Liability, CompanyShareholder
 from decimal import Decimal
 from django.http import JsonResponse
@@ -676,68 +676,74 @@ def un_map(request):
 
 @login_required
 def item_counter(request):
-    form = ItemCounterForm()
     selected_nation = None
     selected_company = None
     items_data = []
     liquid_asset_data = []
+    items_parts = [[] for _ in range(5)]
     denominations = Denomination.objects.all().order_by('priority')
-
+    owner = None
+    
+    # Handle POST requests
     if request.method == 'POST':
         form = ItemCounterForm(request.POST)
         if form.is_valid():
-            nation = form.cleaned_data['nation']
-            company = form.cleaned_data['company']
-            item = form.cleaned_data['item']
-            container = form.cleaned_data['container']
-            count = form.cleaned_data['count']
-            denomination = form.cleaned_data['denomination']
+            nation = form.cleaned_data.get('nation')
+            company = form.cleaned_data.get('company')
+            item = form.cleaned_data.get('item')
+            container = form.cleaned_data.get('container')
+            count = form.cleaned_data.get('count')
+            denomination = form.cleaned_data.get('denomination')
 
             owner = nation or company
-            if not owner:
-                return redirect('item_counter')
+            if owner:
+                if item and count is not None:
+                    if nation:
+                        item_count, created = ItemCount.objects.get_or_create(
+                            nation=nation,
+                            item=item,
+                            defaults={'count': 0}
+                        )
+                    else:
+                        item_count, created = ItemCount.objects.get_or_create(
+                            company=company,
+                            item=item,
+                            defaults={'count': 0}
+                        )
+                    item_count.count = count
+                    item_count.save()
 
-            if item and count is not None:
-                # Handle item count update
-                if nation:
-                    item_count, created = ItemCount.objects.get_or_create(
-                        nation=nation,
-                        item=item,
+                if container and denomination and count is not None:
+                    liquid_count, created = LiquidCount.objects.get_or_create(
+                        asset_container=container,
+                        denomination=denomination,
                         defaults={'count': 0}
                     )
-                else:
-                    item_count, created = ItemCount.objects.get_or_create(
-                        company=company,
-                        item=item,
-                        defaults={'count': 0}
-                    )
-                item_count.count = count
-                item_count.save()
-
-            if container and denomination and count is not None:
-                # Handle liquid asset count update
-                liquid_count, created = LiquidCount.objects.get_or_create(
-                    asset_container=container,
-                    denomination=denomination,
-                    defaults={'count': 0}
-                )
-                liquid_count.count = count
-                liquid_count.save()
+                    liquid_count.count = count
+                    liquid_count.save()
 
             return redirect('item_counter')
 
     # Handle GET requests
-    if 'nation' in request.GET:
-        selected_nation = get_object_or_404(Nation, id=request.GET['nation'])
-        form = ItemCounterForm(initial={'nation': selected_nation})
-        owner = selected_nation
-    elif 'company' in request.GET:
-        selected_company = get_object_or_404(Company, id=request.GET['company'])
-        form = ItemCounterForm(initial={'company': selected_company})
-        owner = selected_company
     else:
-        owner = None
+        if 'nation' in request.GET:
+            try:
+                selected_nation = get_object_or_404(Nation, id=request.GET['nation'])
+                owner = selected_nation
+                form = ItemCounterForm(initial={'nation': selected_nation})
+            except:
+                form = ItemCounterForm()
+        elif 'company' in request.GET:
+            try:
+                selected_company = get_object_or_404(Company, id=request.GET['company'])
+                owner = selected_company
+                form = ItemCounterForm(initial={'company': selected_company})
+            except:
+                form = ItemCounterForm()
+        else:
+            form = ItemCounterForm()
 
+    # Process items and liquid assets if we have an owner
     if owner:
         # Process items
         all_items = Item.objects.all().order_by('ordering')
@@ -784,18 +790,21 @@ def item_counter(request):
                 'total_in_diamonds': container_total_in_diamonds,
             })
 
-        # Distribute items
-        items_parts = [[] for _ in range(5)]
+        # Distribute items into parts
         for item in items_data:
             idx = (item['ordering'] // 100) - 1
             if 0 <= idx < 5:
                 items_parts[idx].append(item)
 
+    # Add the liquid asset form
+    liquid_asset_form = LiquidAssetForm(denominations=denominations)
+    
     return render(request, 'item_counter.html', {
         'form': form,
+        'liquid_asset_form': liquid_asset_form,
         'selected_nation': selected_nation,
         'selected_company': selected_company,
-        'items_parts': items_parts if owner else [],
+        'items_parts': items_parts,
         'denominations': denominations,
         'liquid_asset_data': liquid_asset_data,
     })
@@ -817,3 +826,41 @@ def get_containers(request):
         containers = []
         
     return JsonResponse({'containers': list(containers)})
+
+
+def handle_liquid_asset_update(request):
+    if not request.method == 'POST':
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+    
+    try:
+        data = request.POST
+        container_name = data.get('container')
+        
+        # Get the nation or company from the selected entity
+        nation_id = data.get('nation_id')
+        company_id = data.get('company_id')
+        
+        if nation_id:
+            nation = Nation.objects.get(id=nation_id)
+            container = LiquidAssetContainer.objects.get(nation=nation, name=container_name)
+        elif company_id:
+            company = Company.objects.get(id=company_id)
+            container = LiquidAssetContainer.objects.get(company=company, name=container_name)
+        else:
+            return JsonResponse({'status': 'error', 'message': 'No nation or company selected'})
+        
+        # Process each denomination
+        denominations = Denomination.objects.all()
+        for denomination in denominations:
+            value = data.get(f'denomination_{denomination.id}', '0')
+            if value and float(value) > 0:  # Only process non-zero values
+                liquid_count, created = LiquidCount.objects.update_or_create(
+                    asset_container=container,
+                    denomination=denomination,
+                    defaults={'count': value}
+                )
+        
+        return JsonResponse({'status': 'success'})
+    
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': str(e)})

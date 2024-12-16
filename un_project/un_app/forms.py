@@ -40,11 +40,6 @@ class ItemEvaluationForm(forms.Form):
             )
 
 
-# forms.py
-
-from django import forms
-from .models import Nation, Company, Item, LiquidAssetContainer, Denomination
-
 class ItemCounterForm(forms.Form):
     nation = forms.ModelChoiceField(
         queryset=Nation.objects.all(),
@@ -96,3 +91,23 @@ class ItemCounterForm(forms.Form):
                 self.fields['container'].queryset = LiquidAssetContainer.objects.filter(
                     company=company
                 ).order_by('ordering')
+
+
+
+class LiquidAssetForm(forms.Form):
+    def __init__(self, denominations, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        for denomination in denominations:
+            self.fields[f'denomination_{denomination.id}'] = forms.DecimalField(
+                max_digits=20,
+                decimal_places=3,
+                required=False,
+                initial=0,
+                min_value=0,
+                widget=forms.NumberInput(attrs={
+                    'class': 'form-control input-cell',
+                    'step': '0.001',
+                    'data-diamond-equivalent': denomination.diamond_equivalent
+                })
+            )

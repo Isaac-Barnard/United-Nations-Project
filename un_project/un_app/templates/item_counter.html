@@ -19,7 +19,7 @@
             <form method="get" class="nation-selector">
                 <select name="nation" class="form-control" onchange="handleNationChange(this)">
                     <option value="">Select a Nation</option>
-                    {% for nation in form.nation.field.queryset %}
+                    {% for nation in nations %}
                         <option value="{{ nation.id }}" {% if selected_nation.id == nation.id %}selected{% endif %}>
                             {{ nation.name }} ({{ nation.abbreviation }})
                         </option>
@@ -27,13 +27,13 @@
                 </select>
             </form>
         </div>
-
+    
         <!-- Company Selector -->
         <div class="entity-selector">
             <form method="get" class="company-selector">
                 <select name="company" class="form-control" onchange="handleCompanyChange(this)">
                     <option value="">Select a Company</option>
-                    {% for company in form.company.field.queryset %}
+                    {% for company in companies %}
                         <option value="{{ company.id }}" {% if selected_company.id == company.id %}selected{% endif %}>
                             {{ company.name }} ({{ company.abbreviation }})
                         </option>
@@ -75,10 +75,39 @@
                     {% endfor %}
                 </tr>
                 {% endfor %}
+                <!-- Input Row -->
+                <tr class="input-row">
+                    <form method="post" id="liquidForm">
+                        {% csrf_token %}
+                        <td>
+                            <select name="container" class="form-control input-cell" required>
+                                <option value="">Select Container</option>
+                                {% for asset_data in liquid_asset_data %}
+                                    <option value="{{ asset_data.container_name }}">{{ asset_data.container_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td class="right-align">
+                            <span id="total_diamonds">0.000000</span>
+                        </td>
+                        {% for denomination in denominations %}
+                            <td>
+                                <input type="number" 
+                                       name="denomination_{{ denomination.id }}" 
+                                       class="form-control input-cell" 
+                                       value="0" 
+                                       step="0.001" 
+                                       min="0"
+                                       style="width: 100%; text-align: right;"
+                                       data-diamond-equivalent="{{ denomination.diamond_equivalent }}">
+                            </td>
+                        {% endfor %}
+                    </form>
+                </tr>
             </tbody>
         </table>
-        <div class="total-value-sum">
-            <h3>Total Value of All Liquid Assets: {% if selected_nation %}{{ selected_nation.total_liquid_asset_value|custom_decimal_places }}{% else %}{{ selected_company.total_liquid_asset_value|custom_decimal_places }}{% endif %}</h3>
+        <div style="text-align: right; margin-top: 10px;">
+            <button type="submit" form="liquidForm" class="btn btn-primary">Update Liquid Assets</button>
         </div>
 
         <!-- Items Section -->
@@ -126,6 +155,59 @@
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const liquidForm = document.getElementById('liquidForm');
+    
+    liquidForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get the selected nation or company ID
+        const nationSelect = document.querySelector('select[name="nation"]');
+        const companySelect = document.querySelector('select[name="company"]');
+        const nationId = nationSelect.value;
+        const companyId = companySelect.value;
+        
+        // Add the nation/company ID to the form data
+        const formData = new FormData(liquidForm);
+        if (nationId) formData.append('nation_id', nationId);
+        if (companyId) formData.append('company_id', companyId);
+        
+        // Submit the form via AJAX
+        fetch('/handle-liquid-asset-update/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Reload the page to show updated data
+                window.location.reload();
+            } else {
+                alert('Error updating liquid assets: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error updating liquid assets');
+        });
+    });
+});
+
+
+    function updateTotalDiamonds() {
+        let total = 0;
+        const inputs = document.querySelectorAll('.input-cell[type="number"]');
+        inputs.forEach(input => {
+            const value = parseFloat(input.value) || 0;
+            const diamondEquivalent = parseFloat(input.dataset.diamondEquivalent);
+            total += value * diamondEquivalent;
+        });
+        document.getElementById('total_diamonds').textContent = total.toFixed(6);
+    }
+
 document.addEventListener('DOMContentLoaded', function() {
     const nationSelect = document.querySelector('select[name="nation"]');
     const companySelect = document.querySelector('select[name="company"]');
@@ -203,6 +285,7 @@ document.addEventListener('DOMContentLoaded', function() {
             itemSelect.disabled = false;
         }
     });
+    updateTotalDiamonds();
 });
 </script>
 {% endblock %}

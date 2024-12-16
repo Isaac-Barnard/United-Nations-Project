@@ -69,8 +69,8 @@ Setting up the repo is pretty easy:
             - [ ] Total territories, Main territories, far colonies, near colonies
 - **<ins>Data Entry</ins>**
     - [ ] **Item audit input page**
-        - [ ] Add any item for a given nation using a system like how items are displayed in balance sheets
-        - [ ] Add items and liquid assets on the same page
+        - [x] Add any item for a given nation using a system like how items are displayed in balance sheets
+        - [x] Add items and liquid assets on the same page
         - [ ] Input more items without having to manually calculate sum (ie. it auto adds the amount inputed to the sum)
         - [ ] Ablility to change the total for item/liquid asset in case I made a mistake
         - [ ] Easily switch between nations and LiquidAssetContainers
