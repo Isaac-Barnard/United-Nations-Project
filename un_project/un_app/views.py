@@ -836,11 +836,22 @@ def handle_liquid_asset_update(request):
     try:
         data = request.POST
         container_name = data.get('container')
+        denomination_id = data.get('denomination_id')
+        count = data.get('count', '0')
+        
+        # Convert count to Decimal and validate
+        try:
+            count_decimal = Decimal(str(count))
+            if count_decimal == Decimal('0'):
+                return JsonResponse({'status': 'ignored', 'message': 'Zero value ignored'})
+        except (ValueError, TypeError, InvalidOperation):
+            return JsonResponse({'status': 'error', 'message': 'Invalid count value'})
         
         # Get the nation or company from the selected entity
         nation_id = data.get('nation_id')
         company_id = data.get('company_id')
         
+        # Get the container based on nation/company
         if nation_id:
             nation = Nation.objects.get(id=nation_id)
             container = LiquidAssetContainer.objects.get(nation=nation, name=container_name)
@@ -850,19 +861,30 @@ def handle_liquid_asset_update(request):
         else:
             return JsonResponse({'status': 'error', 'message': 'No nation or company selected'})
         
-        # Process each denomination
-        denominations = Denomination.objects.all()
-        for denomination in denominations:
-            value = data.get(f'denomination_{denomination.id}', '0')
-            if value and float(value) > 0:  # Only process non-zero values
-                liquid_count, created = LiquidCount.objects.update_or_create(
-                    asset_container=container,
-                    denomination=denomination,
-                    defaults={'count': value}
-                )
+        # Get denomination
+        denomination = Denomination.objects.get(id=denomination_id)
         
-        return JsonResponse({'status': 'success'})
-    
+        # Update or create the liquid count
+        liquid_count, created = LiquidCount.objects.update_or_create(
+            asset_container=container,
+            denomination=denomination,
+            defaults={'count': count_decimal}
+        )
+        
+        # Calculate new total in diamonds for the container
+        container_total = Decimal('0')
+        for lc in container.liquidcount_set.all():
+            container_total += lc.count * lc.denomination.diamond_equivalent
+        
+        formatted_total = custom_decimal_places(container_total)
+        formatted_count = format(liquid_count.count, 'g')
+        
+        return JsonResponse({
+            'status': 'success',
+            'new_total_diamonds': formatted_total,
+            'new_count': formatted_count
+        })
+        
     except Exception as e:
         return JsonResponse({'status': 'error', 'message': str(e)})
     
@@ -897,8 +919,10 @@ def handle_item_update(request):
         if item.price_type == 'section_divider':
             return JsonResponse({'status': 'error', 'message': 'Cannot update section divider'})
         
+        owner = None
         if nation_id:
             nation = Nation.objects.get(id=nation_id)
+            owner = nation
             item_count, created = ItemCount.objects.update_or_create(
                 nation=nation,
                 item=item,
@@ -906,6 +930,7 @@ def handle_item_update(request):
             )
         elif company_id:
             company = Company.objects.get(id=company_id)
+            owner = company
             item_count, created = ItemCount.objects.update_or_create(
                 company=company,
                 item=item,
@@ -913,15 +938,32 @@ def handle_item_update(request):
             )
         else:
             return JsonResponse({'status': 'error', 'message': 'No nation or company selected'})
+
+        # Calculate the new total value for this item
+        if item.price_type == 'fixed_price':
+            new_total = count_decimal * item.total_diamond_value
+        else:  # market_rate
+            new_total = count_decimal * item.market_value
+            
+        # Update the total value and save
+        item_count.total_value = new_total
+        item_count.save()
         
-        # Format the values using the custom filter directly
+        # Calculate new total for all items
+        new_total_items = owner.calculate_total_item_asset_value()
+        owner.total_item_asset_value = new_total_items
+        owner.save()
+        
+        # Format the values using the custom filter
         formatted_total = custom_decimal_places(item_count.total_value)
         formatted_count = format(item_count.count, 'g')
+        formatted_total_items = custom_decimal_places(new_total_items)
         
         return JsonResponse({
             'status': 'success',
             'new_total_value': formatted_total,
-            'new_count': formatted_count
+            'new_count': formatted_count,
+            'total_items_value': formatted_total_items
         })
         
     except Exception as e:
