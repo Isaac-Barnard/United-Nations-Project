@@ -3,7 +3,7 @@ from django.db.models import F, FloatField, ExpressionWrapper, Count, Value, Sum
 from django.db.models.functions import Coalesce, Rank
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
-from .forms import BuildingEvaluationForm, ItemEvaluationForm
+from .forms import BuildingEvaluationForm, ItemEvaluationForm, ItemCounterForm
 from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount, ItemEvaluationComponent, ItemEvaluation, Item, Company, LiquidCount, LiquidAssetContainer, LiabilityPayment, Liability, CompanyShareholder
 from decimal import Decimal
 from django.http import JsonResponse
@@ -671,3 +671,149 @@ def get_item_evaluations(request, item_id):
 
 def un_map(request):
     return render(request, 'un_map.html')
+
+
+
+@login_required
+def item_counter(request):
+    form = ItemCounterForm()
+    selected_nation = None
+    selected_company = None
+    items_data = []
+    liquid_asset_data = []
+    denominations = Denomination.objects.all().order_by('priority')
+
+    if request.method == 'POST':
+        form = ItemCounterForm(request.POST)
+        if form.is_valid():
+            nation = form.cleaned_data['nation']
+            company = form.cleaned_data['company']
+            item = form.cleaned_data['item']
+            container = form.cleaned_data['container']
+            count = form.cleaned_data['count']
+            denomination = form.cleaned_data['denomination']
+
+            owner = nation or company
+            if not owner:
+                return redirect('item_counter')
+
+            if item and count is not None:
+                # Handle item count update
+                if nation:
+                    item_count, created = ItemCount.objects.get_or_create(
+                        nation=nation,
+                        item=item,
+                        defaults={'count': 0}
+                    )
+                else:
+                    item_count, created = ItemCount.objects.get_or_create(
+                        company=company,
+                        item=item,
+                        defaults={'count': 0}
+                    )
+                item_count.count = count
+                item_count.save()
+
+            if container and denomination and count is not None:
+                # Handle liquid asset count update
+                liquid_count, created = LiquidCount.objects.get_or_create(
+                    asset_container=container,
+                    denomination=denomination,
+                    defaults={'count': 0}
+                )
+                liquid_count.count = count
+                liquid_count.save()
+
+            return redirect('item_counter')
+
+    # Handle GET requests
+    if 'nation' in request.GET:
+        selected_nation = get_object_or_404(Nation, id=request.GET['nation'])
+        form = ItemCounterForm(initial={'nation': selected_nation})
+        owner = selected_nation
+    elif 'company' in request.GET:
+        selected_company = get_object_or_404(Company, id=request.GET['company'])
+        form = ItemCounterForm(initial={'company': selected_company})
+        owner = selected_company
+    else:
+        owner = None
+
+    if owner:
+        # Process items
+        all_items = Item.objects.all().order_by('ordering')
+        items_with_count = ItemCount.objects.filter(
+            nation=owner if isinstance(owner, Nation) else None,
+            company=owner if isinstance(owner, Company) else None
+        )
+
+        item_count_dict = {
+            item_count.item_id: (item_count.count, item_count.total_value) 
+            for item_count in items_with_count
+        }
+
+        for item in all_items:
+            count, total_value = item_count_dict.get(item.id, (0, 0))
+            items_data.append({
+                'name': item.name,
+                'market_value': item.market_value,
+                'count': count,
+                'total_value': total_value,
+                'ordering': item.ordering,
+            })
+
+        # Process liquid assets
+        liquid_containers = LiquidAssetContainer.objects.filter(
+            nation=owner if isinstance(owner, Nation) else None,
+            company=owner if isinstance(owner, Company) else None
+        ).order_by('ordering')
+
+        for container in liquid_containers:
+            container_total_in_diamonds = Decimal('0')
+            container_counts = []
+
+            for denomination in denominations:
+                count_entry = container.liquidcount_set.filter(
+                    denomination=denomination).first()
+                count_value = count_entry.count if count_entry else Decimal('0')
+                container_counts.append(count_value)
+                container_total_in_diamonds += count_value * denomination.diamond_equivalent
+
+            liquid_asset_data.append({
+                'container_name': container.name,
+                'counts': container_counts,
+                'total_in_diamonds': container_total_in_diamonds,
+            })
+
+        # Distribute items
+        items_parts = [[] for _ in range(5)]
+        for item in items_data:
+            idx = (item['ordering'] // 100) - 1
+            if 0 <= idx < 5:
+                items_parts[idx].append(item)
+
+    return render(request, 'item_counter.html', {
+        'form': form,
+        'selected_nation': selected_nation,
+        'selected_company': selected_company,
+        'items_parts': items_parts if owner else [],
+        'denominations': denominations,
+        'liquid_asset_data': liquid_asset_data,
+    })
+
+@login_required
+def get_containers(request):
+    nation_id = request.GET.get('nation_id')
+    company_id = request.GET.get('company_id')
+    
+    if nation_id:
+        containers = LiquidAssetContainer.objects.filter(
+            nation_id=nation_id
+        ).values('id', 'name').order_by('ordering')
+    elif company_id:
+        containers = LiquidAssetContainer.objects.filter(
+            company_id=company_id
+        ).values('id', 'name').order_by('ordering')
+    else:
+        containers = []
+        
+    return JsonResponse({'containers': list(containers)})

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Building, Denomination, Item
+from .models import Building, Denomination, Item, Nation, LiquidAssetContainer, Company
 
 
 class BuildingEvaluationForm(forms.Form):
@@ -38,3 +38,61 @@ class ItemEvaluationForm(forms.Form):
                 max_digits=20, decimal_places=8, min_value=0, required=False,
                 label=label, initial=0
             )
+
+
+# forms.py
+
+from django import forms
+from .models import Nation, Company, Item, LiquidAssetContainer, Denomination
+
+class ItemCounterForm(forms.Form):
+    nation = forms.ModelChoiceField(
+        queryset=Nation.objects.all(),
+        empty_label="Select a Nation",
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    company = forms.ModelChoiceField(
+        queryset=Company.objects.all(),
+        empty_label="Select a Company",
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    container = forms.ModelChoiceField(
+        queryset=LiquidAssetContainer.objects.none(),
+        empty_label="Select a Container",
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    item = forms.ModelChoiceField(
+        queryset=Item.objects.all().order_by('ordering'),
+        empty_label="Select an Item",
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    count = forms.DecimalField(
+        max_digits=20,
+        decimal_places=3,
+        required=False,
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'step': '0.001'})
+    )
+    denomination = forms.ModelChoiceField(
+        queryset=Denomination.objects.all().order_by('priority'),
+        empty_label="Select a Denomination",
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if 'initial' in kwargs:
+            if 'nation' in kwargs['initial']:
+                nation = kwargs['initial']['nation']
+                self.fields['container'].queryset = LiquidAssetContainer.objects.filter(
+                    nation=nation
+                ).order_by('ordering')
+            elif 'company' in kwargs['initial']:
+                company = kwargs['initial']['company']
+                self.fields['container'].queryset = LiquidAssetContainer.objects.filter(
+                    company=company
+                ).order_by('ordering')

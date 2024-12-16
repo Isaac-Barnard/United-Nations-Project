@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+
+{% block title %}Item Counter{% endblock %}
+
+{% load static %}
+{% load custom_filters %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/item_counter_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Item Counter</h1>
+
+    <div class="selector-container">
+        <!-- Nation Selector -->
+        <div class="entity-selector">
+            <form method="get" class="nation-selector">
+                <select name="nation" class="form-control" onchange="handleNationChange(this)">
+                    <option value="">Select a Nation</option>
+                    {% for nation in form.nation.field.queryset %}
+                        <option value="{{ nation.id }}" {% if selected_nation.id == nation.id %}selected{% endif %}>
+                            {{ nation.name }} ({{ nation.abbreviation }})
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+
+        <!-- Company Selector -->
+        <div class="entity-selector">
+            <form method="get" class="company-selector">
+                <select name="company" class="form-control" onchange="handleCompanyChange(this)">
+                    <option value="">Select a Company</option>
+                    {% for company in form.company.field.queryset %}
+                        <option value="{{ company.id }}" {% if selected_company.id == company.id %}selected{% endif %}>
+                            {{ company.name }} ({{ company.abbreviation }})
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+    </div>
+
+    {% if selected_nation or selected_company %}
+        <div class="counter-form">
+            <h2>Add/Update Counts for {% if selected_nation %}{{ selected_nation.name }}{% else %}{{ selected_company.name }}{% endif %}</h2>
+            <form method="post" id="counterForm">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Update Count</button>
+            </form>
+        </div>
+
+        <!-- Liquid Assets Section -->
+        <h2 class="liquid-heading">Liquid Assets</h2>
+        <table class="liquid-table">
+            <thead>
+                <tr style="font-size: .95em;">
+                    <th>Asset Name</th>
+                    <th>Total in Diamonds</th>
+                    {% for denomination in denominations %}
+                        <th>{{ denomination.name }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody style="font-size: .95em;">
+                {% for asset_data in liquid_asset_data %}
+                <tr style="font-size: .95em;">
+                    <td>{{ asset_data.container_name }}</td>
+                    <td class="right-align">{{ asset_data.total_in_diamonds|custom_decimal_places }}</td>
+                    {% for count in asset_data.counts %}
+                        <td class="right-align">{{ count|stringformat:"g" }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="total-value-sum">
+            <h3>Total Value of All Liquid Assets: {% if selected_nation %}{{ selected_nation.total_liquid_asset_value|custom_decimal_places }}{% else %}{{ selected_company.total_liquid_asset_value|custom_decimal_places }}{% endif %}</h3>
+        </div>
+
+        <!-- Items Section -->
+        <h2 class="items-heading">Items</h2>
+        <div class="item-table-container">
+            {% for items_part in items_parts %}
+                <div class="item-table">
+                    <table>
+                        <thead>
+                            <tr style="font-size: 0.9em;">
+                                <th>Item Type</th>
+                                <th>Total Value</th>
+                                <th>Market Value</th>
+                                <th>Number Owned</th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-size: 0.9em;">
+                            {% for item in items_part %}
+                                {% if 'Section Divider' in item.name %}
+                                    <tr>
+                                        <td colspan="4" style="background-color: transparent;">&nbsp;</td>
+                                    </tr>
+                                {% else %}
+                                    <tr style="font-size: 0.9em;">
+                                        <td class="item-name">{{ item.name }}</td>
+                                        <td class="right-align">{{ item.total_value|custom_decimal_places }}</td>
+                                        <td class="right-align">{{ item.market_value|custom_decimal_places }}</td>
+                                        <td class="right-align">{{ item.count|stringformat:"g" }}</td>
+                                    </tr>
+                                {% endif %}
+                            {% empty %}
+                                <tr>
+                                    <td colspan="4">No items found.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="total-value-sum">
+            <h3>Total Value of All Items: {% if selected_nation %}{{ selected_nation.total_item_asset_value|custom_decimal_places }}{% else %}{{ selected_company.total_item_asset_value|custom_decimal_places }}{% endif %}</h3>
+        </div>
+    {% endif %}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const nationSelect = document.querySelector('select[name="nation"]');
+    const companySelect = document.querySelector('select[name="company"]');
+    const containerSelect = document.querySelector('select[name="container"]');
+    const itemSelect = document.querySelector('select[name="item"]');
+    const denominationSelect = document.querySelector('select[name="denomination"]');
+
+    // Update containers when entity changes
+    async function updateContainers(entityType, entityId) {
+        if (entityId) {
+            const queryParam = entityType === 'nation' ? `nation_id=${entityId}` : `company_id=${entityId}`;
+            const response = await fetch(`/get-containers/?${queryParam}`);
+            const data = await response.json();
+            
+            containerSelect.innerHTML = '<option value="">Select a Container</option>';
+            data.containers.forEach(container => {
+                containerSelect.innerHTML += `
+                    <option value="${container.id}">${container.name}</option>
+                `;
+            });
+        }
+    }
+
+    function handleNationChange(select) {
+        if (select.value) {
+            companySelect.value = '';
+            companySelect.disabled = true;
+            updateContainers('nation', select.value);
+            select.form.submit();
+        } else {
+            companySelect.disabled = false;
+        }
+    }
+
+    function handleCompanyChange(select) {
+        if (select.value) {
+            nationSelect.value = '';
+            nationSelect.disabled = true;
+            updateContainers('company', select.value);
+            select.form.submit();
+        } else {
+            nationSelect.disabled = false;
+        }
+    }
+
+    // Initialize disabled states
+    if (nationSelect.value) {
+        companySelect.disabled = true;
+    } else if (companySelect.value) {
+        nationSelect.disabled = true;
+    }
+
+    // Add the handlers to the window object so they can be called from inline handlers
+    window.handleNationChange = handleNationChange;
+    window.handleCompanyChange = handleCompanyChange;
+
+    // Rest of your existing JavaScript remains the same
+    itemSelect.addEventListener('change', function() {
+        if (this.value) {
+            containerSelect.value = '';
+            denominationSelect.value = '';
+            containerSelect.disabled = true;
+            denominationSelect.disabled = true;
+        } else {
+            containerSelect.disabled = false;
+            denominationSelect.disabled = false;
+        }
+    });
+
+    containerSelect.addEventListener('change', function() {
+        if (this.value) {
+            itemSelect.value = '';
+            itemSelect.disabled = true;
+        } else {
+            itemSelect.disabled = false;
+        }
+    });
+});
+</script>
+{% endblock %}
