@@ -44,16 +44,13 @@
     </div>
 
     {% if selected_nation or selected_company %}
-        <div class="counter-form">
-            <h2>Add/Update Counts for {% if selected_nation %}{{ selected_nation.name }}{% else %}{{ selected_company.name }}{% endif %}</h2>
-            <!-- Hidden CSRF token for AJAX requests -->
-            <form id="csrfForm" style="display: none;">
-                {% csrf_token %}
-            </form>
-        </div>
+        <!-- Hidden CSRF token for AJAX requests -->
+        <form id="csrfForm" style="display: none;">
+            {% csrf_token %}
+        </form>
 
         <!-- Liquid Assets Section -->
-        <h2 class="liquid-heading">Liquid Assets</h2>
+        <h2 class="liquid-heading">Liquid Assets - {% if selected_nation %}{{ selected_nation.name }}{% else %}{{ selected_company.name }}{% endif %}</h2>
         <table class="liquid-table">
             <thead>
                 <tr style="font-size: .95em;">
@@ -110,7 +107,7 @@
         </div>
 
         <!-- Items Section -->
-        <h2 class="items-heading">Items</h2>
+        <h2 class="items-heading">Items - {% if selected_nation %}{{ selected_nation.name }}{% else %}{{ selected_company.name }}{% endif %}</h2>
         <div class="item-table-container">
             {% for items_part in items_parts %}
                 <div class="item-table">
