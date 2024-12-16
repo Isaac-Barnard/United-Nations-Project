@@ -46,10 +46,9 @@
     {% if selected_nation or selected_company %}
         <div class="counter-form">
             <h2>Add/Update Counts for {% if selected_nation %}{{ selected_nation.name }}{% else %}{{ selected_company.name }}{% endif %}</h2>
-            <form method="post" id="counterForm">
+            <!-- Hidden CSRF token for AJAX requests -->
+            <form id="csrfForm" style="display: none;">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-primary">Update Count</button>
             </form>
         </div>
 
@@ -106,8 +105,8 @@
                 </tr>
             </tbody>
         </table>
-        <div style="text-align: right; margin-top: 10px;">
-            <button type="submit" form="liquidForm" class="btn btn-primary">Update Liquid Assets</button>
+        <div class="total-value-sum">
+            <h3>Total Value of All Liquid Assets: <span class="total-items-value">{% if selected_nation %}{{ selected_nation.total_liquid_asset_value|custom_decimal_places }}{% else %}{{ selected_company.total_liquid_asset_value|custom_decimal_places }}{% endif %}</span></h3>
         </div>
 
         <!-- Items Section -->
@@ -409,6 +408,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Update the specific denomination count
                     const denominationCells = containerRow.querySelectorAll('.denomination-count');
                     denominationCells[denominationIndex].textContent = data.new_count;
+                }
+                
+                // Update the total liquid assets value
+                const totalLiquidSpan = document.querySelector('.total-items-value');
+                if (totalLiquidSpan) {
+                    totalLiquidSpan.textContent = data.total_liquid_value;
                 }
                 
                 // Reset input to 0

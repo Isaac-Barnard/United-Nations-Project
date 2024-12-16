@@ -851,12 +851,15 @@ def handle_liquid_asset_update(request):
         nation_id = data.get('nation_id')
         company_id = data.get('company_id')
         
+        owner = None
         # Get the container based on nation/company
         if nation_id:
             nation = Nation.objects.get(id=nation_id)
+            owner = nation
             container = LiquidAssetContainer.objects.get(nation=nation, name=container_name)
         elif company_id:
             company = Company.objects.get(id=company_id)
+            owner = company
             container = LiquidAssetContainer.objects.get(company=company, name=container_name)
         else:
             return JsonResponse({'status': 'error', 'message': 'No nation or company selected'})
@@ -876,13 +879,20 @@ def handle_liquid_asset_update(request):
         for lc in container.liquidcount_set.all():
             container_total += lc.count * lc.denomination.diamond_equivalent
         
+        # Calculate new total for all liquid assets
+        new_total_liquid = owner.calculate_total_liquid_asset_value()
+        owner.total_liquid_asset_value = new_total_liquid
+        owner.save()
+        
         formatted_total = custom_decimal_places(container_total)
         formatted_count = format(liquid_count.count, 'g')
+        formatted_total_liquid = custom_decimal_places(new_total_liquid)
         
         return JsonResponse({
             'status': 'success',
             'new_total_diamonds': formatted_total,
-            'new_count': formatted_count
+            'new_count': formatted_count,
+            'total_liquid_value': formatted_total_liquid
         })
         
     except Exception as e:
