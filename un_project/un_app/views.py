@@ -5,8 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from .forms import BuildingEvaluationForm, ItemEvaluationForm, ItemCounterForm, LiquidAssetForm
 from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount, ItemEvaluationComponent, ItemEvaluation, Item, Company, LiquidCount, LiquidAssetContainer, LiabilityPayment, Liability, CompanyShareholder
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 from django.http import JsonResponse
+from un_app.templatetags.custom_filters import custom_decimal_places
 
 def home(request):
     return render(request, 'home.html')
@@ -862,5 +863,66 @@ def handle_liquid_asset_update(request):
         
         return JsonResponse({'status': 'success'})
     
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': str(e)})
+    
+
+def handle_item_update(request):
+    if not request.method == 'POST':
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+    
+    try:
+        data = request.POST
+        item_name = data.get('item_name')
+        count = data.get('count', '0')
+        
+        # Convert count to Decimal and validate
+        try:
+            count_decimal = Decimal(str(count))
+            if count_decimal == Decimal('0'):
+                return JsonResponse({'status': 'ignored', 'message': 'Zero value ignored'})
+        except (ValueError, TypeError, InvalidOperation):
+            return JsonResponse({'status': 'error', 'message': 'Invalid count value'})
+        
+        # Get the nation or company from the selected entity
+        nation_id = data.get('nation_id')
+        company_id = data.get('company_id')
+        
+        if not item_name:
+            return JsonResponse({'status': 'error', 'message': 'Missing item name'})
+            
+        # Get the item
+        item = Item.objects.get(name=item_name)
+        
+        if item.price_type == 'section_divider':
+            return JsonResponse({'status': 'error', 'message': 'Cannot update section divider'})
+        
+        if nation_id:
+            nation = Nation.objects.get(id=nation_id)
+            item_count, created = ItemCount.objects.update_or_create(
+                nation=nation,
+                item=item,
+                defaults={'count': count_decimal}
+            )
+        elif company_id:
+            company = Company.objects.get(id=company_id)
+            item_count, created = ItemCount.objects.update_or_create(
+                company=company,
+                item=item,
+                defaults={'count': count_decimal}
+            )
+        else:
+            return JsonResponse({'status': 'error', 'message': 'No nation or company selected'})
+        
+        # Format the values using the custom filter directly
+        formatted_total = custom_decimal_places(item_count.total_value)
+        formatted_count = format(item_count.count, 'g')
+        
+        return JsonResponse({
+            'status': 'success',
+            'new_total_value': formatted_total,
+            'new_count': formatted_count
+        })
+        
     except Exception as e:
         return JsonResponse({'status': 'error', 'message': str(e)})

@@ -122,25 +122,34 @@
                                 <th>Total Value</th>
                                 <th>Market Value</th>
                                 <th>Number Owned</th>
+                                <th>Update</th>
                             </tr>
                         </thead>
                         <tbody style="font-size: 0.9em;">
                             {% for item in items_part %}
                                 {% if 'Section Divider' in item.name %}
                                     <tr>
-                                        <td colspan="4" style="background-color: transparent;">&nbsp;</td>
+                                        <td colspan="5" style="background-color: transparent;">&nbsp;</td>
                                     </tr>
                                 {% else %}
-                                    <tr style="font-size: 0.9em;">
+                                    <tr style="font-size: 0.9em;" class="item-row" data-item-name="{{ item.name }}">
                                         <td class="item-name">{{ item.name }}</td>
-                                        <td class="right-align">{{ item.total_value|custom_decimal_places }}</td>
+                                        <td class="right-align total-value">{{ item.total_value|custom_decimal_places }}</td>
                                         <td class="right-align">{{ item.market_value|custom_decimal_places }}</td>
-                                        <td class="right-align">{{ item.count|stringformat:"g" }}</td>
+                                        <td class="right-align current-count">{{ item.count|stringformat:"g" }}</td>
+                                        <td>
+                                            <input type="number" 
+                                                class="item-input form-control input-cell"
+                                                value="0"
+                                                step="0.001"
+                                                min="0"
+                                                style="width: 100%; text-align: right; padding: 2px 4px; height: 22px; font-size: 0.9em;">
+                                        </td>
                                     </tr>
                                 {% endif %}
                             {% empty %}
                                 <tr>
-                                    <td colspan="4">No items found.</td>
+                                    <td colspan="5">No items found.</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -286,6 +295,61 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     updateTotalDiamonds();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const itemInputs = document.querySelectorAll('.item-input');
+    
+    itemInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            const row = this.closest('.item-row');
+            const itemName = row.dataset.itemName;
+            const count = this.value;
+            
+            // Get the selected nation or company ID
+            const nationSelect = document.querySelector('select[name="nation"]');
+            const companySelect = document.querySelector('select[name="company"]');
+            const nationId = nationSelect.value;
+            const companyId = companySelect.value;
+            
+            // Create form data
+            const formData = new FormData();
+            formData.append('item_name', itemName);
+            formData.append('count', count);
+            if (nationId) formData.append('nation_id', nationId);
+            if (companyId) formData.append('company_id', companyId);
+            
+            // Submit the update
+            fetch('/handle-item-update/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Update with pre-formatted strings from the server
+                    row.querySelector('.total-value').textContent = data.new_total_value;
+                    row.querySelector('.current-count').textContent = data.new_count;
+                    // Reset input to 0
+                    this.value = '0';
+                } else if (data.status === 'ignored') {
+                    // Just reset the input to 0
+                    this.value = '0';
+                } else {
+                    alert('Error updating item: ' + data.message);
+                    this.value = '0';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error updating item');
+                this.value = '0';
+            });
+        });
+    });
 });
 </script>
 {% endblock %}
