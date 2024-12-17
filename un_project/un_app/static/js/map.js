@@ -26,6 +26,28 @@ L.imageOverlay('/static/images/maps/map.png', imageBounds).addTo(map);
 // Fit the map view to the image bounds
 map.fitBounds(imageBounds);
 
+L.Control.HomeButton = L.Control.extend({
+    options: {
+        position: 'topleft'
+    },
+
+    onAdd: function(map) {
+        const container = L.DomUtil.create('div', 'home-button leaflet-bar');
+        container.innerHTML = '🏠︎'; // House symbol
+        container.title = 'Return to (0, 0)';
+
+        container.onclick = function() {
+            // Convert Minecraft coordinates (0,0) to map coordinates
+            map.setView([-0, 0], 0); // Using initial zoom level of 2
+        };
+
+        return container;
+    }
+});
+
+// Add the home button to the map
+new L.Control.HomeButton().addTo(map);
+
 // Add coordinate display functionality
 map.on('mousemove', function(e) {
     // Convert the map coordinates back to Minecraft coordinates

@@ -13,13 +13,12 @@
             height: 600px;
             width: 100%;
             position: relative;
-            z-index: 1; /* Set a low z-index for the map */
+            z-index: 1;
         }
 
-        /* Ensure the dropdown content appears above the map */
         .dropdown-content {
             position: absolute;
-            z-index: 10; /* Higher z-index to appear above the map */
+            z-index: 10;
         }
 
         #coordinates {
@@ -34,8 +33,27 @@
             font-size: 14px;
             box-shadow: 0 0 5px rgba(0,0,0,0.2);
         }
-    </style>
 
+        .home-button {
+            padding: 4px;  /* Reduced padding */
+            background-color: white;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 4px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+            cursor: pointer;
+            width: 26px;  /* Smaller width */
+            height: 26px;  /* Smaller height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;  /* Larger font size */
+            line-height: 1;  /* Tighter line height */
+        }
+
+        .home-button:hover {
+            background-color: #f4f4f4;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
