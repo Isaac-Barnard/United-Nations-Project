@@ -8,6 +8,11 @@ table {
     text-align: right;
 }
 
+.total-value-sum {
+    margin: 0rem 0;
+    padding: 0rem 0;
+}
+
 /* Remove the margin below the h2 element for item tables */
 h2.items-heading {
     margin-bottom: 0;

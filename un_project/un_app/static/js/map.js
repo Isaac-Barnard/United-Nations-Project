@@ -8,8 +8,8 @@ const z_bottom_right = 959; // z-coordinate of the bottom-right corner
 const map = L.map('map', {
     center: [0, 0],
     zoom: 2,              // Set an initial zoom level
-    minZoom: -2,           // Set a minimum zoom to allow zooming out further
-    maxZoom: 10,           // Adjust max zoom if needed
+    minZoom: -4,           // Set a minimum zoom to allow zooming out further
+    maxZoom: 5,           // Adjust max zoom if needed
     crs: L.CRS.Simple      // Use simple coordinate system
 });
 
@@ -21,10 +21,27 @@ const imageBounds = [
 
 // Add the PNG as an image overlay layer
 //L.imageOverlay('/static/images/maps/Official UN Map (10_21_24).png', imageBounds).addTo(map);
-L.imageOverlay('/static/images/maps/map.png', imageBounds).addTo(map);
+const imageOverlay = L.imageOverlay('/static/images/maps/map.png', imageBounds, {
+    // This ensures the image uses its native resolution at max zoom
+    maxNativeZoom: 10,
+    // Disable image smoothing
+    className: 'pixelated-image'
+}).addTo(map);
+
+const style = document.createElement('style');
+style.textContent = `
+    .pixelated-image {
+        image-rendering: -moz-crisp-edges;
+        image-rendering: -webkit-crisp-edges;
+        image-rendering: pixelated;
+        image-rendering: crisp-edges;
+    }
+`;
+document.head.appendChild(style);
 
 // Fit the map view to the image bounds
 map.fitBounds(imageBounds);
+map.setZoom(0);
 
 L.Control.HomeButton = L.Control.extend({
     options: {

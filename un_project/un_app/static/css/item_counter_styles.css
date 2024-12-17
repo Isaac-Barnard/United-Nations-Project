@@ -5,7 +5,7 @@ table {
     table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 1rem;
+    margin-bottom: 0rem;
 }
 
 
@@ -48,7 +48,6 @@ select:disabled {
 .liquid-table th:first-child,
 .liquid-table td:first-child {
     width: 20%;
-    text-align: left;
 }
 
 
@@ -130,9 +129,8 @@ select:disabled {
 
 /* Total value summary */
 .total-value-sum {
-    margin: 1rem 0;
-    padding: 1rem 0;
-    border-top: 1px solid #ccc;
+    margin: 0rem 0;
+    padding: 0rem 0;
 }
 
 /* Form controls */
