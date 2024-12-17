@@ -1,8 +1,8 @@
 // Set map bounds using coordinates of the Minecraft world
-const x_top_left = -1562; // x-coordinate of the top-left corner
-const z_top_left = -419;  // z-coordinate of the top-left corner
-const x_bottom_right = 857; // x-coordinate of the bottom-right corner
-const z_bottom_right = 906; // z-coordinate of the bottom-right corner
+const x_top_left = -1616; // x-coordinate of the top-left corner
+const z_top_left = -416;  // z-coordinate of the top-left corner
+const x_bottom_right = 895; // x-coordinate of the bottom-right corner
+const z_bottom_right = 959; // z-coordinate of the bottom-right corner
 
 // Initialize map using L.CRS.Simple to remove latitude/longitude constraints
 const map = L.map('map', {
@@ -20,10 +20,22 @@ const imageBounds = [
 ];
 
 // Add the PNG as an image overlay layer
-L.imageOverlay('/static/images/maps/Official UN Map (10_21_24).png', imageBounds).addTo(map);
+//L.imageOverlay('/static/images/maps/Official UN Map (10_21_24).png', imageBounds).addTo(map);
+L.imageOverlay('/static/images/maps/map.png', imageBounds).addTo(map);
 
 // Fit the map view to the image bounds
 map.fitBounds(imageBounds);
+
+// Add coordinate display functionality
+map.on('mousemove', function(e) {
+    // Convert the map coordinates back to Minecraft coordinates
+    let z = -Math.round(e.latlng.lat); // Negative because we inverted the z-coordinate
+    let x = Math.round(e.latlng.lng);
+    
+    // Update the coordinates display
+    document.getElementById('coordinates').innerHTML = 
+        `X: ${x} | Z: ${z}`;
+});
 
 // Define custom icons for different owners
 const icons = {
@@ -110,7 +122,7 @@ fetch(url)
             const icon = icons[building.owner_abbreviation] || icons['default'];
 
             // Add marker at the transformed coordinates
-            const marker = L.marker([y+7, x], { icon: icon }).addTo(map);
+            const marker = L.marker([y, x], { icon: icon }).addTo(map);
             marker.bindPopup(`
                 <strong style="font-size: 1.2em;">${building.name}</strong><br>
                 <u>Owner:</u> ${building.owner}<br>
