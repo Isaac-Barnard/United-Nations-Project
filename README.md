@@ -105,5 +105,6 @@ Setting up the repo is pretty easy:
             - [x] Add data for each building when data is clicked on
             - [x] Filter out nether/end buildings
             - [ ] Extended map to show more land
+        - [ ] Button that displays railroad/infrastructure routes
         - [ ] Somehow display historical/informative maps
     
