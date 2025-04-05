@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',   # Django REST Framework for API functionality
     'un_app',           # Your main app containing the Building model
     'un_api',           # New app for API views
-    'content',          # Main content app
+    'website',          # Main website app
     'players_api',      # Fetch player data
     'corsheaders',      # CORS headers for api and login usage
 ]

@@ -19,7 +19,7 @@ from django.urls import path, include
 urlpatterns = [
     path('minecraft/records/admin/', admin.site.urls),
 
-    path('', include('content.urls')),
+    path('', include('website.urls')),
     
     path('minecraft/records/', include('un_app.urls')),   # Main app URLs
 
