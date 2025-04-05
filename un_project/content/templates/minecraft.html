@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/minecraft_styles.css' %}">
+{% endblock %}
+
+{% block title %}
+    Minecraft
+{% endblock %}
+
+{% block content %}
+        <div class="server-info">
+            <h3 id="server-ip">direct.ws-studios.com</h3>
+            <div><span id="player-count">0</span> Players Online</div>
+        </div>
+        <div class="links">
+            <p><a href="https://docs.google.com/document/d/10xtooDJzp5dQ9XUCccsWqtzG-gqHBvcr7gf0sgUIs-k/edit?usp=sharing" target="_blank" rel="noopener noreferrer">United Nations Official Records Document</a></p>
+            <p><a href="https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwNyWo/edit?usp=sharing" target="_blank" rel="noopener noreferrer">United Nations Finance Documents</a></p>
+            <p><a href="https://docs.google.com/spreadsheets/d/1UHE3NIoL8Cl78Vgs8Dlx_xnMDgdPvZiRhjuruxc6oF8/edit?usp=sharing" target="_blank" rel="noopener noreferrer">United Nations Building Index</a></p>
+        </div>
+{% endblock %}

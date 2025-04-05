@@ -1,0 +1,289 @@
+:root {
+    --text: #0d0b07;
+    --background: #fbe5c9;
+    --primary: #1ec9c9;
+    --secondary: #ffda91;
+    --accent: #f9dcec;
+}
+
+@font-face {
+    font-family: "Minecraft";
+    src: url('/.fonts');
+    src: url('/.fonts/MinecraftRegular-Bmg3.otf') format('opentype');
+}
+
+html {
+    background: #879aa3;
+    font-family: "Minecraft"
+}
+
+body {
+    margin: 0;
+    margin-top: 75px;
+    padding: 0;
+    overflow: auto;
+}
+
+.content {
+    position: absolute;
+    margin-left: 20px;
+    margin-right: calc(1/4 * 100vw);
+    margin-bottom: 50px;
+}
+
+.inventory {
+    position: relative;
+}
+
+.inventory-background {
+    width: 500px;
+}
+
+.playername {
+    position: relative;
+    top: -430px;
+    left: -270px;
+    font-size: 24px;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.inv-slots {
+    position: relative;
+    top: -497px;
+    left: 20px;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr); /* Assuming 9x3 inventory grid */
+    /*gap: 40px;*/
+    width: 460px;
+    height: 154px;
+    /*background-image: url('/images/inventory-upscaled.png');*/
+    /*background-size: contain;*/
+}
+
+.hotbar-slots {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    top: -485px;
+    left: 20px;
+    width: 460px;
+    height: 50px;
+}
+
+.offhand-slot {
+    position: relative;
+    display: grid;
+    width: 50px;
+    height: 50px;
+    top: -509px;
+    left: 225px;
+}
+
+.armor-slots {
+    position: relative;
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    width: 50px;
+    height: 203px;
+    top: -458px;
+    left: 20px;
+}
+
+.enderchest {
+    position: relative;
+    top: -932px;
+    left: 516px;
+    width: 500px;
+}
+
+.echest-background {
+    width: 500px;
+}
+
+.echest-slots {
+    position: relative;
+    top: -179px;
+    left: 20px;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr); /* Assuming 9x3 inventory grid */
+    width: 460px;
+    height: 154px;
+}
+
+.item {
+    position: relative;
+    margin: 5px
+}
+
+.item img {
+    position: absolute;
+    max-width: 100%;
+    width: 40px;
+    height: 40px;
+}
+
+.quantity {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: white;
+    cursor: default;
+}
+
+.player {
+    position: absolute;
+    top: 23px;
+    left: 74px;
+}
+
+.tooltip {
+    position: absolute;
+    padding: 4px;
+    margin: 0;
+    font-size: 16px;
+    color: white;
+    border: 2px solid #1b0c1b;
+    border-radius: 4px;
+    background: #1b0c1b;
+    z-index: 4;
+    box-shadow: inset 0 0 0 2px #2C0863;
+}
+
+.tooltip .name {
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+    white-space: nowrap;;
+}
+
+.tooltip .enchants {
+    padding: 0;
+    margin: 0;
+}
+
+[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+[type=radio] + img {
+    cursor: pointer;
+    image-rendering: pixelated;
+}
+
+[type=radio]:checked + img {
+    outline: 1px solid #000;
+    image-rendering: pixelated;
+}
+
+[type=radio]:not(:checked) + img {
+    outline: 1px solid #fff;
+    image-rendering: pixelated;
+}
+
+/* Directory CSS */
+
+.directory-bar {
+    position: fixed;
+    top: 0;
+    background-color: var(--primary);
+    padding: 10px;
+    display: inline-flex;
+    border-bottom: 2px solid var(--accent);
+    border-right: 2px solid var(--accent);
+    border-radius: 0 0 15px 0;
+    flex-grow: 1;
+    color: var(--primary);
+    z-index: 5;
+}
+
+.directory-bar a {
+    margin-right: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 24px;
+    font-family: Verdana, sans-serif;
+    color: var(--text);
+}
+
+/* Dropdown CSS */
+
+.dropdown {
+    position: relative;
+    display: block;
+    flex-direction: column;
+}
+
+.dropdown-button {
+    background-color: var(--primary);
+    padding: 0px;
+    margin-right: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 24px;
+    font-family: Verdana, sans-serif;
+    color: var(--text);
+    border: none;
+}
+
+.span {
+    width: inherit;
+    position: absolute;
+    display: block;
+    background-color: var(--primary);
+    left: 0;
+    right: 0;
+    top: -10px;
+    height: 10px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--primary);
+    border-left: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    border-right: 2px solid var(--accent);
+    border-radius: 0 0 15px 15px;
+    margin-top: 10px;
+    left: -20px;
+}
+
+.dropdown-content a {
+    color: var(--text);
+    padding: 12px 24px 12px 20px;
+    margin-right: 0px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown:hover .dropdown-content, .span:hover .dropdown-content, .dropdown-content:hover {
+    display: block;
+}
+
+/* Socials Bar CSS */
+
+.social-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    border-top-right-radius: 15px;
+    background-color: var(--accent);
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5px;
+    padding-left: 0px;
+}
+
+.social-bar img {
+    width: 30px;
+    height: 30px;
+    padding-left: 10px;
+    margin: 0 5px;
+}
