@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'un_app',           # Your main app containing the Building model
     'un_api',           # New app for API views
     'website',          # Main website app
-    'players_api',      # Fetch player data
     'corsheaders',      # CORS headers for api and login usage
 ]
 
