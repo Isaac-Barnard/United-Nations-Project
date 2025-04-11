@@ -409,6 +409,29 @@ class LiabilityPayment(models.Model):
 #                           Buildings
 # --------------------------------------------------------------------
 class Building(models.Model):
+    SIZE_CHOICES = [
+        ('Tiny', 'Tiny (-5×5)'),
+        ('Very Small', 'Very Small (6×6 to 8×8)'),
+        ('Small', 'Small (9×9 to 12×12)'),
+        ('Modest', 'Modest (12×12 to 15×15)'),
+        ('Medium-Small', 'Medium-Small (16×16 to 20×20)'),
+        ('Medium', 'Medium (20×20 to 25×25)'),
+        ('Medium-Large', 'Medium-Large (25×25 to 30×30)'),
+        ('Large', 'Large (31×31 to 40×40)'),
+        ('Very Large', 'Very Large (40×40 to 50×50)'),
+        ('Huge', 'Huge (51×51 to 75×75)'),
+        ('Enormous', 'Enormous (75×75 to 100×100)'),
+        ('Gigantic', 'Gigantic (100×100 to 150×150)'),
+        ('Massive', 'Massive (150×150+)'),
+    ]
+    
+    MATERIAL_CHOICES = [
+        ('Basic', 'Basic (Dirt, Cobblestone, Netherrack, Oak Planks...)'),
+        ('Standard', 'Standard (Stone Bricks, Smooth Sandstone, Terracotta...)'),
+        ('Premium', 'Premium (Smooth Stone, glazed terricotta, exotic woods and stones...)'),
+        ('Elite', 'Elite (Quartz, Obsidian, Purpur, Prismarine...)'),
+    ]
+    
     name = models.CharField(max_length=100, unique=True,
                             help_text="Building name")
     territory = models.ForeignKey(Territory, on_delete=models.CASCADE, related_name='buildings', null=True,
@@ -442,6 +465,12 @@ class Building(models.Model):
                                   help_text="Medal of Papa Quinn (MoPQ) award for architecture or another MoPQ award related to a building.")
     architectural_style = models.CharField(max_length=100, null=True, blank=True,
                                            help_text="The architectural style of the building if it falls into one")
+    size = models.CharField(max_length=20, choices=SIZE_CHOICES, null=True, blank=True,
+                           help_text="The size category of the building")
+    materials = models.CharField(max_length=20, choices=MATERIAL_CHOICES, null=True, blank=True,
+                                help_text="The primary building materials used in construction")
+    furnished = models.BooleanField(null=True, blank=True,
+                                   help_text="Whether the building is furnished inside")
     # Precalculated fields
     ownership_minus_partial = models.IntegerField(default=0)
     price_minus_partial = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
