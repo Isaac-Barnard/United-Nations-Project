@@ -43,6 +43,13 @@
         </div>
     </div>
 
+    <div style="margin-bottom: 1rem;">
+        <label>
+            <input type="checkbox" id="sumModeToggle">
+            Enable Sum Mode (Add to current count)
+        </label>
+    </div>
+
     {% if selected_nation or selected_company %}
         <!-- Hidden CSRF token for AJAX requests -->
         <form id="csrfForm" style="display: none;">

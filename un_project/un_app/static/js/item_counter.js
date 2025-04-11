@@ -14,7 +14,140 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize denomination inputs
     initializeDenominationInputs();
+    
+    // Initialize sum mode toggle
+    initializeSumModeToggle();
 });
+
+// Initialize sum mode toggle
+function initializeSumModeToggle() {
+    const sumModeToggle = document.getElementById('sumModeToggle');
+    if (sumModeToggle) {
+        // Set initial state (could be stored in localStorage for persistence)
+        window.sumModeEnabled = sumModeToggle.checked;
+        
+        // Add change event listener
+        sumModeToggle.addEventListener('change', function() {
+            window.sumModeEnabled = this.checked;
+            console.log('Sum mode ' + (window.sumModeEnabled ? 'enabled' : 'disabled'));
+        });
+    }
+}
+
+// Handle item input changes
+async function handleItemInputChange() {
+    const row = this.closest('.item-row');
+    const itemName = row.dataset.itemName;
+    const inputValue = parseFloat(this.value) || 0;
+
+    // Use the window.sumModeEnabled variable to check if sum mode is active
+    const isSumMode = window.sumModeEnabled;
+
+    // Get the existing count from the row
+    let count = inputValue;
+    if (isSumMode) {
+        const currentCountEl = row.querySelector('.current-count');
+        const currentCount = parseFloat(currentCountEl.textContent) || 0;
+        count = currentCount + inputValue;
+    }
+
+    const nationSelect = document.querySelector('select[name="nation"]');
+    const companySelect = document.querySelector('select[name="company"]');
+    const formData = new FormData();
+    
+    formData.append('item_name', itemName);
+    formData.append('count', count);
+    if (nationSelect.value) formData.append('nation_id', nationSelect.value);
+    if (companySelect.value) formData.append('company_id', companySelect.value);
+    
+    try {
+        const response = await fetch('/handle-item-update/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        });
+        const data = await response.json();
+        
+        if (data.status === 'success') {
+            updateItemRow(row, data);
+        } else if (data.status === 'ignored') {
+            this.value = '0';
+        } else {
+            alert('Error updating item: ' + data.message);
+            this.value = '0';
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error updating item');
+        this.value = '0';
+    }
+}
+
+// Apply the same sum mode logic to denomination input changes
+async function handleDenominationInputChange() {
+    const containerSelect = document.querySelector('.container-select');
+    const container = containerSelect.value;
+    
+    if (!container) {
+        alert('Please select a container first');
+        this.value = '0';
+        return;
+    }
+
+    const denominationId = this.dataset.denominationId;
+    const denominationIndex = this.dataset.denominationIndex;
+    const inputValue = parseFloat(this.value) || 0;
+    
+    // Use sum mode for denominations too
+    const isSumMode = window.sumModeEnabled;
+    
+    // Get current count if in sum mode
+    let count = inputValue;
+    if (isSumMode) {
+        const containerRow = document.querySelector(`.container-row[data-container-name="${container}"]`);
+        if (containerRow) {
+            const denominationCells = containerRow.querySelectorAll('.denomination-count');
+            const currentCount = parseFloat(denominationCells[denominationIndex].textContent) || 0;
+            count = currentCount + inputValue;
+        }
+    }
+    
+    const nationSelect = document.querySelector('select[name="nation"]');
+    const companySelect = document.querySelector('select[name="company"]');
+    const formData = new FormData();
+    
+    formData.append('container', container);
+    formData.append('denomination_id', denominationId);
+    formData.append('count', count);
+    if (nationSelect.value) formData.append('nation_id', nationSelect.value);
+    if (companySelect.value) formData.append('company_id', companySelect.value);
+    
+    try {
+        const response = await fetch('/handle-liquid-asset-update/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        });
+        const data = await response.json();
+        
+        if (data.status === 'success') {
+            updateDenominationRow(container, denominationIndex, data);
+        } else if (data.status === 'ignored') {
+            this.value = '0';
+        } else {
+            alert('Error updating liquid asset: ' + data.message);
+            this.value = '0';
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error updating liquid asset');
+        this.value = '0';
+    }
+}
 
 // Liquid form submission handler
 function handleLiquidFormSubmit(e) {
@@ -165,46 +298,6 @@ function initializeItemInputs() {
     });
 }
 
-// Handle item input changes
-async function handleItemInputChange() {
-    const row = this.closest('.item-row');
-    const itemName = row.dataset.itemName;
-    const count = this.value;
-    
-    const nationSelect = document.querySelector('select[name="nation"]');
-    const companySelect = document.querySelector('select[name="company"]');
-    const formData = new FormData();
-    
-    formData.append('item_name', itemName);
-    formData.append('count', count);
-    if (nationSelect.value) formData.append('nation_id', nationSelect.value);
-    if (companySelect.value) formData.append('company_id', companySelect.value);
-    
-    try {
-        const response = await fetch('/handle-item-update/', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-            }
-        });
-        const data = await response.json();
-        
-        if (data.status === 'success') {
-            updateItemRow(row, data);
-        } else if (data.status === 'ignored') {
-            this.value = '0';
-        } else {
-            alert('Error updating item: ' + data.message);
-            this.value = '0';
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Error updating item');
-        this.value = '0';
-    }
-}
-
 // Update item row with new data
 function updateItemRow(row, data) {
     row.querySelector('.total-value').textContent = data.new_total_value;
@@ -219,56 +312,6 @@ function initializeDenominationInputs() {
     denominationInputs.forEach(input => {
         input.addEventListener('change', handleDenominationInputChange);
     });
-}
-
-// Handle denomination input changes
-async function handleDenominationInputChange() {
-    const containerSelect = document.querySelector('.container-select');
-    const container = containerSelect.value;
-    
-    if (!container) {
-        alert('Please select a container first');
-        this.value = '0';
-        return;
-    }
-
-    const denominationId = this.dataset.denominationId;
-    const denominationIndex = this.dataset.denominationIndex;
-    const count = this.value;
-    
-    const nationSelect = document.querySelector('select[name="nation"]');
-    const companySelect = document.querySelector('select[name="company"]');
-    const formData = new FormData();
-    
-    formData.append('container', container);
-    formData.append('denomination_id', denominationId);
-    formData.append('count', count);
-    if (nationSelect.value) formData.append('nation_id', nationSelect.value);
-    if (companySelect.value) formData.append('company_id', companySelect.value);
-    
-    try {
-        const response = await fetch('/handle-liquid-asset-update/', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-            }
-        });
-        const data = await response.json();
-        
-        if (data.status === 'success') {
-            updateDenominationRow(container, denominationIndex, data);
-        } else if (data.status === 'ignored') {
-            this.value = '0';
-        } else {
-            alert('Error updating liquid asset: ' + data.message);
-            this.value = '0';
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Error updating liquid asset');
-        this.value = '0';
-    }
 }
 
 // Update denomination row with new data
