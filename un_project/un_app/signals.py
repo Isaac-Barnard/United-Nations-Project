@@ -227,14 +227,25 @@ def update_total_liquid_asset_value_on_container_change(sender, instance, **kwar
 @receiver(post_save, sender=ItemEvaluationComponent)
 @receiver(post_delete, sender=ItemEvaluationComponent)
 def update_total_item_asset_value(sender, instance, **kwargs):
-    nation = instance.nation
-    company = instance.company
-    if nation:
+    # Recalculate item asset values for ALL nations
+    for nation in Nation.objects.all():
         total = nation.calculate_total_item_asset_value()
         Nation.objects.filter(pk=nation.pk).update(total_item_asset_value=total)
-    elif company:
+
+    # Recalculate item asset values for ALL companies
+    for company in Company.objects.all():
         total = company.calculate_total_item_asset_value()
         Company.objects.filter(pk=company.pk).update(total_item_asset_value=total)
+    
+    # Called ItemFixedPriceComponent.nation which it doesn't have
+    #nation = instance.nation
+    #company = instance.company
+    #if nation:
+    #    total = nation.calculate_total_item_asset_value()
+    #    Nation.objects.filter(pk=nation.pk).update(total_item_asset_value=total)
+    #elif company:
+    #    total = company.calculate_total_item_asset_value()
+    #    Company.objects.filter(pk=company.pk).update(total_item_asset_value=total)
 
 
 def update_total_building_asset_value(building):

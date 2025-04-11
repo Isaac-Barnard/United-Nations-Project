@@ -15,6 +15,11 @@ class Command(BaseCommand):
             reader = csv.DictReader(file)
             for row in reader:
                 try:
+                    # Check if item already exists
+                    if Item.objects.filter(name=row['name']).exists():
+                        #self.stdout.write(self.style.WARNING(f"Item already exists: {row['name']}"))
+                        continue
+                    
                     # Create the Item object
                     item = Item.objects.create(
                         name=row['name'],

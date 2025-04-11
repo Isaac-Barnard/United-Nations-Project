@@ -29,7 +29,7 @@ class Command(BaseCommand):
             reader = csv.DictReader(file)
             for row in reader:
                 if row['evaluator'].lower() == 'decoy':  # Skip if the evaluator is 'decoy'
-                    self.stdout.write(self.style.WARNING(f"Skipping evaluation for building '{row['building']}' by evaluator 'decoy'"))
+                    #self.stdout.write(self.style.WARNING(f"Skipping evaluation for building '{row['building']}' by evaluator 'decoy'"))
                     continue
 
                 try:
@@ -48,16 +48,16 @@ class Command(BaseCommand):
                         if row[column_name]:  # Check if there's a value in this column
                             quantity = Decimal(row[column_name].strip())
                             denomination = Denomination.objects.get(name=denomination_name)
-
-                            # Create the BuildingEvaluationComponent object
-                            BuildingEvaluationComponent.objects.create(
-                                evaluation=evaluation,
-                                denomination=denomination,
-                                quantity=quantity
-                            )
+                            
+                            # Check if the BuildingEvaluationComponent already exists
+                            if not BuildingEvaluationComponent.objects.filter(evaluation=evaluation, denomination=denomination).exists():
+                                # Create the BuildingEvaluationComponent object only if it doesn't exist
+                                BuildingEvaluationComponent.objects.create(evaluation=evaluation, denomination=denomination, quantity=quantity)
+                                self.stdout.write(self.style.SUCCESS(f"Added evaluation for building: {building.name} by {evaluator.username}"))
+                            #else:
+                                #self.stdout.write(self.style.WARNING(f"evaluation for building: {building.name} by {evaluator.username} already exists"))
 
                     evaluation.save()
-                    self.stdout.write(self.style.SUCCESS(f"Added evaluation for building: {building.name} by {evaluator.username}"))
 
                 except Building.DoesNotExist:
                     self.stdout.write(self.style.ERROR(f"Error: Building '{row['building']}' does not exist."))

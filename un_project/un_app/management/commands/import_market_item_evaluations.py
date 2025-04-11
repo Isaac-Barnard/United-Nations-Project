@@ -29,7 +29,7 @@ class Command(BaseCommand):
             reader = csv.DictReader(file)
             for row in reader:
                 if row['evaluator'].lower() == 'decoy':  # Skip if the evaluator is 'decoy'
-                    self.stdout.write(self.style.WARNING(f"Skipping decoy"))
+                    #self.stdout.write(self.style.WARNING(f"Skipping decoy"))
                     continue
 
                 try:

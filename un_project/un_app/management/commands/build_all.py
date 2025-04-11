@@ -20,7 +20,7 @@ class Command(BaseCommand):
         company_data_csv = os.path.join('un_app', 'data', 'company_data.csv')
         building_evaluation_data_csv = os.path.join('un_app', 'data', 'building_evaluation_data.csv')
         building_data_csv = os.path.join('un_app', 'data', 'building_data.csv')
-        shareholder_data_csv = os.path.join('un_app', 'data', 'shareholder_data')
+        shareholder_data_csv = os.path.join('un_app', 'data', 'shareholder_data.csv')
 
         
         try:
