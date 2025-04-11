@@ -11,16 +11,19 @@ class Base64Binary(serializers.Field):
             return base64.b64decode(data)
         except (TypeError, ValueError):
             raise serializers.ValidationError("Invalid binary data")
+        
 class UserListSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'uuid']
+
 class UserSerializer(serializers.ModelSerializer):
     skin_image = Base64Binary()
     face_image = Base64Binary()
     class Meta:
         model = User
         fields = ['username', 'uuid', 'skin_data', 'skin_sig', 'skin_image', 'face_image', 'is_slim']
+
 class InventorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Inventory
@@ -34,6 +37,7 @@ class InventorySerializer(serializers.ModelSerializer):
             'custom_name',
             'enchantments',
         ]
+        
 class PlayersOnline(serializers.ModelSerializer):
     class Meta:
         model = Players_Online

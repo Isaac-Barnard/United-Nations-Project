@@ -6,6 +6,7 @@ from .serializers import UserSerializer, UserListSerializer, InventorySerializer
 class UserList(generics.ListAPIView):
     queryset = User.objects.values('username', 'uuid')
     serializer_class = UserListSerializer
+
 class UserView(views.APIView):
     def get(self, request, username):
         try:
@@ -14,6 +15,7 @@ class UserView(views.APIView):
             return response.Response(serializer.data)
         except User.DoesNotExist:
             return response.Response({"error": "User not found"}, status=404)
+        
 class InventoryView(views.APIView):
     def get(self, request, username):
         try:
@@ -26,6 +28,7 @@ class InventoryView(views.APIView):
             return response.Response({"error": "User not found"}, status=404)
         except Inventory.DoesNotExist:
             return response.Response({"error": "No inventory data found"}, status=404)
+        
 class PlayersOnline(generics.ListAPIView):
     queryset = Players_Online.objects.values('n')
     serializer_class = PlayersOnline
