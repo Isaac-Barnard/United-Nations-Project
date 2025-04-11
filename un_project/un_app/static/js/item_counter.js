@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize selectors and their handlers
     initializeSelectors();
     
+    // Clear default values from input fields
+    clearDefaultValues();
+    
     // Initialize item inputs
     initializeItemInputs();
     
@@ -18,6 +21,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize sum mode toggle
     initializeSumModeToggle();
 });
+
+// Clear default values from input fields
+function clearDefaultValues() {
+    // Clear item inputs
+    document.querySelectorAll('.item-input').forEach(input => {
+        input.value = '';
+    });
+    
+    // Clear denomination inputs
+    document.querySelectorAll('.denomination-input').forEach(input => {
+        input.value = '';
+    });
+}
 
 // Initialize sum mode toggle
 function initializeSumModeToggle() {
@@ -38,11 +54,17 @@ function initializeSumModeToggle() {
 async function handleItemInputChange() {
     const row = this.closest('.item-row');
     const itemName = row.dataset.itemName;
+    
+    // Return early if the input is empty
+    if (!this.value.trim()) {
+        return;
+    }
+    
     const inputValue = parseFloat(this.value);
     
-    // Return early if the input is empty or not a number
+    // Return early if not a valid number
     if (isNaN(inputValue)) {
-        this.value = '0';
+        this.value = '';
         return;
     }
 
@@ -79,15 +101,15 @@ async function handleItemInputChange() {
         if (data.status === 'success') {
             updateItemRow(row, data);
         } else if (data.status === 'ignored') {
-            this.value = '0';
+            this.value = '';
         } else {
             alert('Error updating item: ' + data.message);
-            this.value = '0';
+            this.value = '';
         }
     } catch (error) {
         console.error('Error:', error);
         alert('Error updating item');
-        this.value = '0';
+        this.value = '';
     }
 }
 
@@ -98,7 +120,12 @@ async function handleDenominationInputChange() {
     
     if (!container) {
         alert('Please select a container first');
-        this.value = '0';
+        this.value = '';
+        return;
+    }
+    
+    // Return early if the input is empty
+    if (!this.value.trim()) {
         return;
     }
 
@@ -106,9 +133,9 @@ async function handleDenominationInputChange() {
     const denominationIndex = this.dataset.denominationIndex;
     const inputValue = parseFloat(this.value);
     
-    // Return early if the input is empty or not a number
+    // Return early if not a valid number
     if (isNaN(inputValue)) {
-        this.value = '0';
+        this.value = '';
         return;
     }
     
@@ -149,15 +176,15 @@ async function handleDenominationInputChange() {
         if (data.status === 'success') {
             updateDenominationRow(container, denominationIndex, data);
         } else if (data.status === 'ignored') {
-            this.value = '0';
+            this.value = '';
         } else {
             alert('Error updating liquid asset: ' + data.message);
-            this.value = '0';
+            this.value = '';
         }
     } catch (error) {
         console.error('Error:', error);
         alert('Error updating liquid asset');
-        this.value = '0';
+        this.value = '';
     }
 }
 
@@ -315,7 +342,7 @@ function updateItemRow(row, data) {
     row.querySelector('.total-value').textContent = data.new_total_value;
     row.querySelector('.current-count').textContent = data.new_count;
     document.querySelector('.total-items-value').textContent = data.total_items_value;
-    row.querySelector('.item-input').value = '0';
+    row.querySelector('.item-input').value = '';
 }
 
 // Initialize denomination inputs and their handlers
@@ -344,6 +371,6 @@ function updateDenominationRow(container, denominationIndex, data) {
     
     const input = document.querySelector(`[data-denomination-index="${denominationIndex}"]`);
     if (input) {
-        input.value = '0';
+        input.value = '';
     }
 }
