@@ -38,7 +38,13 @@ function initializeSumModeToggle() {
 async function handleItemInputChange() {
     const row = this.closest('.item-row');
     const itemName = row.dataset.itemName;
-    const inputValue = parseFloat(this.value) || 0;
+    const inputValue = parseFloat(this.value);
+    
+    // Return early if the input is empty or not a number
+    if (isNaN(inputValue)) {
+        this.value = '0';
+        return;
+    }
 
     // Use the window.sumModeEnabled variable to check if sum mode is active
     const isSumMode = window.sumModeEnabled;
@@ -85,7 +91,7 @@ async function handleItemInputChange() {
     }
 }
 
-// Apply the same sum mode logic to denomination input changes
+// Apply the same logic to denomination input changes
 async function handleDenominationInputChange() {
     const containerSelect = document.querySelector('.container-select');
     const container = containerSelect.value;
@@ -98,7 +104,13 @@ async function handleDenominationInputChange() {
 
     const denominationId = this.dataset.denominationId;
     const denominationIndex = this.dataset.denominationIndex;
-    const inputValue = parseFloat(this.value) || 0;
+    const inputValue = parseFloat(this.value);
+    
+    // Return early if the input is empty or not a number
+    if (isNaN(inputValue)) {
+        this.value = '0';
+        return;
+    }
     
     // Use sum mode for denominations too
     const isSumMode = window.sumModeEnabled;

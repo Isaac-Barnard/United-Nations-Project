@@ -842,8 +842,6 @@ def handle_liquid_asset_update(request):
         # Convert count to Decimal and validate
         try:
             count_decimal = Decimal(str(count))
-            if count_decimal == Decimal('0'):
-                return JsonResponse({'status': 'ignored', 'message': 'Zero value ignored'})
         except (ValueError, TypeError, InvalidOperation):
             return JsonResponse({'status': 'error', 'message': 'Invalid count value'})
         
@@ -911,8 +909,6 @@ def handle_item_update(request):
         # Convert count to Decimal and validate
         try:
             count_decimal = Decimal(str(count))
-            if count_decimal == Decimal('0'):
-                return JsonResponse({'status': 'ignored', 'message': 'Zero value ignored'})
         except (ValueError, TypeError, InvalidOperation):
             return JsonResponse({'status': 'error', 'message': 'Invalid count value'})
         
