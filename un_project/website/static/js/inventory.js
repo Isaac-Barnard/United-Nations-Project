@@ -65,7 +65,7 @@ function createItem(slotData, i) {
  *                        stored in dictionary as {'name': level} format
 */
 async function getInventoryData(playername) {
-    let url = document.URL + 'api/inventory/' + playername + '/?format=json';
+    let url = document.URL + '/api/inventory/' + playername + '/?format=json';
     let response = await fetch(url);
     let data = await response.json();
     const refined_data = await data.map(item => {

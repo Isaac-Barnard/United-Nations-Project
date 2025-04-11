@@ -4,7 +4,7 @@ import { render } from '/static/js/skin_viewer.js';
 init();
 render();
 
-var url = document.URL + 'api/users/?format=json';
+var url = document.URL + '/api/users/?format=json';
 async function getPlayerList() {
     let response = await fetch(url);
     let data = await response.json();
@@ -12,7 +12,7 @@ async function getPlayerList() {
 }
 
 async function constructImage(playername) {
-    var image_url = document.URL + 'api/user/' + playername + '/?format=json';
+    var image_url = document.URL + '/api/user/' + playername + '/?format=json';
     let response = await fetch(image_url);
     let data = await response.json();
     let face = await data['face_image'];

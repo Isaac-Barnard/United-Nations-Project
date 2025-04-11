@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 async function getPlayerSkin(playername) {
-    var image_url = document.URL + 'api/user/' + playername + '/?format=json';
+    var image_url = document.URL + '/api/user/' + playername + '/?format=json';
 
     let response = await fetch(image_url);
     let data = await response.json();
@@ -42,9 +42,9 @@ export const skin = async (player) => {
     let player_skin = player_data[0]
     let is_slim = player_data[1];
 
-    var model_path = '/.resources/regular_overlay.glb';
+    var model_path = '/static/models/regular_overlay.glb';
     if (is_slim === true) {
-        model_path = '/.resources/slim_overlay.glb';
+        model_path = '/static/models/slim_overlay.glb';
     }
 
     const textureLoader = new THREE.TextureLoader();
