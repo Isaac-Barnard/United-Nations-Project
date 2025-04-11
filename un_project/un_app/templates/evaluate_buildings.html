@@ -70,7 +70,7 @@
                     const evaluationTableHeader = document.getElementById('evaluation-table-header');
             
                     function updateEvaluations(buildingId) {
-                        fetch(`/get_evaluations/${buildingId}/`)
+                        fetch(`/minecraft/records/get_evaluations/${buildingId}/`)
                             .then(response => response.json())
                             .then(data => {
                                 selectedBuildingName.textContent = buildingDropdown.options[buildingDropdown.selectedIndex].text;

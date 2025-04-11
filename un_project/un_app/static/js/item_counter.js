@@ -89,7 +89,7 @@ async function handleItemInputChange() {
     if (companySelect.value) formData.append('company_id', companySelect.value);
     
     try {
-        const response = await fetch('/handle-item-update/', {
+        const response = await fetch('/minecraft/records/handle-item-update/', {
             method: 'POST',
             body: formData,
             headers: {
@@ -164,7 +164,7 @@ async function handleDenominationInputChange() {
     if (companySelect.value) formData.append('company_id', companySelect.value);
     
     try {
-        const response = await fetch('/handle-liquid-asset-update/', {
+        const response = await fetch('/minecraft/records/handle-liquid-asset-update/', {
             method: 'POST',
             body: formData,
             headers: {
@@ -207,7 +207,7 @@ function handleLiquidFormSubmit(e) {
 // Submit liquid asset update via AJAX
 async function submitLiquidAssetUpdate(formData) {
     try {
-        const response = await fetch('/handle-liquid-asset-update/', {
+        const response = await fetch('/minecraft/records/handle-liquid-asset-update/', {
             method: 'POST',
             body: formData,
             headers: {
@@ -313,7 +313,7 @@ async function updateContainers(entityType, entityId) {
 
     try {
         const queryParam = entityType === 'nation' ? `nation_id=${entityId}` : `company_id=${entityId}`;
-        const response = await fetch(`/get-containers/?${queryParam}`);
+        const response = await fetch(`/minecraft/records/get-containers/?${queryParam}`);
         const data = await response.json();
         
         const containerSelect = document.querySelector('select[name="container"]');
