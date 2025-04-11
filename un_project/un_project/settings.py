@@ -100,6 +100,14 @@ DATABASES = {
         'PASSWORD': 'passtheword',
         'HOST': 'localhost',
         'PORT': '5432',
+    },
+    'players': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'players',
+        'USER': 'website',
+        'PASSWORD': 'django',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
