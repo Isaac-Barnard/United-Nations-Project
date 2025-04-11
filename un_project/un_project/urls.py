@@ -24,4 +24,5 @@ urlpatterns = [
     path('minecraft/records/', include('un_app.urls')),   # Main app URLs
 
     path('minecraft/records/un_api/', include('un_api.urls')),  # API URLs
+    path('minecraft/player/api/', include('players_api.urls'))
 ]

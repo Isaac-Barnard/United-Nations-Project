@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'un_app',           # Your main app containing the Building model
     'un_api',           # New app for API views
     'website',          # Main website app
+    'players_api',
     'corsheaders',      # CORS headers for api and login usage
 ]
 
@@ -89,6 +90,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'un_project.wsgi.application'
 
 
+# Makes te api view only return as json data
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+}
+
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -110,6 +118,8 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+DATABASE_ROUTERS = ['un_project.player_routers.PlayersRouter']
 
 
 # Password validation
