@@ -1,0 +1,55 @@
+{% extends 'wss_base.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/story_styles.css' %}">
+{% endblock %}
+
+{% block title %}
+    Storytime
+{% endblock %}
+
+{% block content %}
+        <div class="center">
+            <p id="h2">Welcome to the stories section! Here you can find many stories that are sure to interest.</p>
+        </div>
+        <div class="center" id="disclaimer">
+            <p style="font-size: 16px;">Please note that while some of the stories presented may be inspired by real events, they are fictional in nature and should be regarded as such.</p>
+        </div>
+        <div class="stories">
+            <div class="story-list">
+                <select onchange="change_story(this.value)">
+                    <option value="-"></option>{% for story in story_list %}
+                    <option value="{{ story.filename }}">{{ story.title }}</option>{% endfor %}
+                </select>
+            </div>
+            <div class="text-content">
+                <h1>Select Your Story!</h1>
+                <p>Select any story you want to read from the dropdown on the left.</p>
+            </div>
+        </div>
+        <script>
+            function change_story(story) {
+                if (story == "-") {
+                    document.querySelector(".text-content").innerHTML = "<h1>Select Your Story!</h1><p>Select any story you want to read from the dropdown on the right.</p>"
+                    document.getElementById("disclaimer").innerHTML = "<p style=\"font-size: 16px;\">Please note that while some of the stories presented may be inspired by real events, they are fictional in nature and should be regarded as such.</p>"
+                    return;
+                }
+                document.getElementById("disclaimer").innerHTML = "<p style\"margin: 0;\"></p>"
+                const text_content = document.querySelector(".text-content");
+                const filename = "{% static 'stories'%}/" + story + ".txt"
+                fetch(filename)
+                    .then(response => {
+                        if (!response.ok) { throw new Error('Could not find ' + filename); }
+                        return response.text();
+                    })
+                    .then(data => {
+                        text_content.innerHTML = data;
+                    })
+                    .catch(error => {
+                        text_content.innerHTML = "<h1>Whoopsies!</h1><p>Looks like there was a problem fetching that story, please try again or select a different story to read</p>";
+                    });
+            }
+        </script>
+{% endblock %}

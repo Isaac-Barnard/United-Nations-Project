@@ -1,0 +1,33 @@
+:root {
+    --text: #0d0b07;
+    --background: #fbe5c9;
+    --primary: #1ec9c9;
+    --secondary: #ffda91;
+    --accent: #f9dcec;
+}
+
+html[data-theme="light"]{
+    --text: #0d0b07;
+    --background: #fbe5c9;
+    --primary: #1ec9c9;
+    --secondary: #ffda91;
+    --accent: #f9dcec;
+    min-height: 100%;
+}
+
+html[data-theme="dark"] {
+    --text: #0d0b07;
+    --background: #fbe5c9;
+    --primary: #1ec9c9;
+    --secondary: #ffda91;
+    --accent: #f9dcec;
+    min-height: 100%;
+}
+
+.links a:link {
+    color: var(--primary);
+}
+
+.links a:visited {
+    color: var(--primary);
+}

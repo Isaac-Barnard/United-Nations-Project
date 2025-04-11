@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+    <head>
+        <title>We're Special Studios</title>
+        {% load static %}
+        <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/wss_base_styles.css' %}">
+        {% block extra_css %}{% endblock %}
+    </head>
+    <body>
+        <div class="directory-bar">
+            {% block topbar %}
+            <a href="/">Home</a>
+                <div class="dropdown">
+                    <button class="dropdown-button"><a href="/about" style="margin-right: 0px;">Meet the Special</a></button>
+                    <div class="dropdown-content">
+                        <div class="span"></div>
+                        <a href="/about/Axeman_76">Axeman_76</a>
+                        <a href="/about/Old_Man_Reid">Old Man Reid</a>
+                        <a href="/about/Papo_Quim">Papo Quim</a>
+                        <a href="/about/Grum">Grum</a>
+                        <a href="/about/Ungle_Nelton">Ungle Nelton</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropdown-button"><a href="/minecraft" style="margin-right: 0px;">Minecraft</a></button>
+                    <div class="dropdown-content">
+                        <div class="span"></div>
+                        <a href="/minecraft/records">Records</a>
+                        <a href="/minecraft/records/map">Map</a>
+                        <a href="/minecraft/player">Players</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropdown-button" style="margin-right: 20px;"><a href="/discord" style="margin-right: 0px;">Discord Shenanigans</a></button>
+                    <div class="dropdown-content">
+                        <div class="span"></div>
+                        <a href="/discord/stories">Storytime</a>
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+        
+        <div class="social-bar">
+            {% block bottombar %}
+            <a href="https://www.youtube.com/@WereSpecialStudios">
+                <img src="{% static 'images/youtube.webp' %}" alt="Youtube">
+            </a>
+            <a href="https://discord.gg/vXgjkSZ">
+                <img src="{% static 'images/discord.webp' %}" alt="Discord">
+            </a>
+            <a href="https://www.instagram.com/were_special_studios/">
+                <img src="{% static 'images/instagram.webp' %}" alt="Instagram">
+            </a>
+            <a href="https://www.twitch.tv/werespecialstudios">
+                <img src="{% static 'images/twitch.webp' %}" alt="Twitch">
+            </a>
+            {% endblock %}
+        </div>
+    </body>
+</html>

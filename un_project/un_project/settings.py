@@ -10,10 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
-import os
+from pathlib import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,9 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',  # Django REST Framework for API functionality
-    'un_app',          # Your main app containing the Building model
-    'un_api',             # New app for API views
+    'rest_framework',   # Django REST Framework for API functionality
+    'un_app',           # Your main app containing the Building model
+    'un_api',           # New app for API views
+    'website',          # Main website app
+    'players_api',
     'corsheaders',      # CORS headers for api and login usage
 ]
 
@@ -88,6 +90,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'un_project.wsgi.application'
 
 
+# Makes te api view only return as json data
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+}
+
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -99,8 +108,18 @@ DATABASES = {
         'PASSWORD': 'passtheword',
         'HOST': 'localhost',
         'PORT': '5432',
+    },
+    'players': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'players',
+        'USER': 'website',
+        'PASSWORD': 'django',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+
+DATABASE_ROUTERS = ['un_project.player_routers.PlayersRouter']
 
 
 # Password validation
@@ -140,7 +159,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR + '/staticfiles'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
 LOGIN_URL = 'login'  # URL name for the login page

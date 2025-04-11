@@ -1,0 +1,42 @@
+{% extends 'wss_base.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/players_styles.css' %}">
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://unpkg.com/three@0.162.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.162.0/examples/jsm/"
+          }
+        }
+      </script>
+{% endblock %}
+
+
+{% block title %}
+    Players
+{% endblock %}
+
+{% block content %}
+        <div class="content">
+            <div class="selector"></div>
+            <div class="inventory">
+                <img src="{% static 'images/inventory-upscaled.png' %}" class="inventory-background">
+                <p class="playername"></p>
+                <div class="player" id="player"></div>
+                <div class="armor-slots"></div>
+                <div class="offhand-slot"></div>
+                <div class="inv-slots"></div>
+                <div class="hotbar-slots"></div>
+            </div>
+            <div class="enderchest">
+                <img src="{% static 'images/echest-upscaled.png' %}" class="echest-background">
+                <div class="echest-slots"></div>
+            </div>
+        </div>
+        <script src="{% static 'js/inventory.js' %}"></script>
+        <script type="module" src="{% static 'js/skin_viewer.js' %}"></script>
+        <script type="module" src="{% static 'js/faces_radio.js' %}"></script>
+{% endblock %}
