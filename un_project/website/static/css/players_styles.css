@@ -8,8 +8,8 @@
 
 @font-face {
     font-family: "Minecraft";
-    src: url('/.fonts');
-    src: url('/.fonts/MinecraftRegular-Bmg3.otf') format('opentype');
+    src: url('/static/fonts');
+    src: url('/static/fonts/MinecraftRegular-Bmg3.otf') format('opentype');
 }
 
 html {
