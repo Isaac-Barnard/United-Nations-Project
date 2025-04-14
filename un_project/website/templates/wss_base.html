@@ -70,12 +70,23 @@
             {% endblock %}
         </div>
         <script>
-            const checkbox = document.getElementsByClassName('theme-toggle')[0].getElementsByTagName('input')[0];
+            const checkbox = document.querySelector('.theme-toggle input');
             const htmlElement = document.documentElement;
+            
+            const savedTheme = localStorage.getItem('theme');
+
+            if (savedTheme === 'dark') {
+                htmlElement.setAttribute('data-theme', 'dark');
+                checkbox.checked = false;
+            } else {
+                htmlElement.setAttribute('data-theme', 'light');
+                checkbox.checked = true;
+            }
 
             checkbox.addEventListener('change', () => {
                 const theme = checkbox.checked ? 'light' : 'dark';
                 htmlElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
             });
         </script>
         {% block extra_js %}{% endblock %}
