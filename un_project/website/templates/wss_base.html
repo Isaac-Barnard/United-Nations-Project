@@ -40,6 +40,14 @@
                 </div>
             {% endblock %}
         </div>
+        <div class="mode-bar">
+            {% block modebar %}
+            <label class="theme-toggle">
+                <input type="checkbox" checked>
+                <span class="theme-slider"></span>
+            </div>
+            {% endblock %}
+        </div>
         <main>
             {% block content %}
             {% endblock %}
@@ -61,5 +69,15 @@
             </a>
             {% endblock %}
         </div>
+        <script>
+            const checkbox = document.getElementsByClassName('theme-toggle')[0].getElementsByTagName('input')[0];
+            const htmlElement = document.documentElement;
+
+            checkbox.addEventListener('change', () => {
+                const theme = checkbox.checked ? 'light' : 'dark';
+                htmlElement.setAttribute('data-theme', theme);
+            });
+        </script>
+        {% block extra_js %}{% endblock %}
     </body>
 </html>

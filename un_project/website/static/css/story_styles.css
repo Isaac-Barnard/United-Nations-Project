@@ -16,11 +16,11 @@ html[data-theme="light"]{
 }
 
 html[data-theme="dark"] {
-    --text: #0d0b07;
-    --background: #fbe5c9;
+    --text: #f8f6f2;
+    --background2: #545049;
     --primary: #1ec9c9;
     --secondary: #ffda91;
-    --accent: #f9dcec;
+    --accent: #639f83;
     min-height: 100%;
 }
 
