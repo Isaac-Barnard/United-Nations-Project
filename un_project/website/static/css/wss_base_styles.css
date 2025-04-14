@@ -140,7 +140,7 @@ main {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--accent);
+    background-color: var(--secondary);
     border-radius: 24px;
     -webkit-transition: .4s;
     transition: .4s;
@@ -160,11 +160,11 @@ main {
 }
 
 input:checked + .theme-slider {
-    background-color: var(--accent);
+    background-color: var(--secondary);
 }
 
 input:focus + .theme-slider {
-    box-shadow: 0 0 1px var(--accent);
+    box-shadow: 0 0 1px var(--secondary);
 }
 
 input:checked + .theme-slider:before {
@@ -207,6 +207,7 @@ input:checked + .theme-slider:before {
     display: block;
     flex-direction: column;
     transition: all ease-in-out .5s;
+    z-index: 3;
 }
 
 .dropdown-button {
@@ -226,7 +227,6 @@ input:checked + .theme-slider:before {
     width: inherit;
     position: absolute;
     display: block;
-    background-color: var(--primary);
     left: 0;
     right: 0;
     top: -10px;
@@ -238,7 +238,7 @@ input:checked + .theme-slider:before {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: var(--primary);
+    background-color: var(--secondary);
     border-left: 2px solid var(--accent);
     border-bottom: 2px solid var(--accent);
     border-right: 2px solid var(--accent);
@@ -268,15 +268,15 @@ input:checked + .theme-slider:before {
     bottom: 0;
     left: 0;
     border-top-right-radius: 15px;
-    background-color: var(--accent);
+    background-color: var(--secondary);
     padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     padding-bottom: 5px;
     padding-left: 0px;
-    border-top: 2px solid var(--primary);
-    border-right: 2px solid var(--primary);
+    border-top: 2px solid var(--accent);
+    border-right: 2px solid var(--accent);
     transition: all ease-in-out .5s;
 }
 
