@@ -1,9 +1,27 @@
 :root {
     --text: #0d0b07;
-    --background: #fbe5c9;
-    --primary: #1ec9c9;
-    --secondary: #ffda91;
-    --accent: #f9dcec;
+    --background: #eedab9;
+    --primary: #5fa8e0;
+    --secondary: #94e8bc;
+    --accent: #94aca4;
+}
+
+html[data-theme="light"]{
+    --text: #0d0b07;
+    --background: #eedab9;
+    --primary: #5fa8e0;
+    --secondary: #94e8bc;
+    --accent: #94aca4;
+    min-height: 100%;
+}
+
+html[data-theme="dark"] {
+    --text: #f8f6f2;
+    --background: #2f2c29;
+    --primary: #1e679f;
+    --secondary: #16693e;
+    --accent: #526b62;
+    min-height: 100%;
 }
 
 @font-face {

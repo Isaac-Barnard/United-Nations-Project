@@ -1,26 +1,26 @@
 :root {
     --text: #0d0b07;
-    --background: #fbe5c9;
-    --primary: #1ec9c9;
-    --secondary: #ffda91;
-    --accent: #f9dcec;
+    --background: #eedab9;
+    --primary: #5fa8e0;
+    --secondary: #94e8bc;
+    --accent: #94aca4;
 }
 
 html[data-theme="light"]{
     --text: #0d0b07;
-    --background: #fbe5c9;
-    --primary: #1ec9c9;
-    --secondary: #ffda91;
-    --accent: #f9dcec;
+    --background: #eedab9;
+    --primary: #5fa8e0;
+    --secondary: #94e8bc;
+    --accent: #94aca4;
     min-height: 100%;
 }
 
 html[data-theme="dark"] {
     --text: #f8f6f2;
-    --background2: #545049;
-    --primary: #1ec9c9;
-    --secondary: #ffda91;
-    --accent: #639f83;
+    --background: #2f2c29;
+    --primary: #1e679f;
+    --secondary: #16693e;
+    --accent: #526b62;
     min-height: 100%;
 }
 
@@ -31,6 +31,11 @@ body {
     font-family: "Tahoma", sans-serif;
     overflow: auto;
     background: var(--background);
+    transition: all ease-in-out .5s;
+}
+
+main {
+    color: var(--text);
     transition: all ease-in-out .5s;
 }
 
@@ -135,7 +140,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--secondary);
+    background-color: var(--accent);
     border-radius: 24px;
     -webkit-transition: .4s;
     transition: .4s;
@@ -148,25 +153,25 @@ body {
     width: 20px;
     left: 2px;
     bottom: 2px;
-    background-color: var(--accent);
+    background-color: var(--background);
     border-radius: 20px;
     -webkit-transition: .4s;
     transition: .4s;
 }
 
 input:checked + .theme-slider {
-    background-color: var(--secondary);
+    background-color: var(--accent);
 }
 
 input:focus + .theme-slider {
-    box-shadow: 0 0 1px var(--secondary);
+    box-shadow: 0 0 1px var(--accent);
 }
 
 input:checked + .theme-slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
-    }
+}
 
 /* Directory CSS */
 
@@ -182,6 +187,7 @@ input:checked + .theme-slider:before {
     flex-grow: 1;
     color: var(--primary);
     z-index: 5;
+    transition: all ease-in-out .5s;
 }
 
 .directory-bar a {
@@ -191,6 +197,7 @@ input:checked + .theme-slider:before {
     font-size: 24px;
     font-family: Verdana, sans-serif;
     color: var(--text);
+    transition: all ease-in-out .5s;
 }
 
 /* Dropdown CSS */
@@ -199,6 +206,7 @@ input:checked + .theme-slider:before {
     position: relative;
     display: block;
     flex-direction: column;
+    transition: all ease-in-out .5s;
 }
 
 .dropdown-button {
@@ -211,6 +219,7 @@ input:checked + .theme-slider:before {
     font-family: Verdana, sans-serif;
     color: var(--text);
     border: none;
+    transition: all ease-in-out .5s;
 }
 
 .span {
@@ -223,6 +232,7 @@ input:checked + .theme-slider:before {
     top: -10px;
     height: 10px;
     cursor: pointer;
+    transition: all ease-in-out .5s;
 }
 
 .dropdown-content {
@@ -235,6 +245,7 @@ input:checked + .theme-slider:before {
     border-radius: 0 0 15px 15px;
     margin-top: 10px;
     left: -20px;
+    transition: all ease-in-out .5s;
 }
 
 .dropdown-content a {
@@ -243,6 +254,7 @@ input:checked + .theme-slider:before {
     margin-right: 0px;
     text-decoration: none;
     display: block;
+    transition: all ease-in-out .5s;
 }
 
 .dropdown:hover .dropdown-content, .span:hover .dropdown-content, .dropdown-content:hover {
@@ -265,6 +277,7 @@ input:checked + .theme-slider:before {
     padding-left: 0px;
     border-top: 2px solid var(--primary);
     border-right: 2px solid var(--primary);
+    transition: all ease-in-out .5s;
 }
 
 .social-bar img {
