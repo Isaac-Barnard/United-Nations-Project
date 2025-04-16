@@ -2,6 +2,7 @@ import os
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
+from django.conf import settings
 
 
 # Create your views here.
@@ -38,7 +39,7 @@ def discord(request):
 def storytime(request):
     template = loader.get_template('storytime.html')
 
-    dirlist = os.listdir('staticfiles/stories/')
+    dirlist = [file for file in os.listdir(settings.STATIC_ROOT / 'stories') if len(file.split(".txt")) == 2]
     dirlist.sort()
 
     # Cool one-liner to get the filename and title of the story text files
