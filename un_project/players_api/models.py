@@ -9,6 +9,9 @@ class User(models.Model):
     skin_image = models.BinaryField(blank=True, null=True)
     face_image = models.BinaryField(blank=True, null=True)
     is_slim = models.BooleanField(default=True)
+    x = models.IntegerField(blank=True, null=True)
+    y = models.IntegerField(blank=True, null=True)
+    z = models.IntegerField(blank=True, null=True)
     
     class Meta:
         managed = False
