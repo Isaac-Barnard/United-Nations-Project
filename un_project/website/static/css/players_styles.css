@@ -26,7 +26,6 @@ html[data-theme="dark"] {
 
 @font-face {
     font-family: "Minecraft";
-    src: url('/static/fonts');
     src: url('/static/fonts/MinecraftRegular-Bmg3.otf') format('opentype');
 }
 
