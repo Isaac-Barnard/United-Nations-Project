@@ -3,15 +3,15 @@
 {% load static %}
 
 {% block extra_css %}
-      <link rel="stylesheet" type="text/css" href="{% static 'css/players_styles.css' %}">
-      <script type="importmap">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/players_styles.css' %}">
+        <script type="importmap">
           {
               "imports": {
                   "three": "https://unpkg.com/three@0.162.0/build/three.module.js",
                   "three/addons/": "https://unpkg.com/three@0.162.0/examples/jsm/"
               }
           }
-      </script>
+        </script>
 {% endblock %}
 
 
@@ -25,6 +25,10 @@
             <div class="inventory">
                 <img src="{% static 'images/inventory-upscaled.png' %}" class="inventory-background">
                 <p class="playername"></p>
+                <p class="location"></p>"
+                <p class="lastdeath"></p>
+                <div class="health"></div>
+                <div class="xp"></div>
                 <div class="player" id="player"></div>
                 <div class="armor-slots"></div>
                 <div class="offhand-slot"></div>

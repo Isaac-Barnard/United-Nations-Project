@@ -1,29 +1,22 @@
-import { skin } from '/static/js/skin_viewer.js';
-import { init } from '/static/js/skin_viewer.js';
-import { render } from '/static/js/skin_viewer.js';
-init();
-render();
+import { skin, init } from '/static/js/skin_viewer.js';
 
-var url = document.URL + '/api/users/?format=json';
+init();
+
 async function getPlayerList() {
-    let response = await fetch(url);
-    let data = await response.json();
-    return data;
+    const response = await fetch(document.URL + '/api/users/?format=json')
+    return await response.json();
 }
+
 
 async function constructImage(playername) {
-    var image_url = document.URL + '/api/user/' + playername + '/?format=json';
-    let response = await fetch(image_url);
-    let data = await response.json();
-    let face = await data['face_image'];
-    return `data:image/png;base64,${face}`;
+    const response = await fetch(document.URL + '/api/user/' + playername + '/?format=json');
+    const data = await response.json();
+    return `data:image/png;base64,${data.face_image}`;
 }
 
-var lastClicked = ""
+let lastClicked = ""
 function changePlayer(player) {
-    if (lastClicked == player) {
-        return;
-    }
+    if (lastClicked == player) return;
 
     document.querySelector('.playername').innerHTML = "";
     document.querySelector('.armor-slots').innerHTML = "";
@@ -31,8 +24,6 @@ function changePlayer(player) {
     document.querySelector('.inv-slots').innerHTML = "";
     document.querySelector('.hotbar-slots').innerHTML = "";
     document.querySelector('.echest-slots').innerHTML = "";
-    document.querySelector('.player').innerHTML = "";
-    init();
 
     inventory(player);
     skin(player);
@@ -40,21 +31,20 @@ function changePlayer(player) {
 }
 
 const selectorDiv = document.querySelector('.selector');
-let radio = "";
-
 const players = await getPlayerList();
-const usernames = players.map(item => item.username);
+let radioHTML = "";
 
-for(let i = 0; i < usernames.length; i++) {
-    let face_image = await constructImage(usernames[i]);
+for (const player of players) {
+    const face_image = await constructImage(player.username);
+    radioHTML += `
+        <label>
+            <input type="radio" class="radio" name="Player Face" value="${player.username}">
+            <img src="${face_image}" alt="Select Player ${player.username}" width="32" height = "32">
+        </label>`;
+}
 
-    radio += "<label>\n";
-    radio += "<input type=\"radio\" class=\"radio\" name=\"Player Face\" value=\"" + usernames[i] + "\">\n";
-    radio += "<img src=\"" + face_image + "\" alt=\"Select Player " + usernames[i] + "\" width=\"32\" height=\"32\">\n";
-    radio += "</label>\n";
-}
-selectorDiv.innerHTML = radio;
-const el = document.getElementsByClassName("radio");
-for (const element of el) {
-    element.addEventListener('click', function() { changePlayer(element.value); });
-}
+selectorDiv.innerHTML = radioHTML;
+
+document.querySelectorAll(".radio").forEach(el => {
+    el.addEventListener('click', () => changePlayer(el.value));
+});
