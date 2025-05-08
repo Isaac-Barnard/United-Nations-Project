@@ -4,6 +4,7 @@
     --primary: #5fa8e0;
     --secondary: #94e8bc;
     --accent: #94aca4;
+    font-family: "Minecraft"
 }
 
 html[data-theme="light"]{
@@ -13,6 +14,7 @@ html[data-theme="light"]{
     --secondary: #94e8bc;
     --accent: #94aca4;
     min-height: 100%;
+    font-family: "Minecraft"
 }
 
 html[data-theme="dark"] {
@@ -22,6 +24,7 @@ html[data-theme="dark"] {
     --secondary: #16693e;
     --accent: #526b62;
     min-height: 100%;
+    font-family: "Minecraft"
 }
 
 @font-face {
