@@ -23,7 +23,7 @@ class UserSerializer(serializers.ModelSerializer):
     face_image = Base64Binary()
     class Meta:
         model = User
-        fields = ['username', 'uuid', 'skin_data', 'skin_sig', 'skin_image', 'face_image', 'is_slim', 'x', 'y', 'z']
+        fields = ['username', 'uuid', 'skin_data', 'skin_image', 'face_image', 'is_slim', 'x', 'y', 'z']
 
 class InventorySerializer(serializers.ModelSerializer):
     class Meta:

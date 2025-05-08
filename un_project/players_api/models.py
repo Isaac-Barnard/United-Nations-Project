@@ -5,7 +5,6 @@ class User(models.Model):
     username = models.TextField()
     uuid = models.UUIDField(primary_key=True)
     skin_data = models.TextField(blank=True, null=True)
-    skin_sig = models.TextField(blank=True, null=True)
     skin_image = models.BinaryField(blank=True, null=True)
     face_image = models.BinaryField(blank=True, null=True)
     is_slim = models.BooleanField(default=True)
