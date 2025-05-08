@@ -1,5 +1,6 @@
 import csv
 from django.core.management.base import BaseCommand
+from django.db import IntegrityError
 from un_app.models import Building, Territory, Nation, Player
 
 class Command(BaseCommand):
@@ -37,7 +38,10 @@ class Command(BaseCommand):
                         historic_site=row['historic_site'] == 'TRUE',
                         architectural_genius=row['architectural_genius'] == 'TRUE',
                         mopq_award=row['mopq_award'] or None,
-                        architectural_style=row['architectural_style'] or None 
+                        architectural_style=row['architectural_style'] or None ,
+                        size=row['size']  or None,
+                        materials=row['materials'],
+                        furnished=row['furnished']  == 'TRUE'
                     )
                     # Add the main builders to the ManyToManyField
                     building.main_builders.add(*main_builders)
@@ -51,6 +55,12 @@ class Command(BaseCommand):
                     self.stdout.write(self.style.ERROR(f"Error: Owner Nation '{row['owner']}' does not exist."))
                 except Player.DoesNotExist:
                     self.stdout.write(self.style.ERROR(f"Error: One or more builders in '{row['main_builder']}' do not exist."))
+                except IntegrityError as e:
+                    if 'duplicate key value violates unique constraint' in str(e):
+                        # Silently skip duplicates
+                        pass
+                    else:
+                        self.stdout.write(self.style.ERROR(f"Error adding building: {row['name']} - {e}"))
                 except Exception as e:
                     self.stdout.write(self.style.ERROR(f"Error adding building: {row['name']} - {e}"))
 

@@ -22,8 +22,8 @@ class Command(BaseCommand):
 
                     if created:
                         self.stdout.write(self.style.SUCCESS(f"Added territory: {territory.name}"))
-                    else:
-                        self.stdout.write(self.style.WARNING(f"Territory '{territory.name}' already exists."))
+                    #else:
+                        #self.stdout.write(self.style.WARNING(f"Territory '{territory.name}' already exists."))
 
                 except Exception as e:
                     self.stdout.write(self.style.ERROR(f"Error adding territory: {row['name']} - {e}"))
