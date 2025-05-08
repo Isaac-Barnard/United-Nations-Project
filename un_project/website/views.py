@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
 from django.conf import settings
-
+from .utilities.youtube import get_latest_video_id
 
 # Create your views here.
 def home(request):
@@ -50,3 +50,12 @@ def storytime(request):
     }
     
     return HttpResponse(template.render(context, request))
+
+def home(request):
+    video_id = None
+    try:
+        video_id = get_latest_video_id()
+    except Exception as e:
+        print(f"Error fetching latest YouTube video: {e}")
+    context = {'video_id': video_id}
+    return render(request, 'wss_home.html', context)
