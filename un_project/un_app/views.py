@@ -980,3 +980,8 @@ def handle_item_update(request):
 def input_building(request):
     
     return render(request, 'input_building.html')
+
+
+def general_building_info(request):
+    
+    return render(request, 'general_building_info.html')

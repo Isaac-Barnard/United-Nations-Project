@@ -23,7 +23,16 @@
                         </a>
                     </li>
                     <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="{% url 'building_list' %}">Buildings</a></li>
+                    <li class="dropdown" id="evaluations-dropdown">
+                        <a href="javascript:void(0)" class="dropbtn">Buildings</a>
+                        <div class="dropdown-content two-columns">
+                            <div class="column">
+                                <strong>Audit Tools</strong>
+                                <a href="{% url 'building_list' %}">Buildings</a>
+                                <a href="{% url 'general_building_info' %}">General Building Info</a>
+                            </div>
+                        </div>
+                    </li>
                     <li><a href="{% url 'player_list' %}">Players</a></li>
                     <!-- Dropdown for Nations -->
                     <li class="dropdown">
