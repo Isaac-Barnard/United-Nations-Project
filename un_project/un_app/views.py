@@ -976,7 +976,7 @@ def handle_item_update(request):
         return JsonResponse({'status': 'error', 'message': str(e)})
     
     
-
+@login_required
 def input_building(request):
     
     return render(request, 'input_building.html')
