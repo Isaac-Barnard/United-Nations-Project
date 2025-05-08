@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import building_list, player_list, home, nation_balance_sheet, evaluate_buildings, evaluation_success, evaluate_items, company_balance_sheet, un_map, get_building_evaluations, get_item_evaluations, item_counter, get_containers, handle_liquid_asset_update, handle_item_update
+from .views import building_list, player_list, home, nation_balance_sheet, evaluate_buildings, evaluation_success, evaluate_items, company_balance_sheet, un_map, get_building_evaluations, get_item_evaluations, item_counter, get_containers, handle_liquid_asset_update, handle_item_update, input_building
 
 urlpatterns = [
     path('', home, name='home'),  # Default home page
@@ -18,4 +18,5 @@ urlpatterns = [
     path('get-containers/', get_containers, name='get_containers'),
     path('handle-liquid-asset-update/', handle_liquid_asset_update, name='handle-liquid-asset-update'),
     path('handle-item-update/', handle_item_update, name='handle-item-update'),
+    path('input-building/', input_building, name='input_building'),
 ]

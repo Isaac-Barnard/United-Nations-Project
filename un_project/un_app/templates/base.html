@@ -57,7 +57,16 @@
                             </div>
                         </div>
                     </li>
-                    <li><a href="{% url 'item_counter' %}">Audit Tools</a></li>
+                    <li class="dropdown" id="evaluations-dropdown">
+                        <a href="javascript:void(0)" class="dropbtn">Audit Tools</a>
+                        <div class="dropdown-content two-columns">
+                            <div class="column">
+                                <strong>Audit Tools</strong>
+                                <a href="{% url 'item_counter' %}">Item Counter</a>
+                                <a href="{% url 'input_building' %}">Input Building</a>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </nav>
         </header>

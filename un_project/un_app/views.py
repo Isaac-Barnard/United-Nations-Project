@@ -974,3 +974,9 @@ def handle_item_update(request):
         
     except Exception as e:
         return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    
+
+def input_building(request):
+    
+    return render(request, 'input_building.html')
