@@ -11,6 +11,14 @@ class User(models.Model):
     x = models.IntegerField(blank=True, null=True)
     y = models.IntegerField(blank=True, null=True)
     z = models.IntegerField(blank=True, null=True)
+    dimension = models.TextField(blank=True, null=True)
+    health = models.IntegerField(blank=True, null=True)
+    lastdeathx = models.IntegerField(blank=True, null=True)
+    lastdeathy = models.IntegerField(blank=True, null=True)
+    lastdeathz = models.IntegerField(blank=True, null=True)
+    lastdeathdim = models.TextField(blank=True, null=True)
+    xplevel = models.IntegerField(blank=True, null=True)
+    xppercent = models.FloatField(blank=True, null=True)
     
     class Meta:
         managed = False
