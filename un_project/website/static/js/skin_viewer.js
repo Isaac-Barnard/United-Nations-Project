@@ -42,9 +42,9 @@ export const skin = async (player) => {
     let player_skin = player_data[0]
     let is_slim = player_data[1];
 
-    var model_path = '/static/models/regular_overlay.glb';
+    var model_path = '/static/models/regular_with_overlay.glb';
     if (is_slim === true) {
-        model_path = '/static/models/slim_overlay.glb';
+        model_path = '/static/models/slim_with_overlay.glb';
     }
 
     const textureLoader = new THREE.TextureLoader();
