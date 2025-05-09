@@ -85,7 +85,7 @@ Setting up the repo is pretty easy:
         - [ ] Hearts
         - [ ] Xp
     - [ ] Enchantment Glow
-    - [ ] Fix Model Viewer
+    - [X] Fix Model Viewer
 - **<ins>Misc.</ins>**
     - [ ] Sort buildings
         - [ ] Sort by nation
