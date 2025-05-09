@@ -85,9 +85,9 @@ Setting up the repo is pretty easy:
         - [ ] Sort by year
         - [ ] Sort by building price
     - [ ] **Overall info page**
-        - [ ] Per nation Average Height & # of Buildings info
-        - [ ] Per nation # of buildings built per year
-        - [ ] Total # of buildings per nation
+        - [X] Per nation Average Height & # of Buildings info
+        - [X] Per nation # of buildings built per year
+        - [X] Total # of buildings per nation
         - [ ] Per territory Average Height & # of Buildings info
         - [ ] Up and coming territories
     - [ ] **Currency converter (ex: convert 42 emeralds and 58 copper to diamonds)**

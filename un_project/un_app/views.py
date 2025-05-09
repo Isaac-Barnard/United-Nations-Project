@@ -1078,3 +1078,8 @@ def general_building_info(request):
         'total_avg_per_year': total_avg_per_year,
     }
     return render(request, 'general_building_info.html', context)
+
+@login_required
+def general_territory_info(request):
+    
+    return render(request, 'general_territory_info.html')
