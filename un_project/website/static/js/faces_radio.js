@@ -51,6 +51,7 @@ function setUserStats(playerData) {
         lastDeathP.innerHTML = `Last Death - Unknown`;
     }
 
+    /*
     const fillImg = document.getElementById('hearts-fill');
     if (health !== null && fillImg) {
         const percent = Math.max(0, Math.min(health / 20, 1));
@@ -59,7 +60,7 @@ function setUserStats(playerData) {
         fillImg.style.clipPath = `inset(0 ${clipPercent}% 0 0)`;
     } else {
         fillImg.style.clipPath = `inset(0 100% 0 0)`;
-    }
+    }*/
 }
 
 
