@@ -169,3 +169,27 @@ body {
     outline: 1px solid #fff;
     image-rendering: pixelated;
 }
+
+.health {
+    position: relative;
+}
+
+.health img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+}
+
+.hearts-empty {
+    z-index: 1;
+    width: 100%;
+}
+
+.hearts-fill {
+    z-index: 2;
+    width: 100%;
+    overflow: hidden;
+    object-fit: none;
+    clip-path: inset(0 100% 0 0);
+}

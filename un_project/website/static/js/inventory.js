@@ -1,14 +1,11 @@
 var playerJson = '';
 
-
-const nameP = document.querySelector('.playername');
 const armorDiv = document.querySelector('.armor-slots');
 const offhandDiv = document.querySelector('.offhand-slot');
 const inventoryDiv = document.querySelector('.inv-slots');
 const hotbarDiv = document.querySelector('.hotbar-slots');
 const echestDiv = document.querySelector('.echest-slots');
 const playerDiv = document.querySelector('.player');
-let player_name = "";
 
 function createItem(slotData, i) {
     const itemDiv = document.createElement('div');
@@ -117,9 +114,6 @@ function playerInv(slot_list) {
 }
 
 function inventory(playername) {
-    player_name = playername;
-    nameP.innerHTML = playername;
-
     getInventoryData(playername)
         .then(jsonData => {
             playerJson = jsonData;
