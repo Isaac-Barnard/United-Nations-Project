@@ -34,6 +34,26 @@ body {
     padding: 0;
 }
 
+.location {
+    position: relative;
+    top: -370px;
+    left: -342px;
+    font-size: 18px;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.lastdeath {
+    position: relative;
+    top: -320px;
+    left: -530px;
+    font-size: 18px;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
 .inv-slots {
     position: relative;
     top: -497px;
@@ -168,4 +188,28 @@ body {
 [type=radio]:not(:checked) + img {
     outline: 1px solid #fff;
     image-rendering: pixelated;
+}
+
+.health {
+    position: relative;
+}
+
+.health img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+}
+
+.hearts-empty {
+    z-index: 1;
+    width: 100%;
+}
+
+.hearts-fill {
+    z-index: 2;
+    width: 100%;
+    overflow: hidden;
+    object-fit: none;
+    clip-path: inset(0 100% 0 0);
 }

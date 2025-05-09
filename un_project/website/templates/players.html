@@ -3,15 +3,15 @@
 {% load static %}
 
 {% block extra_css %}
-      <link rel="stylesheet" type="text/css" href="{% static 'css/players_styles.css' %}">
-      <script type="importmap">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/players_styles.css' %}">
+        <script type="importmap">
           {
               "imports": {
                   "three": "https://unpkg.com/three@0.162.0/build/three.module.js",
                   "three/addons/": "https://unpkg.com/three@0.162.0/examples/jsm/"
               }
           }
-      </script>
+        </script>
 {% endblock %}
 
 
@@ -30,6 +30,14 @@
                 <div class="offhand-slot"></div>
                 <div class="inv-slots"></div>
                 <div class="hotbar-slots"></div>
+                <p class="location"></p>
+                <p class="lastdeath"></p>
+                <!--
+                <div class="health">
+                    <img src="{% static 'images/hearts_empty.png' %}" class="hearts-empty">
+                    <img src="{% static 'images/hearts_full.png' %}" class="hearts-full" id="hearts-fill">
+                </div>-->
+                <div class="xp"></div>
             </div>
             <div class="enderchest">
                 <img src="{% static 'images/echest-upscaled.png' %}" class="echest-background">

@@ -78,6 +78,14 @@ Setting up the repo is pretty easy:
     - [ ] **Add new/update building page**
         - [ ] Be able to delete destroyed buildings
         - [ ] Be able to search for existing buildings (narrows down list as you type more letters)
+- **<ins>Player Viewer</ins>**
+    - [ ] Display Extra Stats
+        - [ ] Location
+        - [ ] Death Location
+        - [ ] Hearts
+        - [ ] Xp
+    - [ ] Enchantment Glow
+    - [X] Fix Model Viewer
 - **<ins>Misc.</ins>**
     - [ ] Sort buildings
         - [ ] Sort by nation
@@ -108,4 +116,3 @@ Setting up the repo is pretty easy:
             - [ ] Extended map to show more land
         - [ ] Button that displays railroad/infrastructure routes
         - [ ] Somehow display historical/informative maps
-    
