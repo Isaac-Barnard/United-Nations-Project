@@ -1,0 +1,7 @@
+tfoot th:first-child {
+    text-align: right;
+}
+
+tfoot th:not(:first-child) {
+    text-align: left;
+}

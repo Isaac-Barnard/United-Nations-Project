@@ -6,13 +6,24 @@
 
 {% block content %}
     <h2>Login</h2>
-    {% if form.errors %}
-        <p style="color: red;">Invalid username or password. Please try again.</p>
+    
+    {% if form.non_field_errors %}
+        <p style="color: red;">{{ form.non_field_errors }}</p>
     {% endif %}
+
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
+
+        <p>
+            {{ form.password.label_tag }}
+            {{ form.password }}
+            {% if form.password.errors %}
+                <span style="color: red;">{{ form.password.errors }}</span>
+            {% endif %}
+        </p>
+        
+        <button type="submit">Submit</button>
     </form>
+    
     <p><a href="{% url 'password_reset' %}">Forgot password?</a></p>
 {% endblock %}

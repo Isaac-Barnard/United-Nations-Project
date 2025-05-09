@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}General Building Information{% endblock %}
+
+{% load static %}
+{% load custom_filters %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/general_building_info_syles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>General Building Information</h1>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Country</th>
+                <th>Avg Height</th>
+                <th># of Buildings</th>
+                {% for year in years %}
+                    <th>{{ year }}</th>
+                {% endfor %}
+                <th>Buildings/Year</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in table_data %}
+                <tr>
+                    <td>{{ row.nation }}</td>
+                    <td>{{ row.avg_height }}</td>
+                    <td>{{ row.total_buildings }}</td>
+                    {% for count in row.yearly_counts %}
+                        {% if row.is_new_belize and forloop.counter0 < 3 %}
+                            <td>N/A</td>
+                        {% else %}
+                            <td>{{ count }}</td>
+                        {% endif %}
+                    {% endfor %}
+                    <td>{{ row.avg_per_year }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>All Buildings:</th>
+                <th>{{ total_avg_height }}</th>
+                <th>{{ total_buildings }}</th>
+                {% for total in totals_per_year %}
+                    <th>{{ total }}</th>
+                {% endfor %}
+                <th>{{ total_avg_per_year }}</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}

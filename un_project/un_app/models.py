@@ -444,7 +444,7 @@ class Building(models.Model):
                                         help_text="The highest point of the building")
     y_level_ground = models.FloatField(null=True,
                                        help_text="The ground level of the building. Measured to the ground level, not lowest point of the building ie. basements or mines")
-    year_completed = models.IntegerField(null=True,
+    year_started = models.IntegerField(null=True,
                                          help_text="The year where construction began on the building")
     completed = models.BooleanField(default=True,
                                     help_text="Whether or not the building is completed. False means the building is incomplete")
@@ -477,7 +477,7 @@ class Building(models.Model):
 
     def save(self, *args, **kwargs):
         current_year = timezone.now().year
-        if self.year_completed == current_year:
+        if self.year_started == current_year:
             self.mopq_award = "Eligible"
         elif self.mopq_award not in ["Nominated", "Won"]:
             self.mopq_award = ""
