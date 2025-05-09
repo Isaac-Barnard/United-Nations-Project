@@ -11,7 +11,6 @@ async function getPlayerList() {
 async function constructImage(playername) {
     const response = await fetch(document.URL + '/api/user/' + playername + '/?format=json');
     const data = await response.json();
-    user_data = data;
     return `data:image/png;base64,${data.face_image}`;
 }
 
@@ -40,22 +39,32 @@ function setUserStats(playerData) {
 
     if (x !== null && y !== null && z !== null) {
         var dim = formatDimension(dimension);
-        locationP.textcontent = `Location - ${dim}: (${x}, ${y}, ${z})`;
+        locationP.innerHTML = `Location:<br/> ${dim} - ${x}, ${y}, ${z}`;
     } else {
-        locationP.textContent = `Location - Unknown`;
+        locationP.innerHTML = `Location - Unknown`;
     }
 
     if (lastdeathx !== null && lastdeathy !== null && lastdeathz !== null) {
         const deathDimName = formatDimension(lastdeathdim);
-        lastDeathP.textContent = `Last Death - ${deathDimName}: (${lastdeathx}, ${lastdeathy}, ${lastdeathz})`;
+        lastDeathP.innerHTML = `Last Death:<br/> ${deathDimName} - ${lastdeathx}, ${lastdeathy}, ${lastdeathz}`;
     } else {
-        lastDeathP.textContent = `Last Death - Unknown`;
+        lastDeathP.innerHTML = `Last Death - Unknown`;
+    }
+
+    const fillImg = document.getElementById('hearts-fill');
+    if (health !== null && fillImg) {
+        const percent = Math.max(0, Math.min(health / 20, 1));
+        const clipPercent = 100 - (percent * 100);
+
+        fillImg.style.clipPath = `inset(0 ${clipPercent}% 0 0)`;
+    } else {
+        fillImg.style.clipPath = `inset(0 100% 0 0)`;
     }
 }
 
 
 let lastClicked = ""
-function changePlayer(player) {
+async function changePlayer(player) {
     if (lastClicked == player) return;
 
     document.querySelector('.playername').innerHTML = "";
@@ -65,8 +74,10 @@ function changePlayer(player) {
     document.querySelector('.hotbar-slots').innerHTML = "";
     document.querySelector('.echest-slots').innerHTML = "";
 
-    nameP.innerHTML = player;
-    setUserStats();
+    document.querySelector('.playername').innerHTML = player;
+    const playerResponse = await fetch(`/minecraft/player/api/user/${player}/?format=json`);
+    const playerData = await playerResponse.json();
+    setUserStats(playerData);
 
     inventory(player);
     skin(player);

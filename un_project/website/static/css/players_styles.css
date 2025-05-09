@@ -34,6 +34,35 @@ body {
     padding: 0;
 }
 
+.location {
+    position: relative;
+    top: -370px;
+    left: -342px;
+    font-size: 18px;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.lastdeath {
+    position: relative;
+    top: -320px;
+    left: -530px;
+    font-size: 18px;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.health {
+    position: relative;
+    top: -430px;
+    left: -270px;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
 .inv-slots {
     position: relative;
     top: -497px;
