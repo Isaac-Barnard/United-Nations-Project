@@ -54,15 +54,6 @@ body {
     padding: 0;
 }
 
-.health {
-    position: relative;
-    top: -430px;
-    left: -270px;
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-}
-
 .inv-slots {
     position: relative;
     top: -497px;
