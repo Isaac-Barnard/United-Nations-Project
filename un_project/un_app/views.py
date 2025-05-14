@@ -14,6 +14,11 @@ from datetime import datetime
 def home(request):
     return render(request, 'home.html')
 
+def financial_home(request):
+    return render(request, 'financial_home.html')
+
+def records_home(request):
+    return render(request, 'records_home.html')
 
 def building_list(request):
     # Annotate the queryset with the calculated height, handling null values
