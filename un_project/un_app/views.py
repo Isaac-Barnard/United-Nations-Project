@@ -18,7 +18,7 @@ def financial_home(request):
     return render(request, 'financial_home.html')
 
 def records_home(request):
-    return render(request, 'records_home.html')
+    return render(request, 'records_templates/records_home.html')
 
 def building_list(request):
     # Annotate the queryset with the calculated height, handling null values

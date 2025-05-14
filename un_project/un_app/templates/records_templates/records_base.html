@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Django Project{% endblock %}</title>
+    {% load static %}
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/un_seal.png' %}" type="image/png">
+    
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <nav>
+                <ul>
+                    <li class="menu-logo">
+                        <a href="{% url 'home' %}">
+                            <img src="{% static 'images/un_seal.png' %}" alt="UN Seal">
+                        </a>
+                    </li>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'player_list' %}">UN Charter</a></li>
+                    <li><a href="{% url 'player_list' %}">Resolutions</a></li>
+                    <li><a href="{% url 'player_list' %}">Court Cases</a></li>
+                    <li><a href="{% url 'player_list' %}">Treaties</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            {% block content %}
+            <!-- This block will be filled by other templates that extend records_base.html -->
+            {% endblock %}
+        </main>
+
+        <footer>
+            <p>&copy; United Nation Bureau of Records, 2025</p>
+        </footer>
+    </div>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
