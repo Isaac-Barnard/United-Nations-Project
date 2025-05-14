@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',   # Django REST Framework for API functionality
-    'un_app',           # Your main app containing the Building model
+    'un_app',           # Your main app containing the financial models and stuff
+    'un_records_app',   # used for records stuff like resolutions
     'un_api',           # New app for API views
     'website',          # Main website app
     'players_api',
