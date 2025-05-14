@@ -15,11 +15,13 @@ urlpatterns = [
     path('evaluate-items/', evaluate_items, name='evaluate_items'),
     path('get_item_evaluations/<int:item_id>/', get_item_evaluations, name='get_item_evaluations'),
     path('map/', un_map, name='un_map'),
+    path('input-building/', input_building, name='input_building'),
+    path('general-building-info/', general_building_info, name='general_building_info'),
+    path('general-territory-info/', general_territory_info, name='general_territory_info'),
+    
+    # Item Counter Url's
     path('item-counter/', item_counter, name='item_counter'),
     path('get-containers/', get_containers, name='get_containers'),
     path('handle-liquid-asset-update/', handle_liquid_asset_update, name='handle-liquid-asset-update'),
     path('handle-item-update/', handle_item_update, name='handle-item-update'),
-    path('input-building/', input_building, name='input_building'),
-    path('general-building-info/', general_building_info, name='general_building_info'),
-    path('general-territory-info/', general_territory_info, name='general_territory_info'),
 ]
