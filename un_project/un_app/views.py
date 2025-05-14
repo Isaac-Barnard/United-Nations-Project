@@ -20,6 +20,18 @@ def financial_home(request):
 def records_home(request):
     return render(request, 'records_templates/records_home.html')
 
+def charter(request):
+    return render(request, 'records_templates/charter.html')
+
+def resolutions(request):
+    return render(request, 'records_templates/resolutions.html')
+
+def court_cases(request):
+    return render(request, 'records_templates/court_cases.html')
+
+def treaties(request):
+    return render(request, 'records_templates/treaties.html')
+
 def building_list(request):
     # Annotate the queryset with the calculated height, handling null values
     buildings = Building.objects.select_related('owner', 'territory').annotate(

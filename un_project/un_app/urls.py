@@ -1,10 +1,14 @@
 from django.urls import path, include
-from .views import building_list, player_list, home, financial_home, records_home, nation_balance_sheet, evaluate_buildings, evaluation_success, evaluate_items, company_balance_sheet, un_map, get_building_evaluations, get_item_evaluations, item_counter, get_containers, handle_liquid_asset_update, handle_item_update, input_building, general_building_info, general_territory_info
+from .views import building_list, player_list, home, financial_home, records_home, charter, resolutions, court_cases, treaties, nation_balance_sheet, evaluate_buildings, evaluation_success, evaluate_items, company_balance_sheet, un_map, get_building_evaluations, get_item_evaluations, item_counter, get_containers, handle_liquid_asset_update, handle_item_update, input_building, general_building_info, general_territory_info
 
 urlpatterns = [
     path('', home, name='home'),  # Default home page
     path('financial-home', financial_home, name='financial_home'),
     path('records-home', records_home, name='records_home'),
+    path('charter', charter, name='charter'),
+    path('resolutions', resolutions, name='resolutions'),
+    path('court-cases', court_cases, name='court_cases'),
+    path('treaties', treaties, name='treaties'),
     path('buildings/', building_list, name='building_list'),  # http://127.0.0.1:8000/buildings/
     path('players/', player_list, name='player_list'),        # http://127.0.0.1:8000/players/
     path('nation/<str:nation_abbreviation>/', nation_balance_sheet, name='nation_balance_sheet'),  # http://127.0.0.1:8000/nation/XYZ/
