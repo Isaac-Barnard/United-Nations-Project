@@ -4,7 +4,7 @@ from django.db.models.functions import Coalesce, Rank
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from .forms import BuildingEvaluationForm, ItemEvaluationForm, ItemCounterForm, LiquidAssetForm
-from .models import Building, Player, Nation, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Denomination, UserProfile, ItemCount, ItemEvaluationComponent, ItemEvaluation, Item, Company, LiquidCount, LiquidAssetContainer, LiabilityPayment, Liability, CompanyShareholder
+from .models import *
 from decimal import Decimal, InvalidOperation
 from django.http import JsonResponse
 from un_app.templatetags.custom_filters import custom_decimal_places
