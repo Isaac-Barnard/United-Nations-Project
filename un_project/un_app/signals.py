@@ -4,7 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from decimal import Decimal
 from django.db.models import Sum
 from django.db import models
-from .models import Item, ItemCount, ItemEvaluation, ItemFixedPriceComponent, ItemEvaluationComponent, Building, PartialBuildingOwnership, BuildingEvaluation, BuildingEvaluationComponent, Nation, LiquidCount, Company, LiquidAssetContainer, LiabilityPayment, Liability
+from .models import *
 
 # --------------------------------------------------------------------
 #                           Buildings
