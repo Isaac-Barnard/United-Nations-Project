@@ -6,16 +6,30 @@
 {% load custom_filters %}
 
 {% block extra_css %}
-    
 {% endblock %}
 
 {% block content %}
 <div class="container">
     <h1>United Nations Resolutions</h1>
 
+    {% for resolution in resolutions %}
+    <div class="resolution">
+        <h2>{{ resolution.title }}</h2>
+        <p class="resolution-meta">
+            ({{ resolution.date|date:"n/j/Y" }}) [{{ resolution.votes_for }}-{{ resolution.votes_against }}]
+            {% if resolution.void %}<strong>(Void)</strong>{% endif %}
+            {% if resolution.repealed %}<strong>(Repealed)</strong>{% endif %}
+        </p>
+        {% load markdown_extras %}
+        <p class="resolution-body">
+            {{ resolution.body|markdownify }}
+        </p>
+    </div>
+    {% empty %}
+    <p>No resolutions found.</p>
+    {% endfor %}
 </div>
 {% endblock %}
 
 {% block extra_js %}
-
 {% endblock %}

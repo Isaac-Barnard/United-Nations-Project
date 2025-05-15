@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Resolution
 
 # Create your views here.
 def records_home(request):
@@ -8,7 +9,8 @@ def charter(request):
     return render(request, 'charter.html')
 
 def resolutions(request):
-    return render(request, 'resolutions.html')
+    resolutions = Resolution.objects.all().order_by('-date')
+    return render(request, 'resolutions.html', {'resolutions': resolutions})
 
 def court_cases(request):
     return render(request, 'court_cases.html')
