@@ -17,7 +17,7 @@
     <div class="resolution">
         <h2>{{ resolution.title }}</h2>
         <p class="resolution-meta">
-            ({{ resolution.date|date:"n/j/Y" }}) [{{ resolution.votes_for }}-{{ resolution.votes_against }}]
+            ({{ resolution.date|date:"n/j/Y" }}) [{{ resolution.votes_for }}-{{ resolution.votes_against }}] &nbsp;&nbsp;Proposed By: {{ resolution.proposed_by }}
             {% if resolution.void %}<strong>(Void)</strong>{% endif %}
             {% if resolution.repealed %}<strong>(Repealed)</strong>{% endif %}
         </p>
