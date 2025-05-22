@@ -35,13 +35,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Heading sizes and spacing */
 h1 {
-    font-size: 20pt;
+    font-size: 25pt;
     margin-top: 0pt;
     margin-bottom: 6pt;
 }
 
 h2 {
-    font-size: 16.5pt;
+    font-size: 18.5pt;
     margin-top: 18pt;
     margin-bottom: 6pt;
 }
@@ -69,4 +69,10 @@ h6 {
     font-style: italic;
     margin-top: 12pt;
     margin-bottom: 4pt;
+}
+
+
+/* Add space above horizontal lines between resolutions */
+.resolution + hr {
+    margin-top: 18pt; /* Adjust as needed */
 }

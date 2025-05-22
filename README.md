@@ -116,3 +116,9 @@ Setting up the repo is pretty easy:
             - [ ] Extended map to show more land
         - [ ] Button that displays railroad/infrastructure routes
         - [ ] Somehow display historical/informative maps
+- **<ins>Records Document</ins>**
+    - [ ] UN Charter & amendments
+    - [ ] Resolutions
+    - [ ] Treaties
+    - [ ] Court Cases
+    - [ ] Misc.
