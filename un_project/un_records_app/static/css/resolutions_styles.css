@@ -1,0 +1,72 @@
+/* resolutions.css */
+
+/* Global text settings */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 11pt;
+    font-weight: normal;
+    line-height: 1.15;
+    margin: 0; /* Remove default browser margins */
+    background-color: #fff;
+}
+
+/* Page container with 0.5-inch side margins and no top/bottom margin */
+.page-container {
+    
+    padding-left: 1in;
+    padding-right: 1in;
+    margin: 0 auto; /* Center horizontally */
+}
+
+/* Paragraph spacing for normal text */
+p {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: Arial, sans-serif;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    line-height: 1.15;
+}
+
+/* Heading sizes and spacing */
+h1 {
+    font-size: 20pt;
+    margin-top: 0pt;
+    margin-bottom: 6pt;
+}
+
+h2 {
+    font-size: 16.5pt;
+    margin-top: 18pt;
+    margin-bottom: 6pt;
+}
+
+h3 {
+    font-size: 14pt;
+    margin-top: 5pt;
+    margin-bottom: 4pt;
+}
+
+h4 {
+    font-size: 12.5pt;
+    margin-top: 8pt;
+    margin-bottom: 4pt;
+}
+
+h5 {
+    font-size: 11pt;
+    margin-top: 12pt;
+    margin-bottom: 4pt;
+}
+
+h6 {
+    font-size: 11pt;
+    font-style: italic;
+    margin-top: 12pt;
+    margin-bottom: 4pt;
+}

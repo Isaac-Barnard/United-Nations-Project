@@ -6,12 +6,13 @@
 {% load custom_filters %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/resolutions_styles.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="page-container">
     <h1>United Nations Resolutions</h1>
-
+    <hr>
     {% for resolution in resolutions %}
     <div class="resolution">
         <h2>{{ resolution.title }}</h2>
@@ -25,6 +26,7 @@
             {{ resolution.body|markdownify }}
         </p>
     </div>
+    <hr>
     {% empty %}
     <p>No resolutions found.</p>
     {% endfor %}
