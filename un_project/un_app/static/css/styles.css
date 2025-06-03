@@ -168,7 +168,7 @@ tr:hover {
     background-color: #454545;
     width: 400px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-    z-index: 1;
+    z-index: 100;
     flex-direction: row;  /* Align columns horizontally */
     justify-content: space-between; /* Space between columns */
     border: 1px solid #ccc;  /* Add border around the dropdown */
@@ -218,4 +218,43 @@ tr:hover {
     border-left: 1px solid #ccc;
     padding-left: 0px;
 }
+
+.intro-paragraph {
+    margin-top: 2rem;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.big-button {
+    display: inline-block;
+    padding: 2rem 4rem;
+    background-color: #5b92e5; /* UN blue color */
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    border: 2px solid rgb(37, 37, 37);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
+
+    /* Black outline around the text */
+    text-shadow:
+        -1px -1px 0 #555555,  /* Top-left */
+        1px -1px 0 #555555,   /* Top-right */
+        -1px 1px 0 #555555,   /* Bottom-left */
+        1px 1px 0 #555555;    /* Bottom-right */
+}
+
+.big-button:hover {
+    background-color: #0059b3;
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+
 
