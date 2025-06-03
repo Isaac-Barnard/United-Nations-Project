@@ -118,7 +118,21 @@ Setting up the repo is pretty easy:
         - [ ] Somehow display historical/informative maps
 - **<ins>Records Document</ins>**
     - [ ] UN Charter & amendments
+        - [ ] Past charters
     - [ ] Resolutions
+        - [x] Void/repealed resolutions
+        - [ ] Images
+        - [ ] Amendments
     - [ ] Treaties
+        - [ ] Images
     - [ ] Court Cases
+        - [ ] Images/videos
+    - [ ] Executive Orders
     - [ ] Misc.
+        - [ ] Recognized Alliances
+        - [ ] Declarations of War
+        - [ ] National Constitutions
+        - [ ] Buisnesses and Shops
+        - [ ] Aternos Games
+        - [ ] Medal of Papa Quinn
+        - [ ] Petitions
