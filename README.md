@@ -120,7 +120,8 @@ Setting up the repo is pretty easy:
     - [ ] UN Charter & amendments
         - [ ] Past charters
     - [ ] Resolutions
-        - [x] Void/repealed resolutions
+        - [ ] Void/repealed resolutions
+            - [ ] Repealed date/void date
         - [ ] Images
         - [ ] Amendments
     - [ ] Treaties
