@@ -258,3 +258,35 @@ tr:hover {
 }
 
 
+.pinstripe {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    /*background-color: orange;*/
+    z-index: 50; /* below dropdown */
+}
+
+.pinstripe-top {
+    position: absolute;
+    top: calc(85px + 10px); /* 85px is header height, 10px below */
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #FF6F00; /* Pinstripe Orange */
+}
+
+.pinstripe-bottom {
+    position: relative;
+    height: 4px;
+    background-color: #FF6F00; /* Pinstripe Orange */
+    margin-bottom: 15px; /* gap above footer */
+}
+
+.pinstripe-financial {
+    background-color: #FF6F00;
+}
+
+.pinstripe-records {
+    background-color: #5b92e5;
+}
