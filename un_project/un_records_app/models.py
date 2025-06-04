@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 from un_app.models import Nation
 
 class Resolution(models.Model):
@@ -10,6 +11,16 @@ class Resolution(models.Model):
     body  = models.TextField()
     void = models.BooleanField(default=False, blank=True)
     repealed = models.BooleanField(default=False, blank=True)
+    invalidation_date = models.DateField(null=True, default=None, blank=True, help_text="Date the resolution was considered void or repealed")
+    
+    def clean(self):
+        # Ensure that invalidation_date is only set when void or repealed is True
+        if (self.void or self.repealed) and not self.invalidation_date:
+            raise ValidationError("Invalidation date must be set if the resolution is void or repealed.")
+        
+        # Ensure that invalidation_date is None if neither void nor repealed is True
+        if not (self.void or self.repealed) and self.invalidation_date:
+            raise ValidationError("Invalidation date cannot be set unless the resolution is void or repealed.")
 
     def __str__(self):
         return f"{self.title} ({self.date})"
