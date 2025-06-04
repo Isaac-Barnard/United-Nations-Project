@@ -10,9 +10,25 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="page-container">
     <h1>United Nations Treaties</h1>
-
+    <hr>
+    {% for treaty in treaties %}
+    <div>
+        <h2>{{ treaty.title }}</h2>
+        <p>
+            ({{ treaty.date|date:"n/j/Y" }}) &nbsp;&nbsp;Nations Involved: {{ treaty.nations_involved.all|join:", " }}
+            {% if treaty.void %}<strong>(Void, {{ treaty.invalidation_date }})</strong>{% endif %}
+        </p>
+        {% load markdown_extras %}
+        <p>
+            {{ treaty.body|markdownify }}
+        </p>
+    </div>
+    <hr>
+    {% empty %}
+    <p>No treaties found.</p>
+    {% endfor %}
 </div>
 {% endblock %}
 

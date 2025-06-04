@@ -16,13 +16,13 @@
     {% for resolution in resolutions %}
     <div class="resolution">
         <h2>{{ resolution.title }}</h2>
-        <p class="resolution-meta">
+        <p>
             ({{ resolution.date|date:"n/j/Y" }}) [{{ resolution.votes_for }}-{{ resolution.votes_against }}] &nbsp;&nbsp;Proposed By: {{ resolution.proposed_by }}
-            {% if resolution.void %}<strong>(Void)</strong>{% endif %}
-            {% if resolution.repealed %}<strong>(Repealed)</strong>{% endif %}
+            {% if resolution.void %}<strong>(Void, {{ resolution.invalidation_date }})</strong>{% endif %}
+            {% if resolution.repealed %}<strong>(Repealed, {{ resolution.invalidation_date }})</strong>{% endif %}
         </p>
         {% load markdown_extras %}
-        <p class="resolution-body">
+        <p>
             {{ resolution.body|markdownify }}
         </p>
     </div>
