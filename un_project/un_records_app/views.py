@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Resolution
+from .models import Resolution, Treaty
 
 # Create your views here.
 def records_home(request):
@@ -16,4 +16,5 @@ def court_cases(request):
     return render(request, 'court_cases.html')
 
 def treaties(request):
-    return render(request, 'treaties.html')
+    treaties = Treaty.objects.all().order_by('-date')
+    return render(request, 'treaties.html', {'treaties': treaties})
