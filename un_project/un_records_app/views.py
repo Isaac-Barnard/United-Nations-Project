@@ -9,7 +9,8 @@ def charter(request):
     return render(request, 'charter.html')
 
 def resolutions(request):
-    resolutions = Resolution.objects.all().order_by('-date')
+    # Prefetch images to avoid N+1 queries while maintaining date ordering
+    resolutions = Resolution.objects.prefetch_related('images').all().order_by('-date')
     return render(request, 'resolutions.html', {'resolutions': resolutions})
 
 def court_cases(request):

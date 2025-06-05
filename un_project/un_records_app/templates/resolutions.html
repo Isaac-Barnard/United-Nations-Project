@@ -21,17 +21,75 @@
             {% if resolution.void %}<strong>(Void, {{ resolution.invalidation_date }})</strong>{% endif %}
             {% if resolution.repealed %}<strong>(Repealed, {{ resolution.invalidation_date }})</strong>{% endif %}
         </p>
-        {% load markdown_extras %}
-        <p>
-            {{ resolution.body|markdownify }}
-        </p>
+        
+        <div class="resolution-content">
+            {% load markdown_extras %}
+            <div class="resolution-text">
+                {{ resolution.body|markdownify }}
+            </div>
+            
+            {% if resolution.images.exists %}
+                {% if resolution.images.count == 1 %}
+                    <!-- Single image layout -->
+                    <div class="resolution-images single-image">
+                        {% for image in resolution.images.all %}
+                        <div class="image-container">
+                            <img src="{{ image.image.url }}" 
+                                 alt="Image for {{ resolution.title }}" 
+                                 class="resolution-image"
+                                 onclick="openModal('{{ image.image.url }}', '{{ resolution.title }}')">
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Multiple images grid layout -->
+                    <div class="resolution-images multiple-images">
+                        {% for image in resolution.images.all %}
+                        <div class="image-container">
+                            <img src="{{ image.image.url }}" 
+                                 alt="Image for {{ resolution.title }}" 
+                                 class="resolution-image"
+                                 onclick="openModal('{{ image.image.url }}', '{{ resolution.title }}')">
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
     </div>
     <hr>
     {% empty %}
     <p>No resolutions found.</p>
     {% endfor %}
 </div>
+
+<!-- Modal for full-size image viewing -->
+<div id="imageModal" class="image-modal" onclick="closeModal()">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
 {% endblock %}
 
 {% block extra_js %}
+<script>
+function openModal(imageSrc, title) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    
+    modal.style.display = 'block';
+    modalImg.src = imageSrc;
+    modalImg.alt = 'Image for ' + title;
+}
+
+function closeModal() {
+    document.getElementById('imageModal').style.display = 'none';
+}
+
+// Close modal when pressing Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeModal();
+    }
+});
+</script>
 {% endblock %}
