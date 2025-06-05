@@ -12,10 +12,6 @@ class ResolutionImageInline(admin.TabularInline):
 
 @admin.register(models.Resolution)
 class ResolutionAdmin(admin.ModelAdmin):
-    list_display = ['title', 'date', 'proposed_by', 'votes_for', 'votes_against', 'void', 'repealed', 'image_count']
-    list_filter = ['void', 'repealed', 'date', 'proposed_by']
-    search_fields = ['title', 'body']
-    fields = ['title', 'date', 'proposed_by', 'votes_for', 'votes_against', 'body', 'void', 'repealed', 'invalidation_date']
     inlines = [ResolutionImageInline]
     
     def image_count(self, obj):
@@ -24,7 +20,5 @@ class ResolutionAdmin(admin.ModelAdmin):
 
 @admin.register(models.ResolutionImage)
 class ResolutionImageAdmin(admin.ModelAdmin):
-    list_display = ['resolution', 'order']
-    list_filter = ['resolution']
     search_fields = ['resolution__title']
     ordering = ['resolution', 'order']
