@@ -171,3 +171,15 @@ LOGIN_URL = 'login'  # URL name for the login page
 LOGIN_REDIRECT_URL = 'evaluate_buildings'  # Redirect after successful login
 LOGOUT_REDIRECT_URL = 'login'  # Redirect after logout
 
+
+import os
+
+# Media files configuration
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Also make sure you have these static files settings
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]

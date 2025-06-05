@@ -104,9 +104,9 @@ table {
 }
 
 /* Remove spinner arrows for number inputs (Firefox) */
-.building-input-table input[type="number"] {
+/*.building-input-table input[type="number"] {
   -moz-appearance: textfield;
-}
+}*/
 
 /* Focus state for better UX */
 .building-input-table input[type="text"]:focus,

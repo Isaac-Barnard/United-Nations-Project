@@ -27,3 +27,11 @@ urlpatterns = [
     path('minecraft/records/un_api/', include('un_api.urls')),  # API URLs
     path('minecraft/player/api/', include('players_api.urls'))
 ]
+
+
+
+from django.conf import settings
+from django.conf.urls.static import static
+# Add this to serve media files during development
+if settings.MEDIA_URL:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
