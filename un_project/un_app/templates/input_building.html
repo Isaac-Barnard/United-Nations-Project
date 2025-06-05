@@ -1,21 +1,67 @@
 {% extends 'financial_base.html' %}
-
-{% block title %}Input Building{% endblock %}
-
 {% load static %}
 {% load custom_filters %}
 
+{% block title %}
+    Input Building
+{% endblock %}
+
 {% block extra_css %}
-    
+    <link rel="stylesheet" href="{% static 'css/input_building_styles.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="container">
     <h1>Input Building</h1>
 
-</div>
-{% endblock %}
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
 
-{% block extra_js %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="table-wrapper">
+            <table class="building-input-table">
+                <thead>
+                    <tr>
+                        <th>Building Name</th>
+                        <th>Territory</th>
+                        <th>Owner</th>
+                        <th>Main Builders</th>
+                        <th>Y High</th>
+                        <th>Y Low</th>
+                        <th>Height</th>
+                        <th>Year</th>
+                        <th>Comp- lete</th>
+                        <th>X Coord</th>
+                        <th>Z Coord</th>
+                        <th>Architectural Style</th>
+                        <th>Size</th>
+                        <th>Materials</th>
+                        <th>Furnished</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ form.name }}</td>
+                        <td>{{ form.territory }}</td>
+                        <td>{{ form.owner }}</td>
+                        <td>{{ form.main_builders }}</td>
+                        <td>{{ form.y_level_high_pt }}</td>
+                        <td>{{ form.y_level_ground }}</td>
+                        <td>{{ form.height }}</td>
+                        <td>{{ form.year_started }}</td>
+                        <td>{{ form.completed }}</td>
+                        <td>{{ form.x_coordinate }}</td>
+                        <td>{{ form.z_coordinate }}</td>
+                        <td>{{ form.architectural_style }}</td>
+                        <td>{{ form.size }}</td>
+                        <td>{{ form.materials }}</td>
+                        <td>{{ form.furnished }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
+        <button type="submit" class="btn btn-primary">Submit Building</button>
+    </form>
 {% endblock %}

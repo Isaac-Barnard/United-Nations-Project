@@ -111,3 +111,19 @@ class LiquidAssetForm(forms.Form):
                     'data-diamond-equivalent': denomination.diamond_equivalent
                 })
             )
+            
+            
+            
+            
+from django import forms
+from .models import Building
+
+class BuildingForm(forms.ModelForm):
+    class Meta:
+        model = Building
+        fields = [
+            'name', 'territory', 'owner', 'main_builders',
+            'y_level_high_pt', 'y_level_ground',
+            'year_started', 'completed', 'x_coordinate', 'z_coordinate',
+            'architectural_style', 'size', 'materials', 'furnished'
+        ]

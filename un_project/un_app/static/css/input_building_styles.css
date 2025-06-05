@@ -1,0 +1,130 @@
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0rem;
+}
+
+/* input_building_styles.css */
+
+/* Basic table styling */
+.building-input-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.building-input-table th,
+.building-input-table td {
+    padding: 2px;
+}
+
+/* Example column widths */
+.building-input-table th:nth-child(1),
+.building-input-table td:nth-child(1) {
+  width: 100px; /* Building Name */
+}
+
+.building-input-table th:nth-child(2),
+.building-input-table td:nth-child(2) {
+  width: 100px; /* Territory */
+}
+
+.building-input-table th:nth-child(3),
+.building-input-table td:nth-child(3) {
+  width: 100px; /* Owner */
+}
+
+.building-input-table th:nth-child(4),
+.building-input-table td:nth-child(4) {
+  width: 100px; /* Main Builders */
+}
+
+.building-input-table th:nth-child(5),
+.building-input-table td:nth-child(5),
+.building-input-table th:nth-child(6),
+.building-input-table td:nth-child(6),
+.building-input-table th:nth-child(7),
+.building-input-table td:nth-child(7){
+  width: 50px; /* Heights */
+}
+
+
+.building-input-table th:nth-child(8),
+.building-input-table td:nth-child(8){
+  width: 50px; /* Year */
+}
+
+.building-input-table th:nth-child(9),
+.building-input-table td:nth-child(9),
+
+.building-input-table th:nth-child(10),
+.building-input-table td:nth-child(10),
+.building-input-table th:nth-child(11),
+.building-input-table td:nth-child(11) {
+  width: 60px; /* Coords */
+}
+
+.building-input-table th:nth-child(12),
+.building-input-table td:nth-child(12),
+.building-input-table th:nth-child(13),
+.building-input-table td:nth-child(13),
+.building-input-table th:nth-child(14),
+.building-input-table td:nth-child(14),
+.building-input-table th:nth-child(15),
+.building-input-table td:nth-child(15) {
+  width: 120px; /* Style, Size, Materials, Furnished */
+}
+
+
+.building-input-table input[type="text"],
+.building-input-table input[type="number"],
+.building-input-table input[type="checkbox"],
+.building-input-table select,
+.building-input-table textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4px 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 14px;
+}
+
+.building-input-table input[type="checkbox"] {
+  width: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Remove spinner arrows for number inputs (Chrome, Safari) */
+.building-input-table input[type="number"]::-webkit-inner-spin-button,
+.building-input-table input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove spinner arrows for number inputs (Firefox) */
+.building-input-table input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Focus state for better UX */
+.building-input-table input[type="text"]:focus,
+.building-input-table input[type="number"]:focus,
+.building-input-table select:focus,
+.building-input-table textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 3px rgba(0, 123, 255, 0.3);
+}
+
+tr:hover {
+    background-color: #ffffff;
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+  border: 1px solid #ddd; /* optional, to show the scrollable area */
+}

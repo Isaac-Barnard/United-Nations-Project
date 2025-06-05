@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from ..forms import BuildingForm
 
 
 def home(request):
@@ -20,7 +21,15 @@ def un_map(request):
 
 @login_required
 def input_building(request):
-    return render(request, 'input_building.html')
+    if request.method == 'POST':
+        form = BuildingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('building_success')  # Replace with your desired success URL
+    else:
+        form = BuildingForm()
+    
+    return render(request, 'input_building.html', {'form': form})
 
 
 def general_territory_info(request):
