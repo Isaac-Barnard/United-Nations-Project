@@ -25,9 +25,11 @@ body {
 }
 
 .playername {
-    position: relative;
-    top: -430px;
-    left: -270px;
+    position: absolute;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    color: white;
+    top: 20px;
+    left: 235px;
     font-size: 24px;
     display: inline-block;
     margin: 0;
@@ -35,9 +37,11 @@ body {
 }
 
 .location {
-    position: relative;
-    top: -370px;
-    left: -342px;
+    position: absolute;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    color: white;
+    top: 50px;
+    left: 250px;
     font-size: 18px;
     display: inline-block;
     margin: 0;
@@ -45,9 +49,11 @@ body {
 }
 
 .lastdeath {
-    position: relative;
-    top: -320px;
-    left: -530px;
+    position: absolute;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    color: white;
+    top: 100px;
+    left: 250px;
     font-size: 18px;
     display: inline-block;
     margin: 0;
@@ -55,12 +61,11 @@ body {
 }
 
 .inv-slots {
-    position: relative;
-    top: -497px;
+    position: absolute;
+    top: 235px;
     left: 20px;
     display: grid;
     grid-template-columns: repeat(9, 1fr); /* Assuming 9x3 inventory grid */
-    /*gap: 40px;*/
     width: 460px;
     height: 154px;
     /*background-image: url('/images/inventory-upscaled.png');*/
@@ -68,38 +73,38 @@ body {
 }
 
 .hotbar-slots {
-    position: relative;
+    position: absolute;
     display: grid;
     grid-template-columns: repeat(9, 1fr);
-    top: -485px;
+    top: 400px;
     left: 20px;
     width: 460px;
     height: 50px;
 }
 
 .offhand-slot {
-    position: relative;
+    position: absolute;
     display: grid;
     width: 50px;
     height: 50px;
-    top: -509px;
+    top: 175px;
     left: 225px;
 }
 
 .armor-slots {
-    position: relative;
+    position: absolute;
     display: grid;
     grid-template-rows: repeat(4, 1fr);
     width: 50px;
     height: 203px;
-    top: -458px;
+    top: 20px;
     left: 20px;
 }
 
 .enderchest {
-    position: relative;
-    top: -932px;
-    left: 516px;
+    position: absolute;
+    top: 37px;
+    left: 520px;
     width: 500px;
 }
 
