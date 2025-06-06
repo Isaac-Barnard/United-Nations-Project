@@ -39,14 +39,14 @@ function setUserStats(playerData) {
 
     if (x !== null && y !== null && z !== null) {
         var dim = formatDimension(dimension);
-        locationP.innerHTML = `Location:<br/> ${dim} - ${x}, ${y}, ${z}`;
+        locationP.innerHTML = `Location:<br/> ${dim} | ${x}, ${y}, ${z}`;
     } else {
         locationP.innerHTML = `Location - Unknown`;
     }
 
     if (lastdeathx !== null && lastdeathy !== null && lastdeathz !== null) {
         const deathDimName = formatDimension(lastdeathdim);
-        lastDeathP.innerHTML = `Last Death:<br/> ${deathDimName} - ${lastdeathx}, ${lastdeathy}, ${lastdeathz}`;
+        lastDeathP.innerHTML = `Last Death:<br/> ${deathDimName} | ${lastdeathx}, ${lastdeathy}, ${lastdeathz}`;
     } else {
         lastDeathP.innerHTML = `Last Death - Unknown`;
     }
