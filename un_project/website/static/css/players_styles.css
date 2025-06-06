@@ -196,13 +196,13 @@ body {
 }
 
 .health {
-    position: relative;
+    position: absolute;
 }
 
 .health img {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50px;
+    left: 50px;
     height: 100%;
 }
 
