@@ -48,6 +48,12 @@
             <input type="checkbox" id="sumModeToggle">
             Enable Sum Mode (Add to current count)
         </label>
+        <div style="margin-top: 0.5rem; font-size: 0.9em; color: #666;">
+        <strong>Shortcuts:</strong>  <strong>Stack:</strong> Use "s" for 64
+                <strong>Block:</strong> Use "b" for 9
+                <strong>Stack of Blocks:</strong> Use "v" for 576
+                <strong>Small Stack:</strong> Use "c" for 16
+        </div>
     </div>
 
     {% if selected_nation or selected_company %}
@@ -94,11 +100,9 @@
                     </td>
                     {% for denomination in denominations %}
                         <td>
-                            <input type="number" 
+                            <input type="text" 
                                 name="denomination_{{ denomination.id }}" 
                                 class="form-control input-cell denomination-input"
-                                step="0.001" 
-                                min="0"
                                 style="width: 100%; text-align: right;"
                                 data-diamond-equivalent="{{ denomination.diamond_equivalent }}"
                                 data-denomination-id="{{ denomination.id }}"
@@ -140,11 +144,10 @@
                                         <td class="right-align">{{ item.market_value|custom_decimal_places }}</td>
                                         <td class="right-align current-count">{{ item.count|stringformat:"g" }}</td>
                                         <td>
-                                            <input type="number" 
+                                            <input type="text" 
                                                 class="item-input form-control input-cell"
-                                                step="0.001"
-                                                min="0"
-                                                style="width: 100%; text-align: right; padding: 2px 4px; height: 22px; font-size: 0.9em;">
+                                                style="width: 100%; text-align: right; padding: 2px 4px; height: 22px; font-size: 0.9em;"
+                                                title="Enter number, 's' for 64, or '2s' for 128, etc.">
                                         </td>
                                     </tr>
                                 {% endif %}

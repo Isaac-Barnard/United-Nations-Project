@@ -59,9 +59,46 @@ async function handleItemInputChange() {
     if (!this.value.trim()) {
         return;
     }
-    
-    const inputValue = parseFloat(this.value);
-    
+
+    // --- New logic for shortcut parsing ---
+    let inputValueStr = this.value.trim();
+    let inputValue;
+    if (inputValueStr.endsWith('s')) {
+        const numberPart = inputValueStr.slice(0, -1).trim();
+        const multiplier = numberPart ? parseFloat(numberPart) : 1; // if just "s", multiplier=1
+        if (isNaN(multiplier)) {
+            this.value = '';
+            return;
+        }
+        inputValue = multiplier * 64;
+    } else if (inputValueStr.endsWith('b')) {
+        const numberPart = inputValueStr.slice(0, -1).trim();
+        const multiplier = numberPart ? parseFloat(numberPart) : 1; // if just "s", multiplier=1
+        if (isNaN(multiplier)) {
+            this.value = '';
+            return;
+        }
+        inputValue = multiplier * 9;
+    } else if (inputValueStr.endsWith('v')) {
+        const numberPart = inputValueStr.slice(0, -1).trim();
+        const multiplier = numberPart ? parseFloat(numberPart) : 1; // if just "s", multiplier=1
+        if (isNaN(multiplier)) {
+            this.value = '';
+            return;
+        }
+        inputValue = multiplier * 576;
+    } else if (inputValueStr.endsWith('c')) {
+        const numberPart = inputValueStr.slice(0, -1).trim();
+        const multiplier = numberPart ? parseFloat(numberPart) : 1; // if just "s", multiplier=1
+        if (isNaN(multiplier)) {
+            this.value = '';
+            return;
+        }
+        inputValue = multiplier * 16;
+    } else {
+        inputValue = parseFloat(inputValueStr);
+    }
+
     // Return early if not a valid number
     if (isNaN(inputValue)) {
         this.value = '';
@@ -131,14 +168,52 @@ async function handleDenominationInputChange() {
 
     const denominationId = this.dataset.denominationId;
     const denominationIndex = this.dataset.denominationIndex;
-    const inputValue = parseFloat(this.value);
     
+    // --- New logic for shortcut parsing ---
+    let inputValueStr = this.value.trim();
+    let inputValue;
+    if (inputValueStr.endsWith('s')) {
+        const numberPart = inputValueStr.slice(0, -1).trim();
+        const multiplier = numberPart ? parseFloat(numberPart) : 1;
+        if (isNaN(multiplier)) {
+            this.value = '';
+            return;
+        }
+        inputValue = multiplier * 64;
+    } else if (inputValueStr.endsWith('b')) {
+        const numberPart = inputValueStr.slice(0, -1).trim();
+        const multiplier = numberPart ? parseFloat(numberPart) : 1; // if just "s", multiplier=1
+        if (isNaN(multiplier)) {
+            this.value = '';
+            return;
+        }
+        inputValue = multiplier * 9;
+    } else if (inputValueStr.endsWith('v')) {
+        const numberPart = inputValueStr.slice(0, -1).trim();
+        const multiplier = numberPart ? parseFloat(numberPart) : 1; // if just "s", multiplier=1
+        if (isNaN(multiplier)) {
+            this.value = '';
+            return;
+        }
+        inputValue = multiplier * 576;
+    } else if (inputValueStr.endsWith('c')) {
+        const numberPart = inputValueStr.slice(0, -1).trim();
+        const multiplier = numberPart ? parseFloat(numberPart) : 1; // if just "s", multiplier=1
+        if (isNaN(multiplier)) {
+            this.value = '';
+            return;
+        }
+        inputValue = multiplier * 16;
+    } else {
+        inputValue = parseFloat(inputValueStr);
+    }
+
     // Return early if not a valid number
     if (isNaN(inputValue)) {
         this.value = '';
         return;
     }
-    
+
     // Use sum mode for denominations too
     const isSumMode = window.sumModeEnabled;
     

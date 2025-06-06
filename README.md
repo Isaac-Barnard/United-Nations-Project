@@ -68,11 +68,11 @@ Setting up the repo is pretty easy:
         - [ ] Size of nation over time graph
             - [ ] Total territories, Main territories, far colonies, near colonies
 - **<ins>Data Entry</ins>**
-    - [ ] **Item audit input page**
+    - [X] **Item audit input page**
         - [x] Add any item for a given nation using a system like how items are displayed in balance sheets
         - [x] Add items and liquid assets on the same page
         - [X] Input more items without having to manually calculate sum (ie. it auto adds the amount inputed to the sum)
-        - [ ] Add shortcuts for stacks, blocks, stacks of blocks, small stacks
+        - [X] Add shortcuts for stacks, blocks, stacks of blocks, small stacks
         - [X] Ablility to change the total for item/liquid asset in case I made a mistake
         - [X] Easily switch between nations and LiquidAssetContainers
     - [ ] **Add new/update building page**
