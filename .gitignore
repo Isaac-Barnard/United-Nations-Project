@@ -6,6 +6,10 @@
 
 __pycache__
 
+# Ignore log file
+logs/
+
+
 # Ignore server custom config file
 conf
 .stash
