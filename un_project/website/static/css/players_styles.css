@@ -113,8 +113,8 @@ body {
 }
 
 .echest-slots {
-    position: relative;
-    top: -179px;
+    position: absolute;
+    top: 51px;
     left: 20px;
     display: grid;
     grid-template-columns: repeat(9, 1fr); /* Assuming 9x3 inventory grid */
