@@ -121,7 +121,7 @@ def company_balance_sheet(request, company_abbreviation):
     # Calculate total value of investments
     total_investment_value = Decimal('0')
     for investment in stock_investments:
-        company = investment.company
+        investment_company = investment.company
         
         # Get company's receivables
         company_receivables = Liability.objects.filter(
@@ -146,9 +146,9 @@ def company_balance_sheet(request, company_abbreviation):
         )['total']
 
         company_value = (
-            company.total_liquid_asset_value + 
-            company.total_item_asset_value + 
-            company.total_building_asset_value +
+            investment_company.total_liquid_asset_value + 
+            investment_company.total_item_asset_value + 
+            investment_company.total_building_asset_value +
             company_receivables -
             company_liabilities
         )
