@@ -203,6 +203,7 @@ body {
     position: absolute;
     top: 173px;
     left: 300px;
+    visibility: hidden;
 }
 
 .health img {

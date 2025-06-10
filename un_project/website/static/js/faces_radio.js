@@ -61,6 +61,7 @@ function setUserStats(playerData) {
     } else {
         fillImg.style.clipPath = `inset(0 100% 0 0)`;
     }
+    healthDiv.style.visibility = 'visible';
 }
 
 
