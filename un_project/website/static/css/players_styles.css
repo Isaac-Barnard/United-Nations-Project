@@ -201,24 +201,25 @@ body {
 
 .health {
     position: absolute;
+    top: 173px;
+    left: 300px;
 }
 
 .health img {
     position: absolute;
-    top: 50px;
-    left: 50px;
-    height: 100%;
 }
 
 .hearts-empty {
     z-index: 1;
-    width: 100%;
+    width: 162px;
+    height: 18px;
 }
 
-.hearts-fill {
+.hearts-full {
     z-index: 2;
-    width: 100%;
+    width: 162px;
+    height: 18px;
     overflow: hidden;
     object-fit: none;
-    clip-path: inset(0 100% 0 0);
+    clip-path: inset(0 0% 0 0);
 }
