@@ -26,7 +26,6 @@ export const init = () => {
 
     camera = new THREE.PerspectiveCamera(30, 147/198, 0.1, 100);
     camera.position.set(0, 0.8, 4);
-    //camera.look
 
     scene = new THREE.Scene();
     scene.add(light);
@@ -37,7 +36,7 @@ export const init = () => {
 
 export const skin = async (player) => {
     const [player_skin, is_slim] = await getPlayerSkin(player);
-    const model_path = is_slim ? '/static/models/slim_with_overlay.glb' : '/static/models/regular_with_overlay.glb';
+    var model_path = is_slim ? '/static/models/slim_with_overlay.glb' : '/static/models/regular_with_overlay.glb';
 
     if (model) {
         scene.remove(model);
@@ -85,7 +84,7 @@ export const skin = async (player) => {
 function animate() {
     requestAnimationFrame(animate);
     if (model && model.rotation) {
-        model.rotation.y += 0.0035;
+        model.rotation.y += 0.0020;
     }
     renderer.render(scene, camera);
 }
