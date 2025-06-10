@@ -2,7 +2,7 @@ from django.contrib import admin
 from . import models
 
 #admin.site.register(models.Resolution)
-admin.site.register(models.Treaty)
+#admin.site.register(models.Treaty)
 
 class ResolutionImageInline(admin.TabularInline):
     model = models.ResolutionImage
@@ -22,3 +22,24 @@ class ResolutionAdmin(admin.ModelAdmin):
 class ResolutionImageAdmin(admin.ModelAdmin):
     search_fields = ['resolution__title']
     ordering = ['resolution', 'order']
+    
+    
+    
+class TreatyImageInline(admin.TabularInline):
+    model = models.TreatyImage
+    extra = 1
+    fields = ['image', 'order']
+    ordering = ['order']
+
+@admin.register(models.Treaty)
+class TreatyAdmin(admin.ModelAdmin):
+    inlines = [TreatyImageInline]
+    
+    def image_count(self, obj):
+        return obj.images.count()
+    image_count.short_description = 'Images'
+
+@admin.register(models.TreatyImage)
+class TreatyImageAdmin(admin.ModelAdmin):
+    search_fields = ['treaty__title']
+    ordering = ['treaty', 'order']

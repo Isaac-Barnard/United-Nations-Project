@@ -60,3 +60,15 @@ class Treaty(models.Model):
 
     def __str__(self):
         return f"{self.title} ({self.date})"
+    
+    
+class TreatyImage(models.Model):
+    treaty = models.ForeignKey(Treaty, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='treaty_images/')
+    order = models.PositiveIntegerField(default=0, help_text="Order in which images should be displayed")
+    
+    class Meta:
+        ordering = ['order']
+    
+    def __str__(self):
+        return f"Image for {self.treaty.title} ({self.order})"

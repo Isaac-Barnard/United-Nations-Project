@@ -17,5 +17,6 @@ def court_cases(request):
     return render(request, 'court_cases.html')
 
 def treaties(request):
-    treaties = Treaty.objects.all().order_by('-date')
+# Prefetch images to avoid N+1 queries while maintaining date ordering
+    treaties = Treaty.objects.prefetch_related('images').all().order_by('-date')
     return render(request, 'treaties.html', {'treaties': treaties})

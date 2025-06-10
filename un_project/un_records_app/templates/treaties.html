@@ -20,18 +20,75 @@
             ({{ treaty.date|date:"n/j/Y" }}) &nbsp;&nbsp;Nations Involved: {{ treaty.nations_involved.all|join:", " }}
             {% if treaty.void %}<strong>(Void, {{ treaty.invalidation_date }})</strong>{% endif %}
         </p>
-        {% load markdown_extras %}
-        <p>
-            {{ treaty.body|markdownify }}
-        </p>
+        
+        <div class="resolution-content">
+            {% load markdown_extras %}
+            <div class="resolution-text">
+                {{ treaty.body|markdownify }}
+            </div>
+            
+            {% if treaty.images.exists %}
+                {% if treaty.images.count == 1 %}
+                    <!-- Single image layout -->
+                    <div class="resolution-images single-image">
+                        {% for image in treaty.images.all %}
+                        <div class="image-container">
+                            <img src="{{ image.image.url }}" 
+                                 alt="Image for {{ treaty.title }}" 
+                                 class="resolution-image"
+                                 onclick="openModal('{{ image.image.url }}', '{{ treaty.title }}')">
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Multiple images grid layout -->
+                    <div class="resolution-images multiple-images">
+                        {% for image in treaty.images.all %}
+                        <div class="image-container">
+                            <img src="{{ image.image.url }}" 
+                                 alt="Image for {{ treaty.title }}" 
+                                 class="treaty-image"
+                                 onclick="openModal('{{ image.image.url }}', '{{ treaty.title }}')">
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
     </div>
     <hr>
     {% empty %}
     <p>No treaties found.</p>
     {% endfor %}
 </div>
+
+<!-- Modal for full-size image viewing -->
+<div id="imageModal" class="image-modal" onclick="closeModal()">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
 {% endblock %}
 
 {% block extra_js %}
+<script>
+function openModal(imageSrc, title) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    
+    modal.style.display = 'block';
+    modalImg.src = imageSrc;
+    modalImg.alt = 'Image for ' + title;
+}
 
+function closeModal() {
+    document.getElementById('imageModal').style.display = 'none';
+}
+
+// Close modal when pressing Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeModal();
+    }
+});
+</script>
 {% endblock %}
