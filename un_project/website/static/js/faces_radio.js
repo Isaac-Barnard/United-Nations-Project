@@ -94,7 +94,7 @@ for (const player of players) {
     radioHTML += `
         <label>
             <input type="radio" class="radio" name="Player Face" value="${player.username}">
-            <img src="${face_image}" alt="Select Player ${player.username}" width="32" height = "32">
+            <img title="${player.username}" src="${face_image}" alt="Select Player ${player.username}" width="32" height = "32">
         </label>`;
 }
 
