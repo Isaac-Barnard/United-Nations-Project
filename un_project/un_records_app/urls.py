@@ -7,4 +7,5 @@ urlpatterns = [
     path('resolutions', resolutions, name='resolutions'),
     path('court-cases', court_cases, name='court_cases'),
     path('treaties', treaties, name='treaties'),
+    path('executive_orders', executive_orders, name='executive_orders'),
 ]

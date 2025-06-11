@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Resolution, Treaty
+from .models import Resolution, Treaty, Executive_Order
 
 # Create your views here.
 def records_home(request):
@@ -20,3 +20,7 @@ def treaties(request):
 # Prefetch images to avoid N+1 queries while maintaining date ordering
     treaties = Treaty.objects.prefetch_related('images').all().order_by('-date')
     return render(request, 'treaties.html', {'treaties': treaties})
+
+def executive_orders(request):
+    executive_orders = Executive_Order.objects.all().order_by('-date')
+    return render(request, 'executive_orders.html', {'executive_orders': executive_orders})

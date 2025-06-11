@@ -3,6 +3,7 @@ from . import models
 
 #admin.site.register(models.Resolution)
 #admin.site.register(models.Treaty)
+admin.site.register(models.Executive_Order)
 
 class ResolutionImageInline(admin.TabularInline):
     model = models.ResolutionImage
