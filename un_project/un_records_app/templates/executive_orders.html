@@ -26,9 +26,8 @@
                 <h2>Executive Order No. {{ executive_order.number }}</h2>
                 <p>
                     ({{ executive_order.date|date:"n/j/Y" }}) &nbsp;&nbsp;Ordered By: {{ executive_order.ordered_by }}
-                    {% if executive_order.void %}
-                        <strong>(Void, {{ executive_order.invalidation_date|date:"n/j/Y" }})</strong>
-                    {% endif %}
+                    {% if executive_order.void %}<strong>(Void, {{ executive_order.invalidation_date|date:"n/j/Y" }})</strong>{% endif %}
+                    {% if executive_order.repealed %}<strong>(Repealed, {{ executive_order.invalidation_date|date:"n/j/Y" }})</strong>{% endif %}
                 </p>
                 {% load markdown_extras %}
                 <p>
