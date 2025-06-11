@@ -22,7 +22,16 @@
                             <img src="{% static 'images/un_seal.png' %}" alt="UN Seal">
                         </a>
                     </li>
-                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li class="dropdown" id="evaluations-dropdown">
+                        <a href="{% url 'home' %}">Home</a>
+                        <div class="dropdown-content two-columns">
+                            <div class="column">
+                                <strong>Audit Tools</strong>
+                                <a href="{% url 'financial_home' %}">UN Financial Home</a>
+                                <a href="{% url 'records_home' %}">UN Records Home</a>
+                            </div>
+                        </div>
+                    </li>
                     <li><a href="{% url 'charter' %}">UN Charter</a></li>
                     <li><a href="{% url 'resolutions' %}">Resolutions</a></li>
                     <li><a href="{% url 'treaties' %}">Treaties</a></li>
