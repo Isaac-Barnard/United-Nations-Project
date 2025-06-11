@@ -12,23 +12,37 @@
 {% block content %}
 <div class="page-container">
     <h1>United Nations Executive Orders</h1>
-     <hr>
-    {% for executive_order in executive_orders %}
-    <div>
-        <h2>Executive Order No. {{ executive_order.number }}</h2>
-        <p>
-            ({{ executive_order.date|date:"n/j/Y" }}) &nbsp;&nbsp;Ordered By: {{ executive_order.ordered_by }}
-            {% if executive_order.void %}<strong>(Void, {{ executive_order.invalidation_date }})</strong>{% endif %}
-        </p>
-        {% load markdown_extras %}
-        <p>
-            {{ executive_order.body|markdownify }}
-        </p>
-    </div>
     <hr>
-    {% empty %}
-    <p>No executive orders found.</p>
-    {% endfor %}
+    
+    {% with 1 as current_charter %}
+        {% for executive_order in executive_orders %}
+            {% if current_charter != None and current_charter != executive_order.charter %}
+                <!-- Show the line between groups -->
+                <h5 style="text-align: center;"><em>Ratification of a new United Nations Charter</em></h5>
+                <hr>
+            {% endif %}
+
+            <div>
+                <h2>Executive Order No. {{ executive_order.number }}</h2>
+                <p>
+                    ({{ executive_order.date|date:"n/j/Y" }}) &nbsp;&nbsp;Ordered By: {{ executive_order.ordered_by }}
+                    {% if executive_order.void %}
+                        <strong>(Void, {{ executive_order.invalidation_date|date:"n/j/Y" }})</strong>
+                    {% endif %}
+                </p>
+                {% load markdown_extras %}
+                <p>
+                    {{ executive_order.body|markdownify }}
+                </p>
+            </div>
+            <hr>
+
+            {% with executive_order.charter as current_charter %}
+            {% endwith %}
+        {% empty %}
+            <p>No executive orders found.</p>
+        {% endfor %}
+    {% endwith %}
 </div>
 {% endblock %}
 
