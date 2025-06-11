@@ -13,9 +13,11 @@
 <div class="page-container">
     <h1>United Nations Executive Orders</h1>
     <hr>
-    
-    {% with 1 as current_charter %}
-        {% for executive_order in executive_orders %}
+
+    {% regroup executive_orders by charter as charter_groups %}
+
+    {% for group in charter_groups %}
+        {% for executive_order in group.list %}
             <div>
                 <h2>Executive Order No. {{ executive_order.number }}</h2>
                 <p>
@@ -29,19 +31,17 @@
                 </p>
             </div>
             <hr>
-
-            {% if current_charter != None and current_charter != executive_order.charter %}
-                <!-- Show the line between groups -->
-                <h5 style="text-align: center;"><em>Ratification of a new United Nations Charter</em></h5>
-                <hr>
-            {% endif %}
-
-            {% with executive_order.charter as current_charter %}
-            {% endwith %}
-        {% empty %}
-            <p>No executive orders found.</p>
         {% endfor %}
-    {% endwith %}
+        
+        {% if not forloop.last %}
+            <!-- Charter heading: only once per charter group, centered & italicized -->
+            <h5 style="text-align: center;"><em>Ratification of a new United Nations Charter</em></h5>
+            <hr>
+        {% endif %}
+
+    {% empty %}
+        <p>No executive orders found.</p>
+    {% endfor %}
 </div>
 {% endblock %}
 
