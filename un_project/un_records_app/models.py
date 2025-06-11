@@ -39,7 +39,7 @@ class ResolutionImage(models.Model):
     
     
 class ResolutionAmendment(models.Model):
-    number = models.PositiveIntegerField()
+    number = models.CharField(max_length=10)
     resolution = models.ForeignKey(Resolution, on_delete=models.CASCADE, related_name='amended_resolution')
     date = models.DateField()
     votes_for = models.PositiveIntegerField()
@@ -63,7 +63,7 @@ class ResolutionAmendment(models.Model):
             raise ValidationError("Invalidation date cannot be set unless the amendment is void or repealed.")
 
     def __str__(self):
-        return f"{self.title} ({self.date})"
+        return f"{self.resolution.title} {self.number} ({self.date})"
     
     
 #--------------------------------------------------------------------------------------------
