@@ -87,19 +87,28 @@ async function changePlayer(player) {
 }
 
 const selectorDiv = document.querySelector('.selector');
+const specialDiv = document.querySelector('.prioritySelector');
 const players = await getPlayerList();
-let radioHTML = "";
+let selectorHTML = "";
+let specialHTML = "";
 
+const specialPlayers = ["Axeman_76", "Cowman7", "OldManReidGaming", "vlueban", "Tallerfiber1", "Yerloss"];
 for (const player of players) {
     const face_image = await constructImage(player.username);
-    radioHTML += `
+    var playerLabel = `
         <label>
             <input type="radio" class="radio" name="Player Face" value="${player.username}">
             <img title="${player.username}" src="${face_image}" alt="Select Player ${player.username}" width="32" height = "32">
         </label>`;
+    if (specialPlayers.includes(player.username)) {
+        specialHtml += playerLabel;
+    } else {
+        selectorHTML += playerLabel;
+    }
 }
 
-selectorDiv.innerHTML = radioHTML;
+selectorDiv.innerHTML = selectorHTML;
+specialDiv.innerHTML = specialHTML;
 
 document.querySelectorAll(".radio").forEach(el => {
     el.addEventListener('click', () => changePlayer(el.value));

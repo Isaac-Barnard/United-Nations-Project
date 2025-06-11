@@ -173,6 +173,10 @@ body {
     margin: 0;
 }
 
+.prioritySelector {
+    width: 500px;
+}
+
 .selector {
     width: 500px;
 }
