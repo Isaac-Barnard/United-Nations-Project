@@ -101,7 +101,7 @@ for (const player of players) {
             <img title="${player.username}" src="${face_image}" alt="Select Player ${player.username}" width="32" height = "32">
         </label>`;
     if (specialPlayers.includes(player.username)) {
-        specialHtml += playerLabel;
+        specialHTML += playerLabel;
     } else {
         selectorHTML += playerLabel;
     }
