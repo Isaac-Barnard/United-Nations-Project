@@ -22,5 +22,5 @@ def treaties(request):
     return render(request, 'treaties.html', {'treaties': treaties})
 
 def executive_orders(request):
-    executive_orders = Executive_Order.objects.all().order_by('-date')
+    executive_orders = Executive_Order.objects.all().order_by('charter', '-date')
     return render(request, 'executive_orders.html', {'executive_orders': executive_orders})

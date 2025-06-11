@@ -15,7 +15,7 @@
      <hr>
     {% for executive_order in executive_orders %}
     <div>
-        <h2>{{ executive_order.number }}</h2>
+        <h2>Executive Order No. {{ executive_order.number }}</h2>
         <p>
             ({{ executive_order.date|date:"n/j/Y" }}) &nbsp;&nbsp;Ordered By: {{ executive_order.ordered_by }}
             {% if executive_order.void %}<strong>(Void, {{ executive_order.invalidation_date }})</strong>{% endif %}
