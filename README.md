@@ -119,15 +119,15 @@ Setting up the repo is pretty easy:
 - **<ins>Records Document</ins>**
     - [ ] UN Charter & amendments
         - [ ] Past charters
-    - [ ] Resolutions
+    - [x] Resolutions
         - [x] Void/repealed resolutions
-        - [ ] Images
-        - [ ] Amendments
-    - [ ] Treaties
-        - [ ] Images
+        - [x] Images
+        - [x] Amendments
+    - [x] Treaties
+        - [x] Images
     - [ ] Court Cases
         - [ ] Images/videos
-    - [ ] Executive Orders
+    - [x] Executive Orders
     - [ ] Misc.
         - [ ] Recognized Alliances
         - [ ] Declarations of War

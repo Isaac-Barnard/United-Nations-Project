@@ -7,11 +7,11 @@ def records_home(request):
     return render(request, 'records_home.html')
 
 def charter(request):
-    charter = Charter.objects.prefetch_related('amended_charter').all().order_by('-date')
+    charter = Charter.objects.prefetch_related('amended_charter').all().order_by('date')
     return render(request, 'charter.html', {'charter': charter})
 
 def resolutions(request):
-    amendments_prefetch = Prefetch('amended_resolution',queryset=ResolutionAmendment.objects.all().order_by('-date'),to_attr='amendments')
+    amendments_prefetch = Prefetch('amended_resolution',queryset=ResolutionAmendment.objects.all().order_by('date'),to_attr='amendments')
     # Prefetch images to avoid N+1 queries while maintaining date ordering
     resolutions = (Resolution.objects.prefetch_related('images', amendments_prefetch).all().order_by('-date'))
     return render(request, 'resolutions.html', {'resolutions': resolutions})

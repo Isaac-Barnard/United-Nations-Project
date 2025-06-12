@@ -36,7 +36,7 @@
                         <h3>AMENDMENT {{ amendment.number }}</h3>
                         <p>
                             ({{ amendment.date|date:"n/j/Y" }}) 
-                            [{{ amendment.votes_for }}-{{ amendment.votes_against }}] &nbsp;&nbsp;
+                            [{{ amendment.votes_for|custom_charter_decimal_places }}-{{ amendment.votes_against|custom_charter_decimal_places }}] &nbsp;&nbsp;
                             Proposed By: {{ amendment.proposed_by }}
                             {% if amendment.void %}<strong>(Void, {{ amendment.invalidation_date|date:"n/j/Y" }})</strong>{% endif %}
                             {% if amendment.repealed %}<strong>(Repealed, {{ amendment.invalidation_date|date:"n/j/Y" }})</strong>{% endif %}
@@ -55,7 +55,7 @@
         {% endif %}
 
     {% empty %}
-        <p>No executive orders found.</p>
+        <p>No charters found.</p>
     {% endfor %}
 
 </div>
