@@ -6,6 +6,7 @@ from . import models
 admin.site.register(models.Executive_Order)
 admin.site.register(models.ResolutionAmendment)
 admin.site.register(models.Charter)
+admin.site.register(models.CharterAmendment)
 
 class ResolutionImageInline(admin.TabularInline):
     model = models.ResolutionImage

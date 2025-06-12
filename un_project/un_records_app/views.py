@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.db.models import Prefetch
-from .models import Resolution, Treaty, Executive_Order, ResolutionAmendment, Charter
+from .models import Resolution, Treaty, Executive_Order, ResolutionAmendment, Charter, CharterAmendment
 
 # Create your views here.
 def records_home(request):
     return render(request, 'records_home.html')
 
 def charter(request):
-    charter = Charter.objects.all().order_by('-date')
+    charter = Charter.objects.prefetch_related('amended_charter').all().order_by('-date')
     return render(request, 'charter.html', {'charter': charter})
 
 def resolutions(request):

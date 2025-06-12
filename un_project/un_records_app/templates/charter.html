@@ -27,6 +27,27 @@
                 {{ chart.body|markdownify }}
             </p>
         </div>
+
+    <!-- Charter Amendments -->
+        {% if chart.amended_charter.exists %}
+            <div class="amendments-section">
+                {% for amendment in chart.amended_charter.all %}
+                    <div class="amendment">
+                        <h3>AMENDMENT {{ amendment.number }}</h3>
+                        <p>
+                            ({{ amendment.date|date:"n/j/Y" }}) 
+                            [{{ amendment.votes_for }}-{{ amendment.votes_against }}] &nbsp;&nbsp;
+                            Proposed By: {{ amendment.proposed_by }}
+                            {% if amendment.void %}<strong>(Void, {{ amendment.invalidation_date|date:"n/j/Y" }})</strong>{% endif %}
+                            {% if amendment.repealed %}<strong>(Repealed, {{ amendment.invalidation_date|date:"n/j/Y" }})</strong>{% endif %}
+                        </p>
+                        <div class="amendment-body">
+                            {{ amendment.body|markdownify }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
         <hr>
 
         {% if not forloop.last %}
