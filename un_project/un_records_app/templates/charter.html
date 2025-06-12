@@ -10,8 +10,32 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1>United Nations Charter</h1>
+<div class="page-container">
+    {% for chart in charter %}
+        {% if  forloop.first %}
+            <h1>United Nations Charter</h1>
+        {% endif %}
+
+        <div>
+            <p>
+                ({{ chart.date|date:"n/j/Y" }})
+                {% if chart.void %}<strong>(Void, {{ chart.invalidation_date|date:"n/j/Y" }})</strong>{% endif %}
+                {% if chart.repealed %}<strong>(Repealed, {{ chart.invalidation_date|date:"n/j/Y" }})</strong>{% endif %}
+            </p>
+            {% load markdown_extras %}
+            <p>
+                {{ chart.body|markdownify }}
+            </p>
+        </div>
+        <hr>
+
+        {% if not forloop.last %}
+            <h2>Former United Nations Charter</h2>
+        {% endif %}
+
+    {% empty %}
+        <p>No executive orders found.</p>
+    {% endfor %}
 
 </div>
 {% endblock %}

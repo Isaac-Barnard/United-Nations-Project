@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from django.db.models import Prefetch
-from .models import Resolution, Treaty, Executive_Order, ResolutionAmendment
+from .models import Resolution, Treaty, Executive_Order, ResolutionAmendment, Charter
 
 # Create your views here.
 def records_home(request):
     return render(request, 'records_home.html')
 
 def charter(request):
-    return render(request, 'charter.html')
+    charter = Charter.objects.all().order_by('-date')
+    return render(request, 'charter.html', {'charter': charter})
 
 def resolutions(request):
     amendments_prefetch = Prefetch('amended_resolution',queryset=ResolutionAmendment.objects.all().order_by('-date'),to_attr='amendments')
@@ -19,7 +20,7 @@ def court_cases(request):
     return render(request, 'court_cases.html')
 
 def treaties(request):
-# Prefetch images to avoid N+1 queries while maintaining date ordering
+    # Prefetch images to avoid N+1 queries while maintaining date ordering
     treaties = Treaty.objects.prefetch_related('images').all().order_by('-date')
     return render(request, 'treaties.html', {'treaties': treaties})
 
