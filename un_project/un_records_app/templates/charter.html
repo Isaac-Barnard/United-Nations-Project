@@ -32,6 +32,7 @@
         {% if chart.amended_charter.exists %}
             <div class="amendments-section">
                 {% for amendment in chart.amended_charter.all %}
+                    <br>
                     <div class="amendment">
                         <h3>AMENDMENT {{ amendment.number }}</h3>
                         <p>
@@ -48,11 +49,16 @@
                 {% endfor %}
             </div>
         {% endif %}
-        <hr>
+        <br>
 
         {% if not forloop.last %}
+            <br>
+            <hr>
+            <br>
+            <br>
             <h2>Former United Nations Charter</h2>
         {% endif %}
+        
 
     {% empty %}
         <p>No charters found.</p>
