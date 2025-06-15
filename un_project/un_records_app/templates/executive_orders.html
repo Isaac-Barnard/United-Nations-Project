@@ -1,0 +1,50 @@
+{% extends 'records_base.html' %}More actions
+
+{% block title %}Executive Orders{% endblock %}
+
+{% load static %}
+{% load custom_filters %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/records_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1>United Nations Executive Orders</h1>
+    <hr>
+
+    {% regroup executive_orders by charter as charter_groups %}
+
+    {% for group in charter_groups %}
+        {% for executive_order in group.list %}
+            <div>
+                <h2>Executive Order No. {{ executive_order.number }}</h2>
+                <p>
+                    ({{ executive_order.date|date:"n/j/Y" }}) &nbsp;&nbsp;Ordered By: {{ executive_order.ordered_by }}
+                    {% if executive_order.void %}<strong>(Void, {{ executive_order.invalidation_date|date:"n/j/Y" }})</strong>{% endif %}
+                    {% if executive_order.repealed %}<strong>(Repealed, {{ executive_order.invalidation_date|date:"n/j/Y" }})</strong>{% endif %}
+                </p>
+                {% load markdown_extras %}
+                <p>
+                    {{ executive_order.body|markdownify }}
+                </p>
+            </div>
+            <hr>
+        {% endfor %}
+        
+        {% if not forloop.last %}
+            <!-- Charter heading: only once per charter group, centered & italicized -->
+            <h5 style="text-align: center;"><em>Ratification of a new United Nations Charter</em></h5>
+            <hr>
+        {% endif %}
+
+    {% empty %}
+        <p>No executive orders found.</p>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}

@@ -117,17 +117,17 @@ Setting up the repo is pretty easy:
         - [ ] Button that displays railroad/infrastructure routes
         - [ ] Somehow display historical/informative maps
 - **<ins>Records Document</ins>**
-    - [ ] UN Charter & amendments
-        - [ ] Past charters
-    - [ ] Resolutions
+    - [x] UN Charter & amendments
+        - [x] Past charters
+    - [x] Resolutions
         - [x] Void/repealed resolutions
-        - [ ] Images
-        - [ ] Amendments
-    - [ ] Treaties
-        - [ ] Images
+        - [x] Images
+        - [x] Amendments
+    - [x] Treaties
+        - [x] Images
     - [ ] Court Cases
         - [ ] Images/videos
-    - [ ] Executive Orders
+    - [x] Executive Orders
     - [ ] Misc.
         - [ ] Recognized Alliances
         - [ ] Declarations of War
@@ -136,3 +136,6 @@ Setting up the repo is pretty easy:
         - [ ] Aternos Games
         - [ ] Medal of Papa Quinn
         - [ ] Petitions
+        - [ ] UN Staff
+        - [ ] Historical UN Sessions
+        - [ ] Name Changes
