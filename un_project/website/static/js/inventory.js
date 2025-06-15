@@ -290,25 +290,26 @@ function toggle_shulker_display(e) {
     let shulker = document.querySelector(".shulker");
     let shulker_name = document.querySelector('.shulker-name');
 
-    if (shulker.style.visibility === 'visible') {
+    if (shulker.style.visibility === 'visible' && shulker.getAttribute('id') == e.target.offsetParent.getAttribute('id')) {
         subDiv.innerHTML = '';
         shulker_name.style.fontStyle = '';
         shulker_name.innerHTML = '';
         shulker.removeAttribute('id');
         shulker.style.visibility = 'hidden';
-    } else {
-        shulker.style.visibility = 'visible';
-        get_shulker_name(e.target, shulker_name);
-        var inv_id = e.target.offsetParent.getAttribute('id');
-        var inv_json = subData.filter(inventory => inventory.inv_id == inv_id)[0];
-        subDiv.innerHTML = inv_json.div.innerHTML;
-        shulker.setAttribute('id', inv_id);
+        return;
     }
+    shulker.style.visibility = 'visible';
+    get_shulker_name(e.target, shulker_name);
+    var inv_id = e.target.offsetParent.getAttribute('id');
+    var inv_json = subData.filter(inventory => inventory.inv_id == inv_id)[0];
+    subDiv.innerHTML = inv_json.div.innerHTML;
+    shulker.setAttribute('id', inv_id);
+    
 }
 
 function get_shulker_name(element, name_element) {
     if (element.hasAttribute('data-title-c')) {
-        name_element.innerHTML =  element.getAttribute('data-title-c');
+        name_element.innerHTML = element.getAttribute('data-title-c');
         name_element.style.fontStyle = 'italic';
     } else if (element.hasAttribute('data-title')) {
         name_element.innerHTML = element.getAttribute('data-title');
