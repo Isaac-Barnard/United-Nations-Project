@@ -87,7 +87,7 @@ async function changePlayer(player) {
 }
 
 const selectorDiv = document.querySelector('.selector');
-const specialDiv = document.querySelector('.prioritySelector');
+const specialDiv = document.querySelector('.priority-selector');
 const players = await getPlayerList();
 let selectorHTML = "";
 let specialHTML = "";

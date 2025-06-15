@@ -6,8 +6,11 @@ const inventoryDiv = document.querySelector('.inv-slots');
 const hotbarDiv = document.querySelector('.hotbar-slots');
 const echestDiv = document.querySelector('.echest-slots');
 const playerDiv = document.querySelector('.player');
+const subDiv = document.querySelector('.shulker-slots');
 
-function createItem(slotData, i) {
+var subData = [];
+
+function createItem(slotData, i, shulkerId) {
     const itemDiv = document.createElement('div');
     itemDiv.className = 'item';
     const itemImage = document.createElement('img');
@@ -30,6 +33,8 @@ function createItem(slotData, i) {
         if (slotData['item_id'].includes("shulker_box")) {
             itemDiv.setAttribute("onmouseenter", "display_shulker(this);");
             itemDiv.setAttribute("onmouseleave", "remove_shulker(this);");
+            itemDiv.setAttribute("id", shulkerId.value);
+            shulkerId.value = shulkerId.value + 2;
         } else {
             itemDiv.setAttribute("onmouseenter", "display_tooltip(this);");
             itemDiv.setAttribute("onmouseleave", "remove_tooltip(this);");
@@ -57,8 +62,8 @@ function createItem(slotData, i) {
  *  amount              - Number of item held within slot
  *  name                - Proper name of the item
  *                        (cooked_beef -> steak)
- * custom_name          - Custom name of the item, None if no custom name
- * enchantments         - Enchantments on item, None if no enchantments
+ *  custom_name         - Custom name of the item, None if no custom name
+ *  enchantments        - Enchantments on item, None if no enchantments
  *                        stored in dictionary as {'name': level} format
 */
 async function getInventoryData(playername) {
@@ -78,22 +83,30 @@ async function getInventoryData(playername) {
 }
 
 
-function subInv(item) {
-    console.log('subinv: ' + item.name);
+function shulkerInv(slot_list, inv_id) {
+    var tempDiv = document.createElement('div');
+    for (let i = 0; i < 27; i++) {
+        const slot_data = slot_list.find(item=>item.slot === i);
+        const item_div = createItem(slot_data, i);
+        tempDiv.appendChild(item_div);
+    }
+    return tempDiv;
 }
 
 function echestInv(slot_list) {
+    var shulkerId = {value: 3};
     for (let i = 0; i < 27; i++) {
         const slot_data = slot_list.find(item => item.slot === i);
-        const item_div = createItem(slot_data, i);
+        const item_div = createItem(slot_data, i, shulkerId);
         echestDiv.appendChild(item_div);
     }
 }
 
 function playerInv(slot_list) {
+    var shulkerId = {value: 2};
     for (let i = 0; i < 36; i++) {
         const slot_data = slot_list.find(item => item.slot === i); // undefined or the item
-        const item_div = createItem(slot_data, i);
+        const item_div = createItem(slot_data, i, shulkerId);
 
         if (i < 9) {
             hotbarDiv.appendChild(item_div);
@@ -120,9 +133,20 @@ function inventory(playername) {
 
             const player_inv_slots = jsonData.filter(item => item.inventory_type_id === 0);
             playerInv(player_inv_slots);
-
+            
             const echest_inv_slots = jsonData.filter(item => item.inventory_type_id === 1);
             echestInv(echest_inv_slots);
+            
+            var max_inv_id = 0;
+            playerJson.forEach((item) => max_inv_id = item.inventory_type_id > max_inv_id ? item.inventory_type_id : max_inv_id);
+            
+            subData = [];
+            for (let i = 2; i <= max_inv_id; i++)  {
+                var sub_inv_slots = jsonData.filter(item => item.inventory_type_id === i);
+                if (sub_inv_slots === undefined) { continue; }
+                var innerDiv = shulkerInv(sub_inv_slots, i);
+                subData.push({inv_id: i, div: innerDiv});
+            }
         })
         .catch(error => console.error('Error fetching JSON data: ', error));
 }
@@ -151,12 +175,13 @@ function display_tooltip(element) {
 
     var interface = element.offsetParent.offsetParent.className;
 
-    if (interface === "inventory") { interface = 0 }
-    else if (interface === "enderchest") { interface = 1 }
+    if (interface === "inventory") { interface = 0; }
+    else if (interface === "enderchest") { interface = 1; }
+    else { interface = element.offsetParent.offsetParent.id; }
 
     var jsonData = playerJson;
 
-    let slot = jsonData.filter(item => item.inventory_type_id === interface).find(item => item.slot === parseInt(id));
+    let slot = jsonData.filter(item => item.inventory_type_id == interface).find(item => item.slot === parseInt(id));
     if (slot === undefined) {
         console.error("Error fetching item slot " + id);
         return;
@@ -215,7 +240,12 @@ function remove_tooltip(element) {
 }
 
 function display_shulker(element) {
+    if (document.querySelector(".tooltip")) {
+        return;
+    }
     display_tooltip(element);
+    element.removeEventListener('click', toggle_freeze_tooltip);
+    element.addEventListener('click', toggle_shulker_display);
 }
 
 function remove_shulker(element) {
@@ -223,7 +253,7 @@ function remove_shulker(element) {
 }
 
 function follow(e) {
-    if (document.querySelector(".tooltip").hasAttribute('frozen')) {
+    if (document.querySelector(".tooltip") == null || document.querySelector(".tooltip").hasAttribute('frozen')) {
         return;
     }
     if (e.target.className == "tooltip") {
@@ -253,5 +283,35 @@ function toggle_freeze_tooltip(e) {
         tooltip.removeAttribute('frozen');
     } else {
         tooltip.setAttribute('frozen', 'frozen');
+    }
+}
+
+function toggle_shulker_display(e) {
+    let shulker = document.querySelector(".shulker");
+    let shulker_name = document.querySelector('.shulker-name');
+
+    if (shulker.style.visibility === 'visible') {
+        subDiv.innerHTML = '';
+        shulker_name.style.fontStyle = '';
+        shulker_name.innerHTML = '';
+        shulker.removeAttribute('id');
+        shulker.style.visibility = 'hidden';
+    } else {
+        shulker.style.visibility = 'visible';
+        get_shulker_name(e.target, shulker_name);
+        var inv_id = e.target.offsetParent.getAttribute('id');
+        var inv_json = subData.filter(inventory => inventory.inv_id == inv_id)[0];
+        subDiv.innerHTML = inv_json.div.innerHTML;
+        shulker.setAttribute('id', inv_id);
+    }
+}
+
+function get_shulker_name(element, name_element) {
+    if (element.hasAttribute('data-title-c')) {
+        name_element.innerHTML =  element.getAttribute('data-title-c');
+        name_element.style.fontStyle = 'italic';
+    } else if (element.hasAttribute('data-title')) {
+        name_element.innerHTML = element.getAttribute('data-title');
+        name_element.style.fontStyle = '';
     }
 }
