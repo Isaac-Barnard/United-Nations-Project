@@ -10,6 +10,8 @@ html {
 
 body {
     font-family: "Minecraft";
+    height: 100%;
+    overflow: hidden;
 }
 
 .content {
