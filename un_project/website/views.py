@@ -1,9 +1,11 @@
 import os
+import base64
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
 from django.conf import settings
 from .utilities.youtube import get_latest_video_id
+from players_api.models import User
 
 # Create your views here.
 def home(request):
@@ -31,7 +33,31 @@ def minecraft(request):
     return render(request, 'minecraft.html')
 
 def players(request):
-    return render(request, 'players.html')
+    special_players = ["Axeman_76", "Cowman7", "OldManReidGaming", "vlueban", "Tallerfiber1", "YerLoss"]
+
+    players = User.objects.all().values('username', 'face_image')
+
+    players_with_faces = []
+    for player in players:
+        face_image_data = None
+        if player['face_image']:
+            # Handle different data types
+            if isinstance(player['face_image'], (bytes, memoryview)):
+                # Convert binary data to base64
+                face_bytes = bytes(player['face_image']) if isinstance(player['face_image'], memoryview) else player['face_image']
+                face_b64 = base64.b64encode(face_bytes).decode('utf-8')
+                face_image_data = f"data:image/png;base64,{face_b64}"
+            elif isinstance(player['face_image'], str):
+                # Already a base64 string
+                face_image_data = f"data:image/png;base64,{player['face_image']}"
+
+        players_with_faces.append({
+            'username': player['username'],
+            'face_image': face_image_data,
+            'is_special': player['username'] in special_players
+        })
+
+    return render(request, 'players.html', {'players': players_with_faces})
 
 def discord(request):
     return render(request, 'discord.html')

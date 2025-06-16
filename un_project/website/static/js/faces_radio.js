@@ -1,18 +1,6 @@
 import { skin, init } from '/static/js/skin_viewer.js';
 init();
 
-const locationP = document.querySelector('.playername');
-async function getPlayerList() {
-    const response = await fetch(document.URL + '/api/users/?format=json')
-    return await response.json();
-}
-
-
-async function constructImage(playername) {
-    const response = await fetch(document.URL + '/api/user/' + playername + '/?format=json');
-    const data = await response.json();
-    return `data:image/png;base64,${data.face_image}`;
-}
 
 function formatDimension(dim) {
     switch (dim) {
@@ -75,7 +63,7 @@ async function changePlayer(player) {
     document.querySelector('.inv-slots').innerHTML = "";
     document.querySelector('.hotbar-slots').innerHTML = "";
     document.querySelector('.echest-slots').innerHTML = "";
-    document.querySelector('.shulker-slots').innerHMTL = "";
+    document.querySelector('.shulker-slots').innerHTML = "";
     document.querySelector('.shulker').attributes.id = "";
     document.querySelector('.shulker').style.visibility = 'hidden';
 
@@ -89,30 +77,9 @@ async function changePlayer(player) {
     lastClicked = player;
 }
 
-const selectorDiv = document.querySelector('.selector');
-const specialDiv = document.querySelector('.priority-selector');
-const players = await getPlayerList();
-let selectorHTML = "";
-let specialHTML = "";
-
-const specialPlayers = ["Axeman_76", "Cowman7", "OldManReidGaming", "vlueban", "Tallerfiber1", "Yerloss"];
-for (const player of players) {
-    const face_image = await constructImage(player.username);
-    var playerLabel = `
-        <label>
-            <input type="radio" class="radio" name="Player Face" value="${player.username}">
-            <img title="${player.username}" src="${face_image}" alt="Select Player ${player.username}" width="32" height = "32">
-        </label>`;
-    if (specialPlayers.includes(player.username)) {
-        specialHTML += playerLabel;
-    } else {
-        selectorHTML += playerLabel;
-    }
-}
-
-selectorDiv.innerHTML = selectorHTML;
-specialDiv.innerHTML = specialHTML;
-
-document.querySelectorAll(".radio").forEach(el => {
-    el.addEventListener('click', () => changePlayer(el.value));
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll(".radio").forEach(el => {
+        el.addEventListener('click', () => changePlayer(el.value));
+    });
 });
+
