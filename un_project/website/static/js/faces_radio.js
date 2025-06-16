@@ -76,8 +76,8 @@ async function changePlayer(player) {
     document.querySelector('.hotbar-slots').innerHTML = "";
     document.querySelector('.echest-slots').innerHTML = "";
     document.querySelector('.shulker-slots').innerHMTL = "";
-    document.querySelector('shulker').setAttribute('id') = "";
-    document.querySelector('shulker').style.visibility = 'hidden';
+    document.querySelector('.shulker').attributes.id = "";
+    document.querySelector('.shulker').style.visibility = 'hidden';
 
     document.querySelector('.playername').innerHTML = player;
     const playerResponse = await fetch(`/minecraft/player/api/user/${player}/?format=json`);
