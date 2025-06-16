@@ -64,7 +64,7 @@ async function changePlayer(player) {
     document.querySelector('.hotbar-slots').innerHTML = "";
     document.querySelector('.echest-slots').innerHTML = "";
     document.querySelector('.shulker-slots').innerHTML = "";
-    document.querySelector('.shulker').attributes.id = "";
+    document.querySelector('.shulker').setAttribute("id", "");
     document.querySelector('.shulker').style.visibility = 'hidden';
 
     document.querySelector('.playername').innerHTML = player;
