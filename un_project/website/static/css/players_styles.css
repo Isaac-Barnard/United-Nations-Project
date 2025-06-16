@@ -36,28 +36,36 @@ body {
     padding: 0;
 }
 
-.location {
+.player-info {
     position: absolute;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     color: white;
-    top: 50px;
-    left: 235px;
+    top: 0px;
+    left: 520px;
+    width: 400px;
     font-size: 18px;
     display: inline-block;
     margin: 0;
     padding: 0;
 }
 
+.info-box {
+    width: 500px;
+}
+
+.location {
+    position: absolute;
+    top: 12px;
+    left: 24px;
+    margin: 0;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
 .lastdeath {
     position: absolute;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-    color: white;
-    top: 100px;
-    left: 235px;
-    font-size: 18px;
-    display: inline-block;
     margin: 0;
-    padding: 0;
+    left: 24px;
+    top: 70px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .inv-slots {
