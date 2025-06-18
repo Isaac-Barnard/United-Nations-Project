@@ -40,6 +40,7 @@ function createItem(slotData, i, shulkerId) {
             itemDiv.setAttribute("onmouseleave", "remove_tooltip(this);");
         }
 
+        if (slotData['item_id'].includes("bundle")) { shulkerId.value = shulkerId.value + 2; }
 
         if (slotData['amount'] > 1) {
             const quantityDiv = document.createElement('div');
