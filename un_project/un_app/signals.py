@@ -124,7 +124,14 @@ def update_item_counts_on_price_component_change(sender, instance, **kwargs):
     This affects both the direct item and any items that reference this item in their components.
     """
     # Get the directly related item
-    item = instance.item
+    if isinstance(instance, Item):
+        item = instance
+    elif hasattr(instance, 'item'):
+        item = instance.item
+    elif hasattr(instance, 'evaluation') and hasattr(instance.evaluation, 'item'):
+        item = instance.evaluation.item
+    else:
+        return  # Exit if we can't determine the related item
     
     # First update ItemCounts for the direct item
     item_counts = ItemCount.objects.filter(item=item)
