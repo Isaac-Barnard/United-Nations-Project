@@ -21,8 +21,31 @@
 
 {% block content %}
         <div class="content">
-            <div class="prioritySelector"></div>
-            <div class="selector"></div>
+            <div class="priority-selector">
+                {% for player in players %}
+                    {% if player.is_special %}
+                        <label>
+                            <input type="radio" class="radio" name="Player Face" value="{{ player.username }}">
+                            <img title="{{ player.username }}" src="{{ player.face_image }}" alt="Select Player {{ player.username }}" width="32" height = "32">
+                        </label>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="selector">
+                {% for player in players %}
+                    {% if not player.is_special %}
+                        <label>
+                            <input type="radio" class="radio" name="Player Face" value="{{ player.username }}">
+                            <img title="{{ player.username }}" src="{{ player.face_image }}" alt="Select Player {{ player.username }}" width="32" height = "32">
+                        </label>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="player-info">
+                <img src="{% static 'images/blank-box.png' %}" class="info-box">
+                <p class="location"></p>
+                <p class="lastdeath"></p>
+            </div>
             <div class="inventory">
                 <img src="{% static 'images/inventory-upscaled.png' %}" class="inventory-background">
                 <p class="playername"></p>
@@ -31,8 +54,6 @@
                 <div class="offhand-slot"></div>
                 <div class="inv-slots"></div>
                 <div class="hotbar-slots"></div>
-                <p class="location"></p>
-                <p class="lastdeath"></p>
                 <div class="health">
                     <img src="{% static 'images/hearts_empty.png' %}" class="hearts-empty">
                     <img src="{% static 'images/hearts_full.png' %}" class="hearts-full" id="hearts-fill">
@@ -42,6 +63,11 @@
             <div class="enderchest">
                 <img src="{% static 'images/echest-upscaled.png' %}" class="echest-background">
                 <div class="echest-slots"></div>
+            </div>
+            <div class="shulker">
+                <img src="{% static 'images/shulker.png' %}" class="shulker-background">
+                <p class="shulker-name"></p>
+                <div class="shulker-slots"></div>
             </div>
         </div>
         <script src="{% static 'js/inventory.js' %}"></script>

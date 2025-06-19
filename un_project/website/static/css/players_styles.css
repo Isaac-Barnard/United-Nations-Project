@@ -10,6 +10,8 @@ html {
 
 body {
     font-family: "Minecraft";
+    height: 100%;
+    overflow: hidden;
 }
 
 .content {
@@ -36,28 +38,36 @@ body {
     padding: 0;
 }
 
-.location {
+.player-info {
     position: absolute;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     color: white;
-    top: 50px;
-    left: 235px;
+    top: 0px;
+    left: 520px;
+    width: 400px;
     font-size: 18px;
     display: inline-block;
     margin: 0;
     padding: 0;
 }
 
+.info-box {
+    width: 500px;
+}
+
+.location {
+    position: absolute;
+    top: 12px;
+    left: 24px;
+    margin: 0;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
 .lastdeath {
     position: absolute;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-    color: white;
-    top: 100px;
-    left: 235px;
-    font-size: 18px;
-    display: inline-block;
     margin: 0;
-    padding: 0;
+    left: 24px;
+    top: 70px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .inv-slots {
@@ -118,6 +128,36 @@ body {
     left: 20px;
     display: grid;
     grid-template-columns: repeat(9, 1fr); /* Assuming 9x3 inventory grid */
+    width: 460px;
+    height: 154px;
+}
+
+.shulker {
+    position: relative;
+    top: -458px;
+    left: 520px;
+    width: 500px;
+    visibility: hidden;
+}
+
+.shulker-name {
+    color: #3F3F3F;
+    position: absolute;
+    top: -15px;
+    left: 23px;
+    font-size: 28px;
+}
+
+.shulker-background {
+    width: 500px;
+}
+
+.shulker-slots {
+    position: absolute;
+    top: 51px;
+    left: 20px;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
     width: 460px;
     height: 154px;
 }
