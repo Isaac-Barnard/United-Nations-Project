@@ -40,6 +40,8 @@ class InventorySerializer(serializers.ModelSerializer):
             'book_title',
             'book_author',
             'arrow_effect',
+            'trim_material',
+            'trim_pattern'
         ]
 
 class PlayersOnline(serializers.ModelSerializer):
