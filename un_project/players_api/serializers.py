@@ -37,6 +37,9 @@ class InventorySerializer(serializers.ModelSerializer):
             'name',
             'custom_name',
             'enchantments',
+            'book_title',
+            'book_author',
+            'arrow_effect',
         ]
 
 class PlayersOnline(serializers.ModelSerializer):

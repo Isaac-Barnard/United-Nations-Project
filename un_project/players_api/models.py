@@ -38,6 +38,9 @@ class Inventory(models.Model):
     name = models.TextField()
     custom_name = models.TextField(blank=True, null=True)
     enchantments = models.TextField(blank=True, null=True)
+    book_title = models.TextField(blank=True, null=True)
+    book_author = models.TextField(blank=True, null=True)
+    arrow_effect = models.TextField(blank=True, null=True)
     
     class Meta:
         managed = False  # Prevent Django from managing the schema
