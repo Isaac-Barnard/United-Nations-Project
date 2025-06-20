@@ -15,36 +15,40 @@ from pathlib import Path
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs/errors.log',
-            'formatter': 'verbose',
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False
+
+if(DEBUG == False):
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'file': {
+                'level': 'ERROR',
+                'class': 'logging.FileHandler',
+                'filename': BASE_DIR / 'logs/errors.log',
+                'formatter': 'verbose',
+            },
         },
-    },
-    'formatters': {
-        'verbose': {
-            'format': '{asctime} [{levelname}] {name}.{funcName}:{lineno} - {message}',
-            'style': '{',
+        'formatters': {
+            'verbose': {
+                'format': '{asctime} [{levelname}] {name}.{funcName}:{lineno} - {message}',
+                'style': '{',
+            },
         },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'ERROR',
-            'propagate': True,
+        'loggers': {
+            'django': {
+                'handlers': ['file'],
+                'level': 'ERROR',
+                'propagate': True,
+            },
+            '__main__': {  # For middleware or root-level logs
+                'handlers': ['file'],
+                'level': 'ERROR',
+                'propagate': True,
+            },
         },
-        '__main__': {  # For middleware or root-level logs
-            'handlers': ['file'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    },
-}
+    }
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -52,8 +56,6 @@ LOGGING = {
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'xx7av6y(1gj3gu(3ro0-=s5^8r@8o=bt0t9_q!y15_rkma%%lh'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
 ALLOWED_HOSTS = ['ws-studios.com', 'werespecialstudios.com', 'www.ws-studios.com', 'www.werespecialstudios.com', '127.0.0.1']
 
@@ -206,3 +208,13 @@ LOGOUT_REDIRECT_URL = 'login'  # Redirect after logout
 # Media files configuration
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
+
+if(DEBUG == True):
+    import os
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+    # Also make sure you have these static files settings
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+    ]

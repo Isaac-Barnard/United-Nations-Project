@@ -25,7 +25,7 @@ class Item(models.Model):
     market_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
 
     def __str__(self):
-        return self.name
+        return f'{self.name}  ({self.ordering})'
     
 
     def _total_diamond_value(self, processed_items=None):
