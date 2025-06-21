@@ -89,12 +89,15 @@ Running the server locally:
         - [ ] Be able to search for existing buildings (narrows down list as you type more letters)
 - **<ins>Player Viewer</ins>**
     - [ ] Display Extra Stats
-        - [ ] Location
-        - [ ] Death Location
-        - [ ] Hearts
+        - [X] Location
+        - [X] Death Location
+        - [X] Hearts
         - [ ] Xp
-    - [ ] Enchantment Glow
-    - [ ] Fix shulker boxes
+    - [ ] Enchantment Glint
+    - [X] Fix shulker boxes
+    - [ ] Add Rarity
+    - [ ] Fix Tipped Arrows
+    - [ ] Fix Written Books
     - [X] Fix Model Viewer
 - **<ins>Misc.</ins>**
     - [ ] Sort buildings
