@@ -1,4 +1,4 @@
-name,territory,owner,main_builder,y_level_high_pt,y_level_ground,year_completed,completed,x_coordinate,z_coordinate,historic_site,architectural_genius,mopq_award,architectural_style,size,materials,furnished
+name,territory,owner,main_builder,y_level_high_pt,y_level_ground,year_started,completed,x_coordinate,z_coordinate,historic_site,architectural_genius,mopq_award,architectural_style,size,materials,furnished
 Residential Station Hub,Archiva,UN,"Axeman_76, Cowman7",73.5,63,2022,TRUE,31,-19,FALSE,FALSE,,,Medium-Small,Elite,TRUE
 Jose's House,Archiva,UN,TeatedPuddle65,73,64,2019,TRUE,26,13,TRUE,FALSE,,,Modest,Basic,TRUE
 Egg Shooter,Archiva,EOMR,OldManReidGaming,70,63,2019,TRUE,4,8,FALSE,FALSE,,OMR Primitive,Tiny,Basic,TRUE
