@@ -12,12 +12,21 @@ https://docs.google.com/spreadsheets/d/1JdZUSav9DEh1bBfTcVBIFID3sLobqyq5nqLV7MwN
 
 ## Setup
 Setting up the repo is pretty easy:
+First-time setup
 1. Clone the repo
-2. Go to the folder: 
+2. Create a Python virtual enviroment
+3. Enter the virtual enviroment
+4. Install Poetry
+`pip install poetry`
+5. Install dependancies using Poetry
+`python poetry install`
+
+Running the server locally:
+6. Go to the folder: 
 `cd un_project/`
-3. In that folder set up the database by importing/creating all the data by running:
+7. In that folder set up the database by importing/creating all the data by running:
 `python manage.py build_all`
-4. Start the server and enjoy:
+8. Start the server and enjoy:
 `python manage.py runserver`
 
 
@@ -85,6 +94,7 @@ Setting up the repo is pretty easy:
         - [ ] Hearts
         - [ ] Xp
     - [ ] Enchantment Glow
+    - [ ] Fix shulker boxes
     - [X] Fix Model Viewer
 - **<ins>Misc.</ins>**
     - [ ] Sort buildings
