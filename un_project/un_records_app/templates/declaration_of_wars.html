@@ -12,7 +12,20 @@
 {% block content %}
 <div class="container">
     <h1>United Nations Recognized Declaration of Wars</h1>
-     <p>Work in Progress</p>
+     {% for war in declaration_of_wars %}
+            <div>
+                <h2>{{ war.title }}</h2>
+                <p>
+                    ({{ war.date|date:"n/j/Y" }}) &nbsp;&nbsp;Nations Involved: {{ war.nations_involved.all|join:", " }}
+                    {% if war.resolved %}<strong>(Resolved, {{ war.peace_date }})</strong>{% endif %}
+                </p>
+                {% load markdown_extras %}
+                <p>
+                    {{ war.body|markdownify }}
+                </p>
+            </div>
+            <hr>
+        {% endfor %}
 </div>
 {% endblock %}
 
