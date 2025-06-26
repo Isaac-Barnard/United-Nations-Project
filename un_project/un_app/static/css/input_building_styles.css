@@ -42,16 +42,6 @@
     transform: scale(1.2);
 }
 
-/* Special styling for checkbox to align with label */
-.form-row:has(input[type="checkbox"]) {
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-}
-
-.form-row:has(input[type="checkbox"]) label {
-    margin-bottom: 0;
-}
 
 /* Remove spinner arrows for number inputs (Chrome, Safari) */
 .form-row input[type="number"]::-webkit-inner-spin-button,
