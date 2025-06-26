@@ -37,6 +37,16 @@
                     <li><a href="{% url 'treaties' %}">Treaties</a></li>
                     <li><a href="{% url 'executive_orders' %}">Executive Orders</a></li>
                     <li><a href="{% url 'court_cases' %}">Court Cases</a></li>
+                    <li class="dropdown" id="evaluations-dropdown">
+                        <a>Miscellaneous Records</a>
+                        <div class="dropdown-content two-columns">
+                            <div class="column">
+                                <strong>Misc. Records</strong>
+                                <a href="{% url 'alliances' %}">Recognized Alliances</a>
+                                <a href="{% url 'declaration_of_wars' %}">National Constitutions</a>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </nav>
         </header>

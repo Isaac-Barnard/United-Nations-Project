@@ -27,3 +27,9 @@ def treaties(request):
 def executive_orders(request):
     executive_orders = Executive_Order.objects.all().order_by('-charter', '-date')
     return render(request, 'executive_orders.html', {'executive_orders': executive_orders})
+
+def alliances(request):
+    return render(request, 'alliances.html')
+
+def declaration_of_wars(request):
+    return render(request, 'declaration_of_wars.html')
