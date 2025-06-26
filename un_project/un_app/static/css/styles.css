@@ -151,11 +151,11 @@ tr:hover {
 
 /* Button styling */
 button[type="submit"] {
-    margin-top: 20px;
-    padding: 10px 20px;
+    margin-top: 16px;
+    padding: 8px 16px;
     font-size: 16px;
-    border: none;
-    border-radius: 4px;
+    border-width: 2px;
+    border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     background-color: #0084b8;
@@ -169,6 +169,9 @@ button[type="submit"]:hover {
 
 /* Button styling */
 button[type="logout"] {
+    padding: 2px 4px;
+    border-width: 2px;
+    border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     background-color: #0084b8;
