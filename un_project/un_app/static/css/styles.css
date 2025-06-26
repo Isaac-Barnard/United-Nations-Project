@@ -149,6 +149,37 @@ tr:hover {
     background-color: #e6f7ff;
 }
 
+/* Button styling */
+button[type="submit"] {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #0084b8;
+    color: white;
+}
+
+button[type="submit"]:hover {
+    background-color: #005b80;
+}
+
+
+/* Button styling */
+button[type="logout"] {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #0084b8;
+    color: white;
+}
+
+button[type="logout"]:hover {
+    background-color: #005b80;
+}
+
+
 /* Dropdown Menu Styles */
 .dropdown {
     display: inline-block;
