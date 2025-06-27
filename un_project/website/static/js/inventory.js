@@ -172,7 +172,8 @@ function display_tooltip(element) {
     let name = element.children[0].getAttribute('data-title');
     if (element.children[0].getAttribute('data-title-c') !== null) {
         name = element.children[0].getAttribute('data-title-c');
-        label.innerHTML = "<p class=\"name\" style=\"color: #55FFFF; font-style: italic;\">" + name + "</p>";
+        label.innerHTML = "<p class=\"name\" style=\"font-style: italic;\">" + name + "</p>";
+        label.style.color = rarity_color['rare'];
     } else {
         label.innerHTML = "<p class=\"name\">" + name + "</p>";
     }
