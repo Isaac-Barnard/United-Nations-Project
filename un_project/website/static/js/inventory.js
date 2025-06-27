@@ -270,7 +270,6 @@ function add_extra_info(element, slot, label, id_name) {
         var inner_items = [...shulker_div.querySelectorAll('.item')]
         inner_items = inner_items.filter(item => item.querySelector("[data-title]") != null)
         
-        label.innerHTML += "<p class=inner_items>"
         for (let i = 0; i < 5 && i < inner_items.length; i++) {
             var quantity = 1
             if (inner_items[i].childNodes.length == 2) {
@@ -287,8 +286,6 @@ function add_extra_info(element, slot, label, id_name) {
         } else if (inner_items.length - 5 > 0) {
             label.innerHTML += `<p class="preview"><i>and ${inner_items.length - 5} more...</i></p>`;
         }
-
-        label.innerHTML += "</p>";
     }
 
     return label;
