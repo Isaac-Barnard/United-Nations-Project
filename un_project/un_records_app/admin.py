@@ -4,13 +4,15 @@ from . import models
 #admin.site.register(models.Resolution)
 #admin.site.register(models.Treaty)
 admin.site.register(models.Executive_Order)
-admin.site.register(models.ResolutionAmendment)
+admin.site.register(models.Resolution_Amendment)
 admin.site.register(models.Charter)
-admin.site.register(models.CharterAmendment)
+admin.site.register(models.Charter_Amendment)
 admin.site.register(models.Declaration_Of_War)
+admin.site.register(models.National_Constitution)
+admin.site.register(models.National_Constitution_Amendment)
 
 class ResolutionImageInline(admin.TabularInline):
-    model = models.ResolutionImage
+    model = models.Resolution_Image
     extra = 1
     fields = ['image', 'order']
     ordering = ['order']
@@ -23,7 +25,7 @@ class ResolutionAdmin(admin.ModelAdmin):
         return obj.images.count()
     image_count.short_description = 'Images'
 
-@admin.register(models.ResolutionImage)
+@admin.register(models.Resolution_Image)
 class ResolutionImageAdmin(admin.ModelAdmin):
     search_fields = ['resolution__title']
     ordering = ['resolution', 'order']
@@ -31,7 +33,7 @@ class ResolutionImageAdmin(admin.ModelAdmin):
     
     
 class TreatyImageInline(admin.TabularInline):
-    model = models.TreatyImage
+    model = models.Treaty_Image
     extra = 1
     fields = ['image', 'order']
     ordering = ['order']
@@ -44,7 +46,7 @@ class TreatyAdmin(admin.ModelAdmin):
         return obj.images.count()
     image_count.short_description = 'Images'
 
-@admin.register(models.TreatyImage)
+@admin.register(models.Treaty_Image)
 class TreatyImageAdmin(admin.ModelAdmin):
     search_fields = ['treaty__title']
     ordering = ['treaty', 'order']
@@ -52,7 +54,7 @@ class TreatyImageAdmin(admin.ModelAdmin):
     
     
 class AllianceImageInline(admin.TabularInline):
-    model = models.AllianceImage
+    model = models.Alliance_Image
     extra = 1
     fields = ['image', 'order']
     ordering = ['order']
@@ -65,7 +67,7 @@ class AllianceAdmin(admin.ModelAdmin):
         return obj.images.count()
     image_count.short_description = 'Images'
 
-@admin.register(models.AllianceImage)
+@admin.register(models.Alliance_Image)
 class AllianceImageAdmin(admin.ModelAdmin):
     search_fields = ['alliance__title']
     ordering = ['alliance', 'order']

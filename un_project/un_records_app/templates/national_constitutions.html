@@ -1,0 +1,56 @@
+{% extends 'records_base.html' %}
+
+{% block title %}National Constitutions{% endblock %}
+
+{% load static %}
+{% load custom_filters %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/records_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    {% for constitution in national_constitutions %}
+        <div>
+            <h2>Constitution of {{ constitution.nation }}</h2>
+            <p>
+                ({{ constitution.date|date:"n/j/Y" }})
+                {% if constitution.void %}<strong>(Void, {{ constitution.invalidation_date }})</strong>{% endif %}
+            </p>
+            {% load markdown_extras %}
+            <p>
+                {{ constitution.body|markdownify }}
+            </p>
+        </div>
+
+    <!-- National Constitution Amendments -->
+        {% if constitution.amended_national_constitution.exists %}
+            <div class="amendments-section">
+                {% for amendment in constitution.amended_national_constitution.all %}
+                    <br>
+                    <div class="amendment">
+                        <h3>{{ amendment.title }}</h3>
+                        <p>
+                            ({{ amendment.date|date:"n/j/Y" }}) 
+                            {% if amendment.void %}<strong>(Void, {{ amendment.invalidation_date|date:"n/j/Y" }})</strong>{% endif %}
+                        </p>
+                        <div class="amendment-body">
+                            {{ amendment.body|markdownify }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <br>
+
+    {% empty %}
+        <p>No national constitutions found.</p>
+    {% endfor %}
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}

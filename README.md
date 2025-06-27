@@ -142,9 +142,9 @@ Running the server locally:
         - [ ] Images/videos
     - [x] Executive Orders
     - [ ] Misc.
-        - [ ] Recognized Alliances
-        - [ ] Declarations of War
-        - [ ] National Constitutions
+        - [x] Recognized Alliances
+        - [x] Declarations of War
+        - [x] National Constitutions
         - [ ] Buisnesses and Shops
         - [ ] Aternos Games
         - [ ] Medal of Papa Quinn
