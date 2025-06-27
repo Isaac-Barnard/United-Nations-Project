@@ -30,7 +30,6 @@ function createItem(slotData, i, shulkerId) {
         if (slotData['custom_name'] !== "None") {
             let name = slotData['custom_name'];
             itemImage.setAttribute("data-title-c", `${name}`)
-            itemImage.removeAttribute("data-title");
         } else if (slotData['book_title' !== "None"]) {
             let name = slotData["book_title"];
             itemImage.removeAttribute("data-title");
@@ -220,7 +219,7 @@ function display_tooltip(element) {
         return;
     }
 
-    label = add_extra_info(slot, label, id_name);
+    label = add_extra_info(element, slot, label, id_name);
     
     element.addEventListener('mousemove', follow, false);
     element.addEventListener('click', toggle_freeze_tooltip);
@@ -230,10 +229,11 @@ function display_tooltip(element) {
 /*
  * If the item has enchantments, add them to the bottom of the label
  * If the item is a written book, display the author information
+ * If the itme is a shulker, display the top 5 items, then the number of other items in the box.
  * If the item is a tipped arrow or potion, show the relevant potion info
  */ 
 
-function add_extra_info(slot, label, id_name) {
+function add_extra_info(element, slot, label, id_name) {
     if (slot['enchantments'] !== "None") {
         if (label.style.color == "") { label.style.color = rarity_color['rare']; }
         if (id_name == 'trident' || id_name == 'elytra') { label.style.color = rarity_color['epic']; }
@@ -263,6 +263,32 @@ function add_extra_info(slot, label, id_name) {
         }
     } else if (slot['book_author'] !== "None") {
         label.innerHTML += "<p class=\"enchants\" style=\"color: #A8A8A8;\">by " + slot['book_author'] + "</p>";
+    } else if (slot['item_id'] === "shulker_box") {
+        var element_id = element.getAttribute('id');
+        var shulker_div = subData.filter(inv => inv.inv_id == parseInt(element_id))[0]['div']
+
+        var inner_items = [...shulker_div.querySelectorAll('.item')]
+        inner_items = inner_items.filter(item => item.querySelector("[data-title]") != null)
+        
+        label.innerHTML += "<p class=inner_items>"
+        for (let i = 0; i < 5 && i < inner_items.length; i++) {
+            var quantity = 1
+            if (inner_items[i].childNodes.length == 2) {
+                quantity = inner_items[i].children[1].innerHTML;
+            }
+            label.innerHTML += inner_items[i].getAttribute('data-title') + " x" + quantity + "\n";
+        }
+        if (inner_items.length == 6) {
+            var quantity = 1
+            if (inner_items[5].childNodes.length == 2) {
+                quantity = inner_items[5].children[1].innerHTML;
+            }
+            label.innerHTML += inner_items[5].getAttribute('data-title') + " x" + quantity + "\n";
+        } else if (inner_items.length - 5 > 0) {
+            label.innerHTML += `<i>and ${inner_items.length - 5} more...</i>`;
+        }
+
+        label.innerHTML += "</p>";
     }
 
     return label;
