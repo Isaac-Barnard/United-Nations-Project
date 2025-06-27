@@ -12,6 +12,7 @@
 {% block content %}
 <div class="page-container">
     <h1>United Nations Recognized Declaration of Wars</h1>
+    <hr>
      {% for war in declaration_of_wars %}
             <div>
                 <h2>{{ war.title }}</h2>
@@ -23,6 +24,8 @@
                 {% load markdown_extras %}
                 <p>
                     {{ war.body|markdownify }}
+                    <br>
+                    {% if war.resolved %}The war ended with the {{ war.resolving_treaty.title }}.{% endif %}
                 </p>
             </div>
             <hr>
