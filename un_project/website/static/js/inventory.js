@@ -168,55 +168,74 @@ function display_tooltip(element) {
     if (document.querySelector(".tooltip")) {
         return;
     }
-
+    // Create tooltip label
     const label = document.createElement('label');
     label.className = "tooltip";
 
+    // Get id name
+    var srcArr = element.children[0].src.split("/");
+    var id_name = srcArr[srcArr.length - 1].split(".png")[0];
+
+    // Use regex to check if item is a specific rarity
+    regex_rarity.forEach((tuple) => {
+        var match = id_name.match(tuple['regex']);
+        if (match != null && match.length == 1) {
+            label.style.color = rarity_color[tuple['rarity']];
+        }
+    });
+
+    // Use dictionary to check if item is a specific rarity
+    if (Object.keys(rarity).includes(id_name)) {
+        label.style.color = rarity_color[rarity[id_name]];
+    }
+
+    // Add item name to tooltip, if custom name add custom name instead
     let name = element.children[0].getAttribute('data-title');
     if (element.children[0].getAttribute('data-title-c') !== null) {
         name = element.children[0].getAttribute('data-title-c');
-        label.innerHTML = "<p class=\"name\" style=\"font-style: italic;\">" + name + "</p>";
-        label.style.color = rarity_color['rare'];
+        
+        label.innerHTML = "<p class=\"name\">" + name + "</p>";
+        label.style.fontStyle = 'italic';
+        
+        if (label.style.color != "") { label.style.color = rarity_color['rare']; }
     } else {
         label.innerHTML = "<p class=\"name\">" + name + "</p>";
     }
 
-    var srcArr = element.children[0].src.split("/");
-    var id_name = srcArr[srcArr.length - 1].split(".png")[0];
-    
-    var extra_color = "";
-
-    regex_rarity.forEach((tuple) => {
-        var match = id_name.match(tuple['regex']);
-        if (match != null && match.length == 1) {
-            extra_color = rarity_color[tuple['rarity']];
-        }
-    });
-
-    if (Object.keys(rarity).includes(id_name)) {
-        extra_color = rarity_color[rarity[id_name]];
-    }
-
-    label.style.color = extra_color;
-
+    // Get item ID to get item info
     let id = element.children[0].getAttribute('id');
-
     var interface = element.offsetParent.offsetParent.className;
 
+    // Specify the inventory id to use
     if (interface === "inventory") { interface = 0; }
     else if (interface === "enderchest") { interface = 1; }
     else { interface = element.offsetParent.offsetParent.id; }
 
     var jsonData = playerJson;
 
+    // Get item data
     let slot = jsonData.filter(item => item.inventory_type_id == interface).find(item => item.slot === parseInt(id));
     if (slot === undefined) {
         console.error("Error fetching item slot " + id);
         return;
     }
 
+    label = add_extra_info(slot, label, id_name);
+    
+    element.addEventListener('mousemove', follow, false);
+    element.addEventListener('click', toggle_freeze_tooltip);
+    element.appendChild(label);
+}
+
+/*
+ * If the item has enchantments, add them to the bottom of the label
+ * If the item is a written book, display the author information
+ * If the item is a tipped arrow or potion, show the relevant potion info
+ */ 
+
+function add_extra_info(slot, label, id_name) {
     if (slot['enchantments'] !== "None") {
-        if (id_name != 'enchanted_book') { label.style.color = rarity_color['rare']; }
+        if (label.style.color == "") { label.style.color = rarity_color['rare']; }
         if (id_name == 'trident' || id_name == 'elytra') { label.style.color = rarity_color['epic']; }
 
         enchants = slot['enchantments']
@@ -233,23 +252,12 @@ function display_tooltip(element) {
             }
 
             switch (values[i]) {
-                case 1:
-                    currentEnchant += " I";
-                    break;
-                case 2:
-                    currentEnchant += " II";
-                    break;
-                case 3:
-                    currentEnchant += " III";
-                    break;
-                case 4:
-                    currentEnchant += " IV";
-                    break;
-                case 5:
-                    currentEnchant += " V";
-                    break;
-                default:
-                    currentEnchant += "";
+                case 1: currentEnchant += " I";break;
+                case 2: currentEnchant += " II"; break;
+                case 3: currentEnchant += " III"; break;
+                case 4: currentEnchant += " IV"; break;
+                case 5: currentEnchant += " V"; break;
+                default: currentEnchant += "";
             }
             label.innerHTML += "<p class=\"enchants\" style=\"color: #A8A8A8;\">" + currentEnchant + "</p>";
         }
@@ -257,9 +265,7 @@ function display_tooltip(element) {
         label.innerHTML += "<p class=\"enchants\" style=\"color: #A8A8A8;\">by " + slot['book_author'] + "</p>";
     }
 
-    element.addEventListener('mousemove', follow, false);
-    element.addEventListener('click', toggle_freeze_tooltip);
-    element.appendChild(label);
+    return label;
 }
 
 function remove_tooltip(element) {
