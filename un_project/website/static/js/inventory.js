@@ -191,7 +191,7 @@ function display_tooltip(element) {
     });
 
     if (Object.keys(rarity).includes(id_name)) {
-        extra_color = rarity_color[id_name];
+        extra_color = rarity_color[rarity[id_name]];
     }
 
     label.style.color = extra_color;
@@ -213,7 +213,7 @@ function display_tooltip(element) {
     }
 
     if (slot['enchantments'] !== "None") {
-        label.style.color = rarity_color['rare'];
+        if (id_name != 'enchanted_book') { label.style.color = rarity_color['rare']; }
         if (id_name == 'trident') { label.style.color = rarity_color['epic']; }
 
         enchants = slot['enchantments']
