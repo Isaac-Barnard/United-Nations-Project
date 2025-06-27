@@ -7,6 +7,9 @@ const hotbarDiv = document.querySelector('.hotbar-slots');
 const echestDiv = document.querySelector('.echest-slots');
 const playerDiv = document.querySelector('.player');
 const subDiv = document.querySelector('.shulker-slots');
+var rarity = {};
+var regex_rarity = {};
+preload_rarity();
 
 var subData = [];
 
@@ -316,4 +319,20 @@ function get_shulker_name(element, name_element) {
         name_element.innerHTML = element.getAttribute('data-title');
         name_element.style.fontStyle = '';
     }
+}
+
+async function preload_rarity() {
+    fetch('/static/js/rarity_list.txt')
+    .then((response) => response.text())
+    .then((text) => {
+        text.split("\n").forEach((row) => {
+            var rowData = row.split(", ");
+            if (rowData[0].includes("*")) {
+                var data = rowData[0].replace("*", "[A-Za-z0-9]+");
+                regex_rarity[data] = rowData[1];
+            } else {
+                rarity[rowData[0]] = rowData[1];
+            }
+        })
+    })
 }
