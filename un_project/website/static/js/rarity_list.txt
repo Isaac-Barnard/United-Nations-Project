@@ -14,6 +14,7 @@ goat_horn, uncommon
 ominous_bottle, uncommon
 netherite_upgrade_smithing_template, uncommon
 *_armor_trim_smithing_template, uncommon
+*_pottery_sherd, uncommon
 music_disc_*, uncommon
 totem_of_undying, uncommon
 experience_bottle, uncommon
