@@ -31,6 +31,10 @@ function createItem(slotData, i, shulkerId) {
             let name = slotData['custom_name'];
             itemImage.setAttribute("data-title-c", `${name}`)
             itemImage.removeAttribute("data-title");
+        } else if (slotData['book_title' !== "None"]) {
+            let name = slotData["book_title"];
+            itemImage.removeAttribute("data-title");
+            itemImage.setAttribute("data-tile", `${name}`);
         }
 
         itemDiv.appendChild(itemImage);
@@ -177,7 +181,7 @@ function display_tooltip(element) {
         label.innerHTML = "<p class=\"name\">" + name + "</p>";
     }
 
-    var srcArr = element.childNodes[0].src.split("/");
+    var srcArr = element.children[0].src.split("/");
     var id_name = srcArr[srcArr.length - 1].split(".png")[0];
     
     var extra_color = "";
@@ -249,7 +253,9 @@ function display_tooltip(element) {
             }
             label.innerHTML += "<p class=\"enchants\" style=\"color: #A8A8A8;\">" + currentEnchant + "</p>";
         }
-    } else if (slot)
+    } else if (slot['book_author'] !== "None") {
+        label.innerHTML += "<p class=\"enchants\" style=\"color: #A8A8A8;\">by " + slot['book_author'] + "</p>";
+    }
 
     element.addEventListener('mousemove', follow, false);
     element.addEventListener('click', toggle_freeze_tooltip);
