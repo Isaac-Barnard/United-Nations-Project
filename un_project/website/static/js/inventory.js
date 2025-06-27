@@ -177,13 +177,14 @@ function display_tooltip(element) {
         label.innerHTML = "<p class=\"name\">" + name + "</p>";
     }
 
-    var srcArr = element.src.split("/");
+    var srcArr = element.childNodes[0].src.split("/");
     var id_name = srcArr[srcArr.length - 1].split(".png")[0];
     
     var extra_color = "";
 
     regex_rarity.forEach((tuple) => {
-        if (id_name.match(tuple[regex]).length == 1) {
+        var match = id_name.match(tuple[regex]);
+        if (match != null && match.length == 1) {
             extra_color = rarity_color[tuple['rarity']];
         }
     });
