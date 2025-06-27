@@ -193,7 +193,7 @@ body {
     padding: 4px;
     margin: 0;
     font-size: 16px;
-    color: white;
+    width: max-content;
     border: 2px solid #1b0c1b;
     border-radius: 4px;
     background: #1b0c1b;
