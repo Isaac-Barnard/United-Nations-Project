@@ -183,7 +183,7 @@ function display_tooltip(element) {
     var extra_color = "";
 
     regex_rarity.forEach((tuple) => {
-        var match = id_name.match(tuple[regex]);
+        var match = id_name.match(tuple['regex']);
         if (match != null && match.length == 1) {
             extra_color = rarity_color[tuple['rarity']];
         }
