@@ -229,6 +229,7 @@ class Declaration_Of_War(models.Model):
     body = models.TextField()
     resolved = models.BooleanField(default=False, blank=True)
     peace_date = models.DateField(null=True, default=None, blank=True, help_text="Date the war was resolved")
+    resolving_treaty = models.ForeignKey(Treaty, on_delete=models.CASCADE, related_name='resolving_treaty', null=True, default=None, blank=True)
     
     def clean(self):
         # Ensure that invalidation_date is only set when resolved is True
