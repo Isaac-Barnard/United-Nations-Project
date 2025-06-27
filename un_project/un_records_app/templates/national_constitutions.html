@@ -16,7 +16,7 @@
             <h2>Constitution of {{ constitution.nation }}</h2>
             <p>
                 ({{ constitution.date|date:"n/j/Y" }})
-                {% if constitution.void %}<strong>(Void, {{ treaty.invalidation_date }})</strong>{% endif %}
+                {% if constitution.void %}<strong>(Void, {{ constitution.invalidation_date }})</strong>{% endif %}
             </p>
             {% load markdown_extras %}
             <p>
@@ -24,7 +24,7 @@
             </p>
         </div>
 
-    <!-- Charter Amendments -->
+    <!-- National Constitution Amendments -->
         {% if constitution.amended_national_constitution.exists %}
             <div class="amendments-section">
                 {% for amendment in constitution.amended_national_constitution.all %}
@@ -45,7 +45,7 @@
         <br>
 
     {% empty %}
-        <p>No charters found.</p>
+        <p>No national constitutions found.</p>
     {% endfor %}
 
 </div>
