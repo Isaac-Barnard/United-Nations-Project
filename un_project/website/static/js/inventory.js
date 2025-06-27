@@ -168,7 +168,7 @@ function display_tooltip(element) {
         return;
     }
     // Create tooltip label
-    const label = document.createElement('label');
+    var label = document.createElement('label');
     label.className = "tooltip";
 
     // Get id name
