@@ -214,7 +214,7 @@ function display_tooltip(element) {
 
     if (slot['enchantments'] !== "None") {
         if (id_name != 'enchanted_book') { label.style.color = rarity_color['rare']; }
-        if (id_name == 'trident') { label.style.color = rarity_color['epic']; }
+        if (id_name == 'trident' || id_name == 'elytra') { label.style.color = rarity_color['epic']; }
 
         enchants = slot['enchantments']
         const keys = Object.keys(enchants);
@@ -250,7 +250,7 @@ function display_tooltip(element) {
             }
             label.innerHTML += "<p class=\"enchants\" style=\"color: #A8A8A8;\">" + currentEnchant + "</p>";
         }
-    }
+    } else if (slot)
 
     element.addEventListener('mousemove', follow, false);
     element.addEventListener('click', toggle_freeze_tooltip);
