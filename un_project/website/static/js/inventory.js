@@ -276,16 +276,16 @@ function add_extra_info(element, slot, label, id_name) {
             if (inner_items[i].childNodes.length == 2) {
                 quantity = inner_items[i].children[1].innerHTML;
             }
-            label.innerHTML += inner_items[i].getAttribute('data-title') + " x" + quantity + "\n";
+            label.innerHTML += "<p class=\"preview\">" + inner_items[i].children[0].getAttribute('data-title') + " x" + quantity + "</p>";
         }
         if (inner_items.length == 6) {
             var quantity = 1
             if (inner_items[5].childNodes.length == 2) {
                 quantity = inner_items[5].children[1].innerHTML;
             }
-            label.innerHTML += inner_items[5].getAttribute('data-title') + " x" + quantity + "\n";
+            label.innerHTML += "<p class=\"preview\">" + inner_items[5].children[0].getAttribute('data-title') + " x" + quantity + "</p>";
         } else if (inner_items.length - 5 > 0) {
-            label.innerHTML += `<i>and ${inner_items.length - 5} more...</i>`;
+            label.innerHTML += `<p class="preview"><i>and ${inner_items.length - 5} more...</i></p>`;
         }
 
         label.innerHTML += "</p>";

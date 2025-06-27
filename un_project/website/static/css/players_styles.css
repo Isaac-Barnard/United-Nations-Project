@@ -214,6 +214,11 @@ body {
     margin: 0;
 }
 
+.tooltip .preview {
+    padding: 0;
+    margin: 0;
+}
+
 .prioritySelector {
     width: 500px;
 }
