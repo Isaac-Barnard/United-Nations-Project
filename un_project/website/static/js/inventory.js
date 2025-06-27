@@ -8,8 +8,9 @@ const echestDiv = document.querySelector('.echest-slots');
 const playerDiv = document.querySelector('.player');
 const subDiv = document.querySelector('.shulker-slots');
 var rarity = {};
-var regex_rarity = {};
+var regex_rarity = [];
 preload_rarity();
+const rarity_color = {uncommon: "#FFFF55", rare: "#55FFFF", epic: "#FF55FF"};
 
 var subData = [];
 
@@ -171,10 +172,28 @@ function display_tooltip(element) {
     let name = element.children[0].getAttribute('data-title');
     if (element.children[0].getAttribute('data-title-c') !== null) {
         name = element.children[0].getAttribute('data-title-c');
-        label.innerHTML = "<p class=\"name\" style=\"color: #54FCFC; font-style: italic;\">" + name + "</p>";
+        label.innerHTML = "<p class=\"name\" style=\"color: #55FFFF; font-style: italic;\">" + name + "</p>";
     } else {
         label.innerHTML = "<p class=\"name\">" + name + "</p>";
     }
+
+    var srcArr = element.src.split("/");
+    var id_name = srcArr[srcArr.length - 1].split(".png")[0];
+    
+    var extra_color = "";
+
+    regex_rarity.forEach((tuple) => {
+        if (id_name.match(tuple[regex]).length == 1) {
+            extra_color = rarity_color[tuple['rarity']];
+        }
+    });
+
+    if (rarity.hasOwnProperty(id_name)) {
+        extra_color = rarity_color[id_name];
+    }
+
+    label.style.color = extra_color;
+
     let id = element.children[0].getAttribute('id');
 
     var interface = element.offsetParent.offsetParent.className;
@@ -192,6 +211,9 @@ function display_tooltip(element) {
     }
 
     if (slot['enchantments'] !== "None") {
+        label.style.color = rarity_color['rare'];
+        if (id_name == 'trident') { label.style.color = rarity_color['epic']; }
+
         enchants = slot['enchantments']
         const keys = Object.keys(enchants);
         const values = Object.values(enchants);
@@ -329,7 +351,7 @@ async function preload_rarity() {
             var rowData = row.split(", ");
             if (rowData[0].includes("*")) {
                 var data = rowData[0].replace("*", "[A-Za-z0-9]+");
-                regex_rarity[data] = rowData[1];
+                regex_rarity.append({regex: data, rarity: rowData[1]});
             } else {
                 rarity[rowData[0]] = rowData[1];
             }
