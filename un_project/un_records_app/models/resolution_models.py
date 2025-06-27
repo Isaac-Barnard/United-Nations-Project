@@ -26,7 +26,7 @@ class Resolution(models.Model):
         return f"{self.title} ({self.date})"
     
     
-class ResolutionImage(models.Model):
+class Resolution_Image(models.Model):
     resolution = models.ForeignKey(Resolution, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='resolution_images/')
     order = models.PositiveIntegerField(default=0, help_text="Order in which images should be displayed")
@@ -38,7 +38,7 @@ class ResolutionImage(models.Model):
         return f"Image for {self.resolution.title} ({self.order})"
     
     
-class ResolutionAmendment(models.Model):
+class Resolution_Amendment(models.Model):
     number = models.CharField(max_length=10)
     resolution = models.ForeignKey(Resolution, on_delete=models.CASCADE, related_name='amended_resolution')
     date = models.DateField()

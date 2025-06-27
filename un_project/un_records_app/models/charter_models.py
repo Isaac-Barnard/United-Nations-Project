@@ -24,7 +24,7 @@ class Charter(models.Model):
         return f"{self.date}"
     
     
-class CharterAmendment(models.Model):
+class Charter_Amendment(models.Model):
     number = models.CharField(max_length=10)
     charter = models.ForeignKey(Charter, on_delete=models.CASCADE, related_name='amended_charter')
     date = models.DateField()
