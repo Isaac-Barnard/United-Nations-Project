@@ -190,7 +190,7 @@ function display_tooltip(element) {
         }
     });
 
-    if (rarity.hasOwnProperty(id_name)) {
+    if (Object.keys(rarity).includes(id_name)) {
         extra_color = rarity_color[id_name];
     }
 
