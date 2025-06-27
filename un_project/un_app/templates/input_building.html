@@ -11,6 +11,16 @@
 {% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
+    <span>Logged in as {{ user.username }}: </span>
+    <form method="post" action="{% url 'logout' %}" style="display: inline;">
+        {% csrf_token %}
+        <button type="logout" style="display: inline;">Logout</button>
+    </form>
+    {% else %}
+        <p>You are not logged in. Please <a href="{% url 'login' %}?next={{ request.path }}">log in</a> to submit evaluations.</p>
+    {% endif %}
+    
     <h1>Input Building</h1>
 
     {% if error_message %}
@@ -19,49 +29,78 @@
 
     <form method="post">
         {% csrf_token %}
-        <div class="table-wrapper">
-            <table class="building-input-table">
-                <thead>
-                    <tr>
-                        <th>Building Name</th>
-                        <th>Territory</th>
-                        <th>Owner</th>
-                        <th>Main Builders</th>
-                        <th>Y High</th>
-                        <th>Y Low</th>
-                        <th>Height</th>
-                        <th>Year</th>
-                        <th>Comp- lete</th>
-                        <th>X Coord</th>
-                        <th>Z Coord</th>
-                        <th>Architectural Style</th>
-                        <th>Size</th>
-                        <th>Materials</th>
-                        <th>Furnished</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ form.name }}</td>
-                        <td>{{ form.territory }}</td>
-                        <td>{{ form.owner }}</td>
-                        <td>{{ form.main_builders }}</td>
-                        <td>{{ form.y_level_high_pt }}</td>
-                        <td>{{ form.y_level_ground }}</td>
-                        <td>{{ form.height }}</td>
-                        <td>{{ form.year_started }}</td>
-                        <td>{{ form.completed }}</td>
-                        <td>{{ form.x_coordinate }}</td>
-                        <td>{{ form.z_coordinate }}</td>
-                        <td>{{ form.architectural_style }}</td>
-                        <td>{{ form.size }}</td>
-                        <td>{{ form.materials }}</td>
-                        <td>{{ form.furnished }}</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="form-container">
+            <div class="form-row">
+                <label for="{{ form.name.id_for_label }}">Building Name:</label>
+                {{ form.name }}
+            </div>
+            
+            <div class="form-row">
+                <label for="{{ form.territory.id_for_label }}">Territory:</label>
+                {{ form.territory }}
+            </div>
+            
+            <div class="form-row">
+                <label for="{{ form.owner.id_for_label }}">Owner:</label>
+                {{ form.owner }}
+            </div>
+            
+            <div class="form-row">
+                <label for="{{ form.main_builders.id_for_label }}">Main Builders:</label>
+                {{ form.main_builders }}
+            </div>
+            
+            <div class="form-row">
+                <label for="{{ form.y_level_high_pt.id_for_label }}">Y Level High Point:</label>
+                {{ form.y_level_high_pt }}
+            </div>
+            
+            <div class="form-row">
+                <label for="{{ form.y_level_ground.id_for_label }}">Y Level Ground:</label>
+                {{ form.y_level_ground }}
+            </div>
+            
+            <div class="form-row">
+                <label for="{{ form.year_started.id_for_label }}">Year Started:</label>
+                {{ form.year_started }}
+            </div>
+            
+            <div class="form-row">
+                <label for="{{ form.completed.id_for_label }}">Completed:</label>
+                {{ form.completed }}
+            </div>
+            
+            <div class="form-row">
+                <label for="{{ form.x_coordinate.id_for_label }}">X Coordinate:</label>
+                {{ form.x_coordinate }}
+            </div>
+            
+            <div class="form-row">
+                <label for="{{ form.z_coordinate.id_for_label }}">Z Coordinate:</label>
+                {{ form.z_coordinate }}
+            </div>
+            
+            <div class="form-row">
+                <label for="{{ form.architectural_style.id_for_label }}">Architectural Style:</label>
+                {{ form.architectural_style }}
+            </div>
+            
+            <div class="form-row">
+                <label for="{{ form.size.id_for_label }}">Size:</label>
+                {{ form.size }}
+            </div>
+            
+            <div class="form-row">
+                <label for="{{ form.materials.id_for_label }}">Materials:</label>
+                {{ form.materials }}
+            </div>
+            
+            <div class="form-row">
+                <label for="{{ form.furnished.id_for_label }}">Furnished:</label>
+                {{ form.furnished }}
+            </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit Building</button>
+        <button type="submit">Submit Building</button>
     </form>
 {% endblock %}

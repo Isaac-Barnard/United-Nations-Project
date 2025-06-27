@@ -1,3 +1,10 @@
+/* Variables */
+:root {
+    --button_primary-color: #0084b8;
+    --button_hover-color: #005b80;
+}
+
+
 /* static/css/styles.css */
 body {
     font-family: Arial, sans-serif;
@@ -149,6 +156,42 @@ tr:hover {
     background-color: #e6f7ff;
 }
 
+/* Button styling */
+button[type="submit"] {
+    margin-top: 16px;
+    padding: 8px 16px;
+    font-size: 16px;
+    border: none;
+    border-width: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: var(--button_primary-color);
+    color: white;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--button_hover-color);
+}
+
+
+/* Button styling */
+button[type="logout"] {
+    padding: 4px 8px;
+    border: none;
+    border-width: 2px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: var(--button_primary-color);
+    color: white;
+}
+
+button[type="logout"]:hover {
+    background-color: var(--button_hover-color);
+}
+
+
 /* Dropdown Menu Styles */
 .dropdown {
     display: inline-block;
@@ -289,4 +332,14 @@ tr:hover {
 
 .pinstripe-records {
     background-color: #5b92e5;
+}
+
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color:  var(--button_primary-color);
+    box-shadow:  var(--button_hover-color);
 }

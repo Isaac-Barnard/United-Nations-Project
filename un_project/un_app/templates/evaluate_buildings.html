@@ -15,7 +15,7 @@
     <span>Logged in as {{ user.username }}: </span>
     <form method="post" action="{% url 'logout' %}" style="display: inline;">
         {% csrf_token %}
-        <button type="submit" style="display: inline;">Logout</button>
+        <button type="logout" style="display: inline;">Logout</button>
     </form>
     {% else %}
         <p>You are not logged in. Please <a href="{% url 'login' %}?next={{ request.path }}">log in</a> to submit evaluations.</p>

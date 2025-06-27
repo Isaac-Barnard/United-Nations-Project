@@ -7,6 +7,7 @@ admin.site.register(models.Executive_Order)
 admin.site.register(models.ResolutionAmendment)
 admin.site.register(models.Charter)
 admin.site.register(models.CharterAmendment)
+admin.site.register(models.Declaration_Of_War)
 
 class ResolutionImageInline(admin.TabularInline):
     model = models.ResolutionImage
@@ -47,3 +48,24 @@ class TreatyAdmin(admin.ModelAdmin):
 class TreatyImageAdmin(admin.ModelAdmin):
     search_fields = ['treaty__title']
     ordering = ['treaty', 'order']
+    
+    
+    
+class AllianceImageInline(admin.TabularInline):
+    model = models.AllianceImage
+    extra = 1
+    fields = ['image', 'order']
+    ordering = ['order']
+
+@admin.register(models.Alliance)
+class AllianceAdmin(admin.ModelAdmin):
+    inlines = [AllianceImageInline]
+    
+    def image_count(self, obj):
+        return obj.images.count()
+    image_count.short_description = 'Images'
+
+@admin.register(models.AllianceImage)
+class AllianceImageAdmin(admin.ModelAdmin):
+    search_fields = ['alliance__title']
+    ordering = ['alliance', 'order']

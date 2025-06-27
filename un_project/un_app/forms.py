@@ -127,3 +127,8 @@ class BuildingForm(forms.ModelForm):
             'year_started', 'completed', 'x_coordinate', 'z_coordinate',
             'architectural_style', 'size', 'materials', 'furnished'
         ]
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Set furnished field to default unchecked
+        self.fields['completed'].initial = False

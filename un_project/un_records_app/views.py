@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.db.models import Prefetch
-from .models import Resolution, Treaty, Executive_Order, ResolutionAmendment, Charter, CharterAmendment
+from .models import Resolution, Treaty, Executive_Order, ResolutionAmendment, Charter, CharterAmendment , Alliance, Declaration_Of_War
 
 # Create your views here.
 def records_home(request):
@@ -27,3 +27,12 @@ def treaties(request):
 def executive_orders(request):
     executive_orders = Executive_Order.objects.all().order_by('-charter', '-date')
     return render(request, 'executive_orders.html', {'executive_orders': executive_orders})
+
+def alliances(request):
+    # Prefetch images to avoid N+1 queries while maintaining date ordering
+    alliances = Alliance.objects.prefetch_related('images').all().order_by('-date')
+    return render(request, 'alliances.html', {'alliances': alliances})
+
+def declaration_of_wars(request):
+    declaration_of_wars = Declaration_Of_War.objects.all().order_by('-date')
+    return render(request, 'declaration_of_wars.html', {'declaration_of_wars': declaration_of_wars})

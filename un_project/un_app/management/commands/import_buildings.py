@@ -31,7 +31,7 @@ class Command(BaseCommand):
                         owner=owner,  # Assign the fetched Nation object (Owner)
                         y_level_high_pt=row['y_level_high_pt'] or None, 
                         y_level_ground=row['y_level_ground'] or None,
-                        year_completed=row['year_completed'] or None, 
+                        year_started=row['year_started'] or None, 
                         completed=row['completed'] == 'TRUE', 
                         x_coordinate=row['x_coordinate'] or None,
                         z_coordinate=row['z_coordinate'] or None, 
