@@ -148,7 +148,6 @@ function inventory(playername) {
             subData = [];
             for (let i = 2; i <= max_inv_id; i++)  {
                 var sub_inv_slots = jsonData.filter(item => item.inventory_type_id === i);
-                //if (sub_inv_slots.length === 0) { continue; }
                 var innerDiv = shulkerInv(sub_inv_slots, i);
                 subData.push({inv_id: i, div: innerDiv});
             }
