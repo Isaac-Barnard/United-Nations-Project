@@ -19,6 +19,7 @@
                     ({{ war.date|date:"n/j/Y" }}) &nbsp;&nbsp;Nations Involved: {{ war.nations_involved.all|join:", " }}
                     {% if war.resolved %}<strong>(Resolved, {{ war.peace_date }})</strong>{% endif %}
                 </p>
+                <p style="margin:20px;"></p>
                 {% load markdown_extras %}
                 <p>
                     {{ war.body|markdownify }}
