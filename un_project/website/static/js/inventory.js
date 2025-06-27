@@ -351,7 +351,7 @@ async function preload_rarity() {
             var rowData = row.split(", ");
             if (rowData[0].includes("*")) {
                 var data = rowData[0].replace("*", "[A-Za-z0-9]+");
-                regex_rarity.append({regex: data, rarity: rowData[1]});
+                regex_rarity.push({regex: data, rarity: rowData[1]});
             } else {
                 rarity[rowData[0]] = rowData[1];
             }
