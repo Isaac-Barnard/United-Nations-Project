@@ -77,8 +77,8 @@ class AllianceImageAdmin(admin.ModelAdmin):
 
 class CourtCaseArgumentImageInline(admin.TabularInline):
     model = models.CourtCaseArgumentImage
-    extra = 1
-    fields = ['image', 'order']
+    extra = 2
+    fields = ['image', 'order', 'evidence_letter']
     ordering = ['order']
 
 @admin.register(models.CourtCaseArgument)
