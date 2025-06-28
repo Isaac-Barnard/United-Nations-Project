@@ -22,7 +22,7 @@ class Treaty(models.Model):
         return f"{self.title} ({self.date})"
     
     
-class Treaty_Image(models.Model):
+class TreatyImage(models.Model):
     treaty = models.ForeignKey(Treaty, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='treaty_images/')
     order = models.PositiveIntegerField(default=0, help_text="Order in which images should be displayed")

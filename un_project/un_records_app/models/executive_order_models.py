@@ -2,7 +2,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from un_app.models import Nation
 
-class Executive_Order(models.Model):
+class ExecutiveOrder(models.Model):
     number = models.PositiveIntegerField()
     charter = models.PositiveIntegerField()
     date = models.DateField()
