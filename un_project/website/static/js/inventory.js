@@ -263,7 +263,7 @@ function add_extra_info(element, slot, label, id_name) {
         }
     } else if (slot['book_author'] !== "None") {
         label.innerHTML += "<p class=\"enchants\" style=\"color: #A8A8A8;\">by " + slot['book_author'] + "</p>";
-    } else if (slot['item_id'] === "shulker_box") {
+    } else if (slot['item_id'].match("[a-z]+_shulker_box")) {
         var element_id = element.getAttribute('id');
         var shulker_div = subData.filter(inv => inv.inv_id == parseInt(element_id))[0]['div']
 
