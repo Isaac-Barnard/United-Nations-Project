@@ -38,38 +38,39 @@ class CourtCase(models.Model):
         return f"{self.title} ({self.date})"
     
     
-# SIZE_CHOICES = [
-#         ('Plaintiff Argument'),
-#         ('Defendant Argument'),
-#         ('Concurring Opinion'),
-#         ('Dissenting Opinion'),
-#         ('Witness Direct Examination'),
-#         ('Witness Cross Examination'),
-#     ]
-
     
-# class Court_Case_Argument(models.Model):
-#     number = models.CharField(max_length=10)
-#     Court_Case = models.ForeignKey(Court_Case, on_delete=models.CASCADE, related_name='case_argued')
-#     size = models.CharField(max_length=20, choices=SIZE_CHOICES, null=True, blank=True,
-#                            help_text="The size category of the building")
-#     proposed_by = models.ForeignKey(Nation, on_delete=models.CASCADE, related_name='resolution_amendment')
-#     body = models.TextField()
+ARGUMENT_TYPE = [
+        ('Plaintiff Argument', 'Plaintiff Argument'),
+        ('Defendant Argument', 'Defendant Argument'),
+        ('Concurring Opinion', 'Concurring Opinion'),
+        ('Dissenting Opinion', 'Dissenting Opinion'),
+        ('Witness Direct Examination', 'Witness Direct Examination'),
+        ('Witness Cross Examination', 'Witness Cross Examination'),
+    ]
     
-#     class Meta:
-#         unique_together = ('number', 'Court_Case')
+class CourtCaseArgument(models.Model):
+    number = models.CharField(max_length=10)
+    court_case = models.ForeignKey(CourtCase, on_delete=models.CASCADE, related_name='case_argued')
+    argument_type = models.CharField(max_length=50, choices=ARGUMENT_TYPE)
+    speaker = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='resolution_amendment')
+    body = models.TextField()
     
-#     def __str__(self):
-#         return f"{self.Court_Case.title} {self.number}"
+    class Meta:
+        unique_together = ('number', 'court_case')
+    
+    def __str__(self):
+        return f"{self.court_case.title} {self.number}"
     
     
-# class Court_Case_Image(models.Model):
-#     Court_Case_Component = models.ForeignKey(Court_Case_Argument, on_delete=models.CASCADE, related_name='images')
-#     image = models.ImageField(upload_to='court_case_images/')
-#     order = models.PositiveIntegerField(default=0, help_text="Order in which images should be displayed")
     
-#     class Meta:
-#         ordering = ['order']
+class CourtCaseArgumentImage(models.Model):
+    court_case_argument = models.ForeignKey(CourtCaseArgument, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='court_case_images/')
+    evidence_letter = models.CharField(max_length=1)
+    order = models.PositiveIntegerField(default=0, help_text="Order in which images should be displayed")
     
-#     def __str__(self):
-#         return f"Image for {self.Court_Case.title} ({self.order})"
+    class Meta:
+        ordering = ['order']
+    
+    def __str__(self):
+        return f"Image for {self.court_case_argument.court_case.title}, {self.court_case_argument.number} {self.evidence_letter} ({self.order})"

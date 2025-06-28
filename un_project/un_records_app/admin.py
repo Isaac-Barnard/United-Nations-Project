@@ -72,3 +72,24 @@ class AllianceAdmin(admin.ModelAdmin):
 class AllianceImageAdmin(admin.ModelAdmin):
     search_fields = ['alliance__title']
     ordering = ['alliance', 'order']
+    
+    
+
+class CourtCaseArgumentImageInline(admin.TabularInline):
+    model = models.CourtCaseArgumentImage
+    extra = 1
+    fields = ['image', 'order']
+    ordering = ['order']
+
+@admin.register(models.CourtCaseArgument)
+class CourtCaseArgumentAdmin(admin.ModelAdmin):
+    inlines = [CourtCaseArgumentImageInline]
+    
+    def image_count(self, obj):
+        return obj.images.count()
+    image_count.short_description = 'Images'
+
+@admin.register(models.CourtCaseArgumentImage)
+class CourtCaseArgumentImageAdmin(admin.ModelAdmin):
+    search_fields = ['court_case_argument__title']
+    ordering = ['court_case_argument', 'order']
