@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.db.models import Prefetch
-from .models import Resolution, Treaty, ExecutiveOrder, ResolutionAmendment, Charter, CharterAmendment , Alliance, DeclarationOfWar, NationalConstitution, NationalConstitutionAmendment, CourtCase, CourtCaseArgument
+from .models import Resolution, Treaty, ExecutiveOrder, ResolutionAmendment, Charter, CharterAmendment , Alliance, DeclarationOfWar, NationalConstitution, NationalConstitutionAmendment, CourtCase, CourtCaseArgument, CourtCaseArgumentImage
 
 # Create your views here.
 def records_home(request):
@@ -17,9 +17,9 @@ def resolutions(request):
     return render(request, 'resolutions.html', {'resolutions': resolutions})
 
 def court_cases(request):
-    arguments_prefetch = Prefetch('amended_resolution',queryset=CourtCaseArgument.objects.all().order_by('number'),to_attr='arguments')
-    # Prefetch images to avoid N+1 queries while maintaining date ordering
-    court_cases = (CourtCase.objects.prefetch_related('images', arguments_prefetch).all().order_by('-date'))
+    images_prefetch = Prefetch('images',queryset=CourtCaseArgumentImage.objects.all().order_by('order'))
+    arguments_prefetch = Prefetch('case_argued',queryset=CourtCaseArgument.objects.all().order_by('number').prefetch_related(images_prefetch),to_attr='arguments')
+    court_cases = (CourtCase.objects.prefetch_related(arguments_prefetch).all().order_by('-date'))
     return render(request, 'court_cases.html', {'court_cases': court_cases})
 
 def treaties(request):
