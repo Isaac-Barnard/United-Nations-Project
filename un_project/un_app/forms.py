@@ -127,7 +127,19 @@ class BuildingForm(forms.ModelForm):
             'year_started', 'completed', 'x_coordinate', 'z_coordinate',
             'architectural_style', 'size', 'materials', 'furnished'
         ]
-        
+        widgets = {
+            'territory': forms.TextInput(attrs={
+                'list': 'territory-options',
+                'placeholder': 'Type to search territories...',
+                'autocomplete': 'off'
+            }),
+            'owner': forms.TextInput(attrs={
+                'list': 'owner-options',
+                'placeholder': 'Type to search owners...',
+                'autocomplete': 'off'
+            }),
+        }
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Set furnished field to default unchecked

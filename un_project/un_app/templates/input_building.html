@@ -38,11 +38,21 @@
             <div class="form-row">
                 <label for="{{ form.territory.id_for_label }}">Territory:</label>
                 {{ form.territory }}
+                <datalist id="territory-options">
+                    {% for territory in territories %}
+                        <option value="{{ territory }}">
+                    {% endfor %}
+                </datalist>
             </div>
             
             <div class="form-row">
                 <label for="{{ form.owner.id_for_label }}">Owner:</label>
                 {{ form.owner }}
+                <datalist id="owner-options">
+                    {% for owner in owners %}
+                        <option value="{{ owner }}">
+                    {% endfor %}
+                </datalist>
             </div>
             
             <div class="form-row">
