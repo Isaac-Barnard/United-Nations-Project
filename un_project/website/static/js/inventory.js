@@ -30,7 +30,10 @@ function createItem(slotData, i, shulkerId) {
         if (slotData['custom_name'] !== "None") {
             let name = slotData['custom_name'];
             itemImage.setAttribute("data-title-c", `${name}`)
+        } else if (slotData['book_title' !== "None"]) {
+            let name = slotData["book_title"];
             itemImage.removeAttribute("data-title");
+            itemImage.setAttribute("data-tile", `${name}`);
         }
 
         itemDiv.appendChild(itemImage);
@@ -148,7 +151,6 @@ function inventory(playername) {
             subData = [];
             for (let i = 2; i <= max_inv_id; i++)  {
                 var sub_inv_slots = jsonData.filter(item => item.inventory_type_id === i);
-                if (sub_inv_slots.length === 0) { continue; }
                 var innerDiv = shulkerInv(sub_inv_slots, i);
                 subData.push({inv_id: i, div: innerDiv});
             }
@@ -165,56 +167,76 @@ function display_tooltip(element) {
     if (document.querySelector(".tooltip")) {
         return;
     }
-
-    const label = document.createElement('label');
+    // Create tooltip label
+    var label = document.createElement('label');
     label.className = "tooltip";
 
+    // Get id name
+    var srcArr = element.children[0].src.split("/");
+    var id_name = srcArr[srcArr.length - 1].split(".png")[0];
+
+    // Use regex to check if item is a specific rarity
+    regex_rarity.forEach((tuple) => {
+        var match = id_name.match(tuple['regex']);
+        if (match != null && match.length == 1) {
+            label.style.color = rarity_color[tuple['rarity']];
+        }
+    });
+
+    // Use dictionary to check if item is a specific rarity
+    if (Object.keys(rarity).includes(id_name)) {
+        label.style.color = rarity_color[rarity[id_name]];
+    }
+
+    // Add item name to tooltip, if custom name add custom name instead
     let name = element.children[0].getAttribute('data-title');
     if (element.children[0].getAttribute('data-title-c') !== null) {
         name = element.children[0].getAttribute('data-title-c');
-        label.innerHTML = "<p class=\"name\" style=\"font-style: italic;\">" + name + "</p>";
-        label.style.color = rarity_color['rare'];
+        
+        label.innerHTML = "<p class=\"name\">" + name + "</p>";
+        label.style.fontStyle = 'italic';
+        
+        if (label.style.color != "") { label.style.color = rarity_color['rare']; }
     } else {
         label.innerHTML = "<p class=\"name\">" + name + "</p>";
     }
 
-    var srcArr = element.childNodes[0].src.split("/");
-    var id_name = srcArr[srcArr.length - 1].split(".png")[0];
-    
-    var extra_color = "";
-
-    regex_rarity.forEach((tuple) => {
-        var match = id_name.match(tuple['regex']);
-        if (match != null && match.length == 1) {
-            extra_color = rarity_color[tuple['rarity']];
-        }
-    });
-
-    if (rarity.hasOwnProperty(id_name)) {
-        extra_color = rarity_color[id_name];
-    }
-
-    label.style.color = extra_color;
-
+    // Get item ID to get item info
     let id = element.children[0].getAttribute('id');
-
     var interface = element.offsetParent.offsetParent.className;
 
+    // Specify the inventory id to use
     if (interface === "inventory") { interface = 0; }
     else if (interface === "enderchest") { interface = 1; }
     else { interface = element.offsetParent.offsetParent.id; }
 
     var jsonData = playerJson;
 
+    // Get item data
     let slot = jsonData.filter(item => item.inventory_type_id == interface).find(item => item.slot === parseInt(id));
     if (slot === undefined) {
         console.error("Error fetching item slot " + id);
         return;
     }
 
+    label = add_extra_info(element, slot, label, id_name);
+    
+    element.addEventListener('mousemove', follow, false);
+    element.addEventListener('click', toggle_freeze_tooltip);
+    element.appendChild(label);
+}
+
+/*
+ * If the item has enchantments, add them to the bottom of the label
+ * If the item is a written book, display the author information
+ * If the itme is a shulker, display the top 5 items, then the number of other items in the box.
+ * If the item is a tipped arrow or potion, show the relevant potion info
+ */ 
+
+function add_extra_info(element, slot, label, id_name) {
     if (slot['enchantments'] !== "None") {
-        label.style.color = rarity_color['rare'];
-        if (id_name == 'trident') { label.style.color = rarity_color['epic']; }
+        if (label.style.color == "") { label.style.color = rarity_color['rare']; }
+        if (id_name == 'trident' || id_name == 'elytra') { label.style.color = rarity_color['epic']; }
 
         enchants = slot['enchantments']
         const keys = Object.keys(enchants);
@@ -230,31 +252,43 @@ function display_tooltip(element) {
             }
 
             switch (values[i]) {
-                case 1:
-                    currentEnchant += " I";
-                    break;
-                case 2:
-                    currentEnchant += " II";
-                    break;
-                case 3:
-                    currentEnchant += " III";
-                    break;
-                case 4:
-                    currentEnchant += " IV";
-                    break;
-                case 5:
-                    currentEnchant += " V";
-                    break;
-                default:
-                    currentEnchant += "";
+                case 1: currentEnchant += " I";break;
+                case 2: currentEnchant += " II"; break;
+                case 3: currentEnchant += " III"; break;
+                case 4: currentEnchant += " IV"; break;
+                case 5: currentEnchant += " V"; break;
+                default: currentEnchant += "";
             }
             label.innerHTML += "<p class=\"enchants\" style=\"color: #A8A8A8;\">" + currentEnchant + "</p>";
         }
+    } else if (slot['book_author'] !== "None") {
+        label.innerHTML += "<p class=\"enchants\" style=\"color: #A8A8A8;\">by " + slot['book_author'] + "</p>";
+    } else if (slot['item_id'].match("[a-z]+_shulker_box")) {
+        var element_id = element.getAttribute('id');
+        var shulker_div = subData.filter(inv => inv.inv_id == parseInt(element_id))[0]['div']
+
+        var inner_items = [...shulker_div.querySelectorAll('.item')]
+        inner_items = inner_items.filter(item => item.querySelector("[data-title]") != null)
+        
+        for (let i = 0; i < 5 && i < inner_items.length; i++) {
+            var quantity = 1
+            if (inner_items[i].childNodes.length == 2) {
+                quantity = inner_items[i].children[1].innerHTML;
+            }
+            label.innerHTML += "<p class=\"preview\">" + inner_items[i].children[0].getAttribute('data-title') + " x" + quantity + "</p>";
+        }
+        if (inner_items.length == 6) {
+            var quantity = 1
+            if (inner_items[5].childNodes.length == 2) {
+                quantity = inner_items[5].children[1].innerHTML;
+            }
+            label.innerHTML += "<p class=\"preview\">" + inner_items[5].children[0].getAttribute('data-title') + " x" + quantity + "</p>";
+        } else if (inner_items.length - 5 > 0) {
+            label.innerHTML += `<p class="preview"><i>and ${inner_items.length - 5} more...</i></p>`;
+        }
     }
 
-    element.addEventListener('mousemove', follow, false);
-    element.addEventListener('click', toggle_freeze_tooltip);
-    element.appendChild(label);
+    return label;
 }
 
 function remove_tooltip(element) {
