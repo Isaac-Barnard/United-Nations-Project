@@ -26,8 +26,20 @@
             {% if case.arguments %}
                 <div>
                     {% for argument in case.arguments %}
+                        {% if argument.argument_type == "Dissenting Opinion" or argument.argument_type == "Concurring Opinion" %}
+                            <div class="resolution-text">
+                                <h3>Ruling:</h3>
+                                {{ case.ruling_body|markdownify }}
+                            </div>
+                        {% endif %}
+                        <br>
+
                         <div>
+                            {% if argument.argument_type == "Dissenting Opinion" or argument.argument_type == "Concurring Opinion" %}
+                            <h4>{{ argument.argument_type }} ({{ argument.speaker }}):</h4>
+                            {% else %}
                             <h3>{{ argument.argument_type }} ({{ argument.speaker }}):</h3>
+                            {% endif %}
                             <div>
                                 {{ argument.body|markdownify }}
                             </div>
@@ -62,12 +74,6 @@
                         {% endif %}
                         <br>
                     {% endfor %}
-                    
-
-                    <div class="resolution-text">
-                        <h3>Ruling:</h3>
-                        {{ case.ruling_body|markdownify }}
-                    </div>
                 </div>
             {% endif %}
         </div>
