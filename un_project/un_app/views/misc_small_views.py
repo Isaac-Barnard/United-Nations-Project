@@ -19,17 +19,28 @@ def un_map(request):
     return render(request, 'un_map.html')
 
 
+from ..models import Building, Nation, Player, Territory
+
 @login_required
 def input_building(request):
     if request.method == 'POST':
         form = BuildingForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('building_success')  # Replace with your desired success URL
+            return redirect('building_success')  # or wherever you want
     else:
         form = BuildingForm()
     
-    return render(request, 'input_building.html', {'form': form})
+    # Get unique values from existing buildings
+    territories = Territory.objects.all()
+    owners = Nation.objects.all()
+    
+    context = {
+        'form': form,
+        'territories': territories,
+        'owners': owners,
+    }
+    return render(request, 'input_building.html', context)
 
 
 def general_territory_info(request):

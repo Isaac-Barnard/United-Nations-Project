@@ -3,16 +3,17 @@ from . import models
 
 #admin.site.register(models.Resolution)
 #admin.site.register(models.Treaty)
-admin.site.register(models.Executive_Order)
-admin.site.register(models.Resolution_Amendment)
+admin.site.register(models.ExecutiveOrder)
+admin.site.register(models.ResolutionAmendment)
 admin.site.register(models.Charter)
-admin.site.register(models.Charter_Amendment)
-admin.site.register(models.Declaration_Of_War)
-admin.site.register(models.National_Constitution)
-admin.site.register(models.National_Constitution_Amendment)
+admin.site.register(models.CharterAmendment)
+admin.site.register(models.DeclarationOfWar)
+admin.site.register(models.NationalConstitution)
+admin.site.register(models.NationalConstitutionAmendment)
+admin.site.register(models.CourtCase)
 
 class ResolutionImageInline(admin.TabularInline):
-    model = models.Resolution_Image
+    model = models.ResolutionImage
     extra = 1
     fields = ['image', 'order']
     ordering = ['order']
@@ -25,7 +26,7 @@ class ResolutionAdmin(admin.ModelAdmin):
         return obj.images.count()
     image_count.short_description = 'Images'
 
-@admin.register(models.Resolution_Image)
+@admin.register(models.ResolutionImage)
 class ResolutionImageAdmin(admin.ModelAdmin):
     search_fields = ['resolution__title']
     ordering = ['resolution', 'order']
@@ -33,7 +34,7 @@ class ResolutionImageAdmin(admin.ModelAdmin):
     
     
 class TreatyImageInline(admin.TabularInline):
-    model = models.Treaty_Image
+    model = models.TreatyImage
     extra = 1
     fields = ['image', 'order']
     ordering = ['order']
@@ -46,7 +47,7 @@ class TreatyAdmin(admin.ModelAdmin):
         return obj.images.count()
     image_count.short_description = 'Images'
 
-@admin.register(models.Treaty_Image)
+@admin.register(models.TreatyImage)
 class TreatyImageAdmin(admin.ModelAdmin):
     search_fields = ['treaty__title']
     ordering = ['treaty', 'order']
@@ -54,7 +55,7 @@ class TreatyImageAdmin(admin.ModelAdmin):
     
     
 class AllianceImageInline(admin.TabularInline):
-    model = models.Alliance_Image
+    model = models.AllianceImage
     extra = 1
     fields = ['image', 'order']
     ordering = ['order']
@@ -67,7 +68,28 @@ class AllianceAdmin(admin.ModelAdmin):
         return obj.images.count()
     image_count.short_description = 'Images'
 
-@admin.register(models.Alliance_Image)
+@admin.register(models.AllianceImage)
 class AllianceImageAdmin(admin.ModelAdmin):
     search_fields = ['alliance__title']
     ordering = ['alliance', 'order']
+    
+    
+
+class CourtCaseArgumentImageInline(admin.TabularInline):
+    model = models.CourtCaseArgumentImage
+    extra = 2
+    fields = ['image', 'order', 'evidence_letter']
+    ordering = ['order']
+
+@admin.register(models.CourtCaseArgument)
+class CourtCaseArgumentAdmin(admin.ModelAdmin):
+    inlines = [CourtCaseArgumentImageInline]
+    
+    def image_count(self, obj):
+        return obj.images.count()
+    image_count.short_description = 'Images'
+
+@admin.register(models.CourtCaseArgumentImage)
+class CourtCaseArgumentImageAdmin(admin.ModelAdmin):
+    search_fields = ['court_case_argument__title']
+    ordering = ['court_case_argument', 'order']

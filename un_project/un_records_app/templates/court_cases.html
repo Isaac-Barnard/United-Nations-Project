@@ -10,9 +10,83 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="page-container">
     <h1>United Nations Court Cases</h1>
-     <p>Work in Progress</p>
+    <hr>
+    {% for case in court_cases %}
+    <div class="resolution">
+        <h2>{{ case.title }}</h2>
+        <p>
+            ({{ case.date|date:"n/j/Y" }})
+        </p>
+        
+        <div class="resolution-content">
+            {% load markdown_extras %}
+            <!-- Court Arguments -->
+            {% if case.arguments %}
+                <div>
+                    {% for argument in case.arguments %}
+                        {% if argument.argument_type == "Dissenting Opinion" or argument.argument_type == "Concurring Opinion" %}
+                            <div class="resolution-text">
+                                <h3>Ruling:</h3>
+                                {{ case.ruling_body|markdownify }}
+                            </div>
+                        {% endif %}
+
+                        <div>
+                            {% if argument.argument_type == "Dissenting Opinion" or argument.argument_type == "Concurring Opinion" %}
+                            <h4>{{ argument.argument_type }} ({{ argument.speaker }}):</h4>
+                            {% else %}
+                            <h3>{{ argument.argument_type }} ({{ argument.speaker }}):</h3>
+                            {% endif %}
+                            <div>
+                                {{ argument.body|markdownify }}
+                            </div>
+                        </div>
+
+                        {% if argument.images.exists %}
+                            {% if argument.images.count == 1 %}
+                                <!-- Single image layout -->
+                                <div class="resolution-images single-image">
+                                    {% for image in argument.images.all %}
+                                    <div class="image-container">
+                                        <img src="{{ image.image.url }}" 
+                                            alt="Image for {{ argument.title }}" 
+                                            class="resolution-image"
+                                            onclick="openModal('{{ image.image.url }}', '{{ argument.title }}')">
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <!-- Multiple images grid layout -->
+                                <div class="resolution-images multiple-images">
+                                    {% for image in argument.images.all %}
+                                    <div class="image-container">
+                                        <img src="{{ image.image.url }}" 
+                                            alt="Image for {{ argument.title }}" 
+                                            class="resolution-image"
+                                            onclick="openModal('{{ image.image.url }}', '{{ argument.title }}')">
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                        <br>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <hr>
+    {% empty %}
+    <p>No court cases found.</p>
+    {% endfor %}
+</div>
+
+<!-- Modal for full-size image viewing -->
+<div id="imageModal" class="image-modal" onclick="closeModal()">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
 </div>
 {% endblock %}
 

@@ -2,7 +2,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from un_app.models import Nation
 
-class National_Constitution(models.Model):
+class NationalConstitution(models.Model):
     date = models.DateField(unique=True)
     nation = models.ForeignKey(Nation, on_delete=models.CASCADE, related_name='nation_constitution')
     body = models.TextField()
@@ -22,9 +22,9 @@ class National_Constitution(models.Model):
         return f"{self.nation} {self.date}"
     
     
-class National_Constitution_Amendment(models.Model):
+class NationalConstitutionAmendment(models.Model):
     title = models.CharField(max_length=255)
-    national_constitution = models.ForeignKey(National_Constitution, on_delete=models.CASCADE, related_name='amended_national_constitution')
+    national_constitution = models.ForeignKey(NationalConstitution, on_delete=models.CASCADE, related_name='amended_national_constitution')
     date = models.DateField()
     body = models.TextField()
     void = models.BooleanField(default=False, blank=True)
