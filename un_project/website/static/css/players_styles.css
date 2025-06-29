@@ -217,6 +217,7 @@ body {
 .tooltip .preview {
     padding: 0;
     margin: 0;
+    color: #A8A8A8;
 }
 
 .prioritySelector {

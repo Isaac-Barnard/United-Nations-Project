@@ -193,8 +193,7 @@ function display_tooltip(element) {
     if (element.children[0].getAttribute('data-title-c') !== null) {
         name = element.children[0].getAttribute('data-title-c');
         
-        label.innerHTML = "<p class=\"name\">" + name + "</p>";
-        label.style.fontStyle = 'italic';
+        label.innerHTML = "<p class=\"name\" style=\"font-style: italic;\">" + name + "</p>";
         
         if (label.style.color != "") { label.style.color = rarity_color['rare']; }
     } else {
@@ -275,14 +274,14 @@ function add_extra_info(element, slot, label, id_name) {
             if (inner_items[i].childNodes.length == 2) {
                 quantity = inner_items[i].children[1].innerHTML;
             }
-            label.innerHTML += "<p class=\"preview\">" + inner_items[i].children[0].getAttribute('data-title') + " x" + quantity + "</p>";
+            label.innerHTML += `<p class="preview"> ${inner_items[5].children[0].getAttribute('data-title')} x${quantity}</p>`;
         }
         if (inner_items.length == 6) {
             var quantity = 1
             if (inner_items[5].childNodes.length == 2) {
                 quantity = inner_items[5].children[1].innerHTML;
             }
-            label.innerHTML += "<p class=\"preview\">" + inner_items[5].children[0].getAttribute('data-title') + " x" + quantity + "</p>";
+            label.innerHTML += `<p class="preview"> ${inner_items[5].children[0].getAttribute('data-title')} x${quantity}</p>`;
         } else if (inner_items.length - 5 > 0) {
             label.innerHTML += `<p class="preview"><i>and ${inner_items.length - 5} more...</i></p>`;
         }
