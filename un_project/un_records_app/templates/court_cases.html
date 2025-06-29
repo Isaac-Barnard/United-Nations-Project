@@ -22,19 +22,13 @@
         
         <div class="resolution-content">
             {% load markdown_extras %}
-            <div class="resolution-text">
-                {{ resolution.body|markdownify }}
-            </div>
-
-
-
             <!-- Court Arguments -->
             {% if case.arguments %}
-                <div class="amendments-section">
+                <div>
                     {% for argument in case.arguments %}
-                        <div class="amendment">
-                            <h3>test {{ argument.number }}</h3>
-                            <div class="amendment-body">
+                        <div>
+                            <h3>{{ argument.argument_type }} ({{ argument.speaker }}):</h3>
+                            <div>
                                 {{ argument.body|markdownify }}
                             </div>
                         </div>
@@ -66,7 +60,14 @@
                                 </div>
                             {% endif %}
                         {% endif %}
+                        <br>
                     {% endfor %}
+                    
+
+                    <div class="resolution-text">
+                        <h3>Ruling:</h3>
+                        {{ case.ruling_body|markdownify }}
+                    </div>
                 </div>
             {% endif %}
         </div>
