@@ -93,12 +93,25 @@ Running the server locally:
         - [X] Death Location
         - [X] Hearts
         - [ ] Xp
+    - [ ] Full shulker box viewing 
+        - [X] Fix shulker boxes from displaying incorrectly
+        - [X] Add shulker box preview
+        - [ ] Fix shulker box incorrect data
+        - [ ] Fix shulker name overflow
     - [ ] Enchantment Glint
-    - [X] Fix shulker boxes
-    - [ ] Add Rarity
-    - [ ] Fix Tipped Arrows
-    - [ ] Fix Written Books
+    - [X] Add Rarity
+    - [X] Fix Written Books
     - [X] Fix Model Viewer
+    - [ ] Fix Potions and Tipped arrows
+        - [ ] Add potion efffects and durations
+        - [ ] Change potion and arrow colors
+    - [ ] Add extra data to various items
+        - [ ] Goat Horns
+        - [ ] Ominous Bottles
+        - [ ] Armor Trims
+        - [ ] Music Disks
+        - [ ] Suspicious Stew
+    - [ ] Add durability
 - **<ins>Misc.</ins>**
     - [ ] Sort buildings
         - [ ] Sort by nation
