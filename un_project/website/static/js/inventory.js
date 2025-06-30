@@ -165,6 +165,7 @@ function display_tooltip(element) {
     if (document.querySelector(".tooltip")) {
         return;
     }
+    
     // Create tooltip label
     var label = document.createElement('label');
     label.className = "tooltip";
@@ -273,7 +274,7 @@ function add_extra_info(element, slot, label, id_name) {
             if (inner_items[i].childNodes.length == 2) {
                 quantity = inner_items[i].children[1].innerHTML;
             }
-            label.innerHTML += `<p class="preview"> ${inner_items[5].children[0].getAttribute('data-title')} x${quantity}</p>`;
+            label.innerHTML += `<p class="preview"> ${inner_items[i].children[0].getAttribute('data-title')} x${quantity}</p>`;
         }
         if (inner_items.length == 6) {
             var quantity = 1
@@ -338,6 +339,8 @@ function follow(e) {
 
 function toggle_freeze_tooltip(e) {
     let tooltip = document.querySelector(".tooltip");
+
+    if (tooltip.offsetParent != e.target.offsetParent) { return; }
 
     if (tooltip.hasAttribute('frozen')) {
         tooltip.removeAttribute('frozen');
