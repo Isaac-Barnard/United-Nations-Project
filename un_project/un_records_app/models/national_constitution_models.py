@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from un_app.models import Nation
 
 class NationalConstitution(models.Model):
+    title = models.CharField(max_length=255)
     date = models.DateField(unique=True)
     nation = models.ForeignKey(Nation, on_delete=models.CASCADE, related_name='nation_constitution')
     body = models.TextField()
@@ -19,7 +20,7 @@ class NationalConstitution(models.Model):
             raise ValidationError("Invalidation date cannot be set unless the nation's constitution is void")
 
     def __str__(self):
-        return f"{self.nation} {self.date}"
+        return f"{self.nation.abbreviation} - {self.title} ({self.date})"
     
     
 class NationalConstitutionAmendment(models.Model):

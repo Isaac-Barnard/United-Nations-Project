@@ -13,43 +13,48 @@
 <div class="page-container">
     <h1>United Nations National Constitutions</h1>
     <hr>
-    {% for constitution in national_constitutions %}
-        <div>
-            <h2>Constitution of {{ constitution.nation }}</h2>
-            <p>
-                ({{ constitution.date|date:"n/j/Y" }})
-                {% if constitution.void %}<strong>(Void, {{ constitution.invalidation_date|date:"n/j/Y" }})</strong>{% endif %}
-            </p>
-            {% load markdown_extras %}
-            <p>
-                {{ constitution.body|markdownify }}
-            </p>
-        </div>
 
-    <!-- National Constitution Amendments -->
-        {% if constitution.amended_national_constitution.exists %}
-            <div class="amendments-section">
-                {% for amendment in constitution.amended_national_constitution.all %}
-                    <br>
-                    <div class="amendment">
-                        <h3>{{ amendment.title }}</h3>
-                        <p>
-                            ({{ amendment.date|date:"n/j/Y" }}) 
-                            {% if amendment.void %}<strong>(Void, {{ amendment.invalidation_date|date:"n/j/Y" }})</strong>{% endif %}
-                        </p>
-                        <div class="amendment-body">
-                            {{ amendment.body|markdownify }}
-                        </div>
-                    </div>
-                {% endfor %}
+    {% regroup national_constitutions by nation as constitution_groups %}
+    {% for group in constitution_groups %}
+        <h2>Nation: {{ group.grouper }}</h2>
+        {% for constitution in group.list %}
+            <div>
+                <h3>{{ constitution.title }}</h3>
+                <p>
+                    ({{ constitution.date|date:"n/j/Y" }})
+                    {% if constitution.void %}<strong>(Void, {{ constitution.invalidation_date|date:"n/j/Y" }})</strong>{% endif %}
+                </p>
+                {% load markdown_extras %}
+                <p>
+                    {{ constitution.body|markdownify }}
+                </p>
             </div>
-        {% endif %}
-        <br>
 
+            <!-- National Constitution Amendments -->
+            {% if constitution.amended_national_constitution.exists %}
+                <div class="amendments-section">
+                    {% for amendment in constitution.amended_national_constitution.all %}
+                        <br>
+                        <div class="amendment">
+                            <h3>{{ amendment.title }}</h3>
+                            <p>
+                                ({{ amendment.date|date:"n/j/Y" }})
+                                {% if amendment.void %}<strong>(Void, {{ amendment.invalidation_date|date:"n/j/Y" }})</strong>{% endif %}
+                            </p>
+                            <div class="amendment-body">
+                                {{ amendment.body|markdownify }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br>
+            <hr>
+        {% endfor %}
     {% empty %}
         <p>No national constitutions found.</p>
     {% endfor %}
-
+    
 </div>
 {% endblock %}
 

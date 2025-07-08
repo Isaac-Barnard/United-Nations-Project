@@ -41,5 +41,5 @@ def declaration_of_wars(request):
     return render(request, 'declaration_of_wars.html', {'declaration_of_wars': declaration_of_wars})
 
 def national_constitutions(request):
-    national_constitutions = NationalConstitution.objects.prefetch_related(Prefetch('amended_national_constitution', queryset=NationalConstitutionAmendment.objects.order_by('date'))).order_by('-date')
+    national_constitutions = NationalConstitution.objects.prefetch_related(Prefetch('amended_national_constitution', queryset=NationalConstitutionAmendment.objects.order_by('date'))).order_by('nation', '-date')
     return render(request, 'national_constitutions.html', {'national_constitutions': national_constitutions})
