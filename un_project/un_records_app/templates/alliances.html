@@ -17,7 +17,8 @@
     <div>
         <h2>{{ alliance.title }}</h2>
         <p>
-            ({{ alliance.date|date:"n/j/Y" }}) &nbsp;&nbsp;Nations Involved: {{ alliance.nations_involved.all|join:", " }}
+            ({{ alliance.date|date:"n/j/Y" }}) &nbsp;&nbsp;<u>Member Nations:</u> {{ alliance.member_nations.all|join:", " }}
+            {% if alliance.partial_member_nations.exists %} &nbsp;| &nbsp;<u>Partial Member Nations:</u> {{ alliance.partial_member_nations.all|join:", " }} {% endif %}
             {% if alliance.defunct %}<strong>(Defunct, {{ alliance.invalidation_date }})</strong>{% endif %}
         </p>
         

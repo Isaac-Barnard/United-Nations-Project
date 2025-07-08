@@ -5,7 +5,8 @@ from un_app.models import Nation
 class Alliance(models.Model):
     title = models.CharField(max_length=255, unique=True)
     date = models.DateField()
-    nations_involved = models.ManyToManyField('un_app.Nation', related_name='alliance')
+    member_nations = models.ManyToManyField('un_app.Nation', related_name='alliance')
+    partial_member_nations = models.ManyToManyField('un_app.Nation', related_name='partial_alliance', null=True, default=None, blank=True)
     body = models.TextField()
     defunct = models.BooleanField(default=False, blank=True)
     invalidation_date = models.DateField(null=True, default=None, blank=True, help_text="Date the alliance was considered defunct")
