@@ -18,7 +18,7 @@
         <h2>{{ treaty.title }}</h2>
         <p>
             ({{ treaty.date|date:"n/j/Y" }}) &nbsp;&nbsp;Nations Involved: {{ treaty.nations_involved.all|join:", " }}
-            {% if treaty.void %}<strong>(Void, {{ treaty.invalidation_date }})</strong>{% endif %}
+            {% if treaty.void %}<strong>(Void, {{ treaty.invalidation_date|date:"n/j/Y" }})</strong>{% endif %}
         </p>
         
         <div class="resolution-content">

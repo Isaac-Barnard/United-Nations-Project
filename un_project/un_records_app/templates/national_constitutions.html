@@ -18,7 +18,7 @@
             <h2>Constitution of {{ constitution.nation }}</h2>
             <p>
                 ({{ constitution.date|date:"n/j/Y" }})
-                {% if constitution.void %}<strong>(Void, {{ constitution.invalidation_date }})</strong>{% endif %}
+                {% if constitution.void %}<strong>(Void, {{ constitution.invalidation_date|date:"n/j/Y" }})</strong>{% endif %}
             </p>
             {% load markdown_extras %}
             <p>
