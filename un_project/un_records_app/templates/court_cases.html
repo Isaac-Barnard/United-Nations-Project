@@ -81,7 +81,6 @@
                         {% if forloop.last %}
                                 {% if argument.argument_type != "Dissenting Opinion" and argument.argument_type != "Concurring Opinion" %}
                                     <div class="resolution-text">
-                                        <br>
                                         <h3>Ruling:</h3>
                                         {{ case.ruling_body|markdownify }}
                                     </div>

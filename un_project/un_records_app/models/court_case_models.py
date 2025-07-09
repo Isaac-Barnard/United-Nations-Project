@@ -35,7 +35,7 @@ class CourtCase(models.Model):
             raise ValidationError("Exactly one plaintiff must be specified.")
 
     def __str__(self):
-        return f"{self.title} ({self.date})"
+        return f"Case {self.case_number}: {self.title} ({self.date})"
     
     
     
@@ -60,7 +60,7 @@ class CourtCaseArgument(models.Model):
         unique_together = ('number', 'court_case')
     
     def __str__(self):
-        return f"{self.court_case.title} {self.number}"
+        return f"Case {self.court_case.case_number}: {self.argument_type} {self.number}"
     
     
     
@@ -74,4 +74,4 @@ class CourtCaseArgumentImage(models.Model):
         ordering = ['order']
     
     def __str__(self):
-        return f"Image for {self.court_case_argument.court_case.title}, {self.court_case_argument.number} {self.evidence_letter} ({self.order})"
+        return f"Case {self.court_case_argument.court_case.case_number}: {self.court_case_argument.argument_type} {self.court_case_argument.number} {self.evidence_letter} ({self.order})"
