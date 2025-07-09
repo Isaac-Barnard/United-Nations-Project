@@ -11,12 +11,12 @@ class CourtCase(models.Model):
     votes_for_defendant = models.PositiveIntegerField(blank=True, null=True)
     ruling_body = models.TextField()
     
-    defendant_nation = models.ManyToManyField(Nation, blank=True, related_name='defendant_nation')
     plaintiff_nation = models.ManyToManyField(Nation, blank=True, related_name='plaintiff_nation')
-    defendant_individual = models.ManyToManyField(Player, blank=True, related_name='defendant_individual')
+    defendant_nation = models.ManyToManyField(Nation, blank=True, related_name='defendant_nation')
     plaintiff_individual = models.ManyToManyField(Player, blank=True, related_name='plaintiff_individual')
-    defendant_company = models.ManyToManyField(Company, blank=True, related_name='defendant_company')
+    defendant_individual = models.ManyToManyField(Player, blank=True, related_name='defendant_individual')
     plaintiff_company = models.ManyToManyField(Company, blank=True, related_name='plaintiff_company')
+    defendant_company = models.ManyToManyField(Company, blank=True, related_name='defendant_company')
 
     def __str__(self):
         return f"Case {self.case_number}: {self.title} ({self.date})"
