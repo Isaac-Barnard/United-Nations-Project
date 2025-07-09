@@ -151,8 +151,8 @@ Running the server locally:
         - [x] Amendments
     - [x] Treaties
         - [x] Images
-    - [ ] Court Cases
-        - [ ] Images/videos
+    - [x] Court Cases
+        - [x] Images/videos
     - [x] Executive Orders
     - [ ] Misc.
         - [x] Recognized Alliances
