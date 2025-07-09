@@ -11,28 +11,12 @@ class CourtCase(models.Model):
     votes_for_defendant = models.PositiveIntegerField(blank=True, null=True)
     ruling_body = models.TextField()
     
-    defendant_nation = models.ForeignKey(Nation, on_delete=models.CASCADE, null=True, blank=True, related_name='defendant_nation')
-    plaintiff_nation = models.ForeignKey(Nation, on_delete=models.CASCADE, null=True, blank=True, related_name='plaintiff_nation')
-    defendant_individual = models.ForeignKey(Player, on_delete=models.CASCADE, null=True, blank=True, related_name='defendant_individual')
-    plaintiff_individual = models.ForeignKey(Player, on_delete=models.CASCADE, null=True, blank=True, related_name='plaintiff_individual')
-    defendant_company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True, related_name='defendant_company')
-    plaintiff_company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True, related_name='plaintiff_company')
-
-    def clean(self):
-        super().clean()
-
-        # Group defendants and plaintiffs
-        defendants = [self.defendant_nation, self.defendant_individual, self.defendant_company]
-        plaintiffs = [self.plaintiff_nation, self.plaintiff_individual, self.plaintiff_company]
-
-        # Count non-null values
-        num_defendants = sum(1 for d in defendants if d is not None)
-        num_plaintiffs = sum(1 for p in plaintiffs if p is not None)
-
-        if num_defendants != 1:
-            raise ValidationError("Exactly one defendant must be specified.")
-        if num_plaintiffs != 1:
-            raise ValidationError("Exactly one plaintiff must be specified.")
+    defendant_nation = models.ManyToManyField(Nation, blank=True, related_name='defendant_nation')
+    plaintiff_nation = models.ManyToManyField(Nation, blank=True, related_name='plaintiff_nation')
+    defendant_individual = models.ManyToManyField(Player, blank=True, related_name='defendant_individual')
+    plaintiff_individual = models.ManyToManyField(Player, blank=True, related_name='plaintiff_individual')
+    defendant_company = models.ManyToManyField(Company, blank=True, related_name='defendant_company')
+    plaintiff_company = models.ManyToManyField(Company, blank=True, related_name='plaintiff_company')
 
     def __str__(self):
         return f"Case {self.case_number}: {self.title} ({self.date})"
