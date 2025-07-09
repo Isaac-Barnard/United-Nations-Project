@@ -26,10 +26,11 @@
             {% if case.arguments %}
                 <div>
                     {% for argument in case.arguments %}
-                        {% if argument.argument_type == "Dissenting Opinion" or argument.argument_type == "Concurring Opinion" %}
+                        {% if argument.is_ruling_time %}
                             <div class="resolution-text">
                                 <h3>Ruling:</h3>
                                 {{ case.ruling_body|markdownify }}
+                                <br>
                             </div>
                         {% endif %}
 
@@ -76,6 +77,16 @@
                             {% endif %}
                         {% endif %}
                         <br>
+
+                        {% if forloop.last %}
+                                {% if argument.argument_type != "Dissenting Opinion" and argument.argument_type != "Concurring Opinion" %}
+                                    <div class="resolution-text">
+                                        <br>
+                                        <h3>Ruling:</h3>
+                                        {{ case.ruling_body|markdownify }}
+                                    </div>
+                                {% endif %}
+                            {% endif %}
                     {% endfor %}
                 </div>
             {% endif %}
