@@ -53,7 +53,7 @@ class CourtCaseArgument(models.Model):
     number = models.CharField(max_length=10)
     court_case = models.ForeignKey(CourtCase, on_delete=models.CASCADE, related_name='case_argued')
     argument_type = models.CharField(max_length=50, choices=ARGUMENT_TYPE)
-    speaker = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='resolution_amendment')
+    speaker = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='resolution_amendment', blank=True, null=True)
     body = models.TextField()
     
     class Meta:

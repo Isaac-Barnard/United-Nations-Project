@@ -35,9 +35,13 @@
 
                         <div>
                             {% if argument.argument_type == "Dissenting Opinion" or argument.argument_type == "Concurring Opinion" %}
-                            <h4>{{ argument.argument_type }} ({{ argument.speaker }}):</h4>
+                                <h4>{{ argument.argument_type }} ({{ argument.speaker }}):</h4>
                             {% else %}
-                            <h3>{{ argument.argument_type }} ({{ argument.speaker }}):</h3>
+                                {% if argument.argument_type == "War Crime Tribunal" %}
+                                <h3>{{ argument.argument_type }}:</h3>
+                                {% else %}
+                                    <h3>{{ argument.argument_type }} ({{ argument.speaker }}):</h3>
+                                {% endif %}
                             {% endif %}
                             <div>
                                 {{ argument.body|markdownify }}
