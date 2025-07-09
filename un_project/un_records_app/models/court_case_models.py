@@ -7,8 +7,8 @@ class CourtCase(models.Model):
     case_number = models.CharField(max_length=10, unique=True)
     title = models.CharField(max_length=255, unique=True)
     date = models.DateField()
-    votes_for_plaintiff = models.PositiveIntegerField()
-    votes_for_defendant = models.PositiveIntegerField()
+    votes_for_plaintiff = models.PositiveIntegerField(blank=True)
+    votes_for_defendant = models.PositiveIntegerField(blank=True)
     ruling_body = models.TextField()
     
     defendant_nation = models.ForeignKey(Nation, on_delete=models.CASCADE, null=True, blank=True, related_name='defendant_nation')
