@@ -5,7 +5,7 @@ from un_app.models import Nation, Player, Company
 
 class CourtCase(models.Model):
     case_number = models.CharField(max_length=10, unique=True)
-    title = models.CharField(max_length=255, unique=True)
+    title = models.CharField(max_length=255)
     date = models.DateField()
     votes_for_plaintiff = models.PositiveIntegerField(blank=True, null=True)
     votes_for_defendant = models.PositiveIntegerField(blank=True, null=True)
