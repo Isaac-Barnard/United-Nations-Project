@@ -16,7 +16,7 @@
 
     {% regroup national_constitutions by nation as constitution_groups %}
     {% for group in constitution_groups %}
-        <h2>Nation: {{ group.grouper }}</h2>
+        <h2>{{ group.grouper.name }}</h2>
         {% for constitution in group.list %}
             <div>
                 <h3>{{ constitution.title }}</h3>

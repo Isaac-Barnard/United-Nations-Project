@@ -46,6 +46,7 @@ ARGUMENT_TYPE = [
         ('Dissenting Opinion', 'Dissenting Opinion'),
         ('Witness Direct Examination', 'Witness Direct Examination'),
         ('Witness Cross Examination', 'Witness Cross Examination'),
+        ('War Crime Tribunal', 'War Crime Tribunal'),
     ]
     
 class CourtCaseArgument(models.Model):
