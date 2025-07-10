@@ -44,7 +44,7 @@ class CourtCaseArgument(models.Model):
         unique_together = ('number', 'court_case')
     
     def __str__(self):
-        return f"Case {self.court_case.case_number}: {self.argument_type} {self.number}"
+        return f"Case {self.court_case.case_number}: {self.argument_type} {self.number} ({self.speaker})"
     
     
     
@@ -53,6 +53,7 @@ class CourtCaseArgumentImage(models.Model):
     image = models.ImageField(upload_to='court_case_images/')
     evidence_letter = models.CharField(max_length=1)
     order = models.PositiveIntegerField(default=0, help_text="Order in which images should be displayed")
+    description = models.CharField(max_length=255, blank=True, null=True)
     
     class Meta:
         ordering = ['order']
