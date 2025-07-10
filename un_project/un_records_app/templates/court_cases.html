@@ -20,10 +20,10 @@
             ({{ case.date|date:"n/j/Y" }})
             
             {% if case.plaintiff_nation.exists %} &nbsp;&nbsp;<u>Plaintiff Nations:</u> {{ case.plaintiff_nation.all|join:", " }} {% endif %}
-            {% if case.plaintiff_individual.exists %} &nbsp;&nbsp;<u>Plaintiff Individual:</u> {{ case.plaintiff_individual.all|join:", " }} {% endif %}
+            {% if case.plaintiff_individual.exists %} &nbsp;&nbsp;<u>Plaintiff Individuals:</u> {{ case.plaintiff_individual.all|join:", " }} {% endif %}
             {% if case.plaintiff_company.exists %} &nbsp;&nbsp;<u>Plaintiff Companies:</u> {{ case.plaintiff_company.all|join:", " }} {% endif %}
             {% if case.defendant_nation.exists %} &nbsp;| &nbsp;<u>Defendant Nations:</u> {{ case.defendant_nation.all|join:", " }} {% endif %}
-            {% if case.defendant_individual.exists %} &nbsp;| &nbsp;<u>Defendant Individual:</u> {{ case.defendant_individual.all|join:", " }} {% endif %}
+            {% if case.defendant_individual.exists %} &nbsp;| &nbsp;<u>Defendant Individuals:</u> {{ case.defendant_individual.all|join:", " }} {% endif %}
             {% if case.defendant_company.exists %} &nbsp;| &nbsp;<u>Defendant Companies:</u> {{ case.defendant_company.all|join:", " }} {% endif %}
         </p>
         
