@@ -56,6 +56,7 @@
                             </div>
                         </div>
 
+
                         {% if argument.images.exists %}
                             {% if argument.images.count == 1 %}
                                 <!-- Single image layout -->
@@ -82,6 +83,19 @@
                                     {% endfor %}
                                 </div>
                             {% endif %}
+                        {% endif %}
+                        
+                        
+                        {% if argument.videos.exists %}
+                            <div class="video-evidence-container">
+                                {% for video in argument.videos.all %}
+                                    <div class="video-evidence">
+                                        <div class="video-wrapper">
+                                            <iframe src="{{ video.get_embed_url }}" frameborder="0" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
                         {% endif %}
                         <br>
 

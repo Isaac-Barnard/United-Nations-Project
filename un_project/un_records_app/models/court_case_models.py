@@ -60,3 +60,24 @@ class CourtCaseArgumentImage(models.Model):
     
     def __str__(self):
         return f"Case {self.court_case_argument.court_case.case_number}: {self.court_case_argument.argument_type} {self.court_case_argument.number} {self.evidence_letter} ({self.order})"
+    
+    
+class CourtCaseArgumentVideo(models.Model):
+    court_case_argument = models.ForeignKey(CourtCaseArgument, on_delete=models.CASCADE, related_name='videos')
+    youtube_url = models.URLField()
+    evidence_letter = models.CharField(max_length=1)
+    order = models.PositiveIntegerField(default=0, help_text="Order in which videos should be displayed")
+    description = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return f"Case {self.court_case_argument.court_case.case_number}: {self.court_case_argument.argument_type} {self.court_case_argument.number} {self.evidence_letter} ({self.order})"
+
+    def get_embed_url(self):
+        import re
+        match = re.search(r'(?:v=|\/)([0-9A-Za-z_-]{11}).*', self.youtube_url)
+        if match:
+            return f"https://www.youtube.com/embed/{match.group(1)}"
+        return None

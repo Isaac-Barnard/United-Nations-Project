@@ -157,3 +157,33 @@ h6 {
 .amendments-section {
     margin-left: 3rem;
 }
+
+
+.video-evidence-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.video-evidence {
+    flex: 1 1 400px;
+    max-width: 500px;
+    text-align: center;
+}
+
+.video-evidence .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+.video-evidence iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

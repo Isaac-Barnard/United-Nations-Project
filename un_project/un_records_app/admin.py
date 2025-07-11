@@ -80,10 +80,16 @@ class CourtCaseArgumentImageInline(admin.TabularInline):
     extra = 2
     fields = ['image', 'order', 'evidence_letter', 'description']
     ordering = ['order']
+    
+class CourtCaseArgumentVideoInline(admin.TabularInline):
+    model = models.CourtCaseArgumentVideo
+    extra = 1
+    fields = ['youtube_url', 'order', 'evidence_letter', 'description']
+    ordering = ['order']
 
 @admin.register(models.CourtCaseArgument)
 class CourtCaseArgumentAdmin(admin.ModelAdmin):
-    inlines = [CourtCaseArgumentImageInline]
+    inlines = [CourtCaseArgumentImageInline, CourtCaseArgumentVideoInline]
     
     def image_count(self, obj):
         return obj.images.count()
