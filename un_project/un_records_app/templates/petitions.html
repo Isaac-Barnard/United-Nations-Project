@@ -13,7 +13,7 @@
 <div class="page-container">
     <h1>United Nations Petitions</h1>
     <hr>
-        <div class="petition-type-filters">
+    <div class="petition-type-filters">
         <a href="{% url 'petitions' %}" class="filter-button {% if not current_type %}active{% endif %}">
             All
         </a>
@@ -23,14 +23,19 @@
             </a>
         {% endfor %}
     </div>
+
+
+    <hr>
+    {% if current_type == none %} <h2>All Petitions</h2> {% endif %}
+    {% if current_type != none %} <h2>{{ current_type }}</h2> {% endif %}
+    <hr>
     <br>
-    <hr>   
 
     {% for petition in petitions %}
     <div>
-        <h2>{{ petition.title }}</h2>
+        <h3>{{ petition.title }}</h3>
         <p>
-            ({{ petition.date|date:"n/j/Y" }}) &nbsp;&nbsp;Nation: {{ petition.petitioner }} &nbsp;&nbsp;Petition Type: {{ petition.petition_type }}
+            ({{ petition.date|date:"n/j/Y" }}) [{{ petition.votes_for }}-{{ petition.votes_against }}] &nbsp;&nbsp;Nation: {{ petition.petitioner }}
         </p>
         
         <div class="resolution-content">

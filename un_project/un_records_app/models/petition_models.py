@@ -14,6 +14,8 @@ class Petition(models.Model):
     date = models.DateField()
     petition_type = models.CharField(max_length=100, choices=PETITION_TYPE)
     petitioner = models.ForeignKey(Nation, on_delete=models.CASCADE, related_name='petitioner_nation')
+    votes_for = models.PositiveIntegerField()
+    votes_against = models.PositiveIntegerField()
     body = models.TextField()
     
 
