@@ -13,6 +13,19 @@
 <div class="page-container">
     <h1>United Nations Petitions</h1>
     <hr>
+        <div class="petition-type-filters">
+        <a href="{% url 'petitions' %}" class="filter-button {% if not current_type %}active{% endif %}">
+            All
+        </a>
+        {% for type in petition_types %}
+            <a href="?type={{ type }}" class="filter-button {% if current_type == type %}active{% endif %}">
+                {{ type }}
+            </a>
+        {% endfor %}
+    </div>
+    <br>
+    <hr>   
+
     {% for petition in petitions %}
     <div>
         <h2>{{ petition.title }}</h2>

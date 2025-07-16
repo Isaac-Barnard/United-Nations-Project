@@ -57,6 +57,17 @@ def national_constitutions(request):
     return render(request, 'national_constitutions.html', {'national_constitutions': national_constitutions})
 
 def petitions(request):
-    # Prefetch images to avoid N+1 queries while maintaining date ordering
-    petitions = Petition.objects.prefetch_related('images').all().order_by('-date')
-    return render(request, 'petitions.html', {'petitions': petitions})
+    petition_type = request.GET.get('type')
+    petitions = Petition.objects.prefetch_related('images').order_by('-date')
+    
+    if petition_type:
+        petitions = petitions.filter(petition_type=petition_type)
+
+    # To generate buttons, get unique petition types
+    petition_types = Petition.objects.values_list('petition_type', flat=True).distinct()
+    
+    return render(request, 'petitions.html', {
+        'petitions': petitions,
+        'petition_types': petition_types,
+        'current_type': petition_type
+    })
