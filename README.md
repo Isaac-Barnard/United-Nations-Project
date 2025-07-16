@@ -96,7 +96,7 @@ Running the server locally:
     - [ ] Full shulker box viewing 
         - [X] Fix shulker boxes from displaying incorrectly
         - [X] Add shulker box preview
-        - [ ] Fix shulker box incorrect data
+        - [X] Fix shulker box incorrect data
         - [ ] Fix shulker name overflow
     - [ ] Enchantment Glint
     - [X] Add Rarity
@@ -161,7 +161,7 @@ Running the server locally:
         - [ ] Buisnesses and Shops
         - [ ] Aternos Games
         - [ ] Medal of Papa Quinn
-        - [ ] Petitions
+        - [X] Petitions
         - [ ] UN Staff
         - [ ] Historical UN Sessions
         - [ ] Name Changes
