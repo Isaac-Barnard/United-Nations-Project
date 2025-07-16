@@ -1,0 +1,93 @@
+{% extends 'records_base.html' %}
+
+{% block title %}Petitions{% endblock %}
+
+{% load static %}
+{% load custom_filters %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/records_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1>United Nations Petitions</h1>
+    <hr>
+    {% for petition in petitions %}
+    <div>
+        <h2>{{ petition.title }}</h2>
+        <p>
+            ({{ petition.date|date:"n/j/Y" }}) &nbsp;&nbsp;Nation: {{ petition.petitioner }} &nbsp;&nbsp;Petition Type: {{ petition.petition_type }}
+        </p>
+        
+        <div class="resolution-content">
+            {% load markdown_extras %}
+            <div class="resolution-text">
+                {{ petition.body|markdownify }}
+            </div>
+            
+            {% if petition.images.exists %}
+                {% if petition.images.count == 1 %}
+                    <!-- Single image layout -->
+                    <div class="resolution-images single-image">
+                        {% for image in petition.images.all %}
+                        <div class="image-container">
+                            <img src="{{ image.image.url }}" 
+                                 alt="Image for {{ petition.title }}" 
+                                 class="resolution-image"
+                                 onclick="openModal('{{ image.image.url }}', '{{ petition.title }}')">
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Multiple images grid layout -->
+                    <div class="resolution-images multiple-images">
+                        {% for image in petition.images.all %}
+                        <div class="image-container">
+                            <img src="{{ image.image.url }}" 
+                                 alt="Image for {{ petition.title }}" 
+                                 class="petition-image"
+                                 onclick="openModal('{{ image.image.url }}', '{{ petition.title }}')">
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <hr>
+    {% empty %}
+    <p>No petitions found.</p>
+    {% endfor %}
+</div>
+
+<!-- Modal for full-size image viewing -->
+<div id="imageModal" class="image-modal" onclick="closeModal()">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function openModal(imageSrc, title) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    
+    modal.style.display = 'block';
+    modalImg.src = imageSrc;
+    modalImg.alt = 'Image for ' + title;
+}
+
+function closeModal() {
+    document.getElementById('imageModal').style.display = 'none';
+}
+
+// Close modal when pressing Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeModal();
+    }
+});
+</script>
+{% endblock %}

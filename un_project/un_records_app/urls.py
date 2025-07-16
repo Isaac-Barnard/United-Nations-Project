@@ -11,4 +11,5 @@ urlpatterns = [
     path('alliances', alliances, name='alliances'),
     path('declaration_of_wars', declaration_of_wars, name='declaration_of_wars'),
     path('national_constitution', national_constitutions, name='national_constitution'),
+    path('petitions', petitions, name='petitions'),
 ]

@@ -1,8 +1,6 @@
 from django.contrib import admin
 from . import models
 
-#admin.site.register(models.Resolution)
-#admin.site.register(models.Treaty)
 admin.site.register(models.ExecutiveOrder)
 admin.site.register(models.ResolutionAmendment)
 admin.site.register(models.Charter)
@@ -72,6 +70,26 @@ class AllianceAdmin(admin.ModelAdmin):
 class AllianceImageAdmin(admin.ModelAdmin):
     search_fields = ['alliance__title']
     ordering = ['alliance', 'order']
+    
+    
+class PetitionImageInline(admin.TabularInline):
+    model = models.PetitionImage
+    extra = 1
+    fields = ['image', 'order']
+    ordering = ['order']
+
+@admin.register(models.Petition)
+class PetitionAdmin(admin.ModelAdmin):
+    inlines = [PetitionImageInline]
+    
+    def image_count(self, obj):
+        return obj.images.count()
+    image_count.short_description = 'Images'
+
+@admin.register(models.PetitionImage)
+class PetitionImageAdmin(admin.ModelAdmin):
+    search_fields = ['petition__title']
+    ordering = ['petition', 'order']
     
     
 

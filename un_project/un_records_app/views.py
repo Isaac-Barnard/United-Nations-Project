@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.db.models import Prefetch
-from .models import Resolution, Treaty, ExecutiveOrder, ResolutionAmendment, Charter, CharterAmendment , Alliance, DeclarationOfWar, NationalConstitution, NationalConstitutionAmendment, CourtCase, CourtCaseArgument, CourtCaseArgumentImage, CourtCaseArgumentVideo
+from .models import Resolution, Treaty, ExecutiveOrder, ResolutionAmendment, Charter, CharterAmendment , Alliance, DeclarationOfWar, NationalConstitution, NationalConstitutionAmendment, CourtCase, CourtCaseArgument, CourtCaseArgumentImage, CourtCaseArgumentVideo, Petition
 
 # Create your views here.
 def records_home(request):
@@ -55,3 +55,8 @@ def declaration_of_wars(request):
 def national_constitutions(request):
     national_constitutions = NationalConstitution.objects.prefetch_related(Prefetch('amended_national_constitution', queryset=NationalConstitutionAmendment.objects.order_by('date'))).order_by('nation', '-date')
     return render(request, 'national_constitutions.html', {'national_constitutions': national_constitutions})
+
+def petitions(request):
+    # Prefetch images to avoid N+1 queries while maintaining date ordering
+    petitions = Petition.objects.prefetch_related('images').all().order_by('-date')
+    return render(request, 'petitions.html', {'petitions': petitions})
