@@ -64,7 +64,7 @@
                         <div class="image-container">
                             <img src="{{ image.image.url }}" 
                                  alt="Image for {{ petition.title }}" 
-                                 class="petition-image"
+                                 class="resolution-image"
                                  onclick="openModal('{{ image.image.url }}', '{{ petition.title }}')">
                         </div>
                         {% endfor %}
@@ -73,7 +73,11 @@
             {% endif %}
         </div>
     </div>
+
+    <p style="margin:20px;"></p>
     <hr>
+    <p style="margin:20px;"></p>
+
     {% empty %}
     <p>No petitions found.</p>
     {% endfor %}
