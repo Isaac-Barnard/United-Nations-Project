@@ -85,6 +85,7 @@ function createItem(slotData, i, shulkerId) {
         itemImage.src = `/static/images/minecraft_items/${slotData.item_id}.png`;
     }
 
+    itemImage.setAttribute("item-id", `${slotData.item_id}`);
     itemImage.setAttribute("data-title", `${slotData.name}`);
     if (slotData['custom_name'] !== "None") {
         let name = slotData['custom_name'];
@@ -230,8 +231,7 @@ function display_tooltip(element) {
     label.className = "tooltip";
 
     // Get id name
-    var srcArr = element.children[0].src.split("/");
-    var id_name = srcArr[srcArr.length - 1].split(".png")[0];
+    var id_name = element.children[0].getAttribute('item-id');
 
     // Use regex to check if item is a specific rarity
     regex_rarity.forEach((tuple) => {
