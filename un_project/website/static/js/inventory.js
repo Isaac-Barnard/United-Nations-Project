@@ -11,7 +11,7 @@ var rarity = {};
 var regex_rarity = [];
 preload_rarity();
 const rarity_color = {uncommon: "#FFFF55", rare: "#55FFFF", epic: "#FF55FF"};
-const imageSize = 64;
+const imageSize = 32;
 
 var subData = [];
 
@@ -32,55 +32,9 @@ function createItem(slotData, i, shulkerId) {
     itemImage.id = `${i}`;
 
     if (isEnchanted) {
-        const ctx = itemImage.getContext('2d');
         itemImage.width = imageSize;
         itemImage.height = imageSize;
-        
-        const img = new Image();
-        img.src = `/static/images/minecraft_items/${slotData.item_id}.png`;
-
-        const glintImg = new Image();
-        glintImg.src = '/static/images/minecraft_items/enchanted_glint_item.png';
-
-        Promise.all([
-            new Promise(res => img.onload = res),
-            new Promise(res => glintImg.onload = res)
-        ]).then(() => {
-            let offset = 0;
-
-            function drawGlintFrame() {
-                ctx.clearRect(0, 0, imageSize, imageSize);
-                ctx.drawImage(img, 0, 0, imageSize, imageSize);
-
-                const offCanvas = document.createElement('canvas');
-                offCanvas.width = imageSize;
-                offCanvas.height = imageSize;
-                const offCtx = offCanvas.getContext('2d');
-
-                offCtx.fillStyle = offCtx.createPattern(glintImg, 'repeat');
-                offCtx.translate(-offset, -offset);
-                offCtx.fillRect(offset, offset, imageSize, imageSize);
-                offCtx.translate(offset, offset);
-
-                const itemData = ctx.getImageData(0, 0, imageSize, imageSize);
-                const glintData = offCtx.getImageData(0, 0, imageSize, imageSize);
-
-                for (let i = 0; i < itemData.data.length; i += 4) {
-                    const alpha = itemData.data[i + 3];
-                    if (alpha > 0) {
-                        itemData.data[i] = Math.min(255, itemData.data[i] + glintData.data[i] * 0.4);
-                        itemData.data[i + 1] = Math.min(255, itemData.data[i + 1] + glintData.data[i + 1] * 0.2);
-                        itemData.data[i + 2] = Math.min(255, itemData.data[i + 2] + glintData.data[i + 2] * 0.6);
-                    }
-                }
-
-                ctx.putImageData(itemData, 0, 0);
-                offset = (offset + 0.5) % imageSize;
-                requestAnimationFrame(drawGlintFrame);   
-            }
-
-            drawGlintFrame();
-        });
+        startGlintAnimation(itemImage, slotData.item_id);
     } else {
         itemImage.src = `/static/images/minecraft_items/${slotData.item_id}.png`;
     }
@@ -427,7 +381,27 @@ function toggle_shulker_display(e) {
         subDiv.innerHTML = '';
     } else {
         var inv_json = subData.filter(inventory => inventory.inv_id == inv_id)[0];
-        subDiv.innerHTML = inv_json.div.innerHTML;
+        
+        
+        inv_json.div.childNodes.forEach(node => {
+            const cloned = node.cloneNode(true);
+
+            const canvas = cloned.querySelector('canvas');
+            if (canvas) {
+                const itemImgSrc = canvas.getAttribute('item-id');
+                startGlintAnimation(canvas, itemImgSrc);
+                
+                cloned.innerHTML = '';
+                cloned.appendChild(canvas);
+                subDiv.appendChild(cloned);
+            } else {
+                subDiv.appendChild(cloned);
+            }
+            
+        });
+        /*.forEach(element => {
+            console.log(element);
+        });*/
     }
     shulker.setAttribute('id', inv_id);
 }
@@ -456,4 +430,53 @@ async function preload_rarity() {
             }
         })
     })
+}
+
+function startGlintAnimation(canvas, itemImgSrc) {
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    img.src = `/static/images/minecraft_items/${itemImgSrc}.png`;
+
+    const glintImg = new Image();
+    glintImg.src = '/static/images/minecraft_items/enchanted_glint_item.png';
+
+    Promise.all([
+        new Promise(res => img.onload = res),
+        new Promise(res => glintImg.onload = res)
+    ]).then(() => {
+        let offset = 0;
+
+        function drawGlintFrame() {
+            ctx.clearRect(0, 0, imageSize, imageSize);
+            ctx.drawImage(img, 0, 0, imageSize, imageSize);
+
+            const offCanvas = document.createElement('canvas');
+            offCanvas.width = imageSize;
+            offCanvas.height = imageSize;
+            const offCtx = offCanvas.getContext('2d');
+
+            offCtx.fillStyle = offCtx.createPattern(glintImg, 'repeat');
+            offCtx.translate(-offset, -offset);
+            offCtx.fillRect(offset, offset, imageSize, imageSize);
+            offCtx.translate(offset, offset);
+
+            const itemData = ctx.getImageData(0, 0, imageSize, imageSize);
+            const glintData = offCtx.getImageData(0, 0, imageSize, imageSize);
+
+            for (let i = 0; i < itemData.data.length; i += 4) {
+                const alpha = itemData.data[i + 3];
+                if (alpha > 0) {
+                    itemData.data[i] = Math.min(255, itemData.data[i] + glintData.data[i] * 0.4);
+                    itemData.data[i + 1] = Math.min(255, itemData.data[i + 1] + glintData.data[i + 1] * 0.2);
+                    itemData.data[i + 2] = Math.min(255, itemData.data[i + 2] + glintData.data[i + 2] * 0.6);
+                }
+            }
+
+            ctx.putImageData(itemData, 0, 0);
+            offset = (offset + 0.10) % imageSize;
+            requestAnimationFrame(drawGlintFrame);   
+        }
+
+        drawGlintFrame();
+    });
 }
