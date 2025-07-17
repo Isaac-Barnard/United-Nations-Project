@@ -98,7 +98,8 @@ Running the server locally:
         - [X] Add shulker box preview
         - [X] Fix shulker box incorrect data
         - [ ] Fix shulker name overflow
-    - [ ] Enchantment Glint
+    - [X] Enchantment Glint
+    - [ ] De-Lag enchantment glints
     - [X] Add Rarity
     - [X] Fix Written Books
     - [X] Fix Model Viewer
