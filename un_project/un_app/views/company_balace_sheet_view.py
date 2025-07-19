@@ -126,7 +126,7 @@ def company_balance_sheet(request, company_abbreviation):
         # Get company's receivables
         company_receivables = Liability.objects.filter(
             creditor_type=company_content_type,
-            creditor_abbreviation=company.abbreviation
+            creditor_abbreviation=investment_company.abbreviation
         ).aggregate(
             total=Coalesce(
                 Sum('remaining_diamond_value'),
@@ -137,7 +137,7 @@ def company_balance_sheet(request, company_abbreviation):
         # Get company's liabilities
         company_liabilities = Liability.objects.filter(
             debtor_type=company_content_type,
-            debtor_abbreviation=company.abbreviation
+            debtor_abbreviation=investment_company.abbreviation
         ).aggregate(
             total=Coalesce(
                 Sum('remaining_diamond_value'),
