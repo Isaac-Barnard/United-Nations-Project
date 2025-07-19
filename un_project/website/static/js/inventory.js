@@ -11,48 +11,62 @@ var rarity = {};
 var regex_rarity = [];
 preload_rarity();
 const rarity_color = {uncommon: "#FFFF55", rare: "#55FFFF", epic: "#FF55FF"};
+const imageSize = 32;
 
 var subData = [];
 
 function createItem(slotData, i, shulkerId) {
     const itemDiv = document.createElement('div');
     itemDiv.className = 'item';
-    const itemImage = document.createElement('img');
-
+    
     if (slotData === undefined) {
+        const itemImage = document.createElement('img');
         itemImage.src = `/static/images/minecraft_items/air.png`;
         itemDiv.appendChild(itemImage);
+        return itemDiv;
+    }
+    
+    const isEnchanted = slotData['enchantments'] !== "None";
+
+    const itemImage = isEnchanted ? document.createElement('canvas') : document.createElement('img');
+    itemImage.id = `${i}`;
+
+    if (isEnchanted) {
+        itemImage.width = imageSize;
+        itemImage.height = imageSize;
+        startGlintAnimation(itemImage, slotData.item_id);
     } else {
         itemImage.src = `/static/images/minecraft_items/${slotData.item_id}.png`;
-        itemImage.id = `${i}`;
+    }
 
-        itemImage.setAttribute("data-title", `${slotData.name}`);
-        if (slotData['custom_name'] !== "None") {
-            let name = slotData['custom_name'];
-            itemImage.setAttribute("data-title-c", `${name}`)
-        } else if (slotData['book_title'] !== "None") {
-            itemImage.setAttribute("data-title", `${slotData.book_title}`);
-        }
+    itemImage.setAttribute("item-id", `${slotData.item_id}`);
+    itemImage.setAttribute("data-title", `${slotData.name}`);
+    if (slotData['custom_name'] !== "None") {
+        let name = slotData['custom_name'];
+        itemImage.setAttribute("data-title-c", `${name}`)
+    } else if (slotData['book_title'] !== "None") {
+        itemImage.setAttribute("data-title", `${slotData.book_title}`);
+    }
 
-        itemDiv.appendChild(itemImage);
-        if (slotData['item_id'].includes("shulker_box")) {
-            itemDiv.setAttribute("onmouseenter", "display_shulker(this);");
-            itemDiv.setAttribute("onmouseleave", "remove_shulker(this);");
-            itemDiv.setAttribute("id", shulkerId.value);
-            shulkerId.value = shulkerId.value + 2;
-        } else {
-            itemDiv.setAttribute("onmouseenter", "display_tooltip(this);");
-            itemDiv.setAttribute("onmouseleave", "remove_tooltip(this);");
-        }
+    itemDiv.appendChild(itemImage);
 
-        if (slotData['item_id'].includes("bundle")) { shulkerId.value = shulkerId.value + 2; }
+    if (slotData['item_id'].includes("shulker_box")) {
+        itemDiv.setAttribute("onmouseenter", "display_shulker(this);");
+        itemDiv.setAttribute("onmouseleave", "remove_shulker(this);");
+        itemDiv.setAttribute("id", shulkerId.value);
+        shulkerId.value = shulkerId.value + 2;
+    } else {
+        itemDiv.setAttribute("onmouseenter", "display_tooltip(this);");
+        itemDiv.setAttribute("onmouseleave", "remove_tooltip(this);");
+    }
 
-        if (slotData['amount'] > 1) {
-            const quantityDiv = document.createElement('div');
-            quantityDiv.className = 'quantity';
-            quantityDiv.textContent = slotData['amount'];
-            itemDiv.appendChild(quantityDiv);
-        }
+    if (slotData['item_id'].includes("bundle")) { shulkerId.value = shulkerId.value + 2; }
+
+    if (slotData['amount'] > 1) {
+        const quantityDiv = document.createElement('div');
+        quantityDiv.className = 'quantity';
+        quantityDiv.textContent = slotData['amount'];
+        itemDiv.appendChild(quantityDiv);
     }
     return itemDiv;
 }
@@ -171,8 +185,7 @@ function display_tooltip(element) {
     label.className = "tooltip";
 
     // Get id name
-    var srcArr = element.children[0].src.split("/");
-    var id_name = srcArr[srcArr.length - 1].split(".png")[0];
+    var id_name = element.children[0].getAttribute('item-id');
 
     // Use regex to check if item is a specific rarity
     regex_rarity.forEach((tuple) => {
@@ -368,7 +381,27 @@ function toggle_shulker_display(e) {
         subDiv.innerHTML = '';
     } else {
         var inv_json = subData.filter(inventory => inventory.inv_id == inv_id)[0];
-        subDiv.innerHTML = inv_json.div.innerHTML;
+        
+        
+        inv_json.div.childNodes.forEach(node => {
+            const cloned = node.cloneNode(true);
+
+            const canvas = cloned.querySelector('canvas');
+            if (canvas) {
+                const itemImgSrc = canvas.getAttribute('item-id');
+                startGlintAnimation(canvas, itemImgSrc);
+                
+                cloned.innerHTML = '';
+                cloned.appendChild(canvas);
+                subDiv.appendChild(cloned);
+            } else {
+                subDiv.appendChild(cloned);
+            }
+            
+        });
+        /*.forEach(element => {
+            console.log(element);
+        });*/
     }
     shulker.setAttribute('id', inv_id);
 }
@@ -397,4 +430,53 @@ async function preload_rarity() {
             }
         })
     })
+}
+
+function startGlintAnimation(canvas, itemImgSrc) {
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    img.src = `/static/images/minecraft_items/${itemImgSrc}.png`;
+
+    const glintImg = new Image();
+    glintImg.src = '/static/images/minecraft_items/enchanted_glint_item.png';
+
+    Promise.all([
+        new Promise(res => img.onload = res),
+        new Promise(res => glintImg.onload = res)
+    ]).then(() => {
+        let offset = 0;
+
+        function drawGlintFrame() {
+            ctx.clearRect(0, 0, imageSize, imageSize);
+            ctx.drawImage(img, 0, 0, imageSize, imageSize);
+
+            const offCanvas = document.createElement('canvas');
+            offCanvas.width = imageSize;
+            offCanvas.height = imageSize;
+            const offCtx = offCanvas.getContext('2d');
+
+            offCtx.fillStyle = offCtx.createPattern(glintImg, 'repeat');
+            offCtx.translate(-offset, -offset);
+            offCtx.fillRect(offset, offset, imageSize, imageSize);
+            offCtx.translate(offset, offset);
+
+            const itemData = ctx.getImageData(0, 0, imageSize, imageSize);
+            const glintData = offCtx.getImageData(0, 0, imageSize, imageSize);
+
+            for (let i = 0; i < itemData.data.length; i += 4) {
+                const alpha = itemData.data[i + 3];
+                if (alpha > 0) {
+                    itemData.data[i] = Math.min(255, itemData.data[i] + glintData.data[i] * 0.4);
+                    itemData.data[i + 1] = Math.min(255, itemData.data[i + 1] + glintData.data[i + 1] * 0.2);
+                    itemData.data[i + 2] = Math.min(255, itemData.data[i + 2] + glintData.data[i + 2] * 0.6);
+                }
+            }
+
+            ctx.putImageData(itemData, 0, 0);
+            offset = (offset + 0.10) % imageSize;
+            requestAnimationFrame(drawGlintFrame);   
+        }
+
+        drawGlintFrame();
+    });
 }
