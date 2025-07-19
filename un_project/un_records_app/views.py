@@ -6,6 +6,9 @@ from .models import Resolution, Treaty, ExecutiveOrder, ResolutionAmendment, Cha
 def records_home(request):
     return render(request, 'records_home.html')
 
+def un_staff(request):
+    return render(request, 'un_staff.html')
+
 def charter(request):
     charter = Charter.objects.prefetch_related(Prefetch('amended_charter', queryset=CharterAmendment.objects.order_by('date'))).order_by('-date')
     return render(request, 'charter.html', {'charter': charter})
