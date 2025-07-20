@@ -34,59 +34,6 @@
                     </li>
                     <li><a href="{% url 'financial_home' %}">UN Financial Records</a></li>
                     <li><a href="{% url 'records_home' %}">UN Records</a></li>
-                    <!--<li class="dropdown" id="evaluations-dropdown">
-                        <a href="javascript:void(0)" class="dropbtn">Buildings</a>
-                        <div class="dropdown-content two-columns">
-                            <div class="column">
-                                <strong>Audit Tools</strong>
-                                <a href="{% url 'building_list' %}">Buildings</a>
-                                <a href="{% url 'general_building_info' %}">General Building Info</a>
-                                <a href="{% url 'general_territory_info' %}">General Territory Info</a>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="dropdown">
-                        <a href="javascript:void(0)" class="dropbtn">Balance Sheets</a>
-                        <div class="dropdown-content two-columns">
-
-                            <div class="column">
-                                <strong>Nations</strong>
-                                {% for nation in nations %}
-                                    <a href="{% url 'nation_balance_sheet' nation.abbreviation %}">{{ nation.name }}</a>
-                                {% endfor %}
-                            </div>
-                    
-
-                            <div class="column">
-                                <strong>Companies</strong>
-                                {% for company in companies %}
-                                    <a href="{% url 'company_balance_sheet' company.abbreviation %}">{{ company.name }}</a>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="{% url 'un_map' %}">Interactive Map</a></li>
-                    <li class="dropdown" id="evaluations-dropdown">
-                        <a href="javascript:void(0)" class="dropbtn">Evaluations</a>
-                        <div class="dropdown-content two-columns">
-                            <div class="column">
-                                <strong>Evaluations</strong>
-                                <a href="{% url 'evaluate_buildings' %}">Evaluate Buildings</a>
-                                <a href="{% url 'evaluate_items' %}">Evaluate Items</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="dropdown" id="evaluations-dropdown">
-                        <a href="javascript:void(0)" class="dropbtn">Audit Tools</a>
-                        <div class="dropdown-content two-columns">
-                            <div class="column">
-                                <strong>Audit Tools</strong>
-                                <a href="{% url 'input_building' %}">Input Building</a>
-                                <a href="{% url 'item_counter' %}">Item Counter</a>
-                            </div>
-                        </div>
-                    </li> -->
                 </ul>
             </nav>
         </header>
