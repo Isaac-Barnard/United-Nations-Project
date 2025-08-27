@@ -12,10 +12,22 @@
 {% block content %}
     <h1>Currency Converter</h1>
 
+    <!-- Dropdown to pick base currency -->
+    <label for="base_currency">Convert into: </label>
+    <select id="base_currency">
+        {% for denomination in denominations %}
+            <option value="{{ denomination.id }}"
+                    data-equivalent="{{ denomination.diamond_equivalent }}"
+                    {% if denomination.name|lower == "diamond" %}selected{% endif %}>
+                {{ denomination.name }}
+            </option>
+        {% endfor %}
+    </select>
+
     <table>
         <thead>
             <tr>
-                <th>Total Diamond Value</th>
+                <th style="width: 220px;">Total <span id="base_currency_label">Diamonds</span> Value</th>
                 {% for denomination in denominations %}
                     <th>{{ denomination.name }}</th>
                 {% endfor %}
@@ -23,14 +35,14 @@
         </thead>
         <tbody>
             <tr>
-                <td><span id="total_diamond_value">0</span></td>
+                <td style="width: 220px;"><span id="total_converted_value">0</span></td>
                 {% for denomination in denominations %}
                     <td>
                         <input type="number"
-                               id="denomination_{{ denomination.id }}"
-                               value="0"
-                               min="0"
-                               step="any">
+                            id="denomination_{{ denomination.id }}"
+                            value="0"
+                            min="0"
+                            step="any">
                     </td>
                 {% endfor %}
             </tr>
@@ -46,5 +58,5 @@
         }
     </script>
 
-    <script src="{% static 'js/evaluate_buildings.js' %}"></script>
+    <script src="{% static 'js/currency_converter.js' %}"></script>
 {% endblock %}
