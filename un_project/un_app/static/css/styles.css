@@ -343,3 +343,74 @@ textarea:focus {
     border-color:  var(--button_primary-color);
     box-shadow:  var(--button_hover-color);
 }
+
+
+
+
+/* -----------------------------------------------
+        MOBILE PHONE SCREEN OVERRIDE CHANGES
+   ----------------------------------------------- */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+        display: block;
+    }
+
+    nav ul li:not(:last-child):not(.menu-logo)::after {
+        display: none; /* Remove dividers on mobile */
+    }
+
+    nav ul li.menu-logo img {
+        height: 50px;
+        margin: 10px 0;
+    }
+}
+
+
+.table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+table {
+    min-width: 600px; /* prevent table from squishing too much */
+}
+
+
+@media (max-width: 600px) {
+    main {
+        padding: 1rem;
+    }
+
+    nav ul li a {
+        font-size: 1rem;
+    }
+
+    .big-button {
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+    }
+
+    button[type="submit"],
+    button[type="logout"] {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (max-width: 600px) {
+    button, 
+    .big-button {
+        min-height: 44px; /* touch-friendly on mobile only */
+    }
+}
