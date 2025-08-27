@@ -1,0 +1,50 @@
+{% extends 'financial_base.html' %}
+{% load static %}
+
+{% block title %}
+    Currency Converter
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/evaluation_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>Currency Converter</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Total Diamond Value</th>
+                {% for denomination in denominations %}
+                    <th>{{ denomination.name }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span id="total_diamond_value">0</span></td>
+                {% for denomination in denominations %}
+                    <td>
+                        <input type="number"
+                               id="denomination_{{ denomination.id }}"
+                               value="0"
+                               min="0"
+                               step="any">
+                    </td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Hidden JSON mapping denominations to diamond equivalents -->
+    <script type="application/json" id="denomination_values">
+        {
+            {% for denomination in denominations %}
+                "denomination_{{ denomination.id }}": {{ denomination.diamond_equivalent }}{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        }
+    </script>
+
+    <script src="{% static 'js/evaluate_buildings.js' %}"></script>
+{% endblock %}

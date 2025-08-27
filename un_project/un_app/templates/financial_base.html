@@ -67,10 +67,11 @@
                     </li>
                     <li><a href="{% url 'un_map' %}">Interactive Map</a></li>
                     <li class="dropdown" id="evaluations-dropdown">
-                        <a href="javascript:void(0)" class="dropbtn">Evaluations</a>
+                        <a href="javascript:void(0)" class="dropbtn">Tools</a>
                         <div class="dropdown-content two-columns">
                             <div class="column">
-                                <strong>Evaluations</strong>
+                                <strong>Tools</strong>
+                                <a href="{% url 'currency_converter' %}">Currency Converter</a>
                                 <a href="{% url 'evaluate_buildings' %}">Evaluate Buildings</a>
                                 <a href="{% url 'evaluate_items' %}">Evaluate Items</a>
                             </div>

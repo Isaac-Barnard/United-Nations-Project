@@ -18,6 +18,7 @@ urlpatterns = [
     path('input-building/', input_building, name='input_building'),
     path('general-building-info/', general_building_info, name='general_building_info'),
     path('general-territory-info/', general_territory_info, name='general_territory_info'),
+    path('currency-converter/', currency_converter, name='currency_converter'),
     
     # Item Counter Url's
     path('item-counter/', item_counter, name='item_counter'),
