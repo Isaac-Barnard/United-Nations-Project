@@ -306,17 +306,26 @@ button[type="logout"]:hover {
     left: 0;
     width: 100%;
     height: 4px;
-    /*background-color: orange;*/
     z-index: 50; /* below dropdown */
 }
 
+/* Default: desktop */
 .pinstripe-top {
     position: absolute;
     top: calc(85px + 10px); /* 85px is header height, 10px below */
     left: 0;
     width: 100%;
     height: 4px;
-    background-color: #FF6F00; /* Pinstripe Orange */
+    z-index: 50;
+}
+
+/* Mobile: move pinstripe below expanded header */
+@media (max-width: 768px) {
+    .pinstripe-top {
+        position: relative;  /* flows naturally below the header/nav */
+        top: calc(5px + 10px); /* 85px is header height, 10px below */
+        width: 100%;
+    }
 }
 
 .pinstripe-bottom {
