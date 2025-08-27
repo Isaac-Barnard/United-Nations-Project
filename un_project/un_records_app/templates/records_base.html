@@ -16,7 +16,11 @@
     <div class="wrapper">
         <header>
             <nav>
-                <ul>
+                <button class="hamburger" id="hamburger-btn" aria-label="Menu">
+                    ☰
+                </button>
+                
+                <ul id="nav-links">
                     <li class="menu-logo">
                         <a href="{% url 'home' %}">
                             <img src="{% static 'images/un_seal.png' %}" alt="UN Seal">
@@ -67,5 +71,11 @@
         </footer>
     </div>
     {% block extra_js %}{% endblock %}
+
+    <script>
+    document.getElementById('hamburger-btn').addEventListener('click', function() {
+        document.getElementById('nav-links').classList.toggle('show');
+    });
+    </script>
 </body>
 </html>

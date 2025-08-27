@@ -414,3 +414,39 @@ img {
         min-height: 44px; /* touch-friendly on mobile only */
     }
 }
+
+
+/* Hamburger button - hidden on desktop */
+.hamburger {
+    display: none;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+/* Mobile nav behavior */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block; /* show hamburger */
+    }
+
+    nav ul {
+        display: none; /* hide nav links by default */
+        flex-direction: column;
+        background-color: #464646;
+        width: 100%;
+        padding: 1rem 0;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    nav ul.show {
+        display: flex; /* show nav when active */
+    }
+}
