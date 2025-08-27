@@ -71,8 +71,15 @@
     {% block extra_js %}{% endblock %}
 
     <script>
-    document.getElementById('hamburger-btn').addEventListener('click', function() {
-        document.getElementById('nav-links').classList.toggle('show');
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.getElementById('hamburger-btn');
+        const navLinks = document.getElementById('nav-links');
+
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('show');
+            });
+        }
     });
     </script>
 </body>
