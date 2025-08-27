@@ -16,9 +16,7 @@
     <div class="wrapper">
         <header>
             <nav>
-                <button class="hamburger" id="hamburger-btn" aria-label="Menu"> ☰</button>
-                <ul id="nav-links">
-                    
+                <ul>
                     <li class="menu-logo">
                         <a href="{% url 'home' %}">
                             <img src="{% static 'images/un_seal.png' %}" alt="UN Seal">
@@ -52,17 +50,5 @@
     </div>
     {% block extra_js %}{% endblock %}
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const hamburger = document.getElementById('hamburger-btn');
-        const navLinks = document.getElementById('nav-links');
-
-        if (hamburger && navLinks) {
-            hamburger.addEventListener('click', function() {
-                navLinks.classList.toggle('show');
-            });
-        }
-    });
-    </script>
 </body>
 </html>
