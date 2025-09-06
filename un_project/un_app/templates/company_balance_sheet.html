@@ -15,10 +15,13 @@
     <h1>{{ company.name }} ({{ company.abbreviation }}) Balance Sheet</h1>
 
     <h2 class="shareholders-heading">Shareholders</h2>
-    <table class="shareholders-table">
+    <table class="shareholders-table {% if show_board_members %}with-board-member{% endif %}">
         <thead>
             <tr>
                 <th>Shareholder</th>
+                {% if show_board_members %}
+                    <th>Board Member</th>
+                {% endif %}
                 <th>Ownership Percentage</th>
                 <th>Value of Investment</th>
             </tr>
@@ -27,16 +30,28 @@
             {% for shareholder in shareholders %}
             <tr>
                 <td>{{ shareholder.shareholder_name }}</td>
+                {% if show_board_members %}
+                    <td>
+                        {% if shareholder.board_member %}
+                            {{ shareholder.board_member }}
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+                {% endif %}
                 <td class="right-align">{{ shareholder.percentage }}%</td>
                 <td class="right-align">{{ shareholder.share_value|custom_decimal_places }}</td>
             </tr>
             {% empty %}
             <tr>
-                <td colspan="3">No shareholders found.</td>
+                <td colspan="{% if show_board_members %}4{% else %}3{% endif %}">No shareholders found.</td>
             </tr>
             {% endfor %}
             <tr style="border-top: 3px solid; font-weight: bold;" class="total-row">
                 <td><strong>Total</strong></td>
+                {% if show_board_members %}
+                    <td></td>
+                {% endif %}
                 <td class="right-align"><strong>100%</strong></td>
                 <td class="right-align"><strong>{{ total_assets|custom_decimal_places }}</strong></td>
             </tr>

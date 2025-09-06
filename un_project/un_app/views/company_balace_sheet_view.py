@@ -170,6 +170,9 @@ def company_balance_sheet(request, company_abbreviation):
     # Calculate share values manually instead of using annotation
     for shareholder in shareholders:
         shareholder.share_value = (Decimal(str(shareholder.percentage)) * total_assets) / Decimal('100')
+        
+    # Check if at least one shareholder has a board member
+    show_board_members = any(shareholder.board_member for shareholder in shareholders)
 
             
     return render(request, 'company_balance_sheet.html', {
@@ -188,4 +191,5 @@ def company_balance_sheet(request, company_abbreviation):
         'stock_investments': stock_investments,
         'total_investment_value': total_investment_value,
         'total_assets': total_assets,
+        'show_board_members': show_board_members,
     })
