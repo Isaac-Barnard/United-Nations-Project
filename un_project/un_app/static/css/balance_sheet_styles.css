@@ -122,23 +122,43 @@ td.item-name, td.building-name {
 
 
 .shareholders-table {
-    width: 60%; /* Make the table take up the full width of the container */
-    border-collapse: collapse; /* Optional: make borders look cleaner */
+    width: 60%;
+    border-collapse: collapse;
 }
 
-.shareholders-table th:nth-child(1),  /* Item Name column */
+.shareholders-table.with-board-member {
+    width: 67%; /* Make table wider if there is a board member */
+}
+
+.shareholders-table th:nth-child(1),
 .shareholders-table td:nth-child(1) {
-    width: 40%;                /* Allocate more space to item name */
+    width: 40%;
 }
 
-.shareholders-table th:nth-child(2),  /* Item Name column */
+.shareholders-table th:nth-child(2),
 .shareholders-table td:nth-child(2) {
-    width: 30%;                /* Allocate more space to item name */
+    width: 30%;
 }
 
-.shareholders-table th:nth-child(3),  /* Item Name column */
+.shareholders-table th:nth-child(3),
 .shareholders-table td:nth-child(3) {
-    width: 30%;                /* Allocate more space to item name */
+    width: 30%;
+}
+
+/* Optional: adjust widths if board member column exists */
+.shareholders-table.with-board-member th:nth-child(2),
+.shareholders-table.with-board-member td:nth-child(2) {
+    width: 20%; /* board member column */
+}
+
+.shareholders-table.with-board-member th:nth-child(3),
+.shareholders-table.with-board-member td:nth-child(3) {
+    width: 25%; /* ownership percentage */
+}
+
+.shareholders-table.with-board-member th:nth-child(4),
+.shareholders-table.with-board-member td:nth-child(4) {
+    width: 25%; /* value of investment */
 }
 
 

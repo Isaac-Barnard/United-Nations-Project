@@ -69,15 +69,10 @@ class Company(models.Model):
 # --------------------------------------------------------------------
 class CompanyShareholder(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='shareholders')
-    shareholder_type = models.ForeignKey(
-        ContentType,
-        on_delete=models.CASCADE,
-        limit_choices_to={'model__in': ('nation', 'company')},
-        help_text="The type of entity that owns shares (Nation or Company)"
-    )
+    shareholder_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to={'model__in': ('nation', 'company')}, help_text="The type of entity that owns shares (Nation or Company)")
     shareholder_abbreviation = models.CharField(max_length=100)
-    percentage = models.DecimalField(max_digits=5, decimal_places=2, 
-        help_text="Percentage ownership of the company")
+    percentage = models.DecimalField(max_digits=5, decimal_places=2, help_text="Percentage ownership of the company")
+    board_member = models.ForeignKey('Player', on_delete=models.CASCADE, null=True, blank=True)
     
     class Meta:
         unique_together = ('company', 'shareholder_type', 'shareholder_abbreviation')
