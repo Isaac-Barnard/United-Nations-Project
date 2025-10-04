@@ -386,9 +386,9 @@ textarea:focus {
     -webkit-overflow-scrolling: touch;
 }
 
-table {
-    min-width: 600px; /* prevent table from squishing too much */
-}
+/*table {
+    min-width: 600px; /* prevent table from squishing too much 
+}*/
 
 
 @media (max-width: 600px) {
