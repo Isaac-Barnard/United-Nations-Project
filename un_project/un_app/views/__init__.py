@@ -3,6 +3,7 @@ from .company_balace_sheet_view import *
 from .evaluate_buildings_view import *
 from .evaluate_items_view import *
 from .general_building_info_view import *
+from .general_territory_info_view import *
 from .item_counter_view import *
 from .misc_small_views import *
 from .nation_balace_sheet_view import *

@@ -43,10 +43,6 @@ def input_building(request):
     return render(request, 'input_building.html', context)
 
 
-def general_territory_info(request):
-    return render(request, 'general_territory_info.html')
-
-
 from ..models import Denomination
 def currency_converter(request):
     denominations = Denomination.objects.all().order_by('priority')

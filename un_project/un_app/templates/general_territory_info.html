@@ -12,8 +12,34 @@
 {% block content %}
 <div class="container">
     <h1>General Territory Information</h1>
-
-    <h4>Work in progress.</h4>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Territory</th>
+                <th># of Buildings</th>
+                <th>Avg Height</th>
+                <th># of Nations</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in table_data %}
+                <tr>
+                    <td>{{ row.territory }}</td>
+                    <td>{{ row.total_buildings }}</td>
+                    <td>{{ row.avg_height }}</td>
+                    <td>{{ row.num_nations }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>All Territories:</th>
+                <th>{{ total_buildings }}</th>
+                <th>{{ total_avg_height }}</th>
+                <th>{{ total_nations }}</th>
+            </tr>
+        </tfoot>
+    </table>
 </div>
 {% endblock %}
 
