@@ -50,6 +50,38 @@ function initializeSumModeToggle() {
     }
 }
 
+// Calculate total items value from all item rows
+function calculateTotalItemsValue() {
+    let total = 0;
+    document.querySelectorAll('.item-row').forEach(row => {
+        const totalValueElement = row.querySelector('.total-value');
+        if (totalValueElement) {
+            const value = parseFloat(totalValueElement.textContent.replace(/,/g, '')) || 0;
+            total += value;
+        }
+    });
+    return total;
+}
+
+// Calculate total liquid assets value from all container rows
+function calculateTotalLiquidValue() {
+    let total = 0;
+    document.querySelectorAll('.container-row').forEach(row => {
+        const totalElement = row.querySelector('.container-total');
+        if (totalElement) {
+            const value = parseFloat(totalElement.textContent.replace(/,/g, '')) || 0;
+            total += value;
+        }
+    });
+    return total;
+}
+
+// Format number with appropriate decimal places (matching your custom_decimal_places filter)
+function formatDecimal(value) {
+    // Remove trailing zeros and unnecessary decimal point
+    return parseFloat(value).toFixed(6).replace(/\.?0+$/, '');
+}
+
 // Handle item input changes
 async function handleItemInputChange() {
     const row = this.closest('.item-row');
@@ -65,7 +97,7 @@ async function handleItemInputChange() {
     let inputValue;
     if (inputValueStr.endsWith('s')) {
         const numberPart = inputValueStr.slice(0, -1).trim();
-        const multiplier = numberPart ? parseFloat(numberPart) : 1; // if just "s", multiplier=1
+        const multiplier = numberPart ? parseFloat(numberPart) : 1;
         if (isNaN(multiplier)) {
             this.value = '';
             return;
@@ -73,7 +105,7 @@ async function handleItemInputChange() {
         inputValue = multiplier * 64;
     } else if (inputValueStr.endsWith('b')) {
         const numberPart = inputValueStr.slice(0, -1).trim();
-        const multiplier = numberPart ? parseFloat(numberPart) : 1; // if just "s", multiplier=1
+        const multiplier = numberPart ? parseFloat(numberPart) : 1;
         if (isNaN(multiplier)) {
             this.value = '';
             return;
@@ -81,7 +113,7 @@ async function handleItemInputChange() {
         inputValue = multiplier * 9;
     } else if (inputValueStr.endsWith('v')) {
         const numberPart = inputValueStr.slice(0, -1).trim();
-        const multiplier = numberPart ? parseFloat(numberPart) : 1; // if just "s", multiplier=1
+        const multiplier = numberPart ? parseFloat(numberPart) : 1;
         if (isNaN(multiplier)) {
             this.value = '';
             return;
@@ -89,7 +121,7 @@ async function handleItemInputChange() {
         inputValue = multiplier * 576;
     } else if (inputValueStr.endsWith('c')) {
         const numberPart = inputValueStr.slice(0, -1).trim();
-        const multiplier = numberPart ? parseFloat(numberPart) : 1; // if just "s", multiplier=1
+        const multiplier = numberPart ? parseFloat(numberPart) : 1;
         if (isNaN(multiplier)) {
             this.value = '';
             return;
@@ -182,7 +214,7 @@ async function handleDenominationInputChange() {
         inputValue = multiplier * 64;
     } else if (inputValueStr.endsWith('b')) {
         const numberPart = inputValueStr.slice(0, -1).trim();
-        const multiplier = numberPart ? parseFloat(numberPart) : 1; // if just "s", multiplier=1
+        const multiplier = numberPart ? parseFloat(numberPart) : 1;
         if (isNaN(multiplier)) {
             this.value = '';
             return;
@@ -190,7 +222,7 @@ async function handleDenominationInputChange() {
         inputValue = multiplier * 9;
     } else if (inputValueStr.endsWith('v')) {
         const numberPart = inputValueStr.slice(0, -1).trim();
-        const multiplier = numberPart ? parseFloat(numberPart) : 1; // if just "s", multiplier=1
+        const multiplier = numberPart ? parseFloat(numberPart) : 1;
         if (isNaN(multiplier)) {
             this.value = '';
             return;
@@ -198,7 +230,7 @@ async function handleDenominationInputChange() {
         inputValue = multiplier * 576;
     } else if (inputValueStr.endsWith('c')) {
         const numberPart = inputValueStr.slice(0, -1).trim();
-        const multiplier = numberPart ? parseFloat(numberPart) : 1; // if just "s", multiplier=1
+        const multiplier = numberPart ? parseFloat(numberPart) : 1;
         if (isNaN(multiplier)) {
             this.value = '';
             return;
@@ -323,10 +355,12 @@ function initializeSelectors() {
     const denominationSelect = document.querySelector('select[name="denomination"]');
 
     // Initialize disabled states
-    if (nationSelect.value) {
-        companySelect.disabled = true;
-    } else if (companySelect.value) {
-        nationSelect.disabled = true;
+    if (nationSelect && companySelect) {
+        if (nationSelect.value) {
+            companySelect.disabled = true;
+        } else if (companySelect.value) {
+            nationSelect.disabled = true;
+        }
     }
 
     // Add select change handlers to window object for inline handlers
@@ -370,11 +404,13 @@ function initializeSelectors() {
     // Add container select handler
     if (containerSelect) {
         containerSelect.addEventListener('change', function() {
-            if (this.value) {
-                itemSelect.value = '';
-                itemSelect.disabled = true;
-            } else {
-                itemSelect.disabled = false;
+            if (itemSelect) {
+                if (this.value) {
+                    itemSelect.value = '';
+                    itemSelect.disabled = true;
+                } else {
+                    itemSelect.disabled = false;
+                }
             }
         });
     }
@@ -414,9 +450,18 @@ function initializeItemInputs() {
 
 // Update item row with new data
 function updateItemRow(row, data) {
-    row.querySelector('.total-value').textContent = data.new_total_value;
-    row.querySelector('.current-count').textContent = data.new_count;
-    document.querySelector('.total-items-value').textContent = data.total_items_value;
+    row.querySelector('.total-value').textContent = formatDecimal(data.new_total_value);
+    row.querySelector('.current-count').textContent = parseFloat(data.new_count).toString();
+    
+    // RECALCULATE the total items value from all rows
+    const totalItemsValue = calculateTotalItemsValue();
+    
+    // Update the items total (second .total-items-value element)
+    const totalElements = document.querySelectorAll('.total-items-value');
+    if (totalElements.length >= 2) {
+        totalElements[1].textContent = formatDecimal(totalItemsValue);
+    }
+    
     row.querySelector('.item-input').value = '';
 }
 
@@ -430,18 +475,22 @@ function initializeDenominationInputs() {
 
 // Update denomination row with new data
 function updateDenominationRow(container, denominationIndex, data) {
-    document.getElementById('total_diamonds').textContent = data.new_total_diamonds;
+    document.getElementById('total_diamonds').textContent = formatDecimal(data.new_total_diamonds);
     
     const containerRow = document.querySelector(`.container-row[data-container-name="${container}"]`);
     if (containerRow) {
-        containerRow.querySelector('.container-total').textContent = data.new_total_diamonds;
+        containerRow.querySelector('.container-total').textContent = formatDecimal(data.new_total_diamonds);
         const denominationCells = containerRow.querySelectorAll('.denomination-count');
-        denominationCells[denominationIndex].textContent = data.new_count;
+        denominationCells[denominationIndex].textContent = parseFloat(data.new_count).toString();
     }
     
-    const totalLiquidSpan = document.querySelector('.total-items-value');
-    if (totalLiquidSpan) {
-        totalLiquidSpan.textContent = data.total_liquid_value;
+    // RECALCULATE the total liquid value from all rows
+    const totalLiquidValue = calculateTotalLiquidValue();
+    
+    // Update the liquid assets total (first .total-items-value element)
+    const totalElements = document.querySelectorAll('.total-items-value');
+    if (totalElements.length >= 1) {
+        totalElements[0].textContent = formatDecimal(totalLiquidValue);
     }
     
     const input = document.querySelector(`[data-denomination-index="${denominationIndex}"]`);
