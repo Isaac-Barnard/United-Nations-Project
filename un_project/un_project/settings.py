@@ -212,9 +212,3 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 if(DEBUG == True):
     import os
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-    # Also make sure you have these static files settings
-    STATIC_URL = '/static/'
-    STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'static'),
-    ]
