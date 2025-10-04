@@ -47,3 +47,16 @@ from ..models import Denomination
 def currency_converter(request):
     denominations = Denomination.objects.all().order_by('priority')
     return render(request, 'currency_converter.html', {'denominations': denominations,})
+
+
+from django.shortcuts import render
+from ..models import Item
+
+def item_value_calculator(request):
+    all_items = Item.objects.all().order_by('ordering')
+    items_parts = [[] for _ in range(5)]
+    for item in all_items:
+        idx = (item.ordering // 100) - 1
+        if 0 <= idx < 5:
+            items_parts[idx].append(item)
+    return render(request, 'item_value_calculator.html', {'items_parts': items_parts})

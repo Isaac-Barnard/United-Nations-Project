@@ -57,12 +57,12 @@ Running the server locally:
         - [ ] Mortgages, loans, and add Total Debt Assets
     - [x] **Create shareholders table for companies (Shareholder, %, diamond equivalent [total assets * %])**
 - **<ins>Evaluation Pages</ins>**
-    - [ ] Must be logged in to see evaluation pages
+    - [X] Must be logged in to see evaluation pages
     - [ ] **Be able to change your older evaluations**
     - [ ] Make evaluation success better (Instead of taking you to a different page)
     - [ ] Change building/item evaluations to be more like google sheets (ie. other evaluators listed, etc…)
-        - [ ] All buildings/items listed
         - [x] Other evaluator's evaluations listed
+        - [ ] All buildings/items listed
 - **<ins>Graphs</ins>**
     - [ ] Create historical records of nation/company assets (Total assets, liquid, items, buildings, other assets)
     - [ ] Individual nation/company graphs in their balance sheets
@@ -123,10 +123,10 @@ Running the server locally:
         - [X] Per nation Average Height & # of Buildings info
         - [X] Per nation # of buildings built per year
         - [X] Total # of buildings per nation
-        - [ ] Per territory Average Height & # of Buildings info
+        - [X] Per territory Average Height & # of Buildings info
         - [ ] Up and coming territories
-    - [ ] **Currency converter (ex: convert 42 emeralds and 58 copper to diamonds)**
-    - [ ] Item price calculator (Select items, see the price of them)
+    - [X] **Currency converter (ex: convert 42 emeralds and 58 copper to diamonds)**
+    - [X] Item price calculator (Select items, see the price of them)
     - [ ] Architectural Styles stuff
     - [ ] Realty Commision?
     - [ ] Reid's stuff

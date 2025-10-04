@@ -19,6 +19,7 @@ urlpatterns = [
     path('general-building-info/', general_building_info, name='general_building_info'),
     path('general-territory-info/', general_territory_info, name='general_territory_info'),
     path('currency-converter/', currency_converter, name='currency_converter'),
+    path('item-value-calculator/', item_value_calculator, name='item_value_calculator'),
     
     # Item Counter Url's
     path('item-counter/', item_counter, name='item_counter'),
