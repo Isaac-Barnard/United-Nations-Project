@@ -80,11 +80,11 @@ class NationHistory(models.Model):
     nation = models.ForeignKey('Nation', on_delete=models.CASCADE, related_name='history')
     date = models.DateField(db_index=True)
     note = models.CharField(max_length=255, blank=True)
-    total_assets = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
-    liquid_assets = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
-    item_assets = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
-    building_assets = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
-    other_assets = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
+    total_assets = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'), blank=True)
+    liquid_assets = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'), blank=True)
+    item_assets = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'), blank=True)
+    building_assets = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'), blank=True)
+    other_assets = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'), blank=True)
 
     class Meta:
         ordering = ['-date']
