@@ -18,17 +18,24 @@
 
     <ul class="item-list" id="itemList">
         {% for item in items %}
-        {% if item.image_name %}
-            <li onclick="window.location.href='{% url 'item_detail' item.image_name %}'" data-name="{{ item.name|lower }}">
-            <img src="{% static 'images/minecraft_items/'|add:item.image_name|add:'.png' %}" alt="{{ item.name }}">
-            <p>{{ item.name }}</p>
-            </li>
-        {% else %}
-            <li data-name="{{ item.name|lower }}">
-            <img src="{% static 'images/minecraft_items/missing.png' %}" alt="{{ item.name }}">
-            <p>{{ item.name }}</p>
-            </li>
-        {% endif %}
+            {% if item.special_image_name %}
+                <li onclick="window.location.href='{% url 'item_detail' item.image_name %}'" data-name="{{ item.name|lower }}">
+                    <img src="{% static 'images/minecraft_items/'|add:item.special_image_name|add:'.png' %}" alt="{{ item.name }}">
+                    <p>{{ item.name }}</p>
+                    </li>
+            {% else %}
+                {% if item.image_name %}
+                    <li onclick="window.location.href='{% url 'item_detail' item.image_name %}'" data-name="{{ item.name|lower }}">
+                    <img src="{% static 'images/minecraft_items/'|add:item.image_name|add:'.png' %}" alt="{{ item.name }}">
+                    <p>{{ item.name }}</p>
+                    </li>
+                {% else %}
+                    <li data-name="{{ item.name|lower }}">
+                    <img src="{% static 'images/minecraft_items/missing.png' %}" alt="{{ item.name }}">
+                    <p>{{ item.name }}</p>
+                    </li>
+                {% endif %}
+            {% endif %}
         {% endfor %}
     </ul>
 

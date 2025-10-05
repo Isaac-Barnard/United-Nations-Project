@@ -22,6 +22,7 @@ class Item(models.Model):
     description = models.CharField(blank=True)
     note = models.CharField(max_length=255, blank=True, help_text="Used for short note about an oddity with the item")  # Optional note field
     image_name = models.CharField(max_length=255, blank=True)
+    special_image_name = models.CharField(max_length=255, blank=True)
     ordering = models.IntegerField(default=0)  # Field for manual ordering (100's for first table, 200's for second, etc. (ex: 101, 203, 459))
     # Precalculated values:
     market_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
