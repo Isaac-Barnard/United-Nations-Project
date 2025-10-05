@@ -1,0 +1,24 @@
+{% extends 'financial_base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ item.name }}
+{% endblock %}
+
+{% block content %}
+    <h1>United Nations Details: {{ item.name }}</h1>
+    
+    <div>
+        {% if image_url %}
+            <img src="{% static image_url %}" alt="{{ item.name }}" class="item-image">
+        {% else %}
+            <p><em>No image available</em></p>
+        {% endif %}
+
+        <p>{{ item.description }}</p>
+
+        {% if item.note %}
+        <p><strong>Note:</strong> {{ item.note }}</p>
+        {% endif %}
+    </div>
+{% endblock %}
