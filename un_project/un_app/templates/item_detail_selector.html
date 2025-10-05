@@ -1,0 +1,51 @@
+{% extends 'financial_base.html' %}
+{% load static %}
+
+{% block title %}
+    Item Selector
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/item_detail_selector_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>Item Detail Selector</h1>
+
+    <div class="search-bar">
+        <input type="text" id="itemSearch" placeholder="Search items..." onkeyup="filterItems()">
+    </div>
+
+    <ul class="item-list" id="itemList">
+        {% for item in items %}
+        {% if item.image_name %}
+            <li onclick="window.location.href='{% url 'item_detail' item.image_name %}'" data-name="{{ item.name|lower }}">
+            <img src="{% static 'images/minecraft_items/'|add:item.image_name|add:'.png' %}" alt="{{ item.name }}">
+            <p>{{ item.name }}</p>
+            </li>
+        {% else %}
+            <li data-name="{{ item.name|lower }}">
+            <img src="{% static 'images/minecraft_items/missing.png' %}" alt="{{ item.name }}">
+            <p>{{ item.name }}</p>
+            </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+
+    <script>
+        function filterItems() {
+        const input = document.getElementById('itemSearch').value.toLowerCase();
+        const list = document.getElementById('itemList');
+        const items = list.getElementsByTagName('li');
+
+        for (let i = 0; i < items.length; i++) {
+            const name = items[i].getAttribute('data-name');
+            if (name.includes(input)) {
+            items[i].style.display = '';
+            } else {
+            items[i].style.display = 'none';
+            }
+        }
+        }
+    </script>
+{% endblock %}
