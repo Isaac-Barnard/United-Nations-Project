@@ -5,20 +5,39 @@
     {{ item.name }}
 {% endblock %}
 
-{% block content %}
-    <h1>United Nations Details: {{ item.name }}</h1>
-    
-    <div>
-        {% if image_url %}
-            <img src="{% static image_url %}" alt="{{ item.name }}" class="item-image">
-        {% else %}
-            <p><em>No image available</em></p>
-        {% endif %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/item_detail_styles.css' %}">
+{% endblock %}
 
-        <p>{{ item.description }}</p>
+{% block content %}
+<div class="item-header">
+    <h1>United Nations Details: {{ item.name }}</h1>
+    <a href="https://minecraft.wiki/w/{{ item.name|urlencode }}" target="_blank" class="wiki-button">
+        View the Wiki
+    </a>
+</div>
+
+<div class="item-detail-container">
+    {% if image_url %}
+        <div class="item-image-box">
+            <img src="{% static image_url %}" alt="{{ item.name }}" class="item-image">
+        </div>
+    {% else %}
+        <div class="item-image-box">
+            <p><em>No image available</em></p>
+        </div>
+    {% endif %}
+
+    <div class="item-description">
+        {% if item.description %}
+            <p>{{ item.description }}</p>
+        {% else %}
+            <p><em>No description available</em></p>
+        {% endif %}
 
         {% if item.note %}
-        <p><strong>Note:</strong> {{ item.note }}</p>
+            <p><strong>Note:</strong> {{ item.note }}</p>
         {% endif %}
     </div>
+</div>
 {% endblock %}
