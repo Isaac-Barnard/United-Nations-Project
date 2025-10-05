@@ -80,14 +80,28 @@ class NationHistory(models.Model):
     nation = models.ForeignKey('Nation', on_delete=models.CASCADE, related_name='history')
     date = models.DateField(db_index=True)
     note = models.CharField(max_length=255, blank=True)
-    total_assets = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'), blank=True, null=True)
-    liquid_assets = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'), blank=True, null=True)
-    item_assets = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'), blank=True, null=True)
-    building_assets = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'), blank=True, null=True)
-    other_assets = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'), blank=True, null=True)
+    total_assets = models.DecimalField(max_digits=20, decimal_places=6, blank=True, null=True)
+    liquid_assets = models.DecimalField(max_digits=20, decimal_places=6, blank=True, null=True)
+    item_assets = models.DecimalField(max_digits=20, decimal_places=6, blank=True, null=True)
+    building_assets = models.DecimalField(max_digits=20, decimal_places=6, blank=True, null=True)
+    other_assets = models.DecimalField(max_digits=20, decimal_places=6, blank=True, null=True)
 
     class Meta:
         ordering = ['-date']
 
     def __str__(self):
         return f"{self.nation.name} - {self.date:%m-%d-%Y}"
+    
+    @property
+    def calc_total_assets(self):
+        if any(value is None for value in [self.liquid_assets,
+                                           self.item_assets,
+                                           self.building_assets,
+                                           self.other_assets]):
+            return Decimal('0')
+        
+        # Otherwise return the total
+        return (self.liquid_assets +
+                self.item_assets +
+                self.building_assets +
+                self.other_assets)
