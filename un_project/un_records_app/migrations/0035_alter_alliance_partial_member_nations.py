@@ -6,7 +6,6 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('un_app', '0061_remove_item_description_item_note'),
         ('un_records_app', '0034_petition_votes_against_petition_votes_for_and_more'),
     ]
 
