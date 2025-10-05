@@ -48,3 +48,11 @@ def sum_paid_amounts(queryset):
         return sum((obj.total_diamond_value - obj.remaining_diamond_value) for obj in queryset)
     except:
         return Decimal('0')
+    
+    
+    
+    
+    
+@register.filter(name='has_group')
+def has_group(user, group_name):
+    return user.groups.filter(name=group_name).exists()
