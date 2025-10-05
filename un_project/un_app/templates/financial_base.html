@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}My Django Project{% endblock %}</title>
     {% load static %}
+    {% load custom_filters %}
     <!-- Favicon -->
     <link rel="icon" href="{% static 'images/un_seal.png' %}" type="image/png">
     
@@ -44,6 +45,7 @@
                             </div>
                         </div>
                     </li>
+                    <li><a href="{% url 'item_detail_selector' %}">Items</a></li>
                     <li><a href="{% url 'player_list' %}">Players</a></li>
                     <!-- Dropdown for Nations -->
                     <li class="dropdown">
@@ -79,16 +81,18 @@
                             </div>
                         </div>
                     </li>
-                    <li class="dropdown" id="evaluations-dropdown">
-                        <a href="javascript:void(0)" class="dropbtn">Audit Tools</a>
-                        <div class="dropdown-content two-columns">
-                            <div class="column">
-                                <strong>Audit Tools</strong>
-                                <a href="{% url 'input_building' %}">Input Building</a>
-                                <a href="{% url 'item_counter' %}">Item Counter</a>
+                    {% if user.is_authenticated and user|has_group:"Evaluator" %}
+                        <li class="dropdown" id="evaluations-dropdown">
+                            <a href="javascript:void(0)" class="dropbtn">Audit Tools</a>
+                            <div class="dropdown-content two-columns">
+                                <div class="column">
+                                    <strong>Audit Tools</strong>
+                                    <a href="{% url 'input_building' %}">Input Building</a>
+                                    <a href="{% url 'item_counter' %}">Item Counter</a>
+                                </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
+                    {% endif %}
                 </ul>
             </nav>
         </header>

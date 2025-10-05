@@ -20,6 +20,8 @@ urlpatterns = [
     path('general-territory-info/', general_territory_info, name='general_territory_info'),
     path('currency-converter/', currency_converter, name='currency_converter'),
     path('item-value-calculator/', item_value_calculator, name='item_value_calculator'),
+    path('item/<str:image_name>/', item_detail, name='item_detail'),
+    path('item/', item_detail_selector, name='item_detail_selector'),
     
     # Item Counter Url's
     path('item-counter/', item_counter, name='item_counter'),

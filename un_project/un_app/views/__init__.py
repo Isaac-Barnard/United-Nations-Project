@@ -8,3 +8,4 @@ from .item_counter_view import *
 from .misc_small_views import *
 from .nation_balace_sheet_view import *
 from .player_list_view import *
+from .item_detail_view import *
