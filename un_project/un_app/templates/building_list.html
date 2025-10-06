@@ -13,44 +13,64 @@
 {% block content %}
     <h1>United Nations Records: Building List</h1>
 
+    <div class="search-container">
+        <form method="get" action="">
+            <input type="text" name="search" value="{{ search_query }}" placeholder="Search buildings, territories, or owners...">
+            <button type="submit">Search</button>
+            {% if search_query %}
+                <a href="?" class="clear-search">Clear</a>
+            {% endif %}
+            {% if current_sort %}
+                <input type="hidden" name="sort" value="{{ current_sort }}">
+            {% endif %}
+            {% if current_dir %}
+                <input type="hidden" name="dir" value="{{ current_dir }}">
+            {% endif %}
+        </form>
+        <div style="margin-top: 0.5rem; font-size: 0.9em; color: #666;">
+            <strong>Note: </strong>
+            You can search by building names, territories, and owner names/abbreviation.
+        </div>
+    </div>
+
     <table>
         <thead>
             <tr>
                 <th class="{% if current_sort == 'name' %}sorted-{{ current_dir }}{% endif %}">
-                    <a href="?sort=name&dir={% if current_sort == 'name' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Name</a>
+                    <a href="?sort=name&dir={% if current_sort == 'name' and current_dir == 'asc' %}desc{% else %}asc{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Name</a>
                 </th>
                 <th class="{% if current_sort == 'territory__name' %}sorted-{{ current_dir }}{% endif %}">
-                    <a href="?sort=territory__name&dir={% if current_sort == 'territory__name' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Territory</a>
+                    <a href="?sort=territory__name&dir={% if current_sort == 'territory__name' and current_dir == 'asc' %}desc{% else %}asc{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Territory</a>
                 </th>
                 <th class="{% if current_sort == 'owner__abbreviation' %}sorted-{{ current_dir }}{% endif %}">
-                    <a href="?sort=owner__abbreviation&dir={% if current_sort == 'owner__abbreviation' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Owner</a>
+                    <a href="?sort=owner__abbreviation&dir={% if current_sort == 'owner__abbreviation' and current_dir == 'asc' %}desc{% else %}asc{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Owner</a>
                 </th>
                 <th class="{% if current_sort == 'first_builder' %}sorted-{{ current_dir }}{% endif %}">
-                    <a href="?sort=first_builder&dir={% if current_sort == 'first_builder' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Main Builder</a>
+                    <a href="?sort=first_builder&dir={% if current_sort == 'first_builder' and current_dir == 'asc' %}desc{% else %}asc{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Main Builder</a>
                 </th>
                 <th class="{% if current_sort == 'year_started' %}sorted-{{ current_dir }}{% endif %}">
-                    <a href="?sort=year_started&dir={% if current_sort == 'year_started' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Year Completed</a>
+                    <a href="?sort=year_started&dir={% if current_sort == 'year_started' and current_dir == 'asc' %}desc{% else %}asc{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Year Completed</a>
                 </th>
                 <th class="{% if current_sort == 'completed' %}sorted-{{ current_dir }}{% endif %}">
-                    <a href="?sort=completed&dir={% if current_sort == 'completed' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Completed</a>
+                    <a href="?sort=completed&dir={% if current_sort == 'completed' and current_dir == 'asc' %}desc{% else %}asc{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Completed</a>
                 </th>
                 <th class="{% if current_sort == 'calculated_height' %}sorted-{{ current_dir }}{% endif %}">
-                    <a href="?sort=calculated_height&dir={% if current_sort == 'calculated_height' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Height</a>
+                    <a href="?sort=calculated_height&dir={% if current_sort == 'calculated_height' and current_dir == 'asc' %}desc{% else %}asc{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Height</a>
                 </th>
                 <th class="{% if current_sort == 'coordinates' %}sorted-{{ current_dir }}{% endif %}">
-                    <a href="?sort=coordinates&dir={% if current_sort == 'coordinates' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Coordinates</a>
+                    <a href="?sort=coordinates&dir={% if current_sort == 'coordinates' and current_dir == 'asc' %}desc{% else %}asc{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Coordinates</a>
                 </th>
                 <th class="{% if current_sort == 'historic_site' %}sorted-{{ current_dir }}{% endif %}">
-                    <a href="?sort=historic_site&dir={% if current_sort == 'historic_site' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Historic Site</a>
+                    <a href="?sort=historic_site&dir={% if current_sort == 'historic_site' and current_dir == 'asc' %}desc{% else %}asc{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Historic Site</a>
                 </th>
                 <th class="{% if current_sort == 'architectural_genius' %}sorted-{{ current_dir }}{% endif %}">
-                    <a href="?sort=architectural_genius&dir={% if current_sort == 'architectural_genius' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Architectural Genius</a>
+                    <a href="?sort=architectural_genius&dir={% if current_sort == 'architectural_genius' and current_dir == 'asc' %}desc{% else %}asc{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Architectural Genius</a>
                 </th>
                 <th class="{% if current_sort == 'mopq_award' %}sorted-{{ current_dir }}{% endif %}">
-                    <a href="?sort=mopq_award&dir={% if current_sort == 'mopq_award' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">MoPQ Award</a>
+                    <a href="?sort=mopq_award&dir={% if current_sort == 'mopq_award' and current_dir == 'asc' %}desc{% else %}asc{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">MoPQ Award</a>
                 </th>
                 <th class="{% if current_sort == 'architectural_style' %}sorted-{{ current_dir }}{% endif %}">
-                    <a href="?sort=architectural_style&dir={% if current_sort == 'architectural_style' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Architectural Style</a>
+                    <a href="?sort=architectural_style&dir={% if current_sort == 'architectural_style' and current_dir == 'asc' %}desc{% else %}asc{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Architectural Style</a>
                 </th>
             </tr>
         </thead>

@@ -56,3 +56,62 @@ th.sorted-desc a::after {
 .right-align {
     text-align: right;
 }
+
+.search-container {
+    margin: 20px 0;
+}
+
+.search-container form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.search-container input[type="text"] {
+    padding: 0 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    flex: 1;
+    max-width: 400px;
+    height: 38px;
+    box-sizing: border-box;
+    line-height: 38px;
+}
+
+.search-container button {
+    padding: 0 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    height: 38px;
+    box-sizing: border-box;
+    line-height: 1;
+    margin: 0;
+}
+
+.search-container button:hover {
+    background-color: #0056b3;
+}
+
+.search-container .clear-search {
+    padding: 0 16px;
+    background-color: #6c757d;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    height: 38px;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.search-container .clear-search:hover {
+    background-color: #545b62;
+}

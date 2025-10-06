@@ -115,9 +115,9 @@ Running the server locally:
     - [ ] Add durability
 - **<ins>Misc.</ins>**
     - [ ] Sort buildings
-        - [ ] Sort by nation
-        - [ ] Sort by territory
-        - [ ] Sort by year
+        - [X] Sort by nation
+        - [X] Sort by territory
+        - [X] Sort by year
         - [ ] Sort by building price
     - [ ] **Overall info page**
         - [X] Per nation Average Height & # of Buildings info
