@@ -4,7 +4,10 @@ from un_app.models import Item  # adjust import if needed
 def item_detail(request, image_name):
     item = get_object_or_404(Item, image_name=image_name)
     # Image path relative to /static/
-    image_url = f'images/minecraft_items/{item.image_name}.png' if item.image_name else None
+    if item.special_image_name:
+        image_url = f'images/minecraft_items/{item.special_image_name}.png' if item.special_image_name else None
+    else:
+        image_url = f'images/minecraft_items/{item.image_name}.png' if item.image_name else None
 
     return render(request, 'item_detail.html', {
         'item': item,
