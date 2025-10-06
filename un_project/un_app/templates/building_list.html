@@ -57,8 +57,8 @@
                 <th class="{% if current_sort == 'calculated_height' %}sorted-{{ current_dir }}{% endif %}">
                     <a href="?sort=calculated_height&dir={% if current_sort == 'calculated_height' and current_dir == 'asc' %}desc{% else %}asc{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Height</a>
                 </th>
-                <th class="{% if current_sort == 'coordinates' %}sorted-{{ current_dir }}{% endif %}">
-                    <a href="?sort=coordinates&dir={% if current_sort == 'coordinates' and current_dir == 'asc' %}desc{% else %}asc{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Coordinates</a>
+                <th>
+                    Coordinates
                 </th>
                 <th class="{% if current_sort == 'historic_site' %}sorted-{{ current_dir }}{% endif %}">
                     <a href="?sort=historic_site&dir={% if current_sort == 'historic_site' and current_dir == 'asc' %}desc{% else %}asc{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Historic Site</a>
