@@ -4,32 +4,60 @@
     Building List
 {% endblock %}
 
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/building_list_styles.css' %}">
+{% endblock %}
+
 {% block content %}
     <h1>United Nations Records: Building List</h1>
-    
+
     <table>
         <thead>
             <tr>
-                <th>Rank</th>
-                <th>Name</th>
-                <th>Territory</th>
-                <th>Owner</th>
-                <th>Main Builder</th>
-                <th>Year Completed</th>
-                <th>Completed</th>
-                <th>Height</th>
-                <th>Coordinates</th>
-                <th>Historic Site</th>
-                <th>Architectural Genius</th>
-                <th>MoPQ Award</th>
-                <th>Architectural Style</th>
+                <th class="{% if current_sort == 'name' %}sorted-{{ current_dir }}{% endif %}">
+                    <a href="?sort=name&dir={% if current_sort == 'name' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Name</a>
+                </th>
+                <th class="{% if current_sort == 'territory__name' %}sorted-{{ current_dir }}{% endif %}">
+                    <a href="?sort=territory__name&dir={% if current_sort == 'territory__name' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Territory</a>
+                </th>
+                <th class="{% if current_sort == 'owner__abbreviation' %}sorted-{{ current_dir }}{% endif %}">
+                    <a href="?sort=owner__abbreviation&dir={% if current_sort == 'owner__abbreviation' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Owner</a>
+                </th>
+                <th class="{% if current_sort == 'first_builder' %}sorted-{{ current_dir }}{% endif %}">
+                    <a href="?sort=first_builder&dir={% if current_sort == 'first_builder' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Main Builder</a>
+                </th>
+                <th class="{% if current_sort == 'year_started' %}sorted-{{ current_dir }}{% endif %}">
+                    <a href="?sort=year_started&dir={% if current_sort == 'year_started' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Year Completed</a>
+                </th>
+                <th class="{% if current_sort == 'completed' %}sorted-{{ current_dir }}{% endif %}">
+                    <a href="?sort=completed&dir={% if current_sort == 'completed' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Completed</a>
+                </th>
+                <th class="{% if current_sort == 'calculated_height' %}sorted-{{ current_dir }}{% endif %}">
+                    <a href="?sort=calculated_height&dir={% if current_sort == 'calculated_height' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Height</a>
+                </th>
+                <th class="{% if current_sort == 'coordinates' %}sorted-{{ current_dir }}{% endif %}">
+                    <a href="?sort=coordinates&dir={% if current_sort == 'coordinates' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Coordinates</a>
+                </th>
+                <th class="{% if current_sort == 'historic_site' %}sorted-{{ current_dir }}{% endif %}">
+                    <a href="?sort=historic_site&dir={% if current_sort == 'historic_site' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Historic Site</a>
+                </th>
+                <th class="{% if current_sort == 'architectural_genius' %}sorted-{{ current_dir }}{% endif %}">
+                    <a href="?sort=architectural_genius&dir={% if current_sort == 'architectural_genius' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Architectural Genius</a>
+                </th>
+                <th class="{% if current_sort == 'mopq_award' %}sorted-{{ current_dir }}{% endif %}">
+                    <a href="?sort=mopq_award&dir={% if current_sort == 'mopq_award' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">MoPQ Award</a>
+                </th>
+                <th class="{% if current_sort == 'architectural_style' %}sorted-{{ current_dir }}{% endif %}">
+                    <a href="?sort=architectural_style&dir={% if current_sort == 'architectural_style' and current_dir == 'asc' %}desc{% else %}asc{% endif %}">Architectural Style</a>
+                </th>
             </tr>
         </thead>
         <tbody>
             {% if buildings %}
                 {% for building in buildings %}
                 <tr>
-                    <td class="right-align">{{ building.rank }}</td>
                     <td>{{ building.name }}</td>
                     <td>{{ building.territory.name }}</td>
                     <td>{{ building.owner.abbreviation }}</td>
@@ -51,36 +79,28 @@
                     <td>
                         {% if building.historic_site %}
                             Inducted
-                        {% else %}
-                            <!-- Leave blank if null -->
                         {% endif %}
                     </td>
                     <td>
                         {% if building.architectural_genius %}
                             Inducted
-                        {% else %}
-                            <!-- Leave blank if null -->
                         {% endif %}
                     </td>
                     <td>
                         {% if building.mopq_award %}
                             {{ building.mopq_award }}
-                        {% else %}
-                            <!-- Leave blank if null -->
                         {% endif %}
                     </td>
                     <td>
                         {% if building.architectural_style %}
                             {{ building.architectural_style }}
-                        {% else %}
-                            <!-- Leave blank if null -->
                         {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
             {% else %}
                 <tr>
-                    <td colspan="12">No data available.</td>
+                    <td colspan="13">No data available.</td>
                 </tr>
             {% endif %}
         </tbody>
