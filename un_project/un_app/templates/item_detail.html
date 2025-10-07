@@ -44,7 +44,7 @@
 
 {% if item.price_type == 'market_rate' %}
     <div class="item-evaluations table-half-width">
-        <h2>Evaluations for <span id="selected-item-name">{{ item.name }}</span></h2>
+        <h3><span id="selected-item-name">{{ item.name }} Evaluations:</span></h3>
             <table class="evaluation-table">
             <thead>
                 <tr id="evaluation-table-header">
@@ -84,7 +84,7 @@
 {% if item.price_type == 'fixed_price' %}
   {% if item_components or currency_components %}
     <div class="price-breakdown table-half-width">
-      <h3>Price Breakdown</h3>
+      <h3><span id="selected-item-name">{{ item.name }} Price Breakdown:</span></h3>
 
       {% if item_components %}
         <table class="breakdown-table">
