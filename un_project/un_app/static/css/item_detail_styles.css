@@ -144,3 +144,19 @@
   flex-wrap: wrap;
   align-items: flex-start;
 }
+
+.table-half-width {
+    width: 50%;
+    margin-bottom: 30px;
+    margin-left: 100px;
+    float: left;
+}
+
+.table-half-width table {
+    width: 100%;
+}
+
+.table-half-width .total-line {
+    text-align: right;
+    margin-right: 20px;
+}

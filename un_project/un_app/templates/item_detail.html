@@ -43,9 +43,9 @@
 </div>
 
 {% if item.price_type == 'market_rate' %}
-    <div class="item-evaluations">
+    <div class="item-evaluations table-half-width">
         <h2>Evaluations for <span id="selected-item-name">{{ item.name }}</span></h2>
-        <table class="evaluation-table">
+            <table class="evaluation-table">
             <thead>
                 <tr id="evaluation-table-header">
                     <th>Evaluator</th>
@@ -75,12 +75,15 @@
                 {% endif %}
             </tbody>
         </table>
+        <div class="total-line">
+        <strong>Total Value:</strong> {{ total_value|custom_extra_decimal_places }} Diamonds
+      </div>
     </div>
 {% endif %}
 
 {% if item.price_type == 'fixed_price' %}
   {% if item_components or currency_components %}
-    <div class="price-breakdown">
+    <div class="price-breakdown table-half-width">
       <h3>Price Breakdown</h3>
 
       {% if item_components %}
@@ -128,7 +131,7 @@
       {% endif %}
 
       <div class="total-line">
-        <strong>Total Value:</strong> {{ total_value|custom_decimal_places }} Diamonds
+        <strong>Total Value:</strong> {{ total_value|custom_extra_decimal_places }} Diamonds
       </div>
     </div>
   {% endif %}

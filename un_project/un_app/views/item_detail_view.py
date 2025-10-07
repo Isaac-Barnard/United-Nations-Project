@@ -43,13 +43,12 @@ def item_detail(request, image_name):
     # Separate and calculate subtotals
     item_components = []
     currency_components = []
-    total_value = Decimal('0')
+    total_value = item.market_value
 
     if price_components:
         for c in price_components:
             if c.denomination:
                 worth = Decimal(c.quantity) * Decimal(c.denomination.diamond_equivalent)
-                total_value += worth
                 item_components.append({
                     'name': c.denomination.name,
                     'quantity': c.quantity,
@@ -59,7 +58,6 @@ def item_detail(request, image_name):
                 # Calculate the worth of this referenced item
                 referenced_price = c.referenced_item.market_price or Decimal('0')
                 worth = (Decimal(c.percentage_of_item) / Decimal('100')) * referenced_price
-                total_value += worth
                 currency_components.append({
                     'name': c.referenced_item.name,
                     'percentage': c.percentage_of_item,
