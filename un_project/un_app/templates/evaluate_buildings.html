@@ -37,7 +37,7 @@
                 <thead>
                     <tr id="evaluation-table-header">
                         <th>Evaluator</th>
-                        <th>Total Diamond Value</th> 
+                        <th>Total Diamonds</th> 
                         {% for denomination in denominations %}
                             <th>{{ denomination.name }}</th>
                         {% endfor %}
@@ -76,7 +76,7 @@
                                 selectedBuildingName.textContent = buildingDropdown.options[buildingDropdown.selectedIndex].text;
                                 
                                 // Add column headers with Total Diamond Value before denominations
-                                evaluationTableHeader.innerHTML = '<th>Evaluator</th><th>Total Diamond Value</th>';
+                                evaluationTableHeader.innerHTML = '<th>Evaluator</th><th>Total Diamonds</th>';
                                 data.denominations.forEach(denom => {
                                     evaluationTableHeader.innerHTML += `<th>${denom}</th>`;
                                 });
@@ -125,7 +125,7 @@
                 <thead>
                     <tr>
                         <th>User</th>
-                        <th>Total Diamond Value</th>
+                        <th>Total Diamonds</th>
                         {% for field in evaluation_form %}
                             {% if field.name != 'building' %}
                                 <th>{{ field.label }}</th>
