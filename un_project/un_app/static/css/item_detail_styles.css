@@ -101,3 +101,30 @@
 .wiki-button:hover {
     background-color: var(--button_hover-color);;
 }
+
+.item-evaluations {
+  margin-top: 30px;
+  width: 100%;
+}
+
+.item-evaluations h2 {
+  margin-bottom: 10px;
+}
+
+.item-detail-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.item-description {
+  flex: 1;
+  min-width: 250px;
+}
+
+/* Thicker divider between Total Diamond Value and denominations */
+.evaluation-table th:nth-child(2),
+.evaluation-table td:nth-child(2) {
+  border-right: 3px solid; /* adjust thickness/color as needed */
+}

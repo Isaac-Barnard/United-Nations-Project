@@ -1,5 +1,6 @@
 {% extends 'financial_base.html' %}
 {% load static %}
+{% load custom_filters %}
 
 {% block title %}
     {{ item.name }}
@@ -40,4 +41,40 @@
         {% endif %}
     </div>
 </div>
+
+{% if item.price_type == 'market_rate' %}
+    <div class="item-evaluations">
+        <h2>Evaluations for <span id="selected-item-name">{{ item.name }}</span></h2>
+        <table class="evaluation-table">
+            <thead>
+                <tr id="evaluation-table-header">
+                    <th>Evaluator</th>
+                    <th>Total Diamond Value</th>
+                    {% for denomination in denominations %}
+                        <th>{{ denomination.name }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody id="evaluation-table-body">
+                {% if evaluation_data %}
+                    {% for evaluation in evaluation_data %}
+                        <tr>
+                            <td>{{ evaluation.evaluator }}</td>
+                            <td>{{ evaluation.total_diamond_value|custom_decimal_places }}</td>
+                            {% for denomination in denominations %}
+                                <td>{{ evaluation.components|get_item:denomination.id|default:0|custom_decimal_places }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="{{ denominations|length|add:2 }}">
+                            <em>No evaluations available for this item yet.</em>
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}
 {% endblock %}
