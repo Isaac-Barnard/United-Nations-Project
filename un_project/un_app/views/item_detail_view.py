@@ -1,10 +1,10 @@
+from decimal import Decimal
 from django.shortcuts import render, get_object_or_404
-from un_app.models import Item, Denomination, ItemEvaluation  # ensure all are imported
+from un_app.models import Item, Denomination, ItemEvaluation
 
 def item_detail(request, image_name):
     item = get_object_or_404(Item, image_name=image_name)
 
-    # Determine the image URL
     if item.special_image_name:
         image_url = f'images/minecraft_items/{item.special_image_name}.png'
     else:
@@ -34,12 +34,49 @@ def item_detail(request, image_name):
             'components': component_data,
         })
 
+    price_components = (
+        item.price_components.select_related('denomination', 'referenced_item').all()
+        if item.price_type == Item.FIXED_PRICE
+        else None
+    )
+
+    # Separate and calculate subtotals
+    item_components = []
+    currency_components = []
+    total_value = Decimal('0')
+
+    if price_components:
+        for c in price_components:
+            if c.denomination:
+                worth = Decimal(c.quantity) * Decimal(c.denomination.diamond_equivalent)
+                total_value += worth
+                item_components.append({
+                    'name': c.denomination.name,
+                    'quantity': c.quantity,
+                    'worth': worth
+                })
+            elif c.referenced_item:
+                # Calculate the worth of this referenced item
+                referenced_price = c.referenced_item.market_price or Decimal('0')
+                worth = (Decimal(c.percentage_of_item) / Decimal('100')) * referenced_price
+                total_value += worth
+                currency_components.append({
+                    'name': c.referenced_item.name,
+                    'percentage': c.percentage_of_item,
+                    'referenced_price': referenced_price,
+                    'worth': worth
+                })
+
     return render(request, 'item_detail.html', {
         'item': item,
         'image_url': image_url,
         'denominations': denominations,
         'evaluation_data': evaluation_data,
+        'item_components': item_components,
+        'currency_components': currency_components,
+        'total_value': total_value,
     })
+
 
 
 

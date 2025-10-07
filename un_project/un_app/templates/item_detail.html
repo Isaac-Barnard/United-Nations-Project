@@ -60,9 +60,9 @@
                     {% for evaluation in evaluation_data %}
                         <tr>
                             <td>{{ evaluation.evaluator }}</td>
-                            <td>{{ evaluation.total_diamond_value|custom_decimal_places }}</td>
+                            <td>{{ evaluation.total_diamond_value|custom_extra_decimal_places }}</td>
                             {% for denomination in denominations %}
-                                <td>{{ evaluation.components|get_item:denomination.id|default:0|custom_decimal_places }}</td>
+                                <td>{{ evaluation.components|get_item:denomination.id|default:0|custom_extra_decimal_places }}</td>
                             {% endfor %}
                         </tr>
                     {% endfor %}
@@ -77,4 +77,62 @@
         </table>
     </div>
 {% endif %}
+
+{% if item.price_type == 'fixed_price' %}
+  {% if item_components or currency_components %}
+    <div class="price-breakdown">
+      <h3>Price Breakdown</h3>
+
+      {% if item_components %}
+        <table class="breakdown-table">
+          <thead>
+            <tr>
+              <th>Denomination</th>
+              <th>Amount</th>
+              <th>Diamond Equivalent</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for component in item_components %}
+              <tr>
+                <td>{{ component.name }}</td>
+                <td>{{ component.quantity|custom_extra_decimal_places }}</td>
+                <td>{{ component.worth|custom_extra_decimal_places }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+
+      {% if currency_components %}
+        <table class="breakdown-table">
+          <thead>
+            <tr>
+              <th>Referenced Item</th>
+              <th>Percentage</th>
+              <th>Item Base Price</th>
+              <th>Diamond Equivalent</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for component in currency_components %}
+              <tr>
+                <td>{{ component.name }}</td>
+                <td>{{ component.percentage|custom_charter_decimal_places }}%</td>
+                <td>{{ component.referenced_price|custom_extra_decimal_places }}</td>
+                <td>{{ component.worth|custom_extra_decimal_places }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+
+      <div class="total-line">
+        <strong>Total Value:</strong> {{ total_value|custom_decimal_places }} Diamonds
+      </div>
+    </div>
+  {% endif %}
+{% endif %}
+
+
 {% endblock %}

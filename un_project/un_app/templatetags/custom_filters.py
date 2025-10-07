@@ -11,6 +11,19 @@ def custom_decimal_places(value):
         return '0'
     return f"{value:.3f}" if value % 1 != 0 else f"{value:.1f}"
 
+
+@register.filter
+def custom_extra_decimal_places(value):
+    if value is None:
+        return ''
+    if value == 0:
+        return '0'
+
+    s = f"{value:.5f}".rstrip('0').rstrip('.')
+    return s
+
+
+# 5 decimal places and removes trailing 0's
 @register.filter
 def custom_charter_decimal_places(value):
     if value is None:

@@ -128,3 +128,19 @@
 .evaluation-table td:nth-child(2) {
   border-right: 3px solid; /* adjust thickness/color as needed */
 }
+
+.price-breakdown {
+  margin-top: 30px;
+  width: 100%;
+}
+
+.price-breakdown h2 {
+  margin-bottom: 10px;
+}
+
+.price-breakdown-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
