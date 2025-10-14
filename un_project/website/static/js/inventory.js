@@ -12,6 +12,7 @@ var regex_rarity = [];
 preload_rarity();
 const rarity_color = {uncommon: "#FFFF55", rare: "#55FFFF", epic: "#FF55FF"};
 const imageSize = 32;
+var shulker_visible = false;
 
 var subData = [];
 
@@ -366,10 +367,14 @@ function toggle_shulker_display(e) {
     let shulker = document.querySelector(".shulker");
     let shulker_name = document.querySelector('.shulker-name');
 
-    if (shulker.style.visibility === 'visible' && shulker.getAttribute('id') == e.target.offsetParent.getAttribute('id')) {
+    if (shulker_visible) {
         subDiv.innerHTML = '';
         shulker_name.style.fontStyle = '';
         shulker_name.innerHTML = '';
+        shulker_visible = false;
+    }
+    
+    if (shulker.getAttribute('id') == e.target.offsetParent.getAttribute('id')) {
         shulker.removeAttribute('id');
         shulker.style.visibility = 'hidden';
         return;
@@ -399,11 +404,9 @@ function toggle_shulker_display(e) {
             }
             
         });
-        /*.forEach(element => {
-            console.log(element);
-        });*/
     }
     shulker.setAttribute('id', inv_id);
+    shulker_visible = true;
 }
 
 function get_shulker_name(element, name_element) {
