@@ -137,5 +137,62 @@
   {% endif %}
 {% endif %}
 
+<!-- Clear floats before ownership section -->
+<div style="clear: both;"></div>
+
+
+<div class="ownership-section" style="margin-left: 100px;">
+  <div class="ownership-table-wrapper">
+    <h3>Nations Owning {{ item.name }}</h3>
+    <table class="ownership-table">
+      <thead>
+        <tr>
+          <th>Nation</th>
+          <th>Amount Owned</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if nation_counts %}
+          {% for record in nation_counts %}
+          <tr>
+            <td>{{ record.nation.name }}</td>
+            <td>{{ record.count|custom_extra_decimal_places }}</td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="2"><em>No nations own this item yet.</em></td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ownership-table-wrapper">
+    <h3>Companies Owning {{ item.name }}</h3>
+    <table class="ownership-table">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Amount Owned</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if company_counts %}
+          {% for record in company_counts %}
+          <tr>
+            <td>{{ record.company.name }}</td>
+            <td>{{ record.count|custom_extra_decimal_places }}</td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="2"><em>No companies own this item yet.</em></td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
 
 {% endblock %}

@@ -1,6 +1,6 @@
 from decimal import Decimal
 from django.shortcuts import render, get_object_or_404
-from un_app.models import Item, Denomination, ItemEvaluation
+from un_app.models import Item, Denomination, ItemEvaluation, ItemCount
 
 def item_detail(request, image_name):
     item = get_object_or_404(Item, image_name=image_name)
@@ -40,7 +40,6 @@ def item_detail(request, image_name):
         else None
     )
 
-    # Separate and calculate subtotals
     item_components = []
     currency_components = []
     total_value = item.market_value
@@ -55,7 +54,6 @@ def item_detail(request, image_name):
                     'worth': worth
                 })
             elif c.referenced_item:
-                # Calculate the worth of this referenced item
                 referenced_price = c.referenced_item.market_price or Decimal('0')
                 worth = (Decimal(c.percentage_of_item) / Decimal('100')) * referenced_price
                 currency_components.append({
@@ -65,6 +63,19 @@ def item_detail(request, image_name):
                     'worth': worth
                 })
 
+    nation_counts = (
+        ItemCount.objects
+        .filter(item=item, nation__isnull=False, count__gt=0)
+        .select_related('nation')
+        .order_by('-count')
+    )
+    company_counts = (
+        ItemCount.objects
+        .filter(item=item, company__isnull=False, count__gt=0)
+        .select_related('company')
+        .order_by('-count')
+    )
+
     return render(request, 'item_detail.html', {
         'item': item,
         'image_url': image_url,
@@ -73,12 +84,11 @@ def item_detail(request, image_name):
         'item_components': item_components,
         'currency_components': currency_components,
         'total_value': total_value,
+        'nation_counts': nation_counts,
+        'company_counts': company_counts,
     })
-
-
-
-
-
+    
+    
 def item_detail_selector(request):
     items = Item.objects.exclude(image_name='').order_by('name')  # only items with image_name
     return render(request, 'item_detail_selector.html', {

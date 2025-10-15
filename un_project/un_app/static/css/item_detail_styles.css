@@ -160,3 +160,27 @@
     text-align: right;
     margin-right: 20px;
 }
+
+/* Container for both ownership tables */
+.ownership-section {
+  display: flex;
+  gap: 3%;
+}
+
+/* Each table's wrapper takes equal width */
+.ownership-table-wrapper {
+  width: 25%;
+}
+
+/* Table styling (same look as your others) */
+.ownership-table {
+  width: 105%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  font-size: 0.95em;
+}
+
+.ownership-table-wrapper h3 {
+  margin-bottom: 6px;
+  font-size: 1.05em;
+}
