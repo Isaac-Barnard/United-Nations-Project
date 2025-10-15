@@ -33,7 +33,7 @@
         {% if item.description %}
             <p>{{ item.description }}</p>
         {% else %}
-            <p><em>No description available</em></p>
+            <p>For more details, including crafting recipes and usage, check out the <a href="https://minecraft.wiki/w/{{ item.image_name|urlencode }}" target="_blank">Minecraft Wiki</a>!</p>
         {% endif %}
 
         {% if item.note %}
