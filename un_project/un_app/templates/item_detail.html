@@ -44,6 +44,7 @@
 
 {% if item.price_type == 'market_rate' %}
     <div class="item-evaluations table-half-width">
+        <hr class="price-hr">
         <h3><span id="selected-item-name">{{ item.name }} Evaluations:</span></h3>
             <table class="evaluation-table">
             <thead>
@@ -139,8 +140,7 @@
 
 <!-- Clear floats before ownership section -->
 <div style="clear: both;"></div>
-
-
+<hr class="ownership-hr">
 <div class="ownership-section" style="margin-left: 100px;">
   <div class="ownership-table-wrapper">
     <h3>Nations Owning {{ item.name }}</h3>

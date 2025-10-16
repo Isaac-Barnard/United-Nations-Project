@@ -184,3 +184,17 @@
   margin-bottom: 6px;
   font-size: 1.05em;
 }
+
+.price-hr {
+    width: 106.5%;
+    margin: 20px auto;
+    margin-left: -10px;
+    margin-top: 0px;
+}
+
+.ownership-hr {
+    width: 53%;
+    margin: 20px auto;
+    margin-left: 93px;
+    margin-top: 0px;
+}
