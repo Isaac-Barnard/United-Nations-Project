@@ -49,7 +49,7 @@
                     <a href="?sort=first_builder&dir={% if current_sort == 'first_builder' and current_dir == 'asc' %}desc{% else %}asc{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Main Builder</a>
                 </th>
                 <th class="{% if current_sort == 'year_started' %}sorted-{{ current_dir }}{% endif %}">
-                    <a href="?sort=year_started&dir={% if current_sort == 'year_started' and current_dir == 'asc' %}desc{% else %}asc{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Year Completed</a>
+                    <a href="?sort=year_started&dir={% if current_sort == 'year_started' and current_dir == 'asc' %}desc{% else %}asc{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Year Started</a>
                 </th>
                 <th class="{% if current_sort == 'completed' %}sorted-{{ current_dir }}{% endif %}">
                     <a href="?sort=completed&dir={% if current_sort == 'completed' and current_dir == 'asc' %}desc{% else %}asc{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Completed</a>
