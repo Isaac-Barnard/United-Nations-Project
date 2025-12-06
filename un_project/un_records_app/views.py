@@ -74,3 +74,7 @@ def petitions(request):
         'petition_types': petition_types,
         'current_type': petition_type
     })
+    
+    
+def aternos_games(request):
+    return render(request, 'aternos_games.html')

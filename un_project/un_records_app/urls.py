@@ -11,6 +11,7 @@ urlpatterns = [
     path('alliances', alliances, name='alliances'),
     path('declaration_of_wars', declaration_of_wars, name='declaration_of_wars'),
     path('national_constitution', national_constitutions, name='national_constitution'),
+    path('aternos_games', aternos_games, name='aternos_games'),
     path('petitions', petitions, name='petitions'),
     path('un-staff', un_staff, name='un_staff'),
 ]
