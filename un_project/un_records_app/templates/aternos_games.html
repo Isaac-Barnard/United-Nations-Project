@@ -1,24 +1,115 @@
 {% extends 'records_base.html' %}
 
 {% block title %}Aternos Games{% endblock %}
-
 {% load static %}
-{% load custom_filters %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/records_styles.css' %}">
+<style>
+    table.event-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 25px;
+    }
+    table.event-table th, table.event-table td {
+        border: 1px solid #ddd;
+        padding: 6px 10px;
+    }
+    table.event-table th {
+        background: #f0f0f0;
+    }
+    .event-header {
+        margin-top: 40px;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
 <div class="page-container">
+
     <h1>Aternos Games</h1>
     <hr>
 
-    <h1>Work in Progress</h1>
+    {% for game in games %}
+        <div class="game-block">
+            <h2>{{ game.name }}</h2>
 
+            <p><strong>Participating Nations:</strong>
+                {% for nat in game.participating_nations.all %}
+                    {{ nat.name }}{% if not forloop.last %}, {% endif %}
+                {% empty %}
+                    <em>No nations listed</em>
+                {% endfor %}
+            </p>
 
+            <h3>Events</h3>
+
+            {% for event in game.events.all %}
+                <div class="event-block">
+                    <h4>{{ event.name }}</h4>
+
+                    <p><strong>Participants:</strong>
+                        {% for part in event.participants.all %}
+                            {{ part.nation.name }} ({{ part.player_name }})
+                            {% if part.final_placement %}
+                                — placed {{ part.final_placement }}
+                            {% endif %}
+                            {% if not forloop.last %}, {% endif %}
+                        {% empty %}
+                            <em>No participants listed</em>
+                        {% endfor %}
+                    </p>
+
+                    <h5>Stages</h5>
+
+                    {% for stage in event.stages.all %}
+                        <div class="stage-block">
+                            <strong>{{ stage.name }}</strong>
+
+                            <ul>
+                                {% if event.event_type == "POINTS" %}
+                                    {% for r in stage.point_results.all %}
+                                        <li>{{ r.participant.nation.name }} — {{ r.points }} pts{% if r.disqualified %} (DQ){% endif %}</li>
+                                    {% empty %}
+                                        <li><em>No results</em></li>
+                                    {% endfor %}
+
+                                {% elif event.event_type == "TIME" %}
+                                    {% for r in stage.time_results.all %}
+                                        <li>{{ r.participant.nation.name }} — {{ r.time_seconds }}s{% if r.disqualified %} (DQ){% endif %}</li>
+                                    {% empty %}
+                                        <li><em>No results</em></li>
+                                    {% endfor %}
+
+                                {% elif event.event_type == "TOURNAMENT" %}
+                                    {% for r in stage.tournament_round_results.all %}
+                                        <li>
+                                            {{ r.participant.nation.name }} —
+                                            {% if r.eliminated %}Eliminated{% else %}Advanced{% endif %}
+                                            {% if r.disqualified %} (DQ){% endif %}
+                                        </li>
+                                    {% empty %}
+                                        <li><em>No results</em></li>
+                                    {% endfor %}
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% empty %}
+                        <p><em>No stages listed.</em></p>
+                    {% endfor %}
+                </div>
+            {% empty %}
+                <p><em>No events listed.</em></p>
+            {% endfor %}
+        </div>
+
+        <hr>
+    {% empty %}
+        <p>No Aternos Games found.</p>
+    {% endfor %}
+</div>
 {% endblock %}
 
 {% block extra_js %}
-<script src="{% static 'js/images.js' %}"></script>
+
 {% endblock %}

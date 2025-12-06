@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.db.models import Prefetch
-from .models import Resolution, Treaty, ExecutiveOrder, ResolutionAmendment, Charter, CharterAmendment , Alliance, DeclarationOfWar, NationalConstitution, NationalConstitutionAmendment, CourtCase, CourtCaseArgument, CourtCaseArgumentImage, CourtCaseArgumentVideo, Petition
+from .models import Resolution, Treaty, ExecutiveOrder, ResolutionAmendment, Charter, CharterAmendment , Alliance, DeclarationOfWar, NationalConstitution, NationalConstitutionAmendment, CourtCase, CourtCaseArgument, CourtCaseArgumentImage, CourtCaseArgumentVideo, Petition, AternosGame
 
 # Create your views here.
 def records_home(request):
@@ -77,4 +77,13 @@ def petitions(request):
     
     
 def aternos_games(request):
-    return render(request, 'aternos_games.html')
+    games = AternosGame.objects.prefetch_related(
+        "events__stages",
+        "events__participants__nation",
+        "events__participants__point_results",
+        "events__participants__time_results",
+        "events__participants__tournament_results",
+    )
+
+    return render(request, "aternos_games.html", {"games": games})
+

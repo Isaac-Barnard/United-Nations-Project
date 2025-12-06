@@ -13,9 +13,9 @@ class AternosGame(models.Model):
 
 class GameEvent(models.Model):
     EVENT_TYPES = [
-        ("POINTS", "Archery / Points"),
-        ("TIME", "Boat Racing / Timed"),
-        ("TOURNAMENT", "Gladiator / Tournament"),
+        ("POINTS", "Points"),
+        ("TIME", "Timed"),
+        ("TOURNAMENT", "Tournament"),
     ]
     game = models.ForeignKey(AternosGame, on_delete=models.CASCADE, related_name='events')
     name = models.CharField(max_length=255)
