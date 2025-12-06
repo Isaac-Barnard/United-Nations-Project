@@ -8,3 +8,4 @@ from .treaty_models import *
 from .national_constitution_models import *
 from .court_case_models import *
 from .petition_models import *
+from .aternos_games_models import *

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from . import models
 
-admin.site.register(models.Nation)
+#admin.site.register(models.Nation)
 admin.site.register(models.NationHistory)
 admin.site.register(models.Company)
 #admin.site.register(models.Player)
@@ -22,6 +22,10 @@ admin.site.register(models.LiquidAssetContainer)
 admin.site.register(models.Liability)
 admin.site.register(models.LiabilityPayment)
 admin.site.register(models.CompanyShareholder)
+
+@admin.register(models.Nation)
+class NationAdmin(admin.ModelAdmin):
+    search_fields = ['name']
 
 
 @admin.register(models.Item)
