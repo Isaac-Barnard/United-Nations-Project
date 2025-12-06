@@ -5,23 +5,7 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/records_styles.css' %}">
-<style>
-    table.event-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 25px;
-    }
-    table.event-table th, table.event-table td {
-        border: 1px solid #ddd;
-        padding: 6px 10px;
-    }
-    table.event-table th {
-        background: #f0f0f0;
-    }
-    .event-header {
-        margin-top: 40px;
-    }
-</style>
+<link rel="stylesheet" href="{% static 'css/aternos_games_styles.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -43,60 +27,81 @@
             </p>
 
             <h3>Events</h3>
-
             {% for event in game.events.all %}
                 <div class="event-block">
-                    <h4>{{ event.name }}</h4>
-
-                    <p><strong>Participants:</strong>
-                        {% for part in event.participants.all %}
-                            {{ part.nation.name }} ({{ part.player_name }})
-                            {% if part.final_placement %}
-                                — placed {{ part.final_placement }}
-                            {% endif %}
-                            {% if not forloop.last %}, {% endif %}
-                        {% empty %}
-                            <em>No participants listed</em>
-                        {% endfor %}
-                    </p>
-
-                    <h5>Stages</h5>
-
-                    {% for stage in event.stages.all %}
-                        <div class="stage-block">
-                            <strong>{{ stage.name }}</strong>
-
-                            <ul>
-                                {% if event.event_type == "POINTS" %}
-                                    {% for r in stage.point_results.all %}
-                                        <li>{{ r.participant.nation.name }} — {{ r.points }} pts{% if r.disqualified %} (DQ){% endif %}</li>
-                                    {% empty %}
-                                        <li><em>No results</em></li>
+                    <h4 class="event-header"><strong>{{ event.name }} Scoring</strong></h4>
+                    {% if event.stages.all %}
+                        <table class="event-table">
+                            <thead>
+                                <tr>
+                                    <th class="stage-header">Stage</th>
+                                    {% for part in event.participants.all %}
+                                        <th>{{ part.player_name }} ({{ part.nation.abbreviation }})</th>
                                     {% endfor %}
-
-                                {% elif event.event_type == "TIME" %}
-                                    {% for r in stage.time_results.all %}
-                                        <li>{{ r.participant.nation.name }} — {{ r.time_seconds }}s{% if r.disqualified %} (DQ){% endif %}</li>
-                                    {% empty %}
-                                        <li><em>No results</em></li>
-                                    {% endfor %}
-
-                                {% elif event.event_type == "TOURNAMENT" %}
-                                    {% for r in stage.tournament_round_results.all %}
-                                        <li>
-                                            {{ r.participant.nation.name }} —
-                                            {% if r.eliminated %}Eliminated{% else %}Advanced{% endif %}
-                                            {% if r.disqualified %} (DQ){% endif %}
-                                        </li>
-                                    {% empty %}
-                                        <li><em>No results</em></li>
-                                    {% endfor %}
-                                {% endif %}
-                            </ul>
-                        </div>
-                    {% empty %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for stage in event.stages.all %}
+                                    <tr>
+                                        <td class="stage-name">{{ stage.name }}</td>
+                                        
+                                        {% for part in event.participants.all %}
+                                            <td>
+                                                {% if event.event_type == "POINTS" %}
+                                                    {% for r in stage.point_results.all %}
+                                                        {% if r.participant.id == part.id %}
+                                                            {% if r.disqualified %}
+                                                                <s>{{ r.points }} pts</s>
+                                                                <span class="disqualified">DQ</span>
+                                                            {% else %}
+                                                                {{ r.points }} pts
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                
+                                                {% elif event.event_type == "TIME" %}
+                                                    {% for r in stage.time_results.all %}
+                                                        {% if r.participant.id == part.id %}
+                                                            {% if r.disqualified %}
+                                                                <s>{{ r.time_seconds }}s</s>
+                                                                <span class="disqualified">DQ</span>
+                                                            {% else %}
+                                                                {{ r.time_seconds }}s
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                
+                                                {% elif event.event_type == "TOURNAMENT" %}
+                                                    {% for r in stage.tournament_round_results.all %}
+                                                        {% if r.participant.id == part.id %}
+                                                            {% if r.disqualified %}
+                                                                <s>
+                                                                    {% if r.eliminated %}
+                                                                        Eliminated
+                                                                    {% else %}
+                                                                        Advanced
+                                                                    {% endif %}
+                                                                </s>
+                                                                <span class="disqualified">DQ</span>
+                                                            {% else %}
+                                                                {% if r.eliminated %}
+                                                                    Eliminated
+                                                                {% else %}
+                                                                    Advanced
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
                         <p><em>No stages listed.</em></p>
-                    {% endfor %}
+                    {% endif %}
                 </div>
             {% empty %}
                 <p><em>No events listed.</em></p>

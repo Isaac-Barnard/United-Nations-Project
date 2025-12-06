@@ -1,0 +1,17 @@
+table.event-table {
+    width: auto;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+    margin-top: 15px;
+}
+table.event-table td.stage-name {
+    width: 85px;
+    text-align: left;
+}
+table.event-table th:not(.stage-header),
+table.event-table td:not(.stage-name) {
+    width: 150px;
+}
+.disqualified {
+    font-weight: bold;
+}
