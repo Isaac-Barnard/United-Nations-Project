@@ -1,0 +1,176 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block extrastyle %}
+<style>
+    .results-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    .results-table th,
+    .results-table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: center;
+    }
+    .results-table th {
+        background-color: #417690;
+        color: white;
+        font-weight: bold;
+    }
+    .results-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    .results-table tr:hover {
+        background-color: #f5f5f5;
+    }
+    .participant-name {
+        text-align: left;
+        font-weight: bold;
+    }
+    .result-input {
+        width: 100px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+    .save-button {
+        background-color: #417690;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        margin-top: 20px;
+    }
+    .save-button:hover {
+        background-color: #2b5266;
+    }
+    .back-link {
+        display: inline-block;
+        margin-bottom: 20px;
+        color: #417690;
+        text-decoration: none;
+    }
+    .back-link:hover {
+        text-decoration: underline;
+    }
+    .event-header {
+        background-color: #f8f8f8;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+    .event-header h1 {
+        margin: 0 0 10px 0;
+    }
+    .checkbox-cell {
+        width: 60px;
+    }
+    .help-text {
+        color: #666;
+        font-size: 12px;
+        margin-top: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">Home</a>
+    &rsaquo; <a href="{% url 'admin:un_records_app_gameevent_changelist' %}">Game events</a>
+    &rsaquo; <a href="{% url 'admin:un_records_app_gameevent_change' event.id %}">{{ event.name }}</a>
+    &rsaquo; Manage Results
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="event-header">
+    <h1>{{ event.name }} - Results Management</h1>
+    <p><strong>Game:</strong> {{ event.game }} | <strong>Type:</strong> {{ event.get_event_type_display }}</p>
+</div>
+
+<a href="{% url 'admin:un_records_app_gameevent_change' event.id %}" class="back-link">← Back to Event Details</a>
+
+{% if not stages %}
+    <p>No stages created yet. Please add stages to the event first.</p>
+{% elif not participant_results %}
+    <p>No participants registered yet. Please add participants to the event first.</p>
+{% else %}
+    <form method="post" action="{% url 'admin:save_event_results' event.id %}">
+        {% csrf_token %}
+        
+        <table class="results-table">
+            <thead>
+                <tr>
+                    <th>Participant</th>
+                    {% for stage in stages %}
+                        <th>{{ stage.name }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for p_data in participant_results %}
+                <tr>
+                    <td class="participant-name">
+                        {{ p_data.participant.nation.name }}<br>
+                        <small style="color: #666;">{{ p_data.participant.player_name }}</small>
+                    </td>
+                    {% for result in p_data.stage_results %}
+                    <td>
+                        {% if event.event_type == 'POINTS' %}
+                            <input type="number" 
+                                   name="result_{{ result.participant_id }}_{{ result.stage_id }}" 
+                                   value="{{ result.value }}"
+                                   placeholder="Points"
+                                   class="result-input"
+                                   min="0">
+                        {% elif event.event_type == 'TIME' %}
+                            <input type="number" 
+                                   name="result_{{ result.participant_id }}_{{ result.stage_id }}" 
+                                   value="{{ result.value }}"
+                                   placeholder="Seconds"
+                                   class="result-input"
+                                   step="0.01"
+                                   min="0">
+                        {% elif event.event_type == 'TOURNAMENT' %}
+                            <select name="result_{{ result.participant_id }}_{{ result.stage_id }}" class="result-input">
+                                <option value="">---</option>
+                                <option value="active" {% if result.value == 'active' %}selected{% endif %}>Active</option>
+                                <option value="eliminated" {% if result.value == 'eliminated' %}selected{% endif %}>Eliminated</option>
+                            </select>
+                        {% endif %}
+                        <br>
+                        <label style="font-size: 11px; color: #666;">
+                            <input type="checkbox" 
+                                   name="disqualified_{{ result.participant_id }}_{{ result.stage_id }}"
+                                   {% if result.disqualified %}checked{% endif %}>
+                            DQ
+                        </label>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div class="help-text">
+            {% if event.event_type == 'POINTS' %}
+                Enter points scored by each participant in each stage. Check "DQ" for disqualified participants.
+            {% elif event.event_type == 'TIME' %}
+                Enter time in seconds for each participant in each stage. Check "DQ" for disqualified participants.
+            {% elif event.event_type == 'TOURNAMENT' %}
+                Select whether participant is Active or Eliminated in each round. Check "DQ" for disqualified participants.
+            {% endif %}
+        </div>
+        
+        <button type="submit" class="save-button">Save All Results</button>
+    </form>
+{% endif %}
+
+<br><br>
+<a href="{% url 'admin:un_records_app_gameevent_change' event.id %}" class="back-link">← Back to Event Details</a>
+
+{% endblock %}
