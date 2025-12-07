@@ -67,7 +67,8 @@ class GameEventAdmin(admin.ModelAdmin):
                     'stage_id': stage.id,
                     'value': '',
                     'disqualified': False,
-                    'eliminated': False
+                    'eliminated': False,
+                    'matchup_number': 1  # Default matchup number
                 }
                 stage_results.append(result_data)
             
@@ -118,6 +119,7 @@ class GameEventAdmin(admin.ModelAdmin):
                                 s_result['value'] = 'eliminated' if result.eliminated else 'active'
                                 s_result['disqualified'] = result.disqualified
                                 s_result['eliminated'] = result.eliminated
+                                s_result['matchup_number'] = result.matchup_number
                                 break
                         break
         
@@ -153,6 +155,10 @@ class GameEventAdmin(admin.ModelAdmin):
                         
                         disqualified_key = f'disqualified_{participant_id}_{stage_id}'
                         disqualified = disqualified_key in request.POST
+                        
+                        # Get matchup number for tournament events
+                        matchup_key = f'matchup_{participant_id}_{stage_id}'
+                        matchup_number = int(request.POST.get(matchup_key, 1))
                         
                         # Skip empty values
                         if not value or value.strip() == '':
@@ -197,7 +203,8 @@ class GameEventAdmin(admin.ModelAdmin):
                                 stage=stage,
                                 defaults={
                                     'eliminated': eliminated,
-                                    'disqualified': disqualified
+                                    'disqualified': disqualified,
+                                    'matchup_number': matchup_number
                                 }
                             )
         

@@ -86,6 +86,10 @@ class TournamentRoundResult(models.Model):
     stage = models.ForeignKey(EventStage, on_delete=models.CASCADE, related_name="tournament_round_results")
     eliminated = models.BooleanField(default=False)
     disqualified = models.BooleanField(default=False)
+    matchup_number = models.PositiveIntegerField(default=0, help_text="Which matchup in this stage (1, 2, 3, etc.)")
+    
+    class Meta:
+        ordering = ['matchup_number', 'id']
     
     def clean(self):
         if self.participant.event.event_type != "TOURNAMENT":

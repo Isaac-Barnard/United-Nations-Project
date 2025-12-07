@@ -35,6 +35,13 @@
         border: 1px solid #ccc;
         border-radius: 3px;
     }
+    .matchup-input {
+        width: 60px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        margin-top: 5px;
+    }
     .save-button {
         background-color: #417690;
         color: white;
@@ -73,6 +80,17 @@
         color: #666;
         font-size: 12px;
         margin-top: 10px;
+    }
+    .tournament-cell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+    .matchup-label {
+        font-size: 10px;
+        color: #666;
+        font-weight: bold;
     }
 </style>
 {% endblock %}
@@ -136,11 +154,22 @@
                                    step="0.01"
                                    min="0">
                         {% elif event.event_type == 'TOURNAMENT' %}
-                            <select name="result_{{ result.participant_id }}_{{ result.stage_id }}" class="result-input">
-                                <option value="">---</option>
-                                <option value="active" {% if result.value == 'active' %}selected{% endif %}>Active</option>
-                                <option value="eliminated" {% if result.value == 'eliminated' %}selected{% endif %}>Eliminated</option>
-                            </select>
+                            <div class="tournament-cell">
+                                <select name="result_{{ result.participant_id }}_{{ result.stage_id }}" class="result-input">
+                                    <option value="">---</option>
+                                    <option value="active" {% if result.value == 'active' %}selected{% endif %}>Active</option>
+                                    <option value="eliminated" {% if result.value == 'eliminated' %}selected{% endif %}>Eliminated</option>
+                                </select>
+                                <div>
+                                    <label class="matchup-label">Matchup #</label>
+                                    <input type="number" 
+                                           name="matchup_{{ result.participant_id }}_{{ result.stage_id }}" 
+                                           value="{{ result.matchup_number }}"
+                                           class="matchup-input"
+                                           min="0"
+                                           placeholder="0">
+                                </div>
+                            </div>
                         {% endif %}
                         <br>
                         <label style="font-size: 11px; color: #666;">
@@ -162,7 +191,11 @@
             {% elif event.event_type == 'TIME' %}
                 Enter time in seconds for each participant in each stage. Check "DQ" for disqualified participants.
             {% elif event.event_type == 'TOURNAMENT' %}
-                Select whether participant is Active or Eliminated in each round. Check "DQ" for disqualified participants.
+                <strong>Tournament Instructions:</strong><br>
+                - Select whether participant is Active or Eliminated in each round<br>
+                - <strong>Set Matchup #</strong> to pair participants (e.g., both competitors in first match = 1, second match = 2, etc.)<br>
+                - Participants with the same matchup number will be paired together in the bracket<br>
+                - Check "DQ" for disqualified participants
             {% endif %}
         </div>
         

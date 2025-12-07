@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Prefetch
 from .models import Resolution, Treaty, ExecutiveOrder, ResolutionAmendment, Charter, CharterAmendment , Alliance, DeclarationOfWar, NationalConstitution, NationalConstitutionAmendment, CourtCase, CourtCaseArgument, CourtCaseArgumentImage, CourtCaseArgumentVideo, Petition, AternosGame
+from collections import defaultdict
 
 # Create your views here.
 def records_home(request):
@@ -84,6 +85,19 @@ def aternos_games(request):
         "events__participants__time_results",
         "events__participants__tournament_results",
     )
+    
+    # Process tournament events to group participants into matchups
+    for game in games:
+        for event in game.events.all():
+            if event.event_type == "TOURNAMENT":
+                for stage in event.stages.all():
+                    # Group by matchup_number
+                    matchup_dict = defaultdict(list)
+                    for r in stage.tournament_round_results.all():
+                        if not r.eliminated or stage.name == "WINNER":
+                            matchup_dict[r.matchup_number].append(r)
+                    
+                    # Convert to sorted list of matchups
+                    stage.matchups = [matchup_dict[k] for k in sorted(matchup_dict.keys())]
 
     return render(request, "aternos_games.html", {"games": games})
-
