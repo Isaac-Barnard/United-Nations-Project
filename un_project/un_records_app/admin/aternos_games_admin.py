@@ -68,7 +68,7 @@ class GameEventAdmin(admin.ModelAdmin):
                     'value': '',
                     'disqualified': False,
                     'eliminated': False,
-                    'matchup_number': 1  # Default matchup number
+                    'matchup_number': 0  # Default matchup number
                 }
                 stage_results.append(result_data)
             
@@ -158,7 +158,7 @@ class GameEventAdmin(admin.ModelAdmin):
                         
                         # Get matchup number for tournament events
                         matchup_key = f'matchup_{participant_id}_{stage_id}'
-                        matchup_number = int(request.POST.get(matchup_key, 1))
+                        matchup_number = int(request.POST.get(matchup_key, 0))
                         
                         # Skip empty values
                         if not value or value.strip() == '':

@@ -90,11 +90,19 @@ def aternos_games(request):
     for game in games:
         for event in game.events.all():
             if event.event_type == "TOURNAMENT":
-                for stage in event.stages.all():
+                stages_list = list(event.stages.all())
+                
+                # Rename stages for tournament display
+                for idx, stage in enumerate(stages_list):
+                    if idx == len(stages_list) - 1:
+                        stage.display_name = "Winner"
+                    else:
+                        stage.display_name = f"Round {idx + 1}"
+                    
                     # Group by matchup_number
                     matchup_dict = defaultdict(list)
                     for r in stage.tournament_round_results.all():
-                        if not r.eliminated or stage.name == "WINNER":
+                        if not r.eliminated or stage.display_name == "Winner":
                             matchup_dict[r.matchup_number].append(r)
                     
                     # Convert to sorted list of matchups

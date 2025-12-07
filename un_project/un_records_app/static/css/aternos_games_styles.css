@@ -19,25 +19,6 @@ table.event-table td:not(.stage-name) {
     font-weight: bold;
 }
 
-/* Tournament-specific styles */
-/* table.tournament-table {
-    border: none;
-}
-
-table.tournament-table td.stage-name {
-    background-color: #a2a2a2;
-    font-weight: bold;
-}
-
-table.tournament-table td:not(.stage-name) {
-    width: auto;
-    min-width: 150px;
-    text-align: center;
-}
- */
-
-
-
  /* Tournament Bracket Styles */
 .tournament-bracket {
     display: flex;

@@ -110,7 +110,8 @@
     <p><strong>Game:</strong> {{ event.game }} | <strong>Type:</strong> {{ event.get_event_type_display }}</p>
 </div>
 
-<a href="{% url 'admin:un_records_app_gameevent_change' event.id %}" class="back-link">← Back to Event Details</a>
+{% comment %} <a href="{% url 'admin:un_records_app_gameevent_change' event.id %}" class="back-link">← Back to Event Details</a>  {% endcomment %}
+<a href="{% url 'admin:un_records_app_gameevent_changelist' %}" class="back-link">← Back to All Events</a>
 
 {% if not stages %}
     <p>No stages created yet. Please add stages to the event first.</p>
@@ -204,6 +205,6 @@
 {% endif %}
 
 <br><br>
-<a href="{% url 'admin:un_records_app_gameevent_change' event.id %}" class="back-link">← Back to Event Details</a>
+<a href="{% url 'admin:un_records_app_gameevent_changelist' %}" class="back-link">← Back to All Events</a>
 
 {% endblock %}

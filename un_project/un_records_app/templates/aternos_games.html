@@ -36,7 +36,7 @@
                             <div class="tournament-bracket">
                                 {% for stage in event.stages.all %}
                                     <div class="bracket-round">
-                                        <div class="round-label">{{ stage.name }}</div>
+                                        <div class="round-label">{{ stage.display_name }}</div>  {# Uses stage.display_name instead of stage.name #}
                                         <div class="matchups">
                                             {% for matchup in stage.matchups %}
                                                 <div class="matchup">
