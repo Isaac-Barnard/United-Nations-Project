@@ -25,12 +25,13 @@ table.event-table td:not(.stage-name) {
     gap: 40px;
     margin: 20px 0;
     overflow-x: auto;
+    padding-bottom: 20px; /* Adds space for scrollbar if needed */
 }
 
 .bracket-round {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center;  <-- Optional: keeps the whole round centered vertically */
     min-width: 200px;
 }
 
@@ -40,63 +41,73 @@ table.event-table td:not(.stage-name) {
     padding: 8px;
     text-align: center;
     border: 1px solid #000000;
-    margin-bottom: 15px;
+    margin-bottom: 20px; /* Increased space below label */
 }
 
 .matchups {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center; /* CHANGED: Keeps matchups grouped together */
+    gap: 30px; /* NEW: Defines a strict distance between matchups */
     flex-grow: 1;
 }
 
 .matchup {
     display: flex;
     flex-direction: column;
-    margin: 10px 0;
     position: relative;
+    /* margin: 10px 0; <-- REMOVED: We use gap instead */
 }
 
 .participant {
     padding: 10px 15px;
     border: 2px solid #000000;
-    margin: 3px 0;
+    margin: 2px 0; /* Tight spacing between players in the same match */
     text-align: center;
     border-radius: 4px;
+    background-color: white; /* Added for cleaner look */
+    z-index: 2; /* Ensures box sits on top of any stray lines */
 }
 
 .participant:hover {
     background-color: #e9ecef;
 }
 
-/* Connector lines between rounds */
+/* --- CONNECTOR LINES --- */
+
+/* 1. Horizontal line sticking out to the right of every matchup */
 .bracket-round:not(:last-child) .matchup::after {
     content: '';
     position: absolute;
-    right: -40px;
+    right: -20px; /* Shortened slightly to meet vertical line */
     top: 50%;
-    width: 40px;
+    width: 20px;
     height: 2px;
     background-color: #4a5568;
-    transform: translateY(-50%);
 }
 
-/* Vertical line for matchup pairs */
+/* 2. Vertical line logic (The "Fork") */
 .bracket-round:not(:last-child) .matchup::before {
     content: '';
     position: absolute;
-    right: -40px;
-    top: 0;
-    bottom: 0;
     width: 2px;
     background-color: #4a5568;
-    right: -20px;
+    right: -20px; /* Aligned with the horizontal line end */
 }
 
+/* Odd Children (Top of pair): Line goes from Center DOWN */
 .bracket-round:not(:last-child) .matchup:nth-child(odd)::before {
     top: 50%;
+    bottom: -15px; /* Extends exactly half way into the 30px gap */
 }
 
+/* Even Children (Bottom of pair): Line goes from Center UP */
 .bracket-round:not(:last-child) .matchup:nth-child(even)::before {
+    top: -15px; /* Extends exactly half way into the 30px gap */
     bottom: 50%;
+}
+
+/* Hide vertical connector if a matchup has no pair (odd number of matches) */
+.bracket-round:not(:last-child) .matchup:last-child:nth-child(odd)::before {
+    display: none;
 }

@@ -36,21 +36,23 @@
                             <div class="tournament-bracket">
                                 {% for stage in event.stages.all %}
                                     <div class="bracket-round">
-                                        <div class="round-label">{{ stage.display_name }}</div>  {# Uses stage.display_name instead of stage.name #}
+                                        <div class="round-label">{{ stage.display_name }}</div>
+
                                         <div class="matchups">
                                             {% for matchup in stage.matchups %}
-                                                <div class="matchup">
+                                            <div class="matchup">
+                                                {% if matchup %}
                                                     {% for r in matchup %}
-                                                        <div class="participant {% if r.disqualified %}disqualified-participant{% endif %}">
-                                                            {% if r.disqualified %}
-                                                                <s>{{ r.participant.player_name }} ({{ r.participant.nation.abbreviation }})</s>
-                                                                <span class="disqualified">DQ</span>
-                                                            {% else %}
-                                                                {{ r.participant.player_name }} ({{ r.participant.nation.abbreviation }})
-                                                            {% endif %}
+                                                        <div class="participant">
+                                                            {{ r.participant.player_name }} ({{ r.participant.nation.abbreviation }})
                                                         </div>
                                                     {% endfor %}
-                                                </div>
+                                                {% else %}
+                                                    {# empty placeholder keeps bracket aligned #}
+                                                    <div class="participant empty"></div>
+                                                    <div class="participant empty"></div>
+                                                {% endif %}
+                                            </div>
                                             {% endfor %}
                                         </div>
                                     </div>

@@ -102,7 +102,7 @@ def aternos_games(request):
                     # Group by matchup_number
                     matchup_dict = defaultdict(list)
                     for r in stage.tournament_round_results.all():
-                        if not r.eliminated or stage.display_name == "Winner":
+                        if not r.eliminated:
                             matchup_dict[r.matchup_number].append(r)
                     
                     # Convert to sorted list of matchups
