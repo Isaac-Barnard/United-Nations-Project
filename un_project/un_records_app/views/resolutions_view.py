@@ -3,7 +3,7 @@ from django.db.models import Prefetch
 from ..models import Resolution,  ResolutionAmendment
 
 def resolutions(request):
-    amendments_prefetch = Prefetch('amended_resolution',queryset=ResolutionAmendment.objects.all().order_by('date'),to_attr='amendments')
+    amendments_prefetch = Prefetch('amended_resolution', queryset=ResolutionAmendment.objects.all().order_by('date'),to_attr='amendments')
     # Prefetch images to avoid N+1 queries while maintaining date ordering
     resolutions = (Resolution.objects.prefetch_related('images', amendments_prefetch).all().order_by('-date'))
     return render(request, 'resolutions.html', {'resolutions': resolutions})

@@ -8,6 +8,7 @@ urlpatterns = [
     path('resolutions/<slug:slug>/', resolution_detail, name='resolution_detail'),
     path('court-cases', court_cases, name='court_cases'),
     path('treaties', treaties, name='treaties'),
+    path('treaties/<slug:slug>/', treaty_detail, name='treaty_detail'),
     path('executive_orders', executive_orders, name='executive_orders'),
     path('alliances', alliances, name='alliances'),
     path('declaration_of_wars', declaration_of_wars, name='declaration_of_wars'),

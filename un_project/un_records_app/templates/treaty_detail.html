@@ -1,0 +1,80 @@
+{% extends 'records_base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% load markdown_extras %}
+
+{% block title %}{{ treaty.title }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/records_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1 class="resolution-title">
+        {{ treaty.title }}
+
+        <button
+            class="copy-link-btn"
+            type="button"
+            title="Copy link"
+            onclick="copyResolutionLink(
+                '{{ request.build_absolute_uri|add:treaty.get_absolute_url }}',
+                this
+            )">
+            🔗
+        </button>
+    </h1>
+
+    <p>
+        ({{ treaty.date|date:"n/j/Y" }})
+        &nbsp;&nbsp;Nations Involved:
+        {{ treaty.nations_involved.all|join:", " }}
+
+        {% if treaty.void %}
+            <strong>(Void, {{ treaty.invalidation_date|date:"n/j/Y" }})</strong>
+        {% endif %}
+    </p>
+
+    <div class="resolution-content">
+        <div class="resolution-text">
+            {{ treaty.body|markdownify }}
+        </div>
+
+        {% if treaty.images.exists %}
+            <div class="resolution-images
+                {% if treaty.images.count == 1 %}
+                    single-image
+                {% else %}
+                    multiple-images
+                {% endif %}
+            ">
+                {% for image in treaty.images.all %}
+                <div class="image-container">
+                    <img
+                        src="{{ image.image.url }}"
+                        alt="Image for {{ treaty.title }}"
+                        class="resolution-image"
+                        onclick="openModal('{{ image.image.url }}', '{{ treaty.title }}')"
+                    >
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <p>
+        <a href="{% url 'treaties' %}">← Back to all treaties</a>
+    </p>
+</div>
+
+<!-- Modal for full-size image viewing -->
+<div id="imageModal" class="image-modal" onclick="closeModal()">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/images.js' %}"></script>
+{% endblock %}

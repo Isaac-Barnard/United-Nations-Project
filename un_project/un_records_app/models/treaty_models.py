@@ -1,13 +1,25 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.urls import reverse
+from django.utils.text import slugify
 
 class Treaty(models.Model):
     title = models.CharField(max_length=255, unique=True)
+    slug = models.SlugField(max_length=255,  unique=True, editable=False)
     date = models.DateField()
     nations_involved = models.ManyToManyField('un_app.Nation', related_name='treaty')
     body = models.TextField()
     void = models.BooleanField(default=False, blank=True)
     invalidation_date = models.DateField(null=True, default=None, blank=True, help_text="Date the treaty was considered void")
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('treaty_detail', kwargs={'slug': self.slug})
+
     
     def clean(self):
         # Ensure that invalidation_date is only set when void or repealed is True

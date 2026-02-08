@@ -14,8 +14,23 @@
     <h1>United Nations Treaties</h1>
     <hr>
     {% for treaty in treaties %}
-    <div>
-        <h2>{{ treaty.title }}</h2>
+    <div class="resolution">
+        <h2 class="resolution-title">
+            <a href="{{ treaty.get_absolute_url }}">
+                {{ treaty.title }}
+            </a>
+
+            <button
+                class="copy-link-btn"
+                type="button"
+                title="Copy link"
+                onclick="copyResolutionLink(
+                    '{{ request.build_absolute_uri|add:treaty.get_absolute_url }}',
+                    this
+                )">
+                🔗
+            </button>
+        </h2>
         <p>
             ({{ treaty.date|date:"n/j/Y" }}) &nbsp;&nbsp;Nations Involved: {{ treaty.nations_involved.all|join:", " }}
             {% if treaty.void %}<strong>(Void, {{ treaty.invalidation_date|date:"n/j/Y" }})</strong>{% endif %}
@@ -71,4 +86,5 @@
 
 {% block extra_js %}
 <script src="{% static 'js/images.js' %}"></script>
+<script src="{% static 'js/copy_link.js' %}"></script>
 {% endblock %}

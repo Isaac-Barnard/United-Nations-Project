@@ -42,6 +42,7 @@ class TreatyImageInline(admin.TabularInline):
 
 @admin.register(models.Treaty)
 class TreatyAdmin(admin.ModelAdmin):
+    readonly_fields = ('slug',)
     inlines = [TreatyImageInline]
     
     def image_count(self, obj):
