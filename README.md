@@ -150,10 +150,13 @@ Running the server locally:
         - [x] Void/repealed resolutions
         - [x] Images
         - [x] Amendments
+        - [x] Ability to link to individual resolution
     - [x] Treaties
         - [x] Images
+        - [x] Ability to link to individual treaty
     - [x] Court Cases
         - [x] Images/videos
+        - [x] Ability to link to individual court case
     - [x] Executive Orders
     - [ ] Misc.
         - [x] Recognized Alliances
