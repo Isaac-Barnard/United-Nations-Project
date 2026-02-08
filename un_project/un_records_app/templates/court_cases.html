@@ -15,7 +15,19 @@
     <hr>
     {% for case in court_cases %}
     <div class="resolution">
-        <h2>Case {{ case.case_number }}: {{ case.title }}</h2>
+        <h2 class="resolution-title">
+            <a href="{{ case.get_absolute_url }}" class="plain-link">
+                Case {{ case.case_number }}: {{ case.title }}
+            </a>
+
+            <button
+                class="copy-link-btn"
+                type="button"
+                title="Copy link"
+                onclick="copyResolutionLink('{{ request.scheme }}://{{ request.get_host }}{{ case.get_absolute_url }}', this)">
+                🔗
+            </button>
+        </h2>
         <p>
             ({{ case.date|date:"n/j/Y" }})
             
@@ -127,4 +139,5 @@
 
 {% block extra_js %}
 <script src="{% static 'js/images.js' %}"></script>
+<script src="{% static 'js/copy_link.js' %}"></script>
 {% endblock %}

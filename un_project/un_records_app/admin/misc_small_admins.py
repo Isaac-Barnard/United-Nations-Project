@@ -8,7 +8,10 @@ admin.site.register(models.CharterAmendment)
 admin.site.register(models.DeclarationOfWar)
 admin.site.register(models.NationalConstitution)
 admin.site.register(models.NationalConstitutionAmendment)
-admin.site.register(models.CourtCase)
+
+@admin.register(models.CourtCase)
+class CourtCaseAdmin(admin.ModelAdmin):
+    readonly_fields = ('slug',)
 
 # --------------------------------------------------------------------
 

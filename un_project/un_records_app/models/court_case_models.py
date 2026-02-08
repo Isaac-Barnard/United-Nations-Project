@@ -1,11 +1,13 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from un_app.models import Nation, Player, Company
-
+from django.urls import reverse
+from django.utils.text import slugify
 
 class CourtCase(models.Model):
     case_number = models.CharField(max_length=10, unique=True)
     title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True, editable=False)
     date = models.DateField()
     votes_for_plaintiff = models.PositiveIntegerField(blank=True, null=True)
     votes_for_defendant = models.PositiveIntegerField(blank=True, null=True)
@@ -18,6 +20,15 @@ class CourtCase(models.Model):
     plaintiff_company = models.ManyToManyField(Company, blank=True, related_name='plaintiff_company')
     defendant_company = models.ManyToManyField(Company, blank=True, related_name='defendant_company')
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base = slugify(f"case-{self.case_number}-{self.title}")
+            self.slug = base
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('court_case_detail', kwargs={'slug': self.slug})
+    
     def __str__(self):
         return f"Case {self.case_number}: {self.title} ({self.date})"
     

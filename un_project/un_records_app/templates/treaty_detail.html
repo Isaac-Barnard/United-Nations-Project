@@ -13,17 +13,6 @@
 <div class="page-container">
     <h1 class="resolution-title">
         {{ treaty.title }}
-
-        <button
-            class="copy-link-btn"
-            type="button"
-            title="Copy link"
-            onclick="copyResolutionLink(
-                '{{ request.build_absolute_uri|add:treaty.get_absolute_url }}',
-                this
-            )">
-            🔗
-        </button>
     </h1>
 
     <p>

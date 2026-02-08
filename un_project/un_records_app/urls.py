@@ -7,6 +7,7 @@ urlpatterns = [
     path('resolutions', resolutions, name='resolutions'),
     path('resolutions/<slug:slug>/', resolution_detail, name='resolution_detail'),
     path('court-cases', court_cases, name='court_cases'),
+    path('court-cases/<slug:slug>/', court_case_detail, name='court_case_detail'),
     path('treaties', treaties, name='treaties'),
     path('treaties/<slug:slug>/', treaty_detail, name='treaty_detail'),
     path('executive_orders', executive_orders, name='executive_orders'),

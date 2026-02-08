@@ -1,0 +1,77 @@
+{% extends 'records_base.html' %}
+{% load static %}
+{% load markdown_extras %}
+{% load custom_filters %}
+
+{% block title %}Case {{ case.case_number }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/records_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1 class="resolution-title">
+        Case {{ case.case_number }}: {{ case.title }}
+    </h1>
+
+    <p>
+        ({{ case.date|date:"n/j/Y" }})
+        {% if case.plaintiff_nation.exists %} &nbsp;&nbsp;<u>Plaintiff Nations:</u> {{ case.plaintiff_nation.all|join:", " }}{% endif %}
+        {% if case.defendant_nation.exists %} &nbsp;| &nbsp;<u>Defendant Nations:</u> {{ case.defendant_nation.all|join:", " }}{% endif %}
+    </p>
+
+    <hr>
+
+    <div class="resolution-content">
+        {% for argument in case.arguments %}
+            {% if argument.is_ruling_time %}
+                <div class="resolution-text">
+                    <h3>Ruling</h3>
+                    {{ case.ruling_body|markdownify }}
+                </div>
+            {% endif %}
+
+            <h3>{{ argument.argument_type }}{% if argument.speaker %} ({{ argument.speaker }}){% endif %}</h3>
+            {{ argument.body|markdownify }}
+
+            {% if argument.images.exists %}
+                <div class="resolution-images">
+                    {% for image in argument.images.all %}
+                        <img src="{{ image.image.url }}"
+                             class="resolution-image"
+                             onclick="openModal('{{ image.image.url }}', '{{ case.title }}')">
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if argument.videos.exists %}
+                <div class="video-evidence-container">
+                    {% for video in argument.videos.all %}
+                        <iframe src="{{ video.get_embed_url }}" allowfullscreen></iframe>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <br>
+        {% endfor %}
+    </div>
+</div>
+
+<div id="imageModal" class="image-modal" onclick="closeModal()">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/images.js' %}"></script>
+<script>
+document.querySelectorAll('.copy-link').forEach(el => {
+    el.addEventListener('click', e => {
+        e.stopPropagation();
+        navigator.clipboard.writeText(el.dataset.url);
+    });
+});
+</script>
+{% endblock %}

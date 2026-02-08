@@ -24,10 +24,7 @@
                 class="copy-link-btn"
                 type="button"
                 title="Copy link"
-                onclick="copyResolutionLink(
-                    '{{ request.build_absolute_uri|add:treaty.get_absolute_url }}',
-                    this
-                )">
+                onclick="copyResolutionLink('{{ request.scheme }}://{{ request.get_host }}{{ treaty.get_absolute_url }}', this)">
                 🔗
             </button>
         </h2>
