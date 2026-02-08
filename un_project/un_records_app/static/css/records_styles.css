@@ -76,7 +76,27 @@ h6 {
     margin-top: 18pt; /* Adjust as needed */
 }
 
+.resolution h2 a {
+    color: inherit;
+    text-decoration: none;
+}
 
+.copy-link-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.9em;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.copy-link-btn:hover {
+    opacity: 1;
+}
+
+.copy-link-btn.copied {
+    color: green;
+}
 
 /* Image-related styles */
 .resolution-image {

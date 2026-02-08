@@ -19,6 +19,14 @@
             <a href="{{ resolution.get_absolute_url }}">
                 {{ resolution.title }}
             </a>
+
+            <button
+                class="copy-link-btn"
+                type="button"
+                title="Copy link"
+                onclick="copyResolutionLink('{{ request.scheme }}://{{ request.get_host }}{{ resolution.get_absolute_url }}', this)">
+                🔗
+            </button>
         </h2>
         <p>
             ({{ resolution.date|date:"n/j/Y" }}) [{{ resolution.votes_for }}-{{ resolution.votes_against }}] &nbsp;&nbsp;Proposed By: {{ resolution.proposed_by }}
@@ -97,4 +105,5 @@
 
 {% block extra_js %}
 <script src="{% static 'js/images.js' %}"></script>
+<script src="{% static 'js/copy_link.js' %}"></script>
 {% endblock %}
