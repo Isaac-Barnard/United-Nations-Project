@@ -1,0 +1,83 @@
+{% extends 'records_base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% load markdown_extras %}
+
+{% block title %}{{ resolution.title }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/records_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1>{{ resolution.title }}</h1>
+
+    <p>
+        ({{ resolution.date|date:"n/j/Y" }})
+        [{{ resolution.votes_for }}-{{ resolution.votes_against }}]
+        &nbsp;&nbsp;Proposed By: {{ resolution.proposed_by }}
+
+        {% if resolution.void %}
+            <strong>(Void, {{ resolution.invalidation_date|date:"n/j/Y" }})</strong>
+        {% endif %}
+        {% if resolution.repealed %}
+            <strong>(Repealed, {{ resolution.invalidation_date|date:"n/j/Y" }})</strong>
+        {% endif %}
+    </p>
+
+    <div class="resolution-content">
+        <div class="resolution-text">
+            {{ resolution.body|markdownify }}
+        </div>
+
+        {% if resolution.images.exists %}
+            <div class="resolution-images {% if resolution.images.count == 1 %}single-image{% else %}multiple-images{% endif %}">
+                {% for image in resolution.images.all %}
+                <div class="image-container">
+                    <img src="{{ image.image.url }}"
+                         alt="Image for {{ resolution.title }}"
+                         class="resolution-image"
+                         onclick="openModal('{{ image.image.url }}', '{{ resolution.title }}')">
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if resolution.amendments %}
+            <div class="amendments-section">
+                {% for amendment in resolution.amendments %}
+                <div class="amendment">
+                    <h3>AMENDMENT {{ amendment.number }}</h3>
+                    <p>
+                        ({{ amendment.date|date:"n/j/Y" }})
+                        [{{ amendment.votes_for }}-{{ amendment.votes_against }}]
+                        Proposed By: {{ amendment.proposed_by }}
+
+                        {% if amendment.void %}
+                            <strong>(Void, {{ amendment.invalidation_date|date:"n/j/Y" }})</strong>
+                        {% endif %}
+                        {% if amendment.repealed %}
+                            <strong>(Repealed, {{ amendment.invalidation_date|date:"n/j/Y" }})</strong>
+                        {% endif %}
+                    </p>
+
+                    <div class="amendment-body">
+                        {{ amendment.body|markdownify }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    <br>
+    <p>
+        <a href="{% url 'resolutions' %}">← Back to all resolutions</a>
+    </p>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/images.js' %}"></script>
+{% endblock %}

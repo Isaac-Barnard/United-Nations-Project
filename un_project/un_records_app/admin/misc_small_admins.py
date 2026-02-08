@@ -20,6 +20,7 @@ class ResolutionImageInline(admin.TabularInline):
 
 @admin.register(models.Resolution)
 class ResolutionAdmin(admin.ModelAdmin):
+    readonly_fields = ('slug',)
     inlines = [ResolutionImageInline]
     
     def image_count(self, obj):

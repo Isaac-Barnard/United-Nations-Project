@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.db.models import Prefetch
 from .models import Resolution, Treaty, ExecutiveOrder, ResolutionAmendment, Charter, CharterAmendment , Alliance, DeclarationOfWar, NationalConstitution, NationalConstitutionAmendment, CourtCase, CourtCaseArgument, CourtCaseArgumentImage, CourtCaseArgumentVideo, Petition, AternosGame
 from collections import defaultdict
@@ -19,6 +19,15 @@ def resolutions(request):
     # Prefetch images to avoid N+1 queries while maintaining date ordering
     resolutions = (Resolution.objects.prefetch_related('images', amendments_prefetch).all().order_by('-date'))
     return render(request, 'resolutions.html', {'resolutions': resolutions})
+
+def resolution_detail(request, slug):
+    amendments_prefetch = Prefetch('amended_resolution', queryset=ResolutionAmendment.objects.order_by('date'), to_attr='amendments')
+
+    resolution = get_object_or_404(Resolution.objects.prefetch_related('images', amendments_prefetch), slug=slug)
+
+    return render(request, 'resolution_detail.html', {'resolution': resolution})
+
+
 
 def court_cases(request):
     images_prefetch = Prefetch('images',queryset=CourtCaseArgumentImage.objects.all().order_by('order'))

@@ -15,7 +15,11 @@
     <hr>
     {% for resolution in resolutions %}
     <div class="resolution">
-        <h2>{{ resolution.title }}</h2>
+        <h2>
+            <a href="{{ resolution.get_absolute_url }}">
+                {{ resolution.title }}
+            </a>
+        </h2>
         <p>
             ({{ resolution.date|date:"n/j/Y" }}) [{{ resolution.votes_for }}-{{ resolution.votes_against }}] &nbsp;&nbsp;Proposed By: {{ resolution.proposed_by }}
             {% if resolution.void %}<strong>(Void, {{ resolution.invalidation_date|date:"n/j/Y" }})</strong>{% endif %}
