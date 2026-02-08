@@ -22,8 +22,8 @@ class CourtCase(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            base = slugify(f"case-{self.case_number}-{self.title}")
-            self.slug = base
+            # Use only the case number for slug
+            self.slug = f"case-{self.case_number}"
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
