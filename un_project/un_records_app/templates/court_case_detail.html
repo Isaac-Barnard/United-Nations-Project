@@ -1,6 +1,5 @@
 {% extends 'records_base.html' %}
 {% load static %}
-{% load markdown_extras %}
 {% load custom_filters %}
 
 {% block title %}Case {{ case.case_number }}{% endblock %}
@@ -17,61 +16,102 @@
 
     <p>
         ({{ case.date|date:"n/j/Y" }})
-        {% if case.plaintiff_nation.exists %} &nbsp;&nbsp;<u>Plaintiff Nations:</u> {{ case.plaintiff_nation.all|join:", " }}{% endif %}
-        {% if case.defendant_nation.exists %} &nbsp;| &nbsp;<u>Defendant Nations:</u> {{ case.defendant_nation.all|join:", " }}{% endif %}
+        
+        {% if case.plaintiff_nation.exists %} &nbsp;&nbsp;<u>Plaintiff Nations:</u> {{ case.plaintiff_nation.all|join:", " }} {% endif %}
+        {% if case.plaintiff_individual.exists %} &nbsp;&nbsp;<u>Plaintiff Individuals:</u> {{ case.plaintiff_individual.all|join:", " }} {% endif %}
+        {% if case.plaintiff_company.exists %} &nbsp;&nbsp;<u>Plaintiff Companies:</u> {{ case.plaintiff_company.all|join:", " }} {% endif %}
+        {% if case.defendant_nation.exists %} &nbsp;| &nbsp;<u>Defendant Nations:</u> {{ case.defendant_nation.all|join:", " }} {% endif %}
+        {% if case.defendant_individual.exists %} &nbsp;| &nbsp;<u>Defendant Individuals:</u> {{ case.defendant_individual.all|join:", " }} {% endif %}
+        {% if case.defendant_company.exists %} &nbsp;| &nbsp;<u>Defendant Companies:</u> {{ case.defendant_company.all|join:", " }} {% endif %}
     </p>
 
     <hr>
 
     <div class="resolution-content">
+        {% load markdown_extras %}
         {% for argument in case.arguments %}
             {% if argument.is_ruling_time %}
                 <div class="resolution-text">
-                    <h3>Ruling</h3>
+                    <h3>Ruling:</h3>
                     {{ case.ruling_body|markdownify }}
+                    <br>
                 </div>
             {% endif %}
 
-            <h3>{{ argument.argument_type }}{% if argument.speaker %} ({{ argument.speaker }}){% endif %}</h3>
-            {{ argument.body|markdownify }}
+            <div>
+                {% if argument.argument_type == "Dissenting Opinion" or argument.argument_type == "Concurring Opinion" %}
+                    <h4>{{ argument.argument_type }} ({{ argument.speaker }}):</h4>
+                {% else %}
+                    {% if argument.argument_type == "War Crime Tribunal" %}
+                    <h3>{{ argument.argument_type }}:</h3>
+                    {% else %}
+                        <h3>{{ argument.argument_type }} ({{ argument.speaker }}):</h3>
+                    {% endif %}
+                {% endif %}
+                <div>
+                    {{ argument.body|markdownify }}
+                </div>
+            </div>
 
             {% if argument.images.exists %}
-                <div class="resolution-images">
-                    {% for image in argument.images.all %}
-                        <img src="{{ image.image.url }}"
-                             class="resolution-image"
-                             onclick="openModal('{{ image.image.url }}', '{{ case.title }}')">
-                    {% endfor %}
-                </div>
+                {% if argument.images.count == 1 %}
+                    <!-- Single image layout -->
+                    <div class="resolution-images single-image">
+                        {% for image in argument.images.all %}
+                        <div class="image-container">
+                            <img src="{{ image.image.url }}" 
+                                alt="Image for {{ argument.title }}" 
+                                class="resolution-image"
+                                onclick="openModal('{{ image.image.url }}', '{{ argument.title }}')">
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Multiple images grid layout -->
+                    <div class="resolution-images multiple-images">
+                        {% for image in argument.images.all %}
+                        <div class="image-container">
+                            <img src="{{ image.image.url }}" 
+                                alt="Image for {{ argument.title }}" 
+                                class="resolution-image"
+                                onclick="openModal('{{ image.image.url }}', '{{ argument.title }}')">
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             {% endif %}
 
             {% if argument.videos.exists %}
                 <div class="video-evidence-container">
                     {% for video in argument.videos.all %}
-                        <iframe src="{{ video.get_embed_url }}" allowfullscreen></iframe>
+                        <div class="video-evidence">
+                            <div class="video-wrapper">
+                                <iframe src="{{ video.get_embed_url }}" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        </div>
                     {% endfor %}
                 </div>
             {% endif %}
-
-            <br>
+            
+           
+            {% if forloop.last %}
+                {% if argument.argument_type != "Dissenting Opinion" and argument.argument_type != "Concurring Opinion" %}
+                    <div class="resolution-text">
+                        <h3>Ruling:</h3>
+                        {{ case.ruling_body|markdownify }}
+                    </div>
+                {% endif %}
+            {% endif %}
         {% endfor %}
     </div>
 </div>
 
 <div id="imageModal" class="image-modal" onclick="closeModal()">
-    <span class="close-modal">&times;</span>
+    <span class="close-modal" onclick="closeModal()">&times;</span>
     <img class="modal-content" id="modalImage">
 </div>
 {% endblock %}
 
 {% block extra_js %}
 <script src="{% static 'js/images.js' %}"></script>
-<script>
-document.querySelectorAll('.copy-link').forEach(el => {
-    el.addEventListener('click', e => {
-        e.stopPropagation();
-        navigator.clipboard.writeText(el.dataset.url);
-    });
-});
-</script>
 {% endblock %}
