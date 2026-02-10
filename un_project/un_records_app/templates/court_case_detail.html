@@ -8,6 +8,32 @@
 <link rel="stylesheet" href="{% static 'css/records_styles.css' %}">
 {% endblock %}
 
+{% block meta_tags %}
+    <!-- Open Graph / Discord -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Case {{ case.case_number }}: {{ case.title|truncatechars:60 }}">
+    <meta property="og:description" content="{{ case.ruling_body|preview_text:200 }}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    
+    {% if case.arguments %}
+        {% for argument in case.arguments %}
+            {% if argument.images.exists %}
+                <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ argument.images.first.image.url }}">
+                <meta property="og:image:alt" content="Case {{ case.case_number }}: {{ case.title }}">
+                {% break %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    
+    <!-- Additional info -->
+    <meta property="article:published_time" content="{{ case.date|date:'c' }}">
+    <meta property="article:tag" content="Court Case">
+    <meta name="description" content="Case {{ case.case_number }}: {{ case.title }} - {{ case.ruling_body|preview_text:150 }}">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+{% endblock %}
+
 {% block content %}
 <div class="page-container">
     <h1 class="resolution-title">

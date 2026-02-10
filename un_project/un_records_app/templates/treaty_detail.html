@@ -9,6 +9,27 @@
 <link rel="stylesheet" href="{% static 'css/records_styles.css' %}">
 {% endblock %}
 
+{% block meta_tags %}
+    <!-- Open Graph / Discord -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{ treaty.title|truncatechars:70 }}">
+    <meta property="og:description" content="{{ treaty.body|preview_text:200 }}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    
+    {% if treaty.images.exists %}
+        <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ treaty.images.first.image.url }}">
+        <meta property="og:image:alt" content="{{ treaty.title }}">
+    {% endif %}
+    
+    <!-- Additional info -->
+    <meta property="article:published_time" content="{{ treaty.date|date:'c' }}">
+    <meta property="article:tag" content="Treaty">
+    <meta name="description" content="Treaty between {{ treaty.nations_involved.all|join:', ' }} - {{ treaty.body|preview_text:150 }}">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+{% endblock %}
+
 {% block content %}
 <div class="page-container">
     <h1 class="resolution-title">
