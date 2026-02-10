@@ -9,6 +9,11 @@
 <link rel="stylesheet" href="{% static 'css/records_styles.css' %}">
 {% endblock %}
 
+{% block meta %}
+<meta property="og:title" content="{{ resolution.title }}">
+<meta property="og:description" content="UN Resolution passed on {{ resolution.date|date:'F j, Y' }} ({{ resolution.votes_for }}–{{ resolution.votes_against }})">
+{% endblock %}
+
 {% block content %}
 <div class="page-container">
     <h1>United Nations Resolutions</h1>
