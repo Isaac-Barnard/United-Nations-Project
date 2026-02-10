@@ -103,7 +103,13 @@
                                 {% for video in argument.videos.all %}
                                     <div class="video-evidence">
                                         <div class="video-wrapper">
-                                            <iframe src="{{ video.get_embed_url }}" frameborder="0" allowfullscreen></iframe>
+                                            <iframe 
+                                                src="{{ video.get_embed_url }}" 
+                                                frameborder="0" 
+                                                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                referrerpolicy="strict-origin-when-cross-origin"
+                                                allowfullscreen>
+                                            </iframe>
                                         </div>
                                     </div>
                                 {% endfor %}

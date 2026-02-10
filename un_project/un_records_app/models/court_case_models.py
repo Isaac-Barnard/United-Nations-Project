@@ -90,5 +90,5 @@ class CourtCaseArgumentVideo(models.Model):
         import re
         match = re.search(r'(?:v=|\/)([0-9A-Za-z_-]{11}).*', self.youtube_url)
         if match:
-            return f"https://www.youtube.com/embed/{match.group(1)}"
+            return f"https://www.youtube-nocookie.com/embed/{match.group(1)}?rel=0&modestbranding=1"
         return None
