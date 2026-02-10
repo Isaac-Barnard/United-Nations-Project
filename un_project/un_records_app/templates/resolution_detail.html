@@ -10,10 +10,9 @@
 {% endblock %}
 
 {% block meta_tags %}
-    <!-- Open Graph / Discord -->
     <meta property="og:type" content="article">
-    <meta property="og:title" content="{{ resolution.title }}">
-    <meta property="og:description" content="{{ resolution.body|striptags|truncatewords:30 }}">
+    <meta property="og:title" content="{{ resolution.title|truncatechars:70 }}">
+    <meta property="og:description" content="{{ resolution.body|preview_text:200 }}">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
     
     {% if resolution.images.exists %}
@@ -21,12 +20,8 @@
         <meta property="og:image:alt" content="{{ resolution.title }}">
     {% endif %}
     
-    <!-- Additional info -->
     <meta property="article:published_time" content="{{ resolution.date|date:'c' }}">
     <meta property="article:author" content="{{ resolution.proposed_by }}">
-    
-    <!-- Twitter Card (optional, but recommended) -->
-    <meta name="twitter:card" content="summary_large_image">
 {% endblock %}
 
 {% block content %}
