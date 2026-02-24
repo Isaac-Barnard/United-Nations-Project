@@ -38,13 +38,13 @@
                             </div>
                         </div>
                     </li>
-                    <li><a href="{% url 'un_staff' %}">UN Staff</a></li>
-                    <li><a href="{% url 'charter' %}">UN Charter</a></li>
+                    <li><a href="{% url 'interactive_map' %}">Interactive Map</a></li>
+                    {% comment %} <li><a href="{% url 'charter' %}">UN Charter</a></li>
                     <li><a href="{% url 'resolutions' %}">Resolutions</a></li>
                     <li><a href="{% url 'treaties' %}">Treaties</a></li>
                     <li><a href="{% url 'executive_orders' %}">Executive Orders</a></li>
-                    <li><a href="{% url 'court_cases' %}">Court Cases</a></li>
-                    <li class="dropdown" id="evaluations-dropdown">
+                    <li><a href="{% url 'court_cases' %}">Court Cases</a></li> {% endcomment %}
+                    {% comment %} <li class="dropdown" id="evaluations-dropdown">
                         <a>Misc. Records</a>
                         <div class="dropdown-content two-columns">
                             <div class="column">
@@ -56,7 +56,7 @@
                                 <a href="{% url 'national_constitution' %}">National Constitutions</a>
                             </div>
                         </div>
-                    </li>
+                    </li> {% endcomment %}
                 </ul>
             </nav>
         </header>

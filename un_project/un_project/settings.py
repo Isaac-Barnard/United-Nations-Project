@@ -69,13 +69,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',   # Django REST Framework for API functionality
-    'un_app',           # Your main app containing the financial models and stuff
-    'un_records_app',   # used for records stuff like resolutions
-    'un_api',           # New app for API views
-    'website',          # Main website app
+    'rest_framework',     # Django REST Framework for API functionality
+    'un_app',             # Your main app containing the financial models and stuff
+    'un_records_app',     # Used for records stuff like resolutions
+    'cartography_app', # Used for maps
+    'un_api',             # New app for API views
+    'website',            # Main website app
     'players_api',
-    'corsheaders',      # CORS headers for api and login usage
+    'corsheaders',        # CORS headers for api and login usage
 ]
 
 MIDDLEWARE = [
