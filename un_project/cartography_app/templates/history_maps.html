@@ -1,0 +1,24 @@
+{% extends 'cartography_base.html' %}
+
+{% block title %}Historical Maps{% endblock %}
+
+{% load static %}
+{% load custom_filters %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/records_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1>Official United Nations Maps</h1>
+    <hr>
+
+    <h1>Work in Progress</h1>
+    
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/images.js' %}"></script>
+{% endblock %}

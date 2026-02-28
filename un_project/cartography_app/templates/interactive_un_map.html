@@ -1,0 +1,64 @@
+{% extends 'cartography_base.html' %}
+
+{% block title %}
+    Interactive Map
+{% endblock %}
+
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        #coordinates {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border-radius: 4px;
+            z-index: 1000;
+            font-family: monospace;
+            font-size: 14px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+
+        .home-button {
+            padding: 4px;  /* Reduced padding */
+            background-color: white;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 4px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+            cursor: pointer;
+            width: 26px;  /* Smaller width */
+            height: 26px;  /* Smaller height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;  /* Larger font size */
+            line-height: 1;  /* Tighter line height */
+        }
+
+        .home-button:hover {
+            background-color: #f4f4f4;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h1>Interactive Map</h1>
+    <div id="map">
+        <div id="coordinates">X: 0 | Z: 0</div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="{% static 'js/map.js' %}"></script>
+{% endblock %}

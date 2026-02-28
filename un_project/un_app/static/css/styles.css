@@ -246,7 +246,7 @@ button[type="logout"]:hover {
 }
 
 .dropdown-content a:hover {
-    background-color: #535353;
+    background-color: #454545;
 }
 
 .dropdown:hover .dropdown-content {
@@ -254,7 +254,7 @@ button[type="logout"]:hover {
 }
 
 .dropdown:hover .dropbtn {
-    background-color: #575757;
+    background-color: #454545;
 }
 
 .column + .column {
@@ -336,11 +336,15 @@ button[type="logout"]:hover {
 }
 
 .pinstripe-financial {
-    background-color: #FF6F00;
+    background-color: #1f5f3a;
 }
 
 .pinstripe-records {
     background-color: #5b92e5;
+}
+
+.pinstripe-cartography {
+    background-color: #f30c0c;
 }
 
 

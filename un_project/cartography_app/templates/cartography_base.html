@@ -38,7 +38,8 @@
                             </div>
                         </div>
                     </li>
-                    <li><a href="{% url 'interactive_map' %}">Interactive Map</a></li>
+                    <li><a href="{% url 'interactive_un_map' %}">Interactive Map</a></li>
+                    <li><a href="{% url 'history_maps' %}">Historical Maps</a></li>
                     {% comment %} <li><a href="{% url 'charter' %}">UN Charter</a></li>
                     <li><a href="{% url 'resolutions' %}">Resolutions</a></li>
                     <li><a href="{% url 'treaties' %}">Treaties</a></li>
@@ -60,7 +61,7 @@
                 </ul>
             </nav>
         </header>
-        <div class="pinstripe pinstripe-top pinstripe-records"></div>
+        <div class="pinstripe pinstripe-top pinstripe-cartography"></div>
 
         <main>
             {% block content %}
@@ -68,7 +69,7 @@
             {% endblock %}
         </main>
 
-        <div class="pinstripe pinstripe-bottom pinstripe-records"></div>
+        <div class="pinstripe pinstripe-bottom pinstripe-cartography"></div>
         <footer>
             <p>&copy; United Nation Bureau of Records, 2025</p>
         </footer>
