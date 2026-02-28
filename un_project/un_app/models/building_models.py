@@ -10,7 +10,24 @@ from decimal import Decimal
 #from .player_models import Player
 #from .denomination_models import Denomination
 
+class BuildingQuerySet(models.QuerySet):
+    def existing(self):
+        return self.filter(destroyed=False)
+
+    def destroyed(self):
+        return self.filter(destroyed=True)
+    
+class ExistingBuildingManager(models.Manager):
+    def get_queryset(self):
+        return BuildingQuerySet(self.model, using=self._db).filter(destroyed=False)
+
 class Building(models.Model):
+    MOPQ_CHOICES = [
+        ('Eligible', 'Eligible'),
+        ('Nominated', 'Nominated'),
+        ('Won', 'Won')
+    ]
+    
     SIZE_CHOICES = [
         ('Tiny', 'Tiny (-5×5)'),
         ('Very Small', 'Very Small (6×6 to 8×8)'),
@@ -34,48 +51,33 @@ class Building(models.Model):
         ('Elite', 'Elite (Quartz, Obsidian, Purpur, Prismarine...)'),
     ]
     
-    name = models.CharField(max_length=100, unique=True,
-                            help_text="Building name")
-    territory = models.ForeignKey('Territory', on_delete=models.CASCADE, related_name='buildings', null=True,
-                                  help_text="The name of the territory district that this building resides. This does not necessarily indicate owner")
-    owner = models.ForeignKey('Nation', on_delete=models.CASCADE, related_name='owned_buildings',
-                              help_text="The nation that owns the building as its sovereign territory")
-    main_builders = models.ManyToManyField('Player', related_name='main_builds',
-                                           help_text="The builder/builders who constructed the majority of the building")
-    y_level_high_pt = models.FloatField(null=True,
-                                        help_text="The highest point of the building")
-    y_level_ground = models.FloatField(null=True,
-                                       help_text="The ground level of the building. Measured to the ground level, not lowest point of the building ie. basements or mines")
-    year_started = models.IntegerField(null=True,
-                                         help_text="The year where construction began on the building")
-    completed = models.BooleanField(default=True,
-                                    help_text="Whether or not the building is completed. False means the building is incomplete")
-    x_coordinate = models.CharField(max_length=50,
-                                    help_text="The x-coordinate of roughly center of the build")
-    z_coordinate = models.CharField(max_length=50,
-                                    help_text="The z-coordinate of roughly center of the build")
-    historic_site = models.BooleanField(default=False,
-                                        help_text="Damage to structures in the Register of Historic and Cultural Structures (RHCS) is considered war crime") 
-    architectural_genius = models.BooleanField(default=False,
-                                               help_text="Damage to structures in the Register of Architectural and Engineering Wonders of the World (RAEWW) will result in court suits or settlements for damages will be doubled") 
-    mopq_award = models.CharField(max_length=50, null=True, blank=True,
-                                  choices=[
-                                      ('Eligible', 'Eligible'),
-                                      ('Nominated', 'Nominated'),
-                                      ('Won', 'Won')
-                                  ],
-                                  help_text="Medal of Papa Quinn (MoPQ) award for architecture or another MoPQ award related to a building.")
-    architectural_style = models.CharField(max_length=100, null=True, blank=True,
-                                           help_text="The architectural style of the building if it falls into one")
-    size = models.CharField(max_length=20, choices=SIZE_CHOICES, null=True, blank=True,
-                           help_text="The size category of the building")
-    materials = models.CharField(max_length=20, choices=MATERIAL_CHOICES, null=True, blank=True,
-                                help_text="The primary building materials used in construction")
-    furnished = models.BooleanField(null=True, blank=True,
-                                   help_text="Whether the building is furnished inside")
+    name = models.CharField(max_length=100, unique=True, help_text="Building name")
+    territory = models.ForeignKey('Territory', on_delete=models.CASCADE, related_name='buildings', null=True, help_text="The name of the territory district that this building resides. This does not necessarily indicate owner")
+    owner = models.ForeignKey('Nation', on_delete=models.CASCADE, related_name='owned_buildings', help_text="The nation that owns the building as its sovereign territory")
+    main_builders = models.ManyToManyField('Player', related_name='main_builds', help_text="The builder/builders who constructed the majority of the building")
+    y_level_high_pt = models.FloatField(null=True, help_text="The highest point of the building")
+    y_level_ground = models.FloatField(null=True, help_text="The ground level of the building. Measured to the ground level, not lowest point of the building ie. basements or mines")
+    year_started = models.IntegerField(null=True, help_text="The year where construction began on the building")
+    completed = models.BooleanField(default=True, help_text="Whether or not the building is completed. False means the building is incomplete")
+    x_coordinate = models.CharField(max_length=50, help_text="The x-coordinate of roughly center of the build")
+    z_coordinate = models.CharField(max_length=50, help_text="The z-coordinate of roughly center of the build")
+    historic_site = models.BooleanField(default=False, help_text="Damage to structures in the Register of Historic and Cultural Structures (RHCS) is considered war crime") 
+    architectural_genius = models.BooleanField(default=False, help_text="Damage to structures in the Register of Architectural and Engineering Wonders of the World (RAEWW) will result in court suits or settlements for damages will be doubled") 
+    mopq_award = models.CharField(max_length=50, null=True, blank=True, choices=MOPQ_CHOICES, help_text="Medal of Papa Quinn (MoPQ) award for architecture or another MoPQ award related to a building.")
+    architectural_style = models.CharField(max_length=100, null=True, blank=True, help_text="The architectural style of the building if it falls into one")
+    size = models.CharField(max_length=20, choices=SIZE_CHOICES, null=True, blank=True, help_text="The size category of the building")
+    materials = models.CharField(max_length=20, choices=MATERIAL_CHOICES, null=True, blank=True, help_text="The primary building materials used in construction")
+    furnished = models.BooleanField(null=True, blank=True, help_text="Whether the building is furnished inside")
+    destroyed = models.BooleanField(default=False, help_text="Whether the building has been destroyed")
+    year_destroyed = models.IntegerField(null=True, blank=True, help_text="The year the building was destroyed")
+    
     # Precalculated fields
     ownership_minus_partial = models.IntegerField(default=0)
     price_minus_partial = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
+    
+    # Filtering out destroyed buildings
+    objects = ExistingBuildingManager()  # Default manager (only existing)
+    all_objects = BuildingQuerySet.as_manager()  # Includes destroyed
 
     def save(self, *args, **kwargs):
         current_year = timezone.now().year
@@ -84,6 +86,10 @@ class Building(models.Model):
         elif self.mopq_award not in ["Nominated", "Won"]:
             self.mopq_award = ""
         super().save(*args, **kwargs)
+        
+    def clean(self):
+        if not self.destroyed and self.year_destroyed:
+            raise ValidationError("Non-destroyed buildings cannot have a year_destroyed.")
 
     def __str__(self):
         return self.name
