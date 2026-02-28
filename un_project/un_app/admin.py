@@ -1,5 +1,6 @@
 from django.contrib import admin
 from . import models
+from django.utils.html import format_html
 
 #admin.site.register(models.Nation)
 admin.site.register(models.NationHistory)
@@ -36,15 +37,21 @@ class ItemAdmin(admin.ModelAdmin):
     ordering = ('ordering',)
     
 #-------------------------------------------------------------------------------
+from django.contrib import admin
+from django.utils.html import format_html
+from . import models
+
+
 @admin.register(models.Building)
 class BuildingAdmin(admin.ModelAdmin):
     # Columns shown in the list view
     list_display = (
-        'name',
+        'name_display',
         'owner',
         'territory',
         'height',
         'year_started',
+        'year_destroyed',
         'coordinates',
         'completed',
     )
@@ -52,22 +59,45 @@ class BuildingAdmin(admin.ModelAdmin):
     search_fields = (
         'name',
         'architectural_style',
-        'owner__name', 
+        'owner__name',
         'territory__name',
         'main_builders__username',
     )
-    
+
     list_filter = (
         'owner',
         'completed',
         'historic_site',
         'architectural_genius',
         'mopq_award',
+        'year_destroyed',  # allows filtering destroyed vs existing
     )
 
     ordering = ('name',)
-    # This makes the many-to-many field more manageable in admin
+
     filter_horizontal = ('main_builders',)
+
+    # -----------------------------------------
+    # Custom Name Display (Strikethrough if destroyed)
+    # -----------------------------------------
+    @admin.display(description="Name", ordering="name")
+    def name_display(self, obj):
+        if obj.year_destroyed:
+            return format_html(
+                "<span style='text-decoration: line-through; color: #999;'>{}</span>",
+                obj.name
+            )
+        return obj.name
+
+    # -----------------------------------------
+    # Optional: Show destroyed buildings in admin
+    # even if you made a default manager filtering them out
+    # -----------------------------------------
+    def get_queryset(self, request):
+        # Use all_objects if you implemented soft-delete manager
+        if hasattr(models.Building, "all_objects"):
+            return models.Building.all_objects.all()
+        return super().get_queryset(request)
     
 #-------------------------------------------------------------------------------
 @admin.register(models.Territory)
