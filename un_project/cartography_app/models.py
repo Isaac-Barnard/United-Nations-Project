@@ -1,15 +1,19 @@
 from django.db import models
 
 class CartographyMap(models.Model):
+    MAP_TYPES = [
+        ('Official', 'Official UN Map'),
+        ('Territory', 'UN Territory Map'),
+        ('Infastructure', 'Infastructure Map'),
+        ('Evaluation', 'Evaluation Map')
+    ]
+
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
-
-    # Primary chronological sorting
     map_date = models.DateField(db_index=True)
+    type = models.CharField(max_length=100, choices=MAP_TYPES)
+    description = models.TextField(blank=True)
 
-    type = models.TextField(blank=True)
-
-    # Map Variants
     map_a = models.ImageField(upload_to="cartography/maps/")
     map_b = models.ImageField(upload_to="cartography/maps/", blank=True, null=True)
     map_c = models.ImageField(upload_to="cartography/maps/", blank=True, null=True)

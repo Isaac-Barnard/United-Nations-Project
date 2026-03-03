@@ -16,11 +16,10 @@
 
     {% for map in maps %}
         <div class="map-release">
-            <h2>{{ map.title }}</h2>
-            <p><strong>Date:</strong> {{ map.map_date }}</p>
+            <h2>Official UN Map {{ map.map_date|date:"F j, Y" }}</h2>
 
             {% if map.description %}
-                <p>{{ map.description }}</p>
+                <p><em>{{ map.description }}</em></p>
             {% endif %}
 
             <div class="map-image-container">
@@ -48,7 +47,7 @@
                 {% endif %}
 
                 {% if map.map_e %}
-                    <button onclick="switchMap({{ map.id }}, '{{ map.map_e.url }}')">Changes Gif</button>
+                    <button onclick="switchMap({{ map.id }}, '{{ map.map_e.url }}')">Gif</button>
                 {% endif %}
             </div>
 
