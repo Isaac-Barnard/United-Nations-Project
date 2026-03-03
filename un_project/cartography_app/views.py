@@ -8,5 +8,8 @@ def cartography_home(request):
 def interactive_un_map(request):
     return render(request, 'interactive_un_map.html')
 
-def history_maps(request):
-    return render(request, 'history_maps.html')
+
+def historical_maps(request):
+    maps = CartographyMap.objects.all()  # ordered by Meta
+    context = {"maps": maps,}
+    return render(request, "historical_maps.html", context)

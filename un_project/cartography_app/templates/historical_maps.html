@@ -1,0 +1,72 @@
+{% extends 'cartography_base.html' %}
+
+{% block title %}Historical Maps{% endblock %}
+
+{% load static %}
+{% load custom_filters %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/records_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1>Official United Nations Maps</h1>
+    <hr>
+
+    {% for map in maps %}
+        <div class="map-release">
+            <h2>{{ map.title }}</h2>
+            <p><strong>Date:</strong> {{ map.map_date }}</p>
+
+            {% if map.description %}
+                <p>{{ map.description }}</p>
+            {% endif %}
+
+            <div class="map-image-container">
+                <!-- Default Map A -->
+                <img 
+                    id="map-image-{{ map.id }}" 
+                    src="{{ map.map_a.url }}" 
+                    alt="{{ map.title }}"
+                >
+            </div>
+
+            <div class="variant-buttons">
+                <button onclick="switchMap({{ map.id }}, '{{ map.map_a.url }}')">Standard</button>
+
+                {% if map.map_b %}
+                    <button onclick="switchMap({{ map.id }}, '{{ map.map_b.url }}')">Black Background</button>
+                {% endif %}
+
+                {% if map.map_c %}
+                    <button onclick="switchMap({{ map.id }}, '{{ map.map_c.url }}')">Filled-In</button>
+                {% endif %}
+
+                {% if map.map_d %}
+                    <button onclick="switchMap({{ map.id }}, '{{ map.map_d.url }}')">Black Background, Filled-In</button>
+                {% endif %}
+
+                {% if map.map_e %}
+                    <button onclick="switchMap({{ map.id }}, '{{ map.map_e.url }}')">Changes Gif</button>
+                {% endif %}
+            </div>
+
+            <hr>
+        </div>
+    {% empty %}
+        <p>No maps have been archived yet.</p>
+    {% endfor %}
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function switchMap(mapId, newUrl) {
+    const img = document.getElementById(`map-image-${mapId}`);
+    img.src = newUrl;
+}
+</script>
+<script src="{% static 'js/images.js' %}"></script>
+{% endblock %}
