@@ -16,9 +16,7 @@
     {% for resolution in resolutions %}
     <div class="resolution">
         <h2>
-            <a href="{{ resolution.get_absolute_url }}">
-                {{ resolution.title }}
-            </a>
+            <a href="{{ resolution.get_absolute_url }}">{{ resolution.title }}</a>
 
             <button
                 class="copy-link-btn"

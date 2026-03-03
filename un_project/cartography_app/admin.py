@@ -4,6 +4,6 @@ from .models import *
 # Register your models here.
 @admin.register(CartographyMap)
 class CartographyMapAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("title",)}
-    list_display = ("title", "map_date")
+    list_display = ("type", "map_date", "slug")
+    readonly_fields = ("slug",)
     ordering = ("-map_date",)
