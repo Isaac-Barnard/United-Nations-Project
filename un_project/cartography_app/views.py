@@ -10,6 +10,6 @@ def interactive_un_map(request):
 
 
 def historical_maps(request):
-    maps = CartographyMap.objects.order_by("-map_date")
-    context = {"maps": maps,}
+    maps = (CartographyMap.objects.filter(type='Official').order_by("-map_date"))
+    context = {"maps": maps}
     return render(request, "historical_maps.html", context)

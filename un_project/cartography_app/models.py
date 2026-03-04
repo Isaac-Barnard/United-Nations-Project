@@ -5,6 +5,7 @@ from django.utils.text import slugify
 class CartographyMap(models.Model):
     MAP_TYPES = [
         ('Official', 'Official UN Map'),
+        ('FarColony', 'Official UN Far Colonies Map'),
         ('Territory', 'UN Territory Map'),
         ('Infrastructure', 'Infrastructure Map'),
         ('Evaluation', 'Evaluation Map')
@@ -15,7 +16,8 @@ class CartographyMap(models.Model):
 
     map_date = models.DateField(db_index=True)
     type = models.CharField(max_length=100, choices=MAP_TYPES)
-    description = models.TextField(blank=True)
+    description = models.TextField(max_length=200, blank=True)
+    changes = models.TextField(blank=True)
 
     map_a = models.ImageField(upload_to="cartography/maps/")
     map_b = models.ImageField(upload_to="cartography/maps/", blank=True, null=True)
