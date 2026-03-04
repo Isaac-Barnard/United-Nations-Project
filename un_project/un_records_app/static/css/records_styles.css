@@ -234,13 +234,13 @@ h6 {
 
 .filter-button.active {
     box-shadow: 0 0 0 2px white, 0 0 0 4px var(--button_hover-color);
-    background-color: var(--button_hover-color);
+    /* background-color: var(--button_hover-color); */
 }
 
 .petition-type-filters {
     margin-bottom: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     flex-wrap: wrap;
     gap: 10px;
 }

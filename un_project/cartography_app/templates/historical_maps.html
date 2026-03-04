@@ -7,25 +7,23 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/records_styles.css' %}">
+<link rel="stylesheet" href="{% static 'css/cartography_styles.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="page-container">
     <h1>Official United Nations Maps</h1>
     <hr>
-    <div class="map-filter-buttons">
-        <a href="?type=Official">
-            <button {% if current_type == "Official" %}class="active"{% endif %}>
-                Official Maps
-            </button>
+    <div class="header-filter-buttonsss">
+        <a href="?type=Official" class="header-filter-button {% if current_type == 'Official' %}active{% endif %}">
+            Official
         </a>
 
-        <a href="?type=FarColony">
-            <button {% if current_type == "FarColony" %}class="active"{% endif %}>
-                Far Colony Maps
-            </button>
+        <a href="?type=FarColony" class="header-filter-button {% if current_type == 'FarColony' %}active{% endif %}">
+            Far Colony
         </a>
     </div>
+
     <hr>
     {% for map in maps %}
         <div class="map-release">
@@ -44,23 +42,38 @@
                 >
             </div>
 
-            <div class="variant-buttons">
-                <button onclick="switchMap({{ map.id }}, '{{ map.map_a.url }}')">Standard</button>
+            <div class="variant-buttons" id="variant-group-{{ map.id }}">
+                <button class="map-filter-button active"
+                        onclick="switchMap({{ map.id }}, '{{ map.map_a.url }}', this)">
+                    Standard
+                </button>
 
                 {% if map.map_b %}
-                    <button onclick="switchMap({{ map.id }}, '{{ map.map_b.url }}')">Black Background</button>
+                    <button class="map-filter-button"
+                            onclick="switchMap({{ map.id }}, '{{ map.map_b.url }}', this)">
+                        Black Background
+                    </button>
                 {% endif %}
 
                 {% if map.map_c %}
-                    <button onclick="switchMap({{ map.id }}, '{{ map.map_c.url }}')">Filled-In</button>
+                    <button class="map-filter-button"
+                            onclick="switchMap({{ map.id }}, '{{ map.map_c.url }}', this)">
+                        Filled-In
+                    </button>
                 {% endif %}
 
                 {% if map.map_d %}
-                    <button onclick="switchMap({{ map.id }}, '{{ map.map_d.url }}')">Black Background, Filled-In</button>
+                    <button class="map-filter-button"
+                            onclick="switchMap({{ map.id }}, '{{ map.map_d.url }}', this)">
+                        Black Background, Filled-In
+                    </button>
                 {% endif %}
 
                 {% if map.map_e %}
-                    <button onclick="switchMap({{ map.id }}, '{{ map.map_e.url }}')">Gif</button>
+                    <button class="map-filter-button"
+                            onclick="switchMap({{ map.id }}, '{{ map.map_e.url }}', this)">
+                        Gif
+                    </button>
                 {% endif %}
             </div>
             <br>
@@ -80,9 +93,20 @@
 
 {% block extra_js %}
 <script>
-function switchMap(mapId, newUrl) {
+function switchMap(mapId, newUrl, buttonElement) {
+    // Switch image
     const img = document.getElementById(`map-image-${mapId}`);
     img.src = newUrl;
+
+    // Find the parent .variant-buttons container
+    const group = buttonElement.closest(".variant-buttons");
+
+    // Remove active from all buttons in this group
+    const buttons = group.querySelectorAll(".map-filter-button");
+    buttons.forEach(btn => btn.classList.remove("active"));
+
+    // Add active to clicked button
+    buttonElement.classList.add("active");
 }
 </script>
 <script src="{% static 'js/images.js' %}"></script>

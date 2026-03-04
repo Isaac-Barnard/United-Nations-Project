@@ -1,0 +1,63 @@
+.header-filter-button {
+    margin-top: 16px;
+    padding: 8px 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: var(--button_primary-color);
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    white-space: normal;        /* allow line breaks */
+    word-break: break-word;     /* break long words if needed */
+    max-width: 300px;           /* control width to trigger wrapping */
+}
+
+.header-filter-button:hover {
+    background-color: var(--button_hover-color);
+}
+
+.header-filter-button.active {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px var(--button_hover-color);
+    /* background-color: var(--button_hover-color); */
+}
+
+.header-filter-buttonsss {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+
+
+.map-filter-button {
+    margin-top: 2px;
+    padding: 8px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: var(--button_primary-color);
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    white-space: normal;        /* allow line breaks */
+    word-break: break-word;     /* break long words if needed */
+    max-width: 300px;           /* control width to trigger wrapping */
+}
+
+.map-filter-button:hover {
+    background-color: var(--button_hover-color);
+}
+
+.map-filter-button.active {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px var(--button_hover-color);
+    /* background-color: var(--button_hover-color); */
+}
