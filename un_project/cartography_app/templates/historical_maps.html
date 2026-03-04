@@ -13,6 +13,20 @@
 <div class="page-container">
     <h1>Official United Nations Maps</h1>
     <hr>
+    <div class="map-filter-buttons">
+        <a href="?type=Official">
+            <button {% if current_type == "Official" %}class="active"{% endif %}>
+                Official Maps
+            </button>
+        </a>
+
+        <a href="?type=FarColony">
+            <button {% if current_type == "FarColony" %}class="active"{% endif %}>
+                Far Colony Maps
+            </button>
+        </a>
+    </div>
+    <hr>
     {% for map in maps %}
         <div class="map-release">
             <h2>Official UN Map {{ map.map_date|date:"F j, Y" }}</h2>
@@ -49,7 +63,12 @@
                     <button onclick="switchMap({{ map.id }}, '{{ map.map_e.url }}')">Gif</button>
                 {% endif %}
             </div>
-
+            <br>
+            {% load markdown_extras %}
+            <div>
+                {{ map.changes|markdownify }}
+            </div>
+        </div>
             <hr>
         </div>
     {% empty %}

@@ -16,7 +16,7 @@ class CartographyMap(models.Model):
 
     map_date = models.DateField(db_index=True)
     type = models.CharField(max_length=100, choices=MAP_TYPES)
-    description = models.TextField(max_length=200, blank=True)
+    description = models.CharField(max_length=200, blank=True)
     changes = models.TextField(blank=True)
 
     map_a = models.ImageField(upload_to="cartography/maps/")
