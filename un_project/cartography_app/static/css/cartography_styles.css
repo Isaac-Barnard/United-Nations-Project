@@ -61,18 +61,3 @@
     box-shadow: 0 0 0 2px white, 0 0 0 4px var(--button_hover-color);
     /* background-color: var(--button_hover-color); */
 }
-
-
-.map-image-container {
-    margin: 0 auto;
-    padding: 0 50px;
-    max-width: 100%;
-    box-sizing: border-box;
-}
-
-.map-image-container img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    margin: 0 auto;
-}
