@@ -6,6 +6,7 @@ class CartographyMap(models.Model):
     MAP_TYPES = [
         ('Official', 'Official UN Map'),
         ('FarColony', 'Official UN Far Colonies Map'),
+        ('Unofficial', 'Unofficial UN Map'),
         ('Territory', 'UN Territory Map'),
         ('Infrastructure', 'Infrastructure Map'),
         ('Evaluation', 'Evaluation Map')
