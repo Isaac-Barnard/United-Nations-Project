@@ -52,9 +52,9 @@ class Building(models.Model):
     ]
     
     name = models.CharField(max_length=100, unique=True, help_text="Building name")
-    territory = models.ForeignKey('Territory', on_delete=models.CASCADE, related_name='buildings', null=True, help_text="The name of the territory district that this building resides. This does not necessarily indicate owner")
+    territory = models.ForeignKey('Territory', on_delete=models.CASCADE, related_name='buildings', null=True, blank=True, help_text="The name of the territory district that this building resides. This does not necessarily indicate owner")
     owner = models.ForeignKey('Nation', on_delete=models.CASCADE, related_name='owned_buildings', help_text="The nation that owns the building as its sovereign territory")
-    main_builders = models.ManyToManyField('Player', related_name='main_builds', help_text="The builder/builders who constructed the majority of the building")
+    main_builders = models.ManyToManyField('Player', related_name='main_builds', blank=True, help_text="The builder/builders who constructed the majority of the building")
     y_level_high_pt = models.FloatField(null=True, help_text="The highest point of the building")
     y_level_ground = models.FloatField(null=True, help_text="The ground level of the building. Measured to the ground level, not lowest point of the building ie. basements or mines")
     year_started = models.IntegerField(null=True, help_text="The year where construction began on the building")

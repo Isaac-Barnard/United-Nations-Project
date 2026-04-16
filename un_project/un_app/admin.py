@@ -1,6 +1,8 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 from . import models
 from django.utils.html import format_html
+from django import forms
+from django.db.models import Count, Q
 
 #admin.site.register(models.Nation)
 admin.site.register(models.NationHistory)
@@ -41,9 +43,75 @@ from django.contrib import admin
 from django.utils.html import format_html
 from . import models
 
+class BuildingAdminForm(forms.ModelForm):
+    class Meta:
+        model = models.Building
+        fields = '__all__'
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        territory = cleaned_data.get('territory')
+        builders = cleaned_data.get('main_builders')
+
+        warnings = []
+
+        if not territory:
+            warnings.append("Territory is not assigned.")
+
+        if not builders:
+            warnings.append("No main builders assigned.")
+
+        self.warning_messages = warnings
+
+        return cleaned_data
+
+
+class MissingInfoFilter(admin.SimpleListFilter):
+    title = "missing info"
+    parameter_name = "missing_info"
+
+    def lookups(self, request, model_admin):
+        return (
+            ("missing_territory", "Missing Territory"),
+            ("missing_builders", "Missing Builders"),
+        )
+
+    def queryset(self, request, queryset):
+        queryset = queryset.annotate(builder_count=Count("main_builders"))
+
+        if self.value() == "missing_territory":
+            return queryset.filter(territory__isnull=True)
+
+        if self.value() == "missing_builders":
+            return queryset.filter(builder_count=0)
+
+        return queryset
 
 @admin.register(models.Building)
 class BuildingAdmin(admin.ModelAdmin):
+    form = BuildingAdminForm
+    
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+
+        warnings = getattr(form, 'warning_messages', [])
+
+        for warning in warnings:
+            self.message_user(request, warning, level=messages.WARNING)
+    
+    @admin.display(description='Warnings')
+    def missing_info(self, obj):
+        warnings = []
+
+        if not obj.territory:
+            warnings.append("⚠ Territory")
+
+        if not obj.main_builders.exists():
+            warnings.append("⚠ Builders")
+
+        return " | ".join(warnings) if warnings else "✓"
+
     # Columns shown in the list view
     list_display = (
         'name_display',
@@ -54,6 +122,7 @@ class BuildingAdmin(admin.ModelAdmin):
         'year_destroyed',
         'coordinates',
         'completed',
+        'missing_info',
     )
 
     search_fields = (
@@ -67,6 +136,7 @@ class BuildingAdmin(admin.ModelAdmin):
     list_filter = (
         'owner',
         'completed',
+        MissingInfoFilter,
         'historic_site',
         'architectural_genius',
         'mopq_award',

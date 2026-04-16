@@ -17,3 +17,6 @@ staticfiles
 
 
 .vscode
+
+# Ignore test media photos
+un_project/media/
