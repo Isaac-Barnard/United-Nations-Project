@@ -1,8 +1,8 @@
 // Set map bounds using coordinates of the Minecraft world
-const x_top_left = -1616; // x-coordinate of the top-left corner
+const x_top_left = -1664; // x-coordinate of the top-left corner
 const z_top_left = -416;  // z-coordinate of the top-left corner
-const x_bottom_right = 895; // x-coordinate of the bottom-right corner
-const z_bottom_right = 959; // z-coordinate of the bottom-right corner
+const x_bottom_right = 1199; // x-coordinate of the bottom-right corner
+const z_bottom_right = 1039; // z-coordinate of the bottom-right corner
 
 // Initialize map using L.CRS.Simple to remove latitude/longitude constraints
 const map = L.map('map', {
@@ -21,7 +21,7 @@ const imageBounds = [
 
 // Add the PNG as an image overlay layer
 //L.imageOverlay('/static/images/maps/Official UN Map (10_21_24).png', imageBounds).addTo(map);
-const imageOverlay = L.imageOverlay('/static/images/maps/map.png', imageBounds, {
+const imageOverlay = L.imageOverlay('/static/images/maps/map_4-11-26.png', imageBounds, {
     // This ensures the image uses its native resolution at max zoom
     maxNativeZoom: 10,
     // Disable image smoothing
