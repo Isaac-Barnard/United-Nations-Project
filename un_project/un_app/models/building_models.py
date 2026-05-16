@@ -29,19 +29,19 @@ class Building(models.Model):
     ]
     
     SIZE_CHOICES = [
-        ('Tiny', 'Tiny (-5×5)'),
+        ('Tiny', 'Tiny (5×5 and smaller)'),
         ('Very Small', 'Very Small (6×6 to 8×8)'),
         ('Small', 'Small (9×9 to 12×12)'),
-        ('Modest', 'Modest (12×12 to 15×15)'),
+        ('Modest', 'Modest (13×13 to 15×15)'),
         ('Medium-Small', 'Medium-Small (16×16 to 20×20)'),
-        ('Medium', 'Medium (20×20 to 25×25)'),
-        ('Medium-Large', 'Medium-Large (25×25 to 30×30)'),
+        ('Medium', 'Medium (21×21 to 25×25)'),
+        ('Medium-Large', 'Medium-Large (26×26 to 30×30)'),
         ('Large', 'Large (31×31 to 40×40)'),
-        ('Very Large', 'Very Large (40×40 to 50×50)'),
+        ('Very Large', 'Very Large (41×41 to 50×50)'),
         ('Huge', 'Huge (51×51 to 75×75)'),
-        ('Enormous', 'Enormous (75×75 to 100×100)'),
-        ('Gigantic', 'Gigantic (100×100 to 150×150)'),
-        ('Massive', 'Massive (150×150+)'),
+        ('Enormous', 'Enormous (76×76 to 100×100)'),
+        ('Gigantic', 'Gigantic (101×101 to 150×150)'),
+        ('Massive', 'Massive (151×151 and larger)'),
     ]
     
     MATERIAL_CHOICES = [

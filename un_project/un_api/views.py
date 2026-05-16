@@ -16,7 +16,9 @@ class BuildingDataView(APIView):
                 "owner_abbreviation": building.owner.abbreviation,
                 "price": custom_decimal_places(building.price),
                 "builders": [builder.username for builder in building.main_builders.all()],
-                "territory": building.territory.name
+                "builders": ([builder.username for builder in building.main_builders.all()] if building.main_builders.exists() else [""]),
+                "territory": (building.territory.name if building.territory else "Unclaimed"),
+                "year": building.year_started
                 # Add other fields as needed
             }
             for building in buildings

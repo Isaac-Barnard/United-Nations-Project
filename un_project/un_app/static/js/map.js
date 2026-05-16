@@ -164,9 +164,10 @@ fetch(url)
             const marker = L.marker([y, x], { icon: icon }).addTo(map);
             marker.bindPopup(`
                 <strong style="font-size: 1.2em;">${building.name}</strong><br>
+                <u>Territory:</u> ${building.territory}<br>
                 <u>Owner:</u> ${building.owner}<br>
                 <u>Builder:</u> ${building.builders}<br>
-                <u>Territory:</u> ${building.territory}<br>
+                <u>Year:</u> ${building.year}<br>
                 <u>Height:</u> ${building.height}<br>
                 <u>Price:</u> ${building.price}<br>
                 <u>Coords:</u> ${building.x_coordinate}/~/${building.z_coordinate}<br>
