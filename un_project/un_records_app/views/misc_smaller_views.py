@@ -14,7 +14,7 @@ def charter(request):
     return render(request, 'charter.html', {'charter': charter})
 
 def executive_orders(request):
-    executive_orders = ExecutiveOrder.objects.all().order_by('-charter', '-date')
+    executive_orders = ExecutiveOrder.objects.all().order_by('-charter', '-date', '-number')
     return render(request, 'executive_orders.html', {'executive_orders': executive_orders})
 
 def alliances(request):
