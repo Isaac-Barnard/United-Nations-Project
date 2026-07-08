@@ -6,7 +6,7 @@ from django.db.models import Count, Q
 
 #admin.site.register(models.Nation)
 admin.site.register(models.NationHistory)
-admin.site.register(models.Company)
+#admin.site.register(models.Company)
 #admin.site.register(models.Player)
 #admin.site.register(models.Territory)
 #admin.site.register(models.Building)
@@ -29,6 +29,11 @@ admin.site.register(models.CompanyShareholder)
 @admin.register(models.Nation)
 class NationAdmin(admin.ModelAdmin):
     search_fields = ['name']
+    
+    
+@admin.register(models.Company)
+class CompanyAdmin(admin.ModelAdmin):
+    autocomplete_fields = ['headquarters']
 
 
 @admin.register(models.Item)
@@ -92,6 +97,8 @@ class MissingInfoFilter(admin.SimpleListFilter):
 class BuildingAdmin(admin.ModelAdmin):
     form = BuildingAdminForm
     
+    autocomplete_fields = ('territory',)
+    
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
 
@@ -124,12 +131,15 @@ class BuildingAdmin(admin.ModelAdmin):
         'completed',
         'missing_info',
     )
-
+    
     search_fields = (
         'name',
-        'architectural_style',
         'owner__name',
+        'owner__abbreviation',
         'territory__name',
+        'x_coordinate',
+        'z_coordinate',
+        'architectural_style',
         'main_builders__username',
     )
 
@@ -188,7 +198,7 @@ class PlayerAdmin(admin.ModelAdmin):
     search_fields = (
         'username',
         'nation__name',  # allows searching by nation name
-        'nation__abbreviation'
+        'nation__abbreviation',
         'description',
     )
     list_filter = ('un_rep', 'nation',)
