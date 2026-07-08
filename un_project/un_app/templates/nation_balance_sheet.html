@@ -14,6 +14,47 @@
 {% block content %}
     <h1>{{ nation.name }} ({{ nation.abbreviation }}) Balance Sheet</h1>
 
+    <h2 style="border-top: 1px solid #ccc; padding-top: 1rem;">
+        Total Assets Sum</h2>
+    <table class="total-assets-sum-table">
+        <thead>
+            <tr style="font-size: 0.9em;">
+                <th>Asset Category</th>
+                <th>Value Equivalent</th>
+            </tr>
+        </thead>
+        <tbody style="font-size: .95em;">
+            <tr">
+                <td>Total Liquid Assets:</td>
+                <td class="right-align">{{ nation.total_liquid_asset_value|custom_decimal_places }}</td>
+            </tr>
+            <tr>
+                <td>Total Item Values:</td>
+                <td class="right-align">{{ nation.total_item_asset_value|custom_decimal_places }}</td>
+            </tr>
+            <tr>
+                <td>Total Building Values:</td>
+                <td class="right-align">{{ nation.total_building_asset_value|custom_decimal_places }}</td>
+            </tr>
+            <tr>
+                <td>Total Receivables:</td>
+                <td class="right-align">{{ total_receivables|custom_decimal_places }}</td>
+            </tr>
+            <tr>
+                <td>Total Stock Investments:</td>
+                <td class="right-align">{{ total_investment_value|custom_decimal_places }}</td>
+            </tr>
+            <tr>
+                <td>Total Remaining Liabilities:</td>
+                <td class="right-align">{% if total_remaining_liabilities != 0 %}-{% endif %}{{ total_remaining_liabilities|custom_decimal_places }}</td>
+            </tr>
+            <tr style="border-top: 3px solid; font-weight: bold;">
+                <td>Total Assets:</td>
+                <td class="right-align">{{ total_assets|custom_decimal_places }}</td>
+            </tr>
+        </tbody>
+    </table>
+
     <h2 class="liquid-heading">Liquid Assets</h2>
 
     <table class="liquid-table">
@@ -87,49 +128,7 @@
             <h3>Total Value of All Items: {{ nation.total_item_asset_value|custom_decimal_places }}</h3>
         </div>
     </div>
-
-
-    <h2 style="border-top: 1px solid #ccc; padding-top: 1rem;">
-        Total Assets Sum</h2>
-    <table class="total-assets-sum-table">
-        <thead>
-            <tr style="font-size: 0.9em;">
-                <th>Asset Category</th>
-                <th>Value Equivalent</th>
-            </tr>
-        </thead>
-        <tbody style="font-size: .95em;">
-            <tr">
-                <td>Total Liquid Assets:</td>
-                <td class="right-align">{{ nation.total_liquid_asset_value|custom_decimal_places }}</td>
-            </tr>
-            <tr>
-                <td>Total Item Values:</td>
-                <td class="right-align">{{ nation.total_item_asset_value|custom_decimal_places }}</td>
-            </tr>
-            <tr>
-                <td>Total Building Values:</td>
-                <td class="right-align">{{ nation.total_building_asset_value|custom_decimal_places }}</td>
-            </tr>
-            <tr>
-                <td>Total Receivables:</td>
-                <td class="right-align">{{ total_receivables|custom_decimal_places }}</td>
-            </tr>
-            <tr>
-                <td>Total Stock Investments:</td>
-                <td class="right-align">{{ total_investment_value|custom_decimal_places }}</td>
-            </tr>
-            <tr>
-                <td>Total Remaining Liabilities:</td>
-                <td class="right-align">{% if total_remaining_liabilities != 0 %}-{% endif %}{{ total_remaining_liabilities|custom_decimal_places }}</td>
-            </tr>
-            <tr style="border-top: 3px solid; font-weight: bold;">
-                <td>Total Assets:</td>
-                <td class="right-align">{{ total_assets|custom_decimal_places }}</td>
-            </tr>
-        </tbody>
-    </table>
-
+    
 
     <h3 style="border-top: 1px solid #ccc; padding-top: 1rem;"></h3>
     <h2>Receivables</h2>
