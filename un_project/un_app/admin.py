@@ -46,6 +46,7 @@ class ItemAdmin(admin.ModelAdmin):
 #-------------------------------------------------------------------------------
 from django.contrib import admin
 from django.utils.html import format_html
+from django.core.exceptions import ValidationError
 from . import models
 
 class BuildingAdminForm(forms.ModelForm):
@@ -92,10 +93,37 @@ class MissingInfoFilter(admin.SimpleListFilter):
             return queryset.filter(builder_count=0)
 
         return queryset
+    
+    
+class PartialBuildingOwnershipInline(admin.TabularInline):
+    model = models.PartialBuildingOwnership
+    extra = 1
+
+    def clean(self):
+        super().clean()
+
+        total = 0
+
+        for form in self.forms:
+            if hasattr(form, 'cleaned_data'):
+                data = form.cleaned_data
+
+                if data and not data.get('DELETE', False):
+                    total += data.get('percentage', 0)
+
+        if total > 100:
+            raise ValidationError(
+                "Partial ownership cannot exceed 100%."
+            )
+    
 
 @admin.register(models.Building)
 class BuildingAdmin(admin.ModelAdmin):
     form = BuildingAdminForm
+    
+    inlines = [
+        PartialBuildingOwnershipInline,
+    ]
     
     autocomplete_fields = ('territory',)
     
