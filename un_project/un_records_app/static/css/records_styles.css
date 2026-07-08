@@ -12,10 +12,12 @@ body {
 
 /* Page container with 0.5-inch side margins and no top/bottom margin */
 .page-container {
-    
-    padding-left: 1in;
-    padding-right: 1in;
-    margin: 0 auto; /* Center horizontally */
+    width: 100%;
+    max-width: 2200px;
+    box-sizing: border-box;
+    padding-left: clamp(1rem, 5vw, 1in);
+    padding-right: clamp(1rem, 5vw, 1in);
+    margin: 0 auto;
 }
 
 /* Paragraph spacing for normal text */
@@ -115,7 +117,7 @@ h6 {
 
 .resolution-images {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
     gap: 15px;
     margin: 15px 0;
 }
@@ -175,7 +177,7 @@ h6 {
 
 
 .amendments-section {
-    margin-left: 3rem;
+    margin-left: clamp(0.5rem, 3vw, 3rem);
 }
 
 
@@ -243,4 +245,32 @@ h6 {
     justify-content: left;
     flex-wrap: wrap;
     gap: 10px;
+}
+
+
+/* Mobile improvements */
+@media (max-width: 600px) {
+    body {
+        font-size: 11pt;
+    }
+
+    h1 {
+        font-size: 20pt;
+    }
+
+    h2 {
+        font-size: 16pt;
+    }
+
+    h3 {
+        font-size: 13pt;
+    }
+
+    .resolution-content {
+        gap: 10px;
+    }
+
+    .amendments-section {
+        margin-left: 0.5rem;
+    }
 }
