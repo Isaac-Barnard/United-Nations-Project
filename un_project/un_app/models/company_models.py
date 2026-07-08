@@ -8,11 +8,16 @@ from decimal import Decimal
 class Company(models.Model):
     name = models.CharField(max_length=100, unique=True)
     abbreviation = models.CharField(max_length=100, unique=True)
+    headquarters = models.ForeignKey('Building', on_delete=models.CASCADE, null=True, related_name='headquarters')
+    headquarters_unit = models.CharField(max_length=30, blank=True)
     # Precalculated fields
     total_liquid_asset_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
     total_item_asset_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
     total_building_asset_value = models.DecimalField(max_digits=20, decimal_places=6, default=Decimal('0'))
 
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['headquarters', 'headquarters_unit'], name='unique_company_headquarters_unit')]
+    
     # Calculate total liquid asset value
     def calculate_total_liquid_asset_value(self):
         from .liquid_asset_models import LiquidAssetContainer
