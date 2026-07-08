@@ -192,6 +192,13 @@ button[type="logout"]:hover {
 }
 
 
+.seal-image {
+    width: min(400px, 90vw);
+    height: auto;
+    display: block;
+    margin: 2rem auto;
+}
+
 /* Dropdown Menu Styles */
 .dropdown {
     display: inline-block;
@@ -269,29 +276,40 @@ button[type="logout"]:hover {
 .button-container {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 2rem;
     margin: 2rem 0;
 }
 
 .big-button {
-    display: inline-block;
-    padding: 2rem 4rem;
-    background-color: #5b92e5; /* UN blue color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: clamp(220px, 30vw, 350px);
+    min-height: 100px;
+    box-sizing: border-box;
+
+    padding: 1.5rem;
+
+    background-color: #5b92e5;
     color: white;
-    font-size: 1.5rem;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
     font-weight: bold;
+    text-align: center;
+
     text-decoration: none;
     border: 2px solid rgb(37, 37, 37);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+
     transition: background-color 0.3s, transform 0.2s;
 
-    /* Black outline around the text */
     text-shadow:
-        -1px -1px 0 #555555,  /* Top-left */
-        1px -1px 0 #555555,   /* Top-right */
-        -1px 1px 0 #555555,   /* Bottom-left */
-        1px 1px 0 #555555;    /* Bottom-right */
+        -1px -1px 0 #555555,
+        1px -1px 0 #555555,
+        -1px 1px 0 #555555,
+        1px 1px 0 #555555;
 }
 
 .big-button:hover {
@@ -396,6 +414,19 @@ textarea:focus {
 
 
 @media (max-width: 600px) {
+    .button-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .big-button {
+        width: 100%;
+        min-height: 90px;
+        padding: 1rem;
+        font-size: 1.2rem;
+    }
+
     main {
         padding: 1rem;
     }
