@@ -178,7 +178,9 @@ def company_balance_sheet(request, company_abbreviation):
     return render(request, 'company_balance_sheet.html', {
         'company': company,
         #'buildings': buildings,
-        'shareholders': shareholders,  # Now includes share_value
+        'headquarters': company.headquarters,
+        'headquarters_unit': company.headquarters_unit,
+        'shareholders': shareholders,
         'partial_buildings': partial_buildings,
         'items_parts': [items_part1, items_part2, items_part3, items_part4, items_part5],  # Pass as a single list
         'denominations': denominations,

@@ -58,6 +58,13 @@
         </tbody>
     </table>
 
+    <h4 class="shareholders-heading" style="display:inline;">Headquarters:</h4>
+    {% if company.headquarters %}
+        {{ company.headquarters.name }}{% if company.headquarters_unit %} - {{ company.headquarters_unit }}{% endif %}, {{ company.headquarters.territory }}
+    {% else %}
+        No headquarters assigned
+    {% endif %}
+
     <h2 style="margin-top: 1rem; border-top: 1px solid #ccc; padding-top: 1rem;">
         Total Assets Sum</h2>
     <table class="total-assets-sum-table">
