@@ -35,7 +35,7 @@
 <div class="page-container">
     <div class="map-release">
         <h1>
-            Official UN Map {{ map.map_date|date:"F j, Y" }}
+            {{map.get_type_display }} {{ map.map_date|date:"F j, Y" }}
             <button
                     class="copy-link-btn"
                     type="button"

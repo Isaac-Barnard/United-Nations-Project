@@ -8,9 +8,9 @@ class CartographyMap(models.Model):
         ('Official', 'Official UN Map'),
         ('FarColony', 'Official UN Far Colonies Map'),
         ('Unofficial', 'Unofficial UN Map'),
-        ('Territory', 'UN Territory Map'),
-        ('Infrastructure', 'Infrastructure Map'),
-        ('Evaluation', 'Evaluation Map')
+        ('Territory', 'Official UN Territory Map'),
+        ('Infrastructure', 'Official UN Infrastructure Map'),
+        ('Evaluation', 'Official UN Zoning Map')
     ]
 
     title = models.CharField(max_length=200, blank=True)
