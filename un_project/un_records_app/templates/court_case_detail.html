@@ -28,6 +28,13 @@
 <div class="page-container">
     <h1 class="resolution-title">
         Case {{ case.case_number }}: {{ case.title }}
+        <button
+                class="copy-link-btn"
+                type="button"
+                title="Copy link"
+                onclick="copyLink('{{ request.scheme }}://{{ request.get_host }}{{ case.get_absolute_url }}', this)">
+                🔗
+            </button>
     </h1>
 
     <p>
@@ -135,4 +142,5 @@
 
 {% block extra_js %}
 <script src="{% static 'js/images.js' %}"></script>
+<script src="{% static 'js/copy_link.js' %}"></script>
 {% endblock %}

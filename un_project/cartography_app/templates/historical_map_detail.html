@@ -34,7 +34,16 @@
 {% block content %}
 <div class="page-container">
     <div class="map-release">
-        <h1>Official UN Map {{ map.map_date|date:"F j, Y" }}</h1>
+        <h1>
+            Official UN Map {{ map.map_date|date:"F j, Y" }}
+            <button
+                    class="copy-link-btn"
+                    type="button"
+                    title="Copy link"
+                    onclick="copyLink('{{ request.scheme }}://{{ request.get_host }}{{ map.get_absolute_url }}', this)">
+                    🔗
+                </button>
+        </h1>
 
         {% if map.description %}
             <p><em>{{ map.description }}</em></p>
@@ -97,4 +106,5 @@
 {% block extra_js %}
 <script src="{% static 'js/switch_map.js' %}"></script>
 <script src="{% static 'js/images.js' %}"></script>
+<script src="{% static 'js/copy_link.js' %}"></script>
 {% endblock %}
