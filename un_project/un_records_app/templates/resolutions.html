@@ -12,6 +12,21 @@
 {% block content %}
 <div class="page-container">
     <h1>United Nations Resolutions</h1>
+
+    <form method="get" class="resolution-search">
+        <input 
+            type="text" 
+            name="q" 
+            placeholder="Search resolutions..."
+            value="{{ search_query }}"
+        >
+        <button type="submit" class="search-button">Search</button>
+
+        {% if search_query %}
+            <a href="{% url 'resolutions' %}">Clear</a>
+        {% endif %}
+    </form>
+
     <hr>
     {% for resolution in resolutions %}
     <div class="resolution">
