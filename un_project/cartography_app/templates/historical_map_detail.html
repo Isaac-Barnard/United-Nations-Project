@@ -4,10 +4,31 @@
 
 {% load static %}
 {% load custom_filters %}
+{% load markdown_extras %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/records_styles.css' %}">
 <link rel="stylesheet" href="{% static 'css/cartography_styles.css' %}">
+{% endblock %}
+
+{% block meta_tags %}
+    <!-- Open Graph / Discord -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Official UN Map {{ map.map_date|date:'F j, Y' }}">
+    <meta property="og:description" content="{{ map.changes|preview_text:200|default:'Historical United Nations map' }}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ map.map_a.url }}">
+    <meta property="og:image:alt" content="Official UN Map {{ map.map_date|date:'F j, Y' }}">
+    
+    <!-- Additional info -->
+    <meta property="article:published_time" content="{{ map.map_date|date:'c' }}">
+    <meta property="article:tag" content="Historical Map">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Official UN Map {{ map.map_date|date:'F j, Y' }}">
+    <meta name="twitter:description" content="{{ map.changes|preview_text:200|default:'Historical United Nations map' }}">
+    <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ map.map_a.url }}">
 {% endblock %}
 
 {% block content %}
