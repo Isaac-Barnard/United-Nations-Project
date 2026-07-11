@@ -35,7 +35,7 @@ def preview_text(text, length=200):
     text = re.sub(r'!\[([^\]]*)\]\([^\)]+\)', r'\1', text)
     
     # Remove headers (# ## ### etc)
-    text = re.sub(r'^#+\s+', '', text, flags=re.MULTILINE)
+    text = re.sub(r'^#+\s*', '', text, flags=re.MULTILINE)
     
     # Remove bold/italic markers (**, *, __, _)
     text = re.sub(r'\*\*([^\*]+)\*\*', r'\1', text)
