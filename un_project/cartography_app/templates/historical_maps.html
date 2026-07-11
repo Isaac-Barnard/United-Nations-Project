@@ -44,7 +44,7 @@
     {% for map in maps %}
         <div class="map-release">
             <h2>
-                <a> Official UN Map {{ map.map_date|date:"F j, Y" }} </a>
+                <a href="{{ map.get_absolute_url }}">Official UN Map {{ map.map_date|date:"F j, Y" }}</a>
 
                 <button
                     class="copy-link-btn"
