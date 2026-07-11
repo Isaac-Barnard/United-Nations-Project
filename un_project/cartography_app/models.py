@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.urls import reverse
 
 
 class CartographyMap(models.Model):
@@ -46,3 +47,6 @@ class CartographyMap(models.Model):
             self.slug = slug
 
         super().save(*args, **kwargs)
+        
+    def get_absolute_url(self):
+        return reverse("historical_map_detail", kwargs={"slug": self.slug})

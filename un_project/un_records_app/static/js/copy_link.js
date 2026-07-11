@@ -1,12 +1,12 @@
-function copyResolutionLink(url, button) {
+function copyLink(url, button) {
     console.log('Attempting to copy URL:', url);
-    
+
     if (!navigator.clipboard) {
         console.error('Clipboard API not available');
         alert('Clipboard API not supported in this context');
         return;
     }
-    
+
     navigator.clipboard.writeText(url).then(() => {
         console.log('Successfully copied!');
         const original = button.textContent;

@@ -5,5 +5,6 @@ from .views import *
 urlpatterns = [
     path('cartography-home', cartography_home, name='cartography_home'),
     path('interactive-map/', interactive_un_map, name='interactive_un_map'),
-    path("historical-maps/", historical_maps, name="historical_maps"),
+    path("maps/", historical_maps, name="historical_maps"),
+     path("maps/<slug:slug>/", historical_map_detail, name="historical_map_detail"),
 ]

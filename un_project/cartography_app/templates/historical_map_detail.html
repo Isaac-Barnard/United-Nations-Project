@@ -12,48 +12,21 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Official United Nations Maps</h1>
-    <hr>
-    <div class="header-filter-buttonsss">
-        <a href="?type=Official" class="header-filter-button {% if current_type == 'Official' %}active{% endif %}">
-            Official
-        </a>
+    <div class="map-release">
+        <h1>Official UN Map {{ map.map_date|date:"F j, Y" }}</h1>
 
-        <a href="?type=FarColony" class="header-filter-button {% if current_type == 'FarColony' %}active{% endif %}">
-            Far Colony
-        </a>
-    </div>
+        {% if map.description %}
+            <p><em>{{ map.description }}</em></p>
+        {% endif %}
 
-    <hr>
-    {% for map in maps %}
-        <div class="map-release">
-            <h2>
-                <a> Official UN Map {{ map.map_date|date:"F j, Y" }} </a>
+        <div class="map-image-container">
+            <img
+                id="map-image-{{ map.id }}"
+                src="{{ map.map_a.url }}"
+                alt="{{ map.title }}">
+        </div>
 
-                <button
-                    class="copy-link-btn"
-                    type="button"
-                    title="Copy link"
-                    onclick="copyLink('{{ request.scheme }}://{{ request.get_host }}{{ map.get_absolute_url }}', this)">
-                    🔗
-                </button>
-            </h2>
-            
-
-            {% if map.description %}
-                <p><em>{{ map.description }}</em></p>
-            {% endif %}
-
-            <div class="map-image-container">
-                <!-- Default Map A -->
-                <img 
-                    id="map-image-{{ map.id }}" 
-                    src="{{ map.map_a.url }}" 
-                    alt="{{ map.title }}"
-                >
-            </div>
-
-            <div class="variant-buttons" id="variant-group-{{ map.id }}">
+         <div class="variant-buttons" id="variant-group-{{ map.id }}">
                 <button class="map-filter-button active"
                         onclick="switchMap({{ map.id }}, '{{ map.map_a.url }}', this)">
                     Standard
@@ -88,15 +61,11 @@
                 {% endif %}
             </div>
             <br>
-            {% load markdown_extras %}
-            <div>
-                {{ map.changes|markdownify }}
-            </div>
+        {% load markdown_extras %}
+        <div>
+            {{ map.changes|markdownify }}
         </div>
-        <hr>
-    {% empty %}
-        <p>No maps have been archived yet.</p>
-    {% endfor %}
+    </div>
 
 </div>
 {% endblock %}
@@ -104,5 +73,4 @@
 {% block extra_js %}
 <script src="{% static 'js/switch_map.js' %}"></script>
 <script src="{% static 'js/images.js' %}"></script>
-<script src="{% static 'js/copy_link.js' %}"></script>
 {% endblock %}
