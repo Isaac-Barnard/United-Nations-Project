@@ -19,8 +19,6 @@ def historical_maps(request):
         "current_type": map_type,
     })
 
-
-
 def historical_map_detail(request, slug):
     map_obj = get_object_or_404(CartographyMap, slug=slug)
 
